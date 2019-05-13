@@ -6,7 +6,12 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-
+/**
+ * @version 1
+ * @author Evan Zhang
+ * Revision history:
+ *  - May 13, 2019: Created
+ */
 public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
@@ -15,8 +20,9 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Climb to Grace");
-        StackPane root = new StackPane();
-        primaryStage.setScene(new Scene(root));
+        
+        new LevelSelect(primaryStage).drawScreen();
+
         primaryStage.setMinHeight(600);
         primaryStage.setMinWidth(800);
         primaryStage.show();
