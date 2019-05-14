@@ -33,6 +33,7 @@ public class LevelTwo extends BaseLevel {
                 case DOWN: player.moveDown(); break;
                 case RIGHT: player.moveRight(); break;
                 case LEFT: player.moveLeft(); break;
+                case ESCAPE: this.game.updateState(State.MAIN_MENU); break;
             }
         });
         start();
