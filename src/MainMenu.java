@@ -1,4 +1,3 @@
-import javafx.stage.Stage;
 
 /**
  * @version 1
@@ -7,11 +6,11 @@ import javafx.stage.Stage;
  *  - May 13, 2019: Created ~Evan Zhang
  */
 public class MainMenu extends BaseScene {
-    public MainMenu(Stage stage) {
-        super(stage);
+    public MainMenu(Game game) {
+        super(game);
     }
 
-    public void drawScreen() {
+    public void initScene() {
 
     }
 }

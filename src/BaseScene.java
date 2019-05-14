@@ -7,13 +7,13 @@ import javafx.stage.Stage;
  *  - May 13, 2019: Created ~Evan Zhang
  */
 public abstract class BaseScene implements Constants {
-    protected Stage stage;
+    protected Game game;
 
     public BaseScene() {}
 
-    public BaseScene(Stage stage) {
-        this.stage = stage;
+    public BaseScene(Game game) {
+        this.game = game;
     }
 
-    public abstract void drawScreen();
+    public abstract void initScene();
 }

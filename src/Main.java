@@ -11,6 +11,7 @@ import javafx.stage.Stage;
  * @author Evan Zhang
  * Revision history:
  *  - May 13, 2019: Created ~Evan Zhang
+ *  - May 14, 2019: Updated ~Evan Zhang
  */
 public class Main extends Application {
     public static void main(String[] args) {
@@ -21,7 +22,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Climb to Grace");
 
-        new LevelSelect(primaryStage).drawScreen();
+        Game game = new Game(primaryStage);
+        game.updateState(State.LEVEL_SELECT);
 
         primaryStage.setMinHeight(Constants.SCREEN_HEIGHT);
         primaryStage.setMinWidth(Constants.SCREEN_WIDTH);

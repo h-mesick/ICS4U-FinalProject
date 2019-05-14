@@ -1,4 +1,3 @@
-import javafx.stage.Stage;
 
 /**
  * @version 1
@@ -7,11 +6,15 @@ import javafx.stage.Stage;
  *  - May 13, 2019: Created ~Evan Zhang
  */
 public class LevelTwo extends BaseLevel {
-    public LevelTwo(Stage stage) {
-        super(stage);
+    public LevelTwo(Game game) {
+        super(game);
     }
 
-    public void drawScreen() {
+    public void initScene() {
+        
+    }
+
+    protected void update() {
         
     }
 }
