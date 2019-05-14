@@ -14,4 +14,6 @@ public interface Constants {
 
     static final int SCREEN_WIDTH = 900;
     static final int SCREEN_HEIGHT = 600;
+    static final int PLATFORM_BLOCK_WIDTH = 30;
+    static final int PLATFORM_BLOCK_HEIGHT = 30;
 }
