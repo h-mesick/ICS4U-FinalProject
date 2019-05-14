@@ -14,10 +14,19 @@ public abstract class BaseLevel extends BaseScene {
     public BaseLevel(Game game) {
         super(game);
         mainTimer = new AnimationTimer() {
-            public void handle(long nanoSeconds) {
+            @Override
+            public void handle(long now) {
                 update();
             }
         };
+    }
+
+    public void start() {
+        mainTimer.start();
+    }
+
+    public void stop() {
+        mainTimer.stop();
     }
 
     protected abstract void update();

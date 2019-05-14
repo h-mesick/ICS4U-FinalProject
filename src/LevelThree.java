@@ -11,10 +11,10 @@ public class LevelThree extends BaseLevel {
     }
 
     public void initScene() {
-        
+
     }
 
     protected void update() {
-
+        
     }
 }
