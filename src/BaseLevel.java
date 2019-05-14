@@ -19,12 +19,32 @@ import javafx.stage.*;
 public abstract class BaseLevel extends BaseScene {
     protected AnimationTimer mainTimer;
 
+    private class Time {
+        public long time;
+        public Time(long time) {
+            set(time);
+        }
+        public void set(long time) {
+            this.time = time;
+        }
+    }
+
     public BaseLevel(Game game) {
         super(game);
+
+        Time prev = new Time(0);
         mainTimer = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                update();
+                if (prev.time == 0) {
+                    update();
+                } else {
+                    long iterations = (now - prev.time) / 5000000;
+                    for (int x = 0; x < iterations; x++) {
+                        update();
+                    }
+                }
+                prev.set(now);
             }
         };
     }

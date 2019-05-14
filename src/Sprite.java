@@ -10,7 +10,7 @@ import javafx.scene.text.*;
 import javafx.stage.*;
 
 public class Sprite extends Rectangle {
-    final double gravity = 0.1;
+    final double gravity = 0.2;
     double yVel = 0;
 
     public Sprite(double x, double y, double w, double h, Color c) {
@@ -29,11 +29,11 @@ public class Sprite extends Rectangle {
     }
 
     public void jump() {
-        yVel -= 4;
+        yVel -= 8;
     }
 
     public boolean onGround(double ground) {
-        return equal(ground, getTranslateY());
+        return equal(ground, getTranslateY()) || ground-3 <= getTranslateY();
     }
 
     public void fall(double ground) {
