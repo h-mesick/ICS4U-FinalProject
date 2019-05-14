@@ -12,6 +12,6 @@ public interface Constants {
         "Level 3",
     };
 
-    static final int SCREEN_WIDTH = 800;
+    static final int SCREEN_WIDTH = 900;
     static final int SCREEN_HEIGHT = 600;
 }
