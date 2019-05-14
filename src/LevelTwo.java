@@ -25,7 +25,6 @@ public class LevelTwo extends BaseLevel {
 
     public void initScene() {
         player = new Sprite(100, 100, 20, 20, Color.BLUE);
-        player.updateGround(Constants.SCREEN_HEIGHT - 50);
         Group root = new Group();
         root.getChildren().add(player);
 
@@ -49,13 +48,19 @@ public class LevelTwo extends BaseLevel {
         this.game.setScene(scene);
     }
 
+    private double getGround(double x) {
+        // TODO: update
+        return Constants.SCREEN_HEIGHT - 50;
+    }
+
     protected void update() {
-        if (keyUp)
+        double ground = getGround(player.getTranslateX());
+        if (keyUp && player.onGround(ground))
             player.jump();
         if (keyLeft)
             player.moveLeft();
         if (keyRight)
             player.moveRight();
-        player.updatePosition();
+        player.fall(ground);
     }
 }
