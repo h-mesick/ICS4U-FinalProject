@@ -1,3 +1,6 @@
+import javafx.scene.*;
+import javafx.scene.layout.*;
+import javafx.scene.control.*;
 
 /**
  * @version 1
@@ -11,6 +14,15 @@ public class MainMenu extends BaseScene {
     }
 
     public void initScene() {
+        VBox root = new VBox();
 
+        Button btn = new Button("Next screen");
+        btn.setMinWidth(SCREEN_WIDTH / 2);
+        btn.setMinHeight(SCREEN_HEIGHT / 2);
+        btn.setOnAction(event -> {
+            this.game.updateState(State.MAIN_MENU);
+        });
+        root.getChildren().add(btn);
+        this.game.setScene(new Scene(root));
     }
 }

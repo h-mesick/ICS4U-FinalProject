@@ -23,7 +23,6 @@ public class Main extends Application {
         primaryStage.setTitle("Climb to Grace");
 
         Game game = new Game(primaryStage);
-        game.updateState(State.LEVEL_SELECT);
 
         primaryStage.setMinHeight(Constants.SCREEN_HEIGHT);
         primaryStage.setMinWidth(Constants.SCREEN_WIDTH);

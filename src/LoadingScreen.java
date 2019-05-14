@@ -1,5 +1,6 @@
 import javafx.scene.*;
-import javafx.scene.control.Button;
+import javafx.scene.layout.*;
+import javafx.scene.control.*;
 
 /**
  * @version 1
@@ -15,13 +16,13 @@ public class LoadingScreen extends BaseScene {
     public void initScene() {
         VBox root = new VBox();
 
-        Button[] btns = new Button[NUM_LEVELS];
-        for (int x = 0; x < NUM_LEVELS; x++) {
-            btns[x] = new Button(LEVEL_NAMES[x]);
-            btns[x].setMinWidth(SCREEN_WIDTH);
-            btns[x].setMinHeight(SCREEN_HEIGHT / 3);
-            btns[x].setOnAction(handlers[x]);
-        }
-        root.getChildren().addAll(btns);        
+        Button btn = new Button("Next screen");
+        btn.setMinWidth(SCREEN_WIDTH / 2);
+        btn.setMinHeight(SCREEN_HEIGHT / 2);
+        btn.setOnAction(event -> {
+            this.game.updateState(State.MAIN_MENU);
+        });
+        root.getChildren().add(btn);
+        this.game.setScene(new Scene(root));
     }
 }
