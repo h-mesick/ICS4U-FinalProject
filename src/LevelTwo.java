@@ -27,6 +27,7 @@ public class LevelTwo extends BaseLevel {
         player = new Sprite(100, 100, 20, 20, Color.BLUE);
         Group root = new Group();
         root.getChildren().add(player);
+        root.getChildren().add(new Rectangle(20, 20, Color.RED));
 
         Scene scene = new Scene(root);
         scene.setOnKeyPressed(e -> {

@@ -28,8 +28,10 @@ public class Main extends Application {
 
         Game game = new Game(primaryStage);
 
-        primaryStage.setMinHeight(Constants.SCREEN_HEIGHT);
-        primaryStage.setMinWidth(Constants.SCREEN_WIDTH);
+        primaryStage.setResizable(false);
+        primaryStage.setHeight(Constants.SCREEN_HEIGHT);
+        primaryStage.setWidth(Constants.SCREEN_WIDTH);
+
         primaryStage.show();
     }
 }
