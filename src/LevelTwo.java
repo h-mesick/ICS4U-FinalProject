@@ -50,7 +50,7 @@ public class LevelTwo extends BaseLevel {
     }
 
     private double getGround(double x) {
-        return x;
+        return (int)x / 50 * 50;
         // TODO: update
 //        return Constants.SCREEN_HEIGHT - 50;
     }

@@ -24,16 +24,12 @@ public class Sprite extends Rectangle {
         setTranslateY(getTranslateY() + y);
     }
 
-    private boolean equal(double x, double y) {
-        return Math.abs(x - y) < 1e-5;
-    }
-
     public void jump() {
         yVel -= 8;
     }
 
     public boolean onGround(double ground) {
-        return equal(ground, getTranslateY()) || ground-3 <= getTranslateY();
+        return ground <= getTranslateY();
     }
 
     public void fall(double ground) {
