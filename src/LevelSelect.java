@@ -10,32 +10,18 @@ import javafx.stage.Stage;
  * @author Evan Zhang
  * Revision history:
  *  - May 13, 2019: Created ~Evan Zhang
+ *  - May 14, 2019: Updated ~Evan Zhang
  */
-public class LevelSelect extends BaseScreen {
+public class LevelSelect extends BaseScene {
     public LevelSelect(Stage stage) {
         super(stage);
     }
     
     public void drawScreen() {
         EventHandler[] handlers = {
-            new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent ev) {
-                    new LevelOne(stage).drawScreen();
-                }
-            },
-            new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent ev) {
-                    new LevelTwo(stage).drawScreen();
-                }
-            },
-            new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent ev) {
-                    new LevelThree(stage).drawScreen();
-                }
-            },
+            ev -> new LevelOne(stage).drawScreen(),
+            ev -> new LevelTwo(stage).drawScreen(),
+            ev -> new LevelThree(stage).drawScreen(),
         };
 
         VBox root = new VBox();

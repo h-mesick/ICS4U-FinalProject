@@ -6,12 +6,8 @@ import javafx.stage.Stage;
  * Revision history:
  *  - May 13, 2019: Created ~Evan Zhang
  */
-public class MainMenu extends BaseScreen {
-    public MainMenu(Stage stage) {
+public abstract class BaseLevel extends BaseScene {
+    public BaseLevel(Stage stage) {
         super(stage);
-    }
-
-    public void drawScreen() {
-
     }
 }
