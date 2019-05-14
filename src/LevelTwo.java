@@ -1,5 +1,13 @@
+import javafx.animation.*;
+import javafx.event.*;
 import javafx.scene.*;
+import javafx.scene.canvas.*;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
 import javafx.scene.paint.*;
+import javafx.scene.shape.*;
+import javafx.scene.text.*;
+import javafx.stage.*;
 
 /**
  * @version 1

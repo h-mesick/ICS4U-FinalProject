@@ -1,5 +1,13 @@
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
+import javafx.animation.*;
+import javafx.event.*;
+import javafx.scene.*;
+import javafx.scene.canvas.*;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.scene.paint.*;
+import javafx.scene.shape.*;
+import javafx.scene.text.*;
+import javafx.stage.*;
 
 public class Sprite extends Rectangle {
     int xDelta = 0, yDelta = 0;
