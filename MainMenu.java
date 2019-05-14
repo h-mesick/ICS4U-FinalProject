@@ -6,8 +6,8 @@ import javafx.stage.Stage;
  * Revision history:
  *  - May 13, 2019: Created ~Evan Zhang
  */
-public class LoadingScreen extends BaseScreen {
-    public LoadingScreen(Stage stage) {
+public class MainMenu extends BaseScreen {
+    public MainMenu(Stage stage) {
         super(stage);
     }
 

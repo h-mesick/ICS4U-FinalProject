@@ -10,7 +10,7 @@ import javafx.stage.Stage;
  * @version 1
  * @author Evan Zhang
  * Revision history:
- *  - May 13, 2019: Created
+ *  - May 13, 2019: Created ~Evan Zhang
  */
 public class Main extends Application {
     public static void main(String[] args) {
@@ -20,11 +20,11 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Climb to Grace");
-        
+
         new LevelSelect(primaryStage).drawScreen();
 
-        primaryStage.setMinHeight(600);
-        primaryStage.setMinWidth(800);
+        primaryStage.setMinHeight(Constants.SCREEN_HEIGHT);
+        primaryStage.setMinWidth(Constants.SCREEN_WIDTH);
         primaryStage.show();
     }
 }

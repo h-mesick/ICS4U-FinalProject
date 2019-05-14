@@ -6,12 +6,12 @@ import javafx.stage.Stage;
  * Revision history:
  *  - May 13, 2019: Created ~Evan Zhang
  */
-public class LoadingScreen extends BaseScreen {
-    public LoadingScreen(Stage stage) {
+public class LevelThree extends BaseLevel {
+    public LevelThree(Stage stage) {
         super(stage);
     }
 
     public void drawScreen() {
-
+        
     }
 }

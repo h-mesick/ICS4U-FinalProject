@@ -1,13 +1,12 @@
 import javafx.stage.Stage;
 
-
 /**
  * @version 1
  * @author Evan Zhang
  * Revision history:
- *  - May 13, 2019: Created
+ *  - May 13, 2019: Created ~Evan Zhang
  */
-public abstract class BaseScreen {
+public abstract class BaseScreen implements Constants {
     protected Stage stage;
 
     public BaseScreen() {}
@@ -16,5 +15,5 @@ public abstract class BaseScreen {
         this.stage = stage;
     }
 
-    protected abstract void drawScreen();
+    public abstract void drawScreen();
 }
