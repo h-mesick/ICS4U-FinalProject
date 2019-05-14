@@ -10,39 +10,54 @@ import javafx.scene.text.*;
 import javafx.stage.*;
 
 public class Sprite extends Rectangle {
-    int xDelta = 0, yDelta = 0;
+    final double gravity = 0.2;
+    double xDelta = 0, yDelta = 0, yVel = 0, ground = 0;
 
-    public Sprite(int x, int y, int w, int h, Color c) {
+    public Sprite(double x, double y, double w, double h, Color c) {
         super(w, h, c);
         setTranslateX(x);
         setTranslateY(y);
     }
 
-    private void move(int x, int y) {
-        xDelta += x;
-        yDelta += y;
+    private boolean equal(double x, double y) {
+        return Math.abs(x - y) < 1e-5;
+    }
+
+    private boolean onGround() {
+        return equal(getTranslateY(), ground);
+    }
+
+    public void jump() {
+        if (onGround())
+            yVel -= 10;
+    }
+
+    public void updateGround(double ground) {
+        this.ground = ground;
     }
 
     public void updatePosition() {
+        yVel += gravity;
+        yDelta += yVel;
+
         setTranslateX(getTranslateX() + xDelta);
-        setTranslateY(getTranslateY() + yDelta);
+        setTranslateY(Math.min(getTranslateY() + yDelta, ground));
+
+        if (onGround()) {
+            yVel = 0;
+        }
+
         xDelta = 0;
         yDelta = 0;
+
+        System.out.println(getTranslateX() + " " + getTranslateY());
     }
 
     public void moveLeft() {
-        move(-5, 0);
+        xDelta -= 1;
     }
 
     public void moveRight() {
-        move(5, 0);
-    }
-
-    public void moveUp() {
-        move(0, -5);
-    }
-
-    public void moveDown() {
-        move(0, 5);
+        xDelta += 1;
     }
 }

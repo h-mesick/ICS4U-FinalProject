@@ -17,23 +17,32 @@ import javafx.stage.*;
  */
 public class LevelTwo extends BaseLevel {
     Sprite player;
+
+    boolean keyRight = false, keyLeft = false, keyUp = false;
     public LevelTwo(Game game) {
         super(game);
     }
 
     public void initScene() {
         player = new Sprite(100, 100, 20, 20, Color.BLUE);
+        player.updateGround(Constants.SCREEN_HEIGHT - 50);
         Group root = new Group();
         root.getChildren().add(player);
 
         Scene scene = new Scene(root);
         scene.setOnKeyPressed(e -> {
             switch(e.getCode()) {
-                case UP: player.moveUp(); break;
-                case DOWN: player.moveDown(); break;
-                case RIGHT: player.moveRight(); break;
-                case LEFT: player.moveLeft(); break;
+                case UP: keyUp = true; break;
+                case RIGHT: keyRight = true; break;
+                case LEFT: keyLeft = true; break;
                 case ESCAPE: this.game.updateState(State.MAIN_MENU); break;
+            }
+        });
+        scene.setOnKeyReleased(e -> {
+            switch(e.getCode()) {
+                case UP: keyUp = false; break;
+                case RIGHT: keyRight = false; break;
+                case LEFT: keyLeft = false; break;
             }
         });
         start();
@@ -41,6 +50,12 @@ public class LevelTwo extends BaseLevel {
     }
 
     protected void update() {
+        if (keyUp)
+            player.jump();
+        if (keyLeft)
+            player.moveLeft();
+        if (keyRight)
+            player.moveRight();
         player.updatePosition();
     }
 }
