@@ -32,19 +32,26 @@ public class Sprite extends Rectangle {
         return ground <= getTranslateY();
     }
 
-    public void fall(double ground) {
+    public boolean onCeiling(double ceiling) {
+        return ceiling >= getTranslateY();
+    }
+
+    public void fall(double ground, double ceiling) {
         yVel += gravity;
         move(0, yVel);
         setTranslateY(Math.min(ground, getTranslateY()));
-        if (onGround(ground))
+        setTranslateY(Math.max(ceiling, getTranslateY()));
+        if (onGround(ground) || onCeiling(ceiling))
             yVel = 0;
     }
 
-    public void moveLeft() {
-        move(-1, 0);
+    public void moveLeft(double boundary) {
+        move(-1.5, 0);
+        setTranslateX(Math.max(boundary, getTranslateX()));
     }
 
-    public void moveRight() {
-        move(1, 0);
+    public void moveRight(double boundary) {
+        move(1.5, 0);
+        setTranslateX(Math.min(boundary, getTranslateX()));
     }
 }
