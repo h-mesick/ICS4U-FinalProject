@@ -15,16 +15,16 @@ import javafx.stage.*;
  * Revision history:
  *  - May 13, 2019: Created ~Evan Zhang
  */
-public class LevelThree extends BaseLevel {
+public class LevelThree extends BasePlatformer {
     public LevelThree(Game game) {
         super(game);
     }
 
-    public void initScene() {
-
+    protected String getLevelFile() {
+        return "../resources/level3.txt";
     }
 
-    protected void update() {
-        
+    protected void handleSpecial(int specialType) {
+        System.out.println("Got special " + specialType);
     }
 }

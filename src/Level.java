@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.List;
 
 import javafx.animation.*;
 import javafx.event.*;
@@ -22,6 +23,7 @@ import javafx.stage.*;
  */
 public class Level {
     private int[][] arr;
+    private Sprite[][] blocks;
 
     public Level(String file) {
         ArrayList<String> lines = new ArrayList();
@@ -46,6 +48,21 @@ public class Level {
                 }
             }
         }
+
+        blocks = new Sprite[lines.size()][Constants.BLOCK_WIDTH_COUNT];
+        for (int y = 0; y < lines.size(); y++) {
+            for (int x = 0; x < Constants.BLOCK_WIDTH_COUNT; x++) {
+                double yy = y * Constants.PLATFORM_BLOCK_HEIGHT;
+                double xx = x * Constants.PLATFORM_BLOCK_WIDTH;
+                if (isBlocked(xx, yy)) {
+                    blocks[y][x] = new Sprite(xx, yy, Constants.PLATFORM_BLOCK_WIDTH,
+                                              Constants.PLATFORM_BLOCK_HEIGHT, Color.RED);
+                } else if (isSpecial(xx, yy)) {
+                    blocks[y][x] = new Sprite(xx, yy, Constants.PLATFORM_BLOCK_WIDTH,
+                                              Constants.PLATFORM_BLOCK_HEIGHT, Color.YELLOW);
+                }
+            }
+        }
     }
 
     public int length() {
@@ -64,12 +81,31 @@ public class Level {
         return (int)y / Constants.PLATFORM_BLOCK_HEIGHT;
     }
 
+    public List<Sprite> getAllSprites() {
+        List<Sprite> ret = new ArrayList();
+        for (int y = 0; y < length(); y++) {
+            for (int x = 0; x < Constants.BLOCK_WIDTH_COUNT; x++) {
+                if (blocks[y][x] != null)
+                    ret.add(blocks[y][x]);
+            }
+        }
+        return ret;
+    }
+
+    public Sprite getSprite(double x, double y) {
+        return blocks[getBlockY(y)][getBlockX(x)];
+    }
+
     public int getPosition(double x, double y) {
         return arr[getBlockY(y)][getBlockX(x)];
     }
 
     public boolean isBlocked(double x, double y) {
         return getPosition(x, y) == 1;
+    }
+
+    public boolean isSpecial(double x, double y) {
+        return getPosition(x, y) < 0;
     }
 
     public double getLeftBound(BoundingBox obj) {
