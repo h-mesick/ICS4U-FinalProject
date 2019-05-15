@@ -14,6 +14,12 @@ import javafx.scene.shape.*;
 import javafx.scene.text.*;
 import javafx.stage.*;
 
+/**
+ * @version 1
+ * @author Evan Zhang
+ * Revision history:
+ *  - May 14, 2019: Created ~Evan Zhang
+ */
 public class Level {
     private int[][] arr;
 

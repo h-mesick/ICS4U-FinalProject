@@ -9,6 +9,12 @@ import javafx.scene.shape.*;
 import javafx.scene.text.*;
 import javafx.stage.*;
 
+/**
+ * @version 1
+ * @author Evan Zhang
+ * Revision history:
+ *  - May 14, 2019: Created ~Evan Zhang
+ */
 public class Sprite extends Rectangle {
     final double gravity = 0.2;
     double yVel = 0;
