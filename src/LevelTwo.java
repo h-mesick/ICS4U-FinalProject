@@ -1,5 +1,6 @@
 import javafx.animation.*;
 import javafx.event.*;
+import javafx.geometry.*;
 import javafx.scene.*;
 import javafx.scene.canvas.*;
 import javafx.scene.control.*;
@@ -15,32 +16,20 @@ import javafx.stage.*;
  * Revision history:
  *  - May 13, 2019: Created ~Evan Zhang
  */
-public class LevelTwo extends BaseLevel {
+public class LevelTwo extends BasePlatformer {
     Sprite player;
-    boolean keyRight = false, keyLeft = false, keyUp = false;
-    Level level = new Level("../resources/level2.txt");
 
     public LevelTwo(Game game) {
         super(game);
-    }
-
-    public void drawLevel(Group root) {
-        for (int y = 0; y < Constants.SCREEN_HEIGHT; y += Constants.PLATFORM_BLOCK_HEIGHT) {
-            for (int x = 0; x < Constants.SCREEN_WIDTH; x += Constants.PLATFORM_BLOCK_WIDTH) {
-                if (this.level.isBlocked(x, y)) {
-                    root.getChildren().add (
-                        new Sprite(x, y, Constants.PLATFORM_BLOCK_WIDTH, Constants.PLATFORM_BLOCK_HEIGHT, Color.RED)
-                    );
-                }
-            }
-        }
+        level = new Level("../resources/level2.txt");
+        referencePoint = this.level.screenLength() - Constants.SCREEN_HEIGHT;
+        root = new Group();
     }
 
     public void initScene() {
         player = new Sprite(100, 100, 20, 20, Color.BLUE);
-        Group root = new Group();
         root.getChildren().add(player);
-        drawLevel(root);
+        drawLevel();
 
         Scene scene = new Scene(root);
         scene.setOnKeyPressed(e -> {
@@ -62,19 +51,49 @@ public class LevelTwo extends BaseLevel {
         this.game.setScene(scene);
     }
 
-    protected void update() {
-        double ground = this.level.getLowerBound(player) - player.getHeight();
-        double ceiling = this.level.getUpperBound(player);
+    private void updatePlayer() {
+        BoundingBox box = new BoundingBox(player.getTranslateX(), player.getTranslateY() + referencePoint,
+                                          player.getWidth(), player.getHeight());
+
+        double ground = this.level.getLowerBound(box) - player.getHeight() - referencePoint;
+        double ceiling = this.level.getUpperBound(box) - referencePoint;
 
         if (keyUp && player.onGround(ground)) {
             player.jump();
         }
         if (keyLeft) {
-            player.moveLeft(this.level.getLeftBound(player));
+            player.moveLeft(this.level.getLeftBound(box));
         }
         if (keyRight) {
-            player.moveRight(this.level.getRightBound(player) - player.getWidth());
+            player.moveRight(this.level.getRightBound(box) - player.getWidth());
         }
         player.fall(ground, ceiling);
+    }
+
+    private double calcSlide(double cur, double max) {
+        double ret = 10 * (max - cur) / max;
+        return ret < 0 ? 10 : ret;
+    }
+
+    private void updateScreen() {
+        double mod = 0;
+        double posY = player.getTranslateY();
+        double screenY = Constants.SCREEN_HEIGHT;
+        if (posY <= screenY / 3) {
+            mod -= calcSlide(posY, screenY / 3);
+        } else if (posY >= screenY * 2 / 3) {
+            mod += calcSlide(screenY - posY, screenY / 3);
+        }
+        if (Math.abs(mod) > 1e-7 && 0 <= referencePoint + mod && referencePoint + mod + screenY < this.level.screenLength()) {
+            referencePoint += mod;
+            for (Node obj : root.getChildren()) {
+                obj.setTranslateY(obj.getTranslateY() - mod);
+            }
+        }
+    }
+
+    protected void update() {
+        updatePlayer();
+        updateScreen();
     }
 }
