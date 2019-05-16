@@ -1,8 +1,10 @@
 import javafx.animation.*;
 import javafx.event.*;
+import javafx.geometry.*;
 import javafx.scene.*;
 import javafx.scene.canvas.*;
 import javafx.scene.control.*;
+import javafx.scene.image.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.*;
 import javafx.scene.shape.*;
@@ -28,13 +30,25 @@ public class LevelSelect extends BaseScene {
             event -> game.updateState(State.LEVEL_THREE),
         };
 
-        VBox root = new VBox();
+        VBox root = new VBox(30);
+        root.setAlignment(Pos.CENTER);
+        root.setBackground(new Background(new BackgroundImage(
+            ResourceLoader.loadImage("platform.png"),
+            BackgroundRepeat.NO_REPEAT,
+            BackgroundRepeat.NO_REPEAT,
+            BackgroundPosition.CENTER,
+            new BackgroundSize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, false, false, false, false)
+        )));
+
+        root.getChildren().add(new ImageView(ResourceLoader.loadImage("game-logo.png")));
 
         Button[] btns = new Button[NUM_LEVELS];
         for (int x = 0; x < NUM_LEVELS; x++) {
             btns[x] = new Button(LEVEL_NAMES[x]);
-            btns[x].setMinWidth(SCREEN_WIDTH);
-            btns[x].setMinHeight(SCREEN_HEIGHT / 3);
+            btns[x].setAlignment(Pos.CENTER);
+            btns[x].setMinWidth(SCREEN_WIDTH / 2);
+            btns[x].setMinHeight(SCREEN_HEIGHT / 5);
+            btns[x].setGraphic(new Sprite(0, 0, 100, 100, ResourceLoader.loadImage("platform.png")));
             btns[x].setOnAction(handlers[x]);
         }
         root.getChildren().addAll(btns);
