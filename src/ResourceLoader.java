@@ -13,15 +13,19 @@ import javafx.stage.*;
 
 public class ResourceLoader
 {
-    public static Image loadImage(String filename) {
-        return new Image("file:resources/images/" + filename);
+    public static InputStream getResource(String location) {
+        return ResourceLoader.class.getClassLoader().getResourceAsStream(location);
     }
 
-    public static FileReader loadLevel(String filename) {
+    public static Image loadImage(String filename) {
+        return new Image(getResource("resources/images/" + filename));
+    }
+
+    public static Reader loadLevel(String filename) {
         try {
-            return new FileReader("resources/levels/" + filename);
-        } catch(FileNotFoundException e) {
-            System.out.println("Could not load level named \"" + filename + "\": file not found.");
+            return new InputStreamReader(getResource("resources/levels/" + filename), "UTF-8");
+        } catch(UnsupportedEncodingException e) {
+            System.err.println("Cannot decode level file: \"" + filename + "\".");
         }
         return null;
     }
