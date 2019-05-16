@@ -1,0 +1,6 @@
+#!/usr/bin/sh
+
+rm ClimbToGrace.jar
+mkdir out
+javac src/*.java -d out/ && cp -r src/resources/ out/ && jar cvfm ClimbToGrace.jar MANIFEST.MF -C out/ .
+rm -r out/
