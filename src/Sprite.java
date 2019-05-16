@@ -3,6 +3,7 @@ import javafx.event.*;
 import javafx.scene.*;
 import javafx.scene.canvas.*;
 import javafx.scene.control.*;
+import javafx.scene.image.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.*;
 import javafx.scene.shape.*;
@@ -14,20 +15,31 @@ import javafx.stage.*;
  * @author Evan Zhang
  * Revision history:
  *  - May 14, 2019: Created ~Evan Zhang
+ *  - May 15, 2019: Updated ~Evan Zhang
  */
-public class Sprite extends Rectangle {
+public class Sprite extends ImageView {
     final double gravity = 0.2;
     double yVel = 0;
 
-    public Sprite(double x, double y, double w, double h, Color c) {
-        super(w, h, c);
+    public Sprite(double x, double y, double w, double h, Image c) {
+        super(c);
         setTranslateX(x);
         setTranslateY(y);
+        setFitWidth(w);
+        setFitHeight(h);
     }
 
     private void move(double x, double y) {
         setTranslateX(getTranslateX() + x);
         setTranslateY(getTranslateY() + y);
+    }
+
+    public double getWidth() {
+        return getFitWidth();
+    }
+
+    public double getHeight() {
+        return getFitHeight();
     }
 
     public void jump() {

@@ -24,7 +24,7 @@ public class LevelTwo extends BasePlatformer {
     }
 
     protected String getLevelFile() {
-        return "../resources/level2.txt";
+        return "level2.txt";
     }
 
     protected void handleSpecial(int specialType) {

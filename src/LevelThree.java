@@ -14,6 +14,7 @@ import javafx.stage.*;
  * @author Evan Zhang
  * Revision history:
  *  - May 13, 2019: Created ~Evan Zhang
+ *  - May 15, 2019: Updated ~Evan Zhang
  */
 public class LevelThree extends BasePlatformer {
     public LevelThree(Game game) {
@@ -21,7 +22,7 @@ public class LevelThree extends BasePlatformer {
     }
 
     protected String getLevelFile() {
-        return "../resources/level3.txt";
+        return "level3.txt";
     }
 
     protected void handleSpecial(int specialType) {

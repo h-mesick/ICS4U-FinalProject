@@ -1,5 +1,4 @@
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +19,7 @@ import javafx.stage.*;
  * @author Evan Zhang
  * Revision history:
  *  - May 14, 2019: Created ~Evan Zhang
+ *  - May 15, 2019: Updated ~Evan Zhang
  */
 public class Level {
     private int[][] arr;
@@ -28,7 +28,7 @@ public class Level {
     public Level(String file) {
         ArrayList<String> lines = new ArrayList();
         try {
-            BufferedReader in = new BufferedReader(new FileReader(file));
+            BufferedReader in = new BufferedReader(ResourceLoader.loadLevel(file));
             for (String line; (line = in.readLine()) != null;) {
                 lines.add(line);
             }
@@ -52,14 +52,25 @@ public class Level {
         blocks = new Sprite[lines.size()][Constants.BLOCK_WIDTH_COUNT];
         for (int y = 0; y < lines.size(); y++) {
             for (int x = 0; x < Constants.BLOCK_WIDTH_COUNT; x++) {
-                double yy = y * Constants.PLATFORM_BLOCK_HEIGHT;
-                double xx = x * Constants.PLATFORM_BLOCK_WIDTH;
+                double yy = getActY(y);
+                double xx = getActX(x);
+
+                boolean topBlocked = y > 0 && isBlocked(xx, getActY(y - 1));
+
+                String image = null;
                 if (isBlocked(xx, yy)) {
-                    blocks[y][x] = new Sprite(xx, yy, Constants.PLATFORM_BLOCK_WIDTH,
-                                              Constants.PLATFORM_BLOCK_HEIGHT, Color.RED);
+                    image = topBlocked ? "platform.png" : "platform-top.png";
                 } else if (isSpecial(xx, yy)) {
+                    image = "special.png";
+                } else {
+                    if (topBlocked) {
+                        int num = (int)(Math.random() * 3) + 1;
+                        image = "platform-overhang-" + num + ".png";
+                    }
+                }
+                if (image != null) {
                     blocks[y][x] = new Sprite(xx, yy, Constants.PLATFORM_BLOCK_WIDTH,
-                                              Constants.PLATFORM_BLOCK_HEIGHT, Color.YELLOW);
+                                              Constants.PLATFORM_BLOCK_HEIGHT, ResourceLoader.loadImage(image));
                 }
             }
         }
@@ -71,6 +82,14 @@ public class Level {
 
     public int screenLength() {
         return this.arr.length * Constants.PLATFORM_BLOCK_HEIGHT;
+    }
+
+    public int getActX(int x) {
+        return x * Constants.PLATFORM_BLOCK_WIDTH;
+    }
+
+    public int getActY(int y) {
+        return y * Constants.PLATFORM_BLOCK_HEIGHT;
     }
 
     public int getBlockX(double x) {
@@ -108,17 +127,24 @@ public class Level {
         return getPosition(x, y) < 0;
     }
 
+    public void removeSpecial(double x, double y) {
+        if (isSpecial(x, y)) {
+            arr[getBlockY(y)][getBlockX(x)] = 0;
+            blocks[getBlockY(y)][getBlockX(x)] = null;
+        }
+    }
+
     public double getLeftBound(BoundingBox obj) {
         int jumpX = Constants.PLATFORM_BLOCK_WIDTH / 2;
         int jumpY = Constants.PLATFORM_BLOCK_HEIGHT / 2;
         for (double x = obj.getMinX(); x >= 0; x -= jumpX) {
             for (double y = obj.getMinY(); y < obj.getMaxY(); y += jumpY) {
                 if (isBlocked(x, y)) {
-                    return (getBlockX(x) + 1) * Constants.PLATFORM_BLOCK_WIDTH;
+                    return getActX(getBlockX(x) + 1);
                 }
             }
             if (isBlocked(x, obj.getMaxY() - 0.5)) {
-                return (getBlockX(x) + 1) * Constants.PLATFORM_BLOCK_WIDTH;
+                return getActX(getBlockX(x) + 1);
             }
         }
         return 0;
@@ -130,11 +156,11 @@ public class Level {
         for (double x = obj.getMaxX(); x < Constants.SCREEN_WIDTH; x += jumpX) {
             for (double y = obj.getMinY(); y < obj.getMaxY(); y += jumpY) {
                 if (isBlocked(x, y)) {
-                    return getBlockX(x) * Constants.PLATFORM_BLOCK_WIDTH;
+                    return getActX(getBlockX(x));
                 }
             }
             if (isBlocked(x, obj.getMaxY() - 0.5)) {
-                return getBlockX(x) * Constants.PLATFORM_BLOCK_WIDTH;
+                return getActX(getBlockX(x));
             }
         }
         return Constants.SCREEN_WIDTH - 1;
@@ -146,11 +172,11 @@ public class Level {
         for (double y = obj.getMinY(); y >= 0; y -= jumpY) {
             for (double x = obj.getMinX(); x < obj.getMaxX(); x += jumpX) {
                 if (isBlocked(x, y)) {
-                    return (getBlockY(y) + 1) * Constants.PLATFORM_BLOCK_HEIGHT;
+                    return getActY(getBlockY(y) + 1);
                 }
             }
             if (isBlocked(obj.getMaxX() - 0.5, y)) {
-                return (getBlockY(y) + 1) * Constants.PLATFORM_BLOCK_HEIGHT;
+                return getActY(getBlockY(y) + 1);
             }
         }
         return 0;
@@ -162,11 +188,11 @@ public class Level {
         for (double y = obj.getMaxY(); y < screenLength(); y += jumpY) {
             for (double x = obj.getMinX(); x < obj.getMaxX(); x += jumpX) {
                 if (isBlocked(x, y)) {
-                    return getBlockY(y) * Constants.PLATFORM_BLOCK_HEIGHT;
+                    return getActY(getBlockY(y));
                 }
             }
             if (isBlocked(obj.getMaxX() - 0.5, y)) {
-                return getBlockY(y) * Constants.PLATFORM_BLOCK_HEIGHT;
+                return getActY(getBlockY(y));
             }
         }
         return screenLength() - 1;

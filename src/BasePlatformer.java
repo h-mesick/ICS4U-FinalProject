@@ -2,8 +2,8 @@ import javafx.animation.*;
 import javafx.event.*;
 import javafx.geometry.*;
 import javafx.scene.*;
-import javafx.scene.canvas.*;
 import javafx.scene.control.*;
+import javafx.scene.image.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.*;
 import javafx.scene.shape.*;
@@ -20,6 +20,7 @@ import javafx.stage.*;
  */
 public abstract class BasePlatformer extends BaseLevel {
     protected Sprite player;
+    protected ProgressBar progress;
     protected Group root;
     protected boolean keyRight = false, keyLeft = false, keyUp = false;
     protected Level level;
@@ -39,8 +40,17 @@ public abstract class BasePlatformer extends BaseLevel {
         for (Node s : root.getChildren()) {
             s.setTranslateY(s.getTranslateY() - referencePoint);
         }
-        player = new Sprite(100, 100, 20, 20, Color.BLUE);
+        player = new Sprite(30, Constants.SCREEN_HEIGHT - Constants.PLATFORM_BLOCK_HEIGHT - 30,
+                            20, 30, ResourceLoader.loadImage("player.png"));
         root.getChildren().add(player);
+
+        progress = new ProgressBar();
+        progress.setTranslateX(Constants.SCREEN_WIDTH / 3);
+        progress.setMinWidth(Constants.SCREEN_WIDTH / 3);
+        progress.setTranslateY(20);
+        progress.setMinHeight(20);
+		progress.setStyle("-fx-accent: #00a000; -fx-background: #fff; -fx-control-inner-background: #fff;");
+        root.getChildren().add(progress);
 
         Scene scene = new Scene(root);
         scene.setOnKeyPressed(e -> {
@@ -95,18 +105,23 @@ public abstract class BasePlatformer extends BaseLevel {
         } else if (posY >= screenY * 2 / 3) {
             mod += calcSlide(screenY - posY, screenY / 3);
         }
-        if (Math.abs(mod) > 1e-7 && 0 <= referencePoint + mod && referencePoint + mod + screenY < this.level.screenLength()) {
+        if (Math.abs(mod) > 1e-7 &&
+                0 <= referencePoint + mod && referencePoint + mod + screenY < this.level.screenLength()) {
             referencePoint += mod;
-            for (Node obj : root.getChildren()) {
+            for (Sprite obj : this.level.getAllSprites()) {
                 obj.setTranslateY(obj.getTranslateY() - mod);
+                obj.setVisible(0 <= obj.getTranslateY() + obj.getHeight() && obj.getTranslateY() < screenY);
             }
+            player.setTranslateY(player.getTranslateY() - mod);
         }
     }
 
     private void updateSpecial() {
-        int positionValue = this.level.getPosition(player.getTranslateX(), getRealY(player.getTranslateY()));
-        if (positionValue < 0) {
-            handleSpecial(-positionValue);
+        double x = player.getTranslateX(), y = getRealY(player.getTranslateY());
+        if (this.level.isSpecial(x, y)) {
+            handleSpecial(-this.level.getPosition(x, y));
+            root.getChildren().remove(this.level.getSprite(x, y));
+            this.level.removeSpecial(x, y);
         }
     }
 
@@ -114,6 +129,7 @@ public abstract class BasePlatformer extends BaseLevel {
         updateScreen();
         updatePlayer();
         updateSpecial();
+        progress.setProgress(1 - (referencePoint + Constants.SCREEN_HEIGHT) / this.level.screenLength());
     }
 
     protected double getRealY(double y) {
