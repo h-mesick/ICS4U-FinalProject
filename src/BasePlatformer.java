@@ -22,6 +22,7 @@ import javafx.stage.*;
 public abstract class BasePlatformer extends BaseLevel {
     protected Sprite player;
     protected ProgressBar progress;
+    protected VBox escapeOverlay;
     protected Group root;
     protected boolean keyRight = false, keyLeft = false, keyUp = false;
     protected Level level;
@@ -34,16 +35,51 @@ public abstract class BasePlatformer extends BaseLevel {
         root = new Group();
     }
 
+    private VBox initEscapeOverlay() {
+        VBox overlay = new VBox(10);
+        overlay.setPadding(new Insets(100));
+        overlay.setAlignment(Pos.CENTER);
+
+        overlay.setMinWidth(Constants.SCREEN_WIDTH);
+        overlay.setMinHeight(Constants.SCREEN_HEIGHT / 3);
+
+        String[] buttonNames = {
+            "Resume",
+            "Level Select",
+            "Main Menu",
+        };
+
+        EventHandler[] buttonHandlers = {
+            event -> overlay.setVisible(false),
+            event -> game.updateState(State.LEVEL_SELECT),
+            event -> game.updateState(State.MAIN_MENU),
+        };
+
+        for (int x = 0; x < buttonNames.length; x++) {
+            Button b = new Button(buttonNames[x]);
+            b.setMinWidth(Constants.SCREEN_WIDTH / 2);
+            b.setMinHeight(50);
+            b.setOnAction(buttonHandlers[x]);
+            overlay.getChildren().add(b);
+        }
+        overlay.setVisible(false);
+        return overlay;
+    }
+
     public void initScene() {
+        // add blocks
         for (Sprite s : level.getAllSprites()) {
             root.getChildren().add(s);
             s.setTranslateY(getScreenY(s.getTranslateY()));
             s.setVisible(0 <= s.getTranslateY() + s.getHeight() && s.getTranslateY() < Constants.SCREEN_HEIGHT);
         }
+
+        // add player
         player = new Sprite(30, Constants.SCREEN_HEIGHT - Constants.PLATFORM_BLOCK_HEIGHT - 30,
                             20, 30, ResourceLoader.loadImage("player.png"));
         root.getChildren().add(player);
 
+        // add progress bar
         progress = new ProgressBar();
         progress.setTranslateX(Constants.SCREEN_WIDTH / 3);
         progress.setMinWidth(Constants.SCREEN_WIDTH / 3);
@@ -52,13 +88,16 @@ public abstract class BasePlatformer extends BaseLevel {
 		progress.setStyle("-fx-accent: #00a000; -fx-background: #fff; -fx-control-inner-background: #fff;");
         root.getChildren().add(progress);
 
+        escapeOverlay = initEscapeOverlay();
+        root.getChildren().add(escapeOverlay);
+
         Scene scene = new Scene(root);
         scene.setOnKeyPressed(e -> {
             switch(e.getCode()) {
                 case UP: keyUp = true; break;
                 case RIGHT: keyRight = true; break;
                 case LEFT: keyLeft = true; break;
-                case ESCAPE: this.game.updateState(State.MAIN_MENU); break;
+                case ESCAPE: escapeOverlay.setVisible(!escapeOverlay.isVisible()); break;
             }
         });
         scene.setOnKeyReleased(e -> {
@@ -68,8 +107,8 @@ public abstract class BasePlatformer extends BaseLevel {
                 case LEFT: keyLeft = false; break;
             }
         });
-        start();
         this.game.setScene(scene);
+        start();
     }
 
     private void updatePlayer() {
@@ -126,10 +165,17 @@ public abstract class BasePlatformer extends BaseLevel {
     }
 
     protected void update() {
+        if (escapeOverlay.isVisible()) {
+            return;
+        }
+
         updateScreen();
         updatePlayer();
         updateSpecial();
-        progress.setProgress(1 - (referencePoint + Constants.SCREEN_HEIGHT) / this.level.screenLength());
+        double curProgress = referencePoint + Constants.SCREEN_HEIGHT;
+        if (getRealY(player.getTranslateY()) < Constants.SCREEN_HEIGHT)
+            curProgress = player.getTranslateY();
+        progress.setProgress(1 - curProgress / this.level.screenLength());
     }
 
     protected double getRealY(double y) {

@@ -32,6 +32,7 @@ public class LevelSelect extends BaseScene {
 
         BorderPane root = new BorderPane();
 
+
         root.setBackground(new Background(new BackgroundImage(
             ResourceLoader.loadImage("platform.png"),
             BackgroundRepeat.NO_REPEAT,
@@ -40,30 +41,48 @@ public class LevelSelect extends BaseScene {
             new BackgroundSize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, false, false, false, false)
         )));
 
-        VBox body = new VBox(30);
+        root.setTop(getTitle());
+
+        VBox body = new VBox(10);
         body.setAlignment(Pos.CENTER);
 
-        body.getChildren().add(new ImageView(ResourceLoader.loadImage("game-logo.png")));
+        body.getChildren().add(new ImageView(ResourceLoader.loadImage("level-select-logo.png")));
 
-        Button[] btns = new Button[NUM_LEVELS];
         for (int x = 0; x < NUM_LEVELS; x++) {
-            btns[x] = new Button(LEVEL_NAMES[x]);
-            btns[x].setAlignment(Pos.CENTER);
-            btns[x].setMinWidth(SCREEN_WIDTH / 2);
-            btns[x].setMinHeight(SCREEN_HEIGHT / 6);
-//            btns[x].setGraphic(new Sprite(0, 0, 100, 100, ResourceLoader.loadImage("platform.png")));
-            btns[x].setOnAction(handlers[x]);
-        }
-        body.getChildren().addAll(btns);
+            ImageButton lvlButton = new ImageButton();
+            lvlButton.setImages(ResourceLoader.loadImage("level-button.png"),
+                                ResourceLoader.loadImage("level-button-hover.png"),
+                                ResourceLoader.loadImage("level-button-selected.png"));
+            lvlButton.setFitWidth(SCREEN_WIDTH / 5 * 2);
+            lvlButton.setFitHeight(SCREEN_HEIGHT / 8);
+            lvlButton.setOnAction(handlers[x]);
 
-        BorderPane footer = new BorderPane();
-        footer.setMinHeight(50);
-        footer.setPadding(new Insets(10));
-        footer.setRight(new ImageView(ResourceLoader.loadImage("help-button.png")));
-        footer.setLeft(new ImageView(ResourceLoader.loadImage("back-button.png")));
+            StackPane button = new StackPane();
+            button.setAlignment(Pos.CENTER);
+            button.getChildren().add(lvlButton);
+            button.getChildren().add(new ImageView(ResourceLoader.loadImage("level-" + (x + 1) + ".png")));
+            if (x == 0)
+                button.setDisable(true);
+            body.getChildren().add(button);
+        }
+
+        ImageButton backButton = new ImageButton();
+        backButton.setFitWidth(50);
+        backButton.setFitHeight(50);
+        backButton.setImages(ResourceLoader.loadImage("back-button.png"),
+                             ResourceLoader.loadImage("back-button-hover.png"),
+                             ResourceLoader.loadImage("back-button-selected.png"));
+        backButton.setOnAction(event -> game.updateState(State.MAIN_MENU));
+
+        ImageButton helpButton = new ImageButton();
+        helpButton.setFitWidth(50);
+        helpButton.setFitHeight(50);
+        helpButton.setImages(ResourceLoader.loadImage("help-button.png"),
+                             ResourceLoader.loadImage("help-button-hover.png"),
+                             ResourceLoader.loadImage("help-button-selected.png"));
 
         root.setCenter(body);
-        root.setBottom(footer);
+        root.setBottom(getFooter(backButton, helpButton));
         this.game.setScene(new Scene(root));
     }
 }

@@ -42,9 +42,7 @@ public class Game {
             case HIGH_SCORES:
                 // new HighScores(this).initScene();
                 break;
-            case HELP:
-                // new Help(this).initScene();
-                break;
+            case HELP: new Help(this).initScene(); break;
             case TUTORIAL:
                 // new Tutorial(this).initScene();
                 break;

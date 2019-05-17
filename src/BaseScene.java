@@ -1,8 +1,10 @@
 import javafx.animation.*;
 import javafx.event.*;
+import javafx.geometry.*;
 import javafx.scene.*;
 import javafx.scene.canvas.*;
 import javafx.scene.control.*;
+import javafx.scene.image.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.*;
 import javafx.scene.shape.*;
@@ -25,4 +27,24 @@ public abstract class BaseScene implements Constants {
     }
 
     public abstract void initScene();
+
+    public VBox getTitle() {
+        VBox title = new VBox();
+        title.setAlignment(Pos.CENTER);
+        title.getChildren().add(new ImageView(ResourceLoader.loadImage("game-logo.png")));
+        return title;
+    }
+
+    public BorderPane getFooter(Node left, Node right) {
+        BorderPane footer = new BorderPane();
+        footer.setPadding(new Insets(10));
+
+        if (left != null) {
+            footer.setLeft(left);
+        }
+        if (right != null) {
+            footer.setRight(right);
+        }
+        return footer;
+    }
 }

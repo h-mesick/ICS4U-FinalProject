@@ -17,6 +17,10 @@ public class ResourceLoader
         return ResourceLoader.class.getClassLoader().getResourceAsStream(location);
     }
 
+    public static String getResourceLocation(String location) {
+        return ResourceLoader.class.getClassLoader().getResource(location).toExternalForm();
+    }
+
     public static Image loadImage(String filename) {
         return new Image(getResource("resources/images/" + filename));
     }
@@ -28,5 +32,9 @@ public class ResourceLoader
             System.err.println("Cannot decode level file: \"" + filename + "\".");
         }
         return null;
+    }
+
+    public static String loadCSS(String filename) {
+        return getResourceLocation("resources/css/" + filename);
     }
 }
