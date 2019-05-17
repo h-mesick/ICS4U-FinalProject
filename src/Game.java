@@ -14,6 +14,7 @@ import javafx.stage.*;
  * @author Evan Zhang
  * Revision history:
  *  - May 14, 2019: Created ~Evan Zhang
+ *  - May 16, 2019: Updated ~Evan Zhang
  */
 public class Game {
     private State currentState;

@@ -11,6 +11,13 @@ import javafx.scene.shape.*;
 import javafx.scene.text.*;
 import javafx.stage.*;
 
+/**
+ * @version 1
+ * @author Evan Zhang
+ * Revision history:
+ *  - May 15, 2019: Created ~Evan Zhang
+ *  - May 16, 2019: Updated ~Evan Zhang
+ */
 public class ResourceLoader
 {
     public static InputStream getResource(String location) {
