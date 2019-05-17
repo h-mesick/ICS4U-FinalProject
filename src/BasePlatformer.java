@@ -85,7 +85,7 @@ public abstract class BasePlatformer extends BaseLevel {
         progress.setMinWidth(Constants.SCREEN_WIDTH / 3);
         progress.setTranslateY(20);
         progress.setMinHeight(20);
-		progress.setStyle("-fx-accent: #00a000; -fx-background: #fff; -fx-control-inner-background: #fff;");
+        progress.getStylesheets().add(ResourceLoader.loadCSS("game-progress-bar.css"));
         root.getChildren().add(progress);
 
         escapeOverlay = initEscapeOverlay();
