@@ -18,6 +18,7 @@ import javafx.stage.*;
  *  - May 14, 2019: Updated ~Evan Zhang
  *  - May 15, 2019: Updated ~Evan Zhang
  *  - May 17, 2019: Updated ~Evan Zhang
+ *  - May 18, 2019: Updated ~Evan Zhang
  */
 public class LevelTwo extends BasePlatformer {
     public LevelTwo(Game game) {
@@ -26,6 +27,20 @@ public class LevelTwo extends BasePlatformer {
 
     protected String getLevelFile() {
         return "level2.txt";
+    }
+
+    protected Question getQuestion(int specialType) {
+        String question = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa " + specialType;
+        String[] answers = {
+            "a", "b", "c", "dasdasdsadasdasdsadadadsd"
+        };
+        EventHandler[] handlers = {
+            event -> removeOverlay(),
+            event -> game.updateState(State.MAIN_MENU),
+            event -> game.updateState(State.MAIN_MENU),
+            event -> game.updateState(State.MAIN_MENU),
+        };
+        return new Question(question, answers, handlers);
     }
 
     protected void handleSpecial(int specialType) {
@@ -38,28 +53,19 @@ public class LevelTwo extends BasePlatformer {
         overlay.setAlignment(Pos.CENTER);
 
         overlay.setBackground(new Background(new BackgroundFill(
-            new Color(0, 0, 0, 0.5),
+            new Color(0, 0, 0, 0.3),
             new CornerRadii(10),
             new Insets(0)
         )));
 
-        //TODO: begin add actual questions
-        String question = "" + specialType;
-        String[] answers = {
-            "a", "b", "c", "dasdasdsadasdasdsadadadsd"
-        };
-        EventHandler[] handlers = {
-            event -> removeOverlay(),
-            event -> game.updateState(State.MAIN_MENU),
-            event -> game.updateState(State.MAIN_MENU),
-            event -> game.updateState(State.MAIN_MENU),
-        };
-        //end add actual questions
+        Question question = getQuestion(specialType);
 
-        FlowPane questionPane = new FlowPane();
+        StackPane questionPane = new StackPane();
         questionPane.setAlignment(Pos.CENTER);
-        Text questionText = new Text(question);
-        questionText.setFill(Color.WHITE);
+        Text questionText = new Text(question.getQuestion());
+        questionText.setFont(new Font("Verdana", 20));
+        questionText.setFill(Color.RED);
+        questionText.setWrappingWidth(Constants.SCREEN_WIDTH / 3 * 2);
         questionPane.getChildren().add(questionText);
 
         GridPane answersPane = new GridPane();
@@ -68,7 +74,7 @@ public class LevelTwo extends BasePlatformer {
         answersPane.setVgap(10);
 
         for (int x = 0; x < 4; x++) {
-            StackPane button = getMainButton(answers[x], handlers[x], 15);
+            StackPane button = getMainButton(question.getAnswers()[x], question.getHandlers()[x], 15);
             answersPane.add(button, x / 2, x % 2);
         }
         overlay.getChildren().addAll(questionPane, answersPane);

@@ -1,6 +1,7 @@
 import java.util.*;
 
 import javafx.animation.*;
+import javafx.beans.property.*;
 import javafx.event.*;
 import javafx.geometry.*;
 import javafx.scene.*;
@@ -20,6 +21,7 @@ import javafx.stage.*;
  *  - May 13, 2019: Created ~Evan Zhang
  *  - May 14, 2019: Updated ~Evan Zhang
  *  - May 17, 2019: Updated ~Evan Zhang
+ *  - May 18, 2019: Updated ~Evan Zhang
  */
 public abstract class BaseLevel extends BaseScene {
     protected AnimationTimer mainTimer;
@@ -27,27 +29,17 @@ public abstract class BaseLevel extends BaseScene {
     protected Set<KeyCode> pressedKeys = new HashSet();
     protected Group root;
 
-    private class Time {
-        public long time;
-        public Time(long time) {
-            set(time);
-        }
-        public void set(long time) {
-            this.time = time;
-        }
-    }
-
     public BaseLevel(Game game) {
         super(game);
 
-        Time prev = new Time(0);
+        SimpleLongProperty prev = new SimpleLongProperty();
         mainTimer = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                if (prev.time == 0) {
+                if (prev.get() == 0) {
                     update();
                 } else {
-                    long iterations = (now - prev.time) / 5000000;
+                    long iterations = (now - prev.get()) / 5000000;
                     for (int x = 0; x < iterations; x++) {
                         update();
                     }

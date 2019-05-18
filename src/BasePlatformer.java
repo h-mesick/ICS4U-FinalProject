@@ -20,6 +20,7 @@ import javafx.stage.*;
  *  - May 15, 2019: Updated ~Evan Zhang
  *  - May 16, 2019: Updated ~Evan Zhang
  *  - May 17, 2019: Updated ~Evan Zhang
+ *  - May 18, 2019: Updated ~Evan Zhang
 */
 public abstract class BasePlatformer extends BaseLevel {
     protected Sprite player;
@@ -46,7 +47,7 @@ public abstract class BasePlatformer extends BaseLevel {
 
         // add player
         player = new Sprite(30, Constants.SCREEN_HEIGHT - Constants.PLATFORM_BLOCK_HEIGHT - 30,
-                            20, 30, ResourceLoader.loadImage("player.png"));
+                            20, 29, ResourceLoader.loadImage("player.png"));
         root.getChildren().add(player);
 
         // add progress bar
