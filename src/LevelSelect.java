@@ -18,6 +18,7 @@ import javafx.stage.*;
  *  - May 13, 2019: Created ~Evan Zhang
  *  - May 14, 2019: Updated ~Evan Zhang
  *  - May 16, 2019: Updated ~Evan Zhang
+ *  - May 17, 2019: Updated ~Evan Zhang
  */
 public class LevelSelect extends BaseScene {
     public LevelSelect(Game game) {
@@ -32,7 +33,6 @@ public class LevelSelect extends BaseScene {
         };
 
         BorderPane root = new BorderPane();
-
 
         root.setBackground(new Background(new BackgroundImage(
             ResourceLoader.loadImage("platform.png"),
@@ -50,18 +50,7 @@ public class LevelSelect extends BaseScene {
         body.getChildren().add(new ImageView(ResourceLoader.loadImage("level-select-logo.png")));
 
         for (int x = 0; x < NUM_LEVELS; x++) {
-            ImageButton lvlButton = new ImageButton();
-            lvlButton.setImages(ResourceLoader.loadImage("level-button.png"),
-                                ResourceLoader.loadImage("level-button-hover.png"),
-                                ResourceLoader.loadImage("level-button-selected.png"));
-            lvlButton.setFitWidth(SCREEN_WIDTH / 5 * 2);
-            lvlButton.setFitHeight(SCREEN_HEIGHT / 8);
-            lvlButton.setOnAction(handlers[x]);
-
-            StackPane button = new StackPane();
-            button.setAlignment(Pos.CENTER);
-            button.getChildren().add(lvlButton);
-            button.getChildren().add(new ImageView(ResourceLoader.loadImage("level-" + (x + 1) + ".png")));
+            StackPane button = getMainButton("" + (x+1), handlers[x]);
             if (x == 0)
                 button.setDisable(true);
             body.getChildren().add(button);
@@ -81,6 +70,7 @@ public class LevelSelect extends BaseScene {
         helpButton.setImages(ResourceLoader.loadImage("help-button.png"),
                              ResourceLoader.loadImage("help-button-hover.png"),
                              ResourceLoader.loadImage("help-button-selected.png"));
+        helpButton.setOnAction(event -> game.updateState(State.HELP));
 
         root.setCenter(body);
         root.setBottom(getFooter(backButton, helpButton));

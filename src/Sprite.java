@@ -42,6 +42,14 @@ public class Sprite extends ImageView {
         return getFitHeight();
     }
 
+    public double getCenterX() {
+        return getTranslateX() + getWidth() / 2;
+    }
+
+    public double getCenterY() {
+        return getTranslateY() + getHeight() / 2;
+    }
+
     public void jump() {
         yVel -= 8;
     }

@@ -21,7 +21,7 @@ public class LevelOne extends BaseLevel {
     }
 
     public void initScene() {
-        Group root = new Group();
+        root = new Group();
         Canvas c = new Canvas(SCREEN_WIDTH, SCREEN_HEIGHT);
         root.getChildren().add(c);
         this.game.setScene(new Scene(root));

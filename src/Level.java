@@ -52,28 +52,31 @@ public class Level {
         blocks = new Sprite[lines.size()][Constants.BLOCK_WIDTH_COUNT];
         for (int y = 0; y < lines.size(); y++) {
             for (int x = 0; x < Constants.BLOCK_WIDTH_COUNT; x++) {
-                double yy = getActY(y);
-                double xx = getActX(x);
-
-                boolean topBlocked = y > 0 && isBlocked(xx, getActY(y - 1));
-
-                String image = null;
-                if (isBlocked(xx, yy)) {
-                    image = topBlocked ? "platform.png" : "platform-top.png";
-                } else if (isSpecial(xx, yy)) {
-                    image = "special.png";
-                } else {
-                    if (topBlocked) {
-                        int num = (int)(Math.random() * 3) + 1;
-                        image = "platform-overhang-" + num + ".png";
-                    }
-                }
-                if (image != null) {
-                    blocks[y][x] = new Sprite(xx, yy, Constants.PLATFORM_BLOCK_WIDTH,
-                                              Constants.PLATFORM_BLOCK_HEIGHT, ResourceLoader.loadImage(image));
-                }
+                double xx = getActX(x), yy = getActY(y);
+                blocks[y][x] = getBlock(xx, yy);
             }
         }
+    }
+
+    private Sprite getBlock(double x, double y) {
+        boolean topBlocked = y - Constants.PLATFORM_BLOCK_HEIGHT >= 0 &&
+                             isBlocked(x, y - Constants.PLATFORM_BLOCK_HEIGHT);
+        String image = null;
+        if (isBlocked(x, y)) {
+            image = topBlocked ? "platform.png" : "platform-top.png";
+        } else if (isSpecial(x, y)) {
+            image = "special.png";
+        } else {
+            if (topBlocked) {
+                int num = (int)(Math.random() * 3) + 1;
+                image = "platform-overhang-" + num + ".png";
+            }
+        }
+        if (image != null) {
+            return new Sprite(x, y, Constants.PLATFORM_BLOCK_WIDTH,
+                              Constants.PLATFORM_BLOCK_HEIGHT, ResourceLoader.loadImage(image));
+        }
+        return null;
     }
 
     public int length() {
@@ -100,12 +103,27 @@ public class Level {
         return (int)y / Constants.PLATFORM_BLOCK_HEIGHT;
     }
 
+    //TODO: optimize
+    public List<Sprite> getSpecialSprites() {
+        List<Sprite> ret = new ArrayList();
+        for (int y = 0; y < length(); y++) {
+            for (int x = 0; x < Constants.BLOCK_WIDTH_COUNT; x++) {
+                if (arr[y][x] < 0) {
+                    ret.add(blocks[y][x]);
+                }
+            }
+        }
+        return ret;
+    }
+
+    //TODO: optimize
     public List<Sprite> getAllSprites() {
         List<Sprite> ret = new ArrayList();
         for (int y = 0; y < length(); y++) {
             for (int x = 0; x < Constants.BLOCK_WIDTH_COUNT; x++) {
-                if (blocks[y][x] != null)
+                if (blocks[y][x] != null) {
                     ret.add(blocks[y][x]);
+                }
             }
         }
         return ret;
@@ -125,13 +143,6 @@ public class Level {
 
     public boolean isSpecial(double x, double y) {
         return getPosition(x, y) < 0;
-    }
-
-    public void removeSpecial(double x, double y) {
-        if (isSpecial(x, y)) {
-            arr[getBlockY(y)][getBlockX(x)] = 0;
-            blocks[getBlockY(y)][getBlockX(x)] = null;
-        }
     }
 
     public double getLeftBound(BoundingBox obj) {

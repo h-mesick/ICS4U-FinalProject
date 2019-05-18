@@ -1,8 +1,12 @@
+import java.util.*;
+
 import javafx.animation.*;
 import javafx.event.*;
+import javafx.geometry.*;
 import javafx.scene.*;
 import javafx.scene.canvas.*;
 import javafx.scene.control.*;
+import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.*;
 import javafx.scene.shape.*;
@@ -18,6 +22,9 @@ import javafx.stage.*;
  */
 public abstract class BaseLevel extends BaseScene {
     protected AnimationTimer mainTimer;
+    protected Node currentOverlay;
+    protected Set<KeyCode> pressedKeys = new HashSet();
+    protected Group root;
 
     private class Time {
         public long time;
@@ -56,6 +63,67 @@ public abstract class BaseLevel extends BaseScene {
     public void stop() {
         mainTimer.stop();
     }
+
+    protected VBox initEscapeOverlay() {
+        VBox overlay = new VBox(10);
+        overlay.setPadding(new Insets(100));
+        overlay.setAlignment(Pos.CENTER);
+
+        overlay.setMinWidth(Constants.SCREEN_WIDTH);
+        overlay.setMinHeight(Constants.SCREEN_HEIGHT / 3);
+
+        String[] buttonNames = {
+            "Resume",
+            "Level Select",
+            "Main Menu",
+        };
+
+        EventHandler[] buttonHandlers = {
+            event -> removeOverlay(),
+            event -> game.updateState(State.LEVEL_SELECT),
+            event -> game.updateState(State.MAIN_MENU),
+        };
+
+        for (int x = 0; x < buttonNames.length; x++) {
+            StackPane b = getMainButton(buttonNames[x], buttonHandlers[x]);
+            overlay.getChildren().add(b);
+        }
+        return overlay;
+    }
+
+    protected void setOverlay(Node overlay) {
+        if (currentOverlay != null) {
+            System.err.println("Warning: overlay is already set.");
+            return;
+        }
+        root.getChildren().add(overlay);
+        currentOverlay = overlay;
+    }
+
+    protected void removeOverlay() {
+        if (currentOverlay == null) {
+            System.err.println("Warning: overlay is not set.");
+            return;
+        }
+        root.getChildren().remove(currentOverlay);
+        currentOverlay = null;
+    }
+
+    protected void setScene(Parent root) {
+        Scene scene = new Scene(root);
+        scene.setOnKeyPressed(e -> {
+            pressedKeys.add(e.getCode());
+            handleKeyPressed(e.getCode());
+        });
+        scene.setOnKeyReleased(e -> {
+            pressedKeys.remove(e.getCode());
+            handleKeyReleased(e.getCode());
+        });
+        this.game.setScene(scene);
+    }
+
+    protected void handleKeyPressed(KeyCode key) {}
+    protected void handleKeyReleased(KeyCode key) {}
 
     protected abstract void update();
 }

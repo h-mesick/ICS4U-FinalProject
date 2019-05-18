@@ -48,4 +48,31 @@ public abstract class BaseScene implements Constants {
         }
         return footer;
     }
+
+    public StackPane getMainButton(String text, EventHandler onClick, int fontSize) {
+        ImageButton mainButton = new ImageButton();
+        mainButton.setImages(ResourceLoader.loadImage("button.png"),
+                             ResourceLoader.loadImage("button-hover.png"),
+                             ResourceLoader.loadImage("button-selected.png"));
+        mainButton.setFitWidth(SCREEN_WIDTH / 5 * 2);
+        mainButton.setFitHeight(SCREEN_HEIGHT / 8);
+        mainButton.setOnAction(onClick);
+
+        Text t = new Text(text);
+        t.setTranslateY(5);
+        t.setFont(Font.font("Verdana", fontSize));
+        t.setFill(Color.RED);
+        t.setMouseTransparent(true);
+
+        StackPane button = new StackPane();
+        button.setAlignment(Pos.CENTER);
+        button.getChildren().add(mainButton);
+        button.getChildren().add(t);
+
+        return button;
+    }
+
+    public StackPane getMainButton(String text, EventHandler onClick) {
+        return getMainButton(text, onClick, 30);
+    }
 }

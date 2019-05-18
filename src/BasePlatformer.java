@@ -4,6 +4,7 @@ import javafx.geometry.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
+import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.*;
 import javafx.scene.shape.*;
@@ -23,8 +24,6 @@ public abstract class BasePlatformer extends BaseLevel {
     protected Sprite player;
     protected ProgressBar progress;
     protected VBox escapeOverlay;
-    protected Group root;
-    protected boolean keyRight = false, keyLeft = false, keyUp = false;
     protected Level level;
     protected double referencePoint;
 
@@ -35,38 +34,8 @@ public abstract class BasePlatformer extends BaseLevel {
         root = new Group();
     }
 
-    private VBox initEscapeOverlay() {
-        VBox overlay = new VBox(10);
-        overlay.setPadding(new Insets(100));
-        overlay.setAlignment(Pos.CENTER);
-
-        overlay.setMinWidth(Constants.SCREEN_WIDTH);
-        overlay.setMinHeight(Constants.SCREEN_HEIGHT / 3);
-
-        String[] buttonNames = {
-            "Resume",
-            "Level Select",
-            "Main Menu",
-        };
-
-        EventHandler[] buttonHandlers = {
-            event -> overlay.setVisible(false),
-            event -> game.updateState(State.LEVEL_SELECT),
-            event -> game.updateState(State.MAIN_MENU),
-        };
-
-        for (int x = 0; x < buttonNames.length; x++) {
-            Button b = new Button(buttonNames[x]);
-            b.setMinWidth(Constants.SCREEN_WIDTH / 2);
-            b.setMinHeight(50);
-            b.setOnAction(buttonHandlers[x]);
-            overlay.getChildren().add(b);
-        }
-        overlay.setVisible(false);
-        return overlay;
-    }
-
     public void initScene() {
+        root = new Group();
         // add blocks
         for (Sprite s : level.getAllSprites()) {
             root.getChildren().add(s);
@@ -89,25 +58,8 @@ public abstract class BasePlatformer extends BaseLevel {
         root.getChildren().add(progress);
 
         escapeOverlay = initEscapeOverlay();
-        root.getChildren().add(escapeOverlay);
 
-        Scene scene = new Scene(root);
-        scene.setOnKeyPressed(e -> {
-            switch(e.getCode()) {
-                case UP: keyUp = true; break;
-                case RIGHT: keyRight = true; break;
-                case LEFT: keyLeft = true; break;
-                case ESCAPE: escapeOverlay.setVisible(!escapeOverlay.isVisible()); break;
-            }
-        });
-        scene.setOnKeyReleased(e -> {
-            switch(e.getCode()) {
-                case UP: keyUp = false; break;
-                case RIGHT: keyRight = false; break;
-                case LEFT: keyLeft = false; break;
-            }
-        });
-        this.game.setScene(scene);
+        setScene(root);
         start();
     }
 
@@ -118,13 +70,13 @@ public abstract class BasePlatformer extends BaseLevel {
         double ground = getScreenY(this.level.getLowerBound(box) - player.getHeight());
         double ceiling = getScreenY(this.level.getUpperBound(box));
 
-        if (keyUp && player.onGround(ground)) {
+        if (pressedKeys.contains(KeyCode.UP) && player.onGround(ground)) {
             player.jump();
         }
-        if (keyLeft) {
+        if (pressedKeys.contains(KeyCode.LEFT)) {
             player.moveLeft(this.level.getLeftBound(box));
         }
-        if (keyRight) {
+        if (pressedKeys.contains(KeyCode.RIGHT)) {
             player.moveRight(this.level.getRightBound(box) - player.getWidth());
         }
         player.fall(ground, ceiling);
@@ -156,26 +108,44 @@ public abstract class BasePlatformer extends BaseLevel {
     }
 
     private void updateSpecial() {
-        double x = player.getTranslateX(), y = getRealY(player.getTranslateY());
-        if (this.level.isSpecial(x, y)) {
-            handleSpecial(-this.level.getPosition(x, y));
-            root.getChildren().remove(this.level.getSprite(x, y));
-            this.level.removeSpecial(x, y);
-        }
+        this.level.getSpecialSprites().stream()
+            .filter(s -> s.getBoundsInParent().intersects(player.getBoundsInParent()))
+            .filter(s -> root.getChildren().remove(s))
+            .forEach(s -> {
+                handleSpecial(-this.level.getPosition(s.getCenterX(), getRealY(s.getCenterY())));
+            });
     }
 
-    protected void update() {
-        if (escapeOverlay.isVisible()) {
-            return;
-        }
-
-        updateScreen();
-        updatePlayer();
-        updateSpecial();
+    private void updateProgress() {
         double curProgress = referencePoint + Constants.SCREEN_HEIGHT;
         if (getRealY(player.getTranslateY()) < Constants.SCREEN_HEIGHT)
             curProgress = player.getTranslateY();
         progress.setProgress(1 - curProgress / this.level.screenLength());
+    }
+
+    protected void update() {
+        if (currentOverlay != null) {
+            return;
+        }
+        updateScreen();
+        updatePlayer();
+        updateSpecial();
+        updateProgress();
+    }
+
+    protected void handleKeyPressed(KeyCode key) {
+        switch(key) {
+            case ESCAPE: {
+                if (currentOverlay != null) {
+                    if (currentOverlay.equals(escapeOverlay)) {
+                        removeOverlay();
+                    }
+                } else {
+                    setOverlay(escapeOverlay);
+                }
+                break;
+            }
+        }
     }
 
     protected double getRealY(double y) {
