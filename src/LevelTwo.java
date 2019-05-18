@@ -17,6 +17,7 @@ import javafx.stage.*;
  *  - May 13, 2019: Created ~Evan Zhang
  *  - May 14, 2019: Updated ~Evan Zhang
  *  - May 15, 2019: Updated ~Evan Zhang
+ *  - May 17, 2019: Updated ~Evan Zhang
  */
 public class LevelTwo extends BasePlatformer {
     public LevelTwo(Game game) {

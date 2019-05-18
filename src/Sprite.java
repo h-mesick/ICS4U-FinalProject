@@ -16,6 +16,7 @@ import javafx.stage.*;
  * Revision history:
  *  - May 14, 2019: Created ~Evan Zhang
  *  - May 15, 2019: Updated ~Evan Zhang
+ *  - May 17, 2019: Updated ~Evan Zhang
  */
 public class Sprite extends ImageView {
     final double gravity = 0.2;
