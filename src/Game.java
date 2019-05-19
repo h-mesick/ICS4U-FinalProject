@@ -15,12 +15,13 @@ import javafx.stage.*;
  * Revision history:
  *  - May 14, 2019: Created ~Evan Zhang
  *  - May 16, 2019: Updated ~Evan Zhang
+ *  - May 18, 2019: Updated ~Evan Zhang
  */
 public class Game {
     private State currentState;
+    private State nextState = null;
 
     public Stage stage;
-
 
     public Game(Stage stage) {
         this.stage = stage;
@@ -29,6 +30,26 @@ public class Game {
 
     public void setScene(Scene scene) {
         this.stage.setScene(scene);
+    }
+
+    public State getCurrentState() {
+        return this.currentState;
+    }
+
+    public void setNextState(State newState) {
+        this.nextState = newState;
+    }
+
+    public boolean hasNextState() {
+        return this.nextState != null;
+    }
+
+    public void nextState() {
+        if (hasNextState()) {
+            State tmpState = nextState;
+            this.nextState = null;
+            updateState(tmpState);
+        }
     }
 
     public void updateState(State newState) {

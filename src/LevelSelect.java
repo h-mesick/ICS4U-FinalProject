@@ -19,6 +19,7 @@ import javafx.stage.*;
  *  - May 14, 2019: Updated ~Evan Zhang
  *  - May 16, 2019: Updated ~Evan Zhang
  *  - May 17, 2019: Updated ~Evan Zhang
+ *  - May 18, 2019: Updated ~Evan Zhang
  */
 public class LevelSelect extends BaseScene {
     public LevelSelect(Game game) {
@@ -70,7 +71,10 @@ public class LevelSelect extends BaseScene {
         helpButton.setImages(ResourceLoader.loadImage("help-button.png"),
                              ResourceLoader.loadImage("help-button-hover.png"),
                              ResourceLoader.loadImage("help-button-selected.png"));
-        helpButton.setOnAction(event -> game.updateState(State.HELP));
+        helpButton.setOnAction(event -> {
+            game.setNextState(game.getCurrentState());
+            game.updateState(State.HELP);
+        });
 
         root.setCenter(body);
         root.setBottom(getFooter(backButton, helpButton));

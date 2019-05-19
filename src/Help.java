@@ -14,6 +14,7 @@ import javafx.stage.*;
  * @author Evan Zhang
  * Revision history:
  *  - May 16, 2019: Created ~Evan Zhang
+ *  - May 18, 2019: Updated ~Evan Zhang
  */
 public class Help extends BaseScene {
     public Help(Game game) {
@@ -23,11 +24,15 @@ public class Help extends BaseScene {
     public void initScene() {
         VBox root = new VBox();
 
-        Button btn = new Button("Main Menu");
+        Button btn = new Button("Go Back");
         btn.setMinWidth(SCREEN_WIDTH);
         btn.setMinHeight(SCREEN_HEIGHT);
         btn.setOnAction(event -> {
-            this.game.updateState(State.MAIN_MENU);
+            if (this.game.hasNextState()) {
+                this.game.nextState();
+            } else {
+                this.game.updateState(State.MAIN_MENU);
+            }
         });
         root.getChildren().add(btn);
         this.game.setScene(new Scene(root));
