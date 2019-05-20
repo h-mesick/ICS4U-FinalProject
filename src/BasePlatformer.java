@@ -21,6 +21,7 @@ import javafx.stage.*;
  *  - May 16, 2019: Updated ~Evan Zhang
  *  - May 17, 2019: Updated ~Evan Zhang
  *  - May 18, 2019: Updated ~Evan Zhang
+ *  - May 19, 2019: Updated ~Evan Zhang
 */
 public abstract class BasePlatformer extends BaseLevel {
     protected Sprite player;

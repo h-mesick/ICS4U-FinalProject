@@ -20,6 +20,7 @@ import javafx.stage.*;
  *  - May 15, 2019: Updated ~Evan Zhang
  *  - May 17, 2019: Updated ~Evan Zhang
  *  - May 18, 2019: Updated ~Evan Zhang
+ *  - May 19, 2019: Updated ~Evan Zhang
  */
 public class LevelTwo extends BasePlatformer {
     private HBox coinCountOverlay;
