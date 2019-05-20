@@ -37,7 +37,6 @@ public abstract class BasePlatformer extends BaseLevel {
     }
 
     public void initScene() {
-        root = new Group();
         // add blocks
         for (Sprite s : level.getAllSprites()) {
             root.getChildren().add(s);

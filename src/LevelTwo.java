@@ -4,6 +4,7 @@ import javafx.geometry.*;
 import javafx.scene.*;
 import javafx.scene.canvas.*;
 import javafx.scene.control.*;
+import javafx.scene.image.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.*;
 import javafx.scene.shape.*;
@@ -21,6 +22,9 @@ import javafx.stage.*;
  *  - May 18, 2019: Updated ~Evan Zhang
  */
 public class LevelTwo extends BasePlatformer {
+    private HBox coinCountOverlay;
+    private Text coinText;
+    private int coinCount = 0;
     public LevelTwo(Game game) {
         super(game);
     }
@@ -29,18 +33,53 @@ public class LevelTwo extends BasePlatformer {
         return "level2.txt";
     }
 
+    private void incrementCoinCount(int delta) {
+        coinCount += delta;
+        coinText.setText("" + coinCount);
+    }
+
     protected Question getQuestion(int specialType) {
         String question = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa " + specialType;
         String[] answers = {
             "a", "b", "c", "dasdasdsadasdasdsadadadsd"
         };
         EventHandler[] handlers = {
-            event -> removeOverlay(),
-            event -> game.updateState(State.MAIN_MENU),
-            event -> game.updateState(State.MAIN_MENU),
-            event -> game.updateState(State.MAIN_MENU),
+            event -> {
+                incrementCoinCount(1);
+                removeOverlay();
+            },
+            event -> {
+                incrementCoinCount(3);
+                removeOverlay();
+            },
+            event -> {
+                incrementCoinCount(10);
+                removeOverlay();
+            },
+            event -> {
+                incrementCoinCount(-1);
+                removeOverlay();
+            },
         };
         return new Question(question, answers, handlers);
+    }
+
+    public void initScene() {
+        coinCountOverlay = new HBox(5);
+        coinCountOverlay.setAlignment(Pos.CENTER);
+        coinCountOverlay.setPadding(new Insets(10));
+
+        ImageView coinImage = new ImageView(ResourceLoader.loadImage("coin.png"));
+        coinImage.setPreserveRatio(true);
+        coinImage.setFitWidth(40);
+
+        coinText = new Text("0");
+        coinText.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
+
+        coinCountOverlay.getChildren().addAll(coinImage, coinText);
+
+        super.initScene();
+        root.getChildren().add(coinCountOverlay);
     }
 
     protected void handleSpecial(int specialType) {
@@ -53,7 +92,7 @@ public class LevelTwo extends BasePlatformer {
         overlay.setAlignment(Pos.CENTER);
 
         overlay.setBackground(new Background(new BackgroundFill(
-            new Color(0, 0, 0, 0.3),
+            new Color(1, 215.0/255, 64.0/255, 0.75),
             new CornerRadii(10),
             new Insets(0)
         )));

@@ -67,12 +67,17 @@ public abstract class BaseLevel extends BaseScene {
 
         String[] buttonNames = {
             "Resume",
+            "Help",
             "Level Select",
             "Main Menu",
         };
 
         EventHandler[] buttonHandlers = {
             event -> removeOverlay(),
+            event -> {
+                game.setNextState(game.getCurrentState());
+                game.updateState(State.HELP);
+            },
             event -> game.updateState(State.LEVEL_SELECT),
             event -> game.updateState(State.MAIN_MENU),
         };

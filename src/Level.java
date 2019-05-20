@@ -23,6 +23,7 @@ import javafx.stage.*;
  *  - May 17, 2019: Updated ~Evan Zhang
  */
 public class Level {
+    private final double OFFSET = 0.1;
     private int[][] arr;
     private Sprite[][] blocks;
 
@@ -66,7 +67,7 @@ public class Level {
         if (isBlocked(x, y)) {
             image = topBlocked ? "platform.png" : "platform-top.png";
         } else if (isSpecial(x, y)) {
-            image = "special.png";
+            image = "coin.png";
         } else {
             if (topBlocked) {
                 int num = (int)(Math.random() * 3) + 1;
@@ -152,11 +153,11 @@ public class Level {
         for (double x = obj.getMinX(); x >= 0; x -= jumpX) {
             for (double y = obj.getMinY(); y < obj.getMaxY(); y += jumpY) {
                 if (isBlocked(x, y)) {
-                    return getActX(getBlockX(x) + 1);
+                    return getActX(getBlockX(x) + 1) + OFFSET;
                 }
             }
-            if (isBlocked(x, obj.getMaxY() - 0.5)) {
-                return getActX(getBlockX(x) + 1);
+            if (isBlocked(x, obj.getMaxY() - OFFSET)) {
+                return getActX(getBlockX(x) + 1) + OFFSET;
             }
         }
         return 0;
@@ -168,11 +169,11 @@ public class Level {
         for (double x = obj.getMaxX(); x < Constants.SCREEN_WIDTH; x += jumpX) {
             for (double y = obj.getMinY(); y < obj.getMaxY(); y += jumpY) {
                 if (isBlocked(x, y)) {
-                    return getActX(getBlockX(x));
+                    return getActX(getBlockX(x)) - OFFSET;
                 }
             }
-            if (isBlocked(x, obj.getMaxY() - 0.5)) {
-                return getActX(getBlockX(x));
+            if (isBlocked(x, obj.getMaxY() - OFFSET)) {
+                return getActX(getBlockX(x)) - OFFSET;
             }
         }
         return Constants.SCREEN_WIDTH - 1;
@@ -184,11 +185,11 @@ public class Level {
         for (double y = obj.getMinY(); y >= 0; y -= jumpY) {
             for (double x = obj.getMinX(); x < obj.getMaxX(); x += jumpX) {
                 if (isBlocked(x, y)) {
-                    return getActY(getBlockY(y) + 1);
+                    return getActY(getBlockY(y) + 1) + OFFSET;
                 }
             }
-            if (isBlocked(obj.getMaxX() - 0.5, y)) {
-                return getActY(getBlockY(y) + 1);
+            if (isBlocked(obj.getMaxX() - OFFSET, y)) {
+                return getActY(getBlockY(y) + 1) + OFFSET;
             }
         }
         return 0;
@@ -200,11 +201,11 @@ public class Level {
         for (double y = obj.getMaxY(); y < screenLength(); y += jumpY) {
             for (double x = obj.getMinX(); x < obj.getMaxX(); x += jumpX) {
                 if (isBlocked(x, y)) {
-                    return getActY(getBlockY(y));
+                    return getActY(getBlockY(y)) - OFFSET;
                 }
             }
-            if (isBlocked(obj.getMaxX() - 0.5, y)) {
-                return getActY(getBlockY(y));
+            if (isBlocked(obj.getMaxX() - OFFSET, y)) {
+                return getActY(getBlockY(y)) - OFFSET;
             }
         }
         return screenLength() - 1;
