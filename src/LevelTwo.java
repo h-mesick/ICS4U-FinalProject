@@ -21,9 +21,10 @@ import javafx.stage.*;
  *  - May 17, 2019: Updated ~Evan Zhang
  *  - May 18, 2019: Updated ~Evan Zhang
  *  - May 19, 2019: Updated ~Evan Zhang
+ *  - May 21, 2019: Updated ~Evan Zhang
  */
 public class LevelTwo extends BasePlatformer {
-    private HBox coinCountOverlay;
+    private HBox scoreCountOverlay;
     private Text coinText;
     private int coinCount = 0;
     public LevelTwo(Game game) {
@@ -66,9 +67,9 @@ public class LevelTwo extends BasePlatformer {
     }
 
     public void initScene() {
-        coinCountOverlay = new HBox(5);
-        coinCountOverlay.setAlignment(Pos.CENTER);
-        coinCountOverlay.setPadding(new Insets(10));
+        scoreCountOverlay = new HBox(5);
+        scoreCountOverlay.setAlignment(Pos.CENTER);
+        scoreCountOverlay.setPadding(new Insets(10));
 
         ImageView coinImage = new ImageView(ResourceLoader.loadImage("coin.png"));
         coinImage.setPreserveRatio(true);
@@ -77,10 +78,10 @@ public class LevelTwo extends BasePlatformer {
         coinText = new Text("0");
         coinText.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
 
-        coinCountOverlay.getChildren().addAll(coinImage, coinText);
+        scoreCountOverlay.getChildren().addAll(coinImage, coinText);
 
         super.initScene();
-        root.getChildren().add(coinCountOverlay);
+        root.getChildren().add(scoreCountOverlay);
     }
 
     protected void handleSpecial(int specialType) {
