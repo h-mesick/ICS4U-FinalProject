@@ -40,6 +40,10 @@ public class LevelOne extends BaseLevel {
     protected void update() {
     }
 
+    protected int getLevel() {
+        return 1;
+    }
+
     public GameSave save() {
         return null;
     }

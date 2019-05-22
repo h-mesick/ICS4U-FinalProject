@@ -20,10 +20,10 @@ import javafx.stage.*;
  */
 public class Game {
     private State currentState = null, nextState = null;
-    private GameSave[] levelSave = new GameSave[Constants.NUM_LEVELS];
     private BaseScene currentScene;
 
     public Stage stage;
+    public GameSave[] levelSave = new GameSave[Constants.NUM_LEVELS];
 
     public Game(Stage stage) {
         this.stage = stage;
@@ -55,12 +55,8 @@ public class Game {
     }
 
     public void updateState(State newState) {
-        if (this.currentState != null) {
-            switch (this.currentState) {
-                case LEVEL_ONE: levelSave[0] = ((BaseLevel)currentScene).save(); break;
-                case LEVEL_TWO: levelSave[1] = ((BaseLevel)currentScene).save(); break;
-                case LEVEL_THREE: levelSave[2] = ((BaseLevel)currentScene).save(); break;
-            }
+        if (this.currentScene != null) {
+            this.currentScene.onExit();
         }
         this.currentState = newState;
         updateScene();

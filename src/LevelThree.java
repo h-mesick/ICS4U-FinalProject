@@ -28,8 +28,8 @@ public class LevelThree extends BasePlatformer {
         super(game);
     }
 
-    protected String getLevelFile() {
-        return "level3.txt";
+    protected int getLevel() {
+        return 3;
     }
 
     private void incrementCoinCount(int delta) {

@@ -124,10 +124,30 @@ public abstract class BasePlatformer extends BaseLevel {
     }
 
     private void updateProgress() {
-        double curProgress = referencePoint + Constants.SCREEN_HEIGHT;
-        if (getRealY(player.getTranslateY()) < Constants.SCREEN_HEIGHT)
-            curProgress = player.getTranslateY();
-        progress.setProgress(1 - curProgress / this.level.screenLength());
+        /**
+         * Calculating the progress bar.
+         * The challenge with calculating the progress bar is, which position do you use?
+         * * Using the top of the screen means the bar can never be empty (at the beginning of the level).
+         * * Using the bottom of the screen means the bar can never full (at the end of the level).
+         * * Using the middle of the screen means the bar can never be full *nor* empty.
+         *
+         * Thus, the solution is to calculate the position of the screen to use *based* on the actual position.
+         * This is calculated with the "add" variable.
+         *
+         *  add = (referencePoint + add * Constants.SCREEN_HEIGHT) / this.level.screenLength();
+         *
+         *  Note that the answer depends on the answer. Fortunately, the answer converges, so we can just approximate
+         *  by recursing 3 times.
+         */
+        int n = 3;
+        double add = 0;
+        for (int x = n - 1; x >= 0; x--) {
+            add += referencePoint * Math.pow(this.level.screenLength(), x) * Math.pow(Constants.SCREEN_HEIGHT, n - x - 1);
+        }
+        add /= Math.pow(this.level.screenLength(), n);
+        add *= Constants.SCREEN_HEIGHT;
+
+        progress.setProgress(1 - (referencePoint + add) / this.level.screenLength());
     }
 
     protected void update() {
@@ -160,18 +180,18 @@ public abstract class BasePlatformer extends BaseLevel {
         this.player = (Sprite)save.player;
         root.getChildren().add(this.player);
 
-        this.removedNodes = save.removedNodes;
-        for (Node n : this.removedNodes) {
-            double x = n.getTranslateX();
-            double y = getRealY(n.getTranslateY());
-            root.getChildren().remove(this.level.getSprite(x, y));
-        }
-
         double mod = save.referencePoint - this.referencePoint;
         this.referencePoint = save.referencePoint;
         for (Sprite obj : this.level.getAllSprites()) {
             obj.setTranslateY(obj.getTranslateY() - mod);
             obj.setVisible(0 <= obj.getTranslateY() + obj.getHeight() && obj.getTranslateY() < Constants.SCREEN_HEIGHT);
+        }
+
+        this.removedNodes = save.removedNodes;
+        for (Node n : this.removedNodes) {
+            double x = n.getTranslateX();
+            double y = getRealY(n.getTranslateY());
+            root.getChildren().remove(this.level.getSprite(x, y));
         }
     }
 
@@ -183,6 +203,9 @@ public abstract class BasePlatformer extends BaseLevel {
         return y - referencePoint;
     }
 
-    protected abstract String getLevelFile();
+    protected String getLevelFile() {
+        return "level" + getLevel() + ".txt";
+    }
+
     protected abstract void handleSpecial(int specialType);
 }

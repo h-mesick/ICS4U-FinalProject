@@ -76,4 +76,6 @@ public abstract class BaseScene implements Constants {
     public StackPane getMainButton(String text, EventHandler onClick) {
         return getMainButton(text, onClick, 30);
     }
+
+    public void onExit() {}
 }

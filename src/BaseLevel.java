@@ -51,6 +51,10 @@ public abstract class BaseLevel extends BaseScene {
         };
     }
 
+    public void onExit() {
+        this.game.levelSave[getLevel() - 1] = save();
+    }
+
     public void start() {
         mainTimer.start();
     }
@@ -126,6 +130,7 @@ public abstract class BaseLevel extends BaseScene {
     protected void handleKeyReleased(KeyCode key) {}
 
     protected abstract void update();
+    protected abstract int getLevel();
     public abstract GameSave save();
     public abstract void load(GameSave save);
 }
