@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 import javafx.animation.*;
 import javafx.event.*;
 import javafx.geometry.*;
@@ -22,6 +24,7 @@ import javafx.stage.*;
  *  - May 17, 2019: Updated ~Evan Zhang
  *  - May 18, 2019: Updated ~Evan Zhang
  *  - May 19, 2019: Updated ~Evan Zhang
+ *  - May 21, 2019: Updated ~Evan Zhang
 */
 public abstract class BasePlatformer extends BaseLevel {
     protected Sprite player;
@@ -29,6 +32,7 @@ public abstract class BasePlatformer extends BaseLevel {
     protected VBox escapeOverlay;
     protected Level level;
     protected double referencePoint;
+    protected ArrayList<Node> removedNodes = new ArrayList();
 
     public BasePlatformer(Game game) {
         super(game);
@@ -114,6 +118,7 @@ public abstract class BasePlatformer extends BaseLevel {
             .filter(s -> s.getBoundsInParent().intersects(player.getBoundsInParent()))
             .filter(s -> root.getChildren().remove(s))
             .forEach(s -> {
+                removedNodes.add(s);
                 handleSpecial(-this.level.getPosition(s.getCenterX(), getRealY(s.getCenterY())));
             });
     }
@@ -147,6 +152,26 @@ public abstract class BasePlatformer extends BaseLevel {
                 }
                 break;
             }
+        }
+    }
+
+    protected void load(PlatformerGameSave save) {
+        root.getChildren().remove(this.player);
+        this.player = (Sprite)save.player;
+        root.getChildren().add(this.player);
+
+        this.removedNodes = save.removedNodes;
+        for (Node n : this.removedNodes) {
+            double x = n.getTranslateX();
+            double y = getRealY(n.getTranslateY());
+            root.getChildren().remove(this.level.getSprite(x, y));
+        }
+
+        double mod = save.referencePoint - this.referencePoint;
+        this.referencePoint = save.referencePoint;
+        for (Sprite obj : this.level.getAllSprites()) {
+            obj.setTranslateY(obj.getTranslateY() - mod);
+            obj.setVisible(0 <= obj.getTranslateY() + obj.getHeight() && obj.getTranslateY() < Constants.SCREEN_HEIGHT);
         }
     }
 

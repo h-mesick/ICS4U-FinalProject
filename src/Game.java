@@ -16,10 +16,12 @@ import javafx.stage.*;
  *  - May 14, 2019: Created ~Evan Zhang
  *  - May 16, 2019: Updated ~Evan Zhang
  *  - May 18, 2019: Updated ~Evan Zhang
+ *  - May 21, 2019: Updated ~Evan Zhang
  */
 public class Game {
-    private State currentState;
-    private State nextState = null;
+    private State currentState = null, nextState = null;
+    private GameSave[] levelSave = new GameSave[Constants.NUM_LEVELS];
+    private BaseScene currentScene;
 
     public Stage stage;
 
@@ -53,25 +55,39 @@ public class Game {
     }
 
     public void updateState(State newState) {
+        if (this.currentState != null) {
+            switch (this.currentState) {
+                case LEVEL_ONE: levelSave[0] = ((BaseLevel)currentScene).save(); break;
+                case LEVEL_TWO: levelSave[1] = ((BaseLevel)currentScene).save(); break;
+                case LEVEL_THREE: levelSave[2] = ((BaseLevel)currentScene).save(); break;
+            }
+        }
         this.currentState = newState;
         updateScene();
     }
 
     public void updateScene() {
+        currentScene = null;
         switch(this.currentState) {
-            case LOADING_SCREEN: new LoadingScreen(this).initScene(); break;
-            case MAIN_MENU: new MainMenu(this).initScene(); break;
+            case LOADING_SCREEN: currentScene =  new LoadingScreen(this); break;
+            case MAIN_MENU: currentScene = new MainMenu(this); break;
             case HIGH_SCORES:
-                // new HighScores(this).initScene();
+                // currentScene = new HighScores(this);
                 break;
-            case HELP: new Help(this).initScene(); break;
+            case HELP: currentScene = new Help(this); break;
             case TUTORIAL:
-                // new Tutorial(this).initScene();
+                // currentScene = new Tutorial(this);
                 break;
-            case LEVEL_SELECT: new LevelSelect(this).initScene(); break;
-            case LEVEL_ONE: new LevelOne(this).initScene(); break;
-            case LEVEL_TWO: new LevelTwo(this).initScene(); break;
-            case LEVEL_THREE: new LevelThree(this).initScene(); break;
+            case LEVEL_SELECT: currentScene = new LevelSelect(this); break;
+            case LEVEL_ONE: currentScene = new LevelOne(this); break;
+            case LEVEL_TWO: currentScene = new LevelTwo(this); break;
+            case LEVEL_THREE: currentScene = new LevelThree(this); break;
+        }
+        currentScene.initScene();
+        switch(this.currentState) {
+            case LEVEL_ONE: ((BaseLevel)currentScene).load(levelSave[0]); break;
+            case LEVEL_TWO: ((BaseLevel)currentScene).load(levelSave[1]); break;
+            case LEVEL_THREE: ((BaseLevel)currentScene).load(levelSave[2]); break;
         }
     }
 }

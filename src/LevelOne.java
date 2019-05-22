@@ -15,6 +15,7 @@ import javafx.stage.*;
  * Revision history:
  *  - May 13, 2019: Created ~Evan Zhang
  *  - May 17, 2019: Updated ~Evan Zhang
+ *  - May 21, 2019: Updated ~Evan Zhang
  */
 public class LevelOne extends BaseLevel {
     public LevelOne(Game game) {
@@ -37,6 +38,15 @@ public class LevelOne extends BaseLevel {
     }
 
     protected void update() {
-        
+    }
+
+    public GameSave save() {
+        return null;
+    }
+
+    public void load(GameSave save) {
+        if (save == null) {
+            return;
+        }
     }
 }

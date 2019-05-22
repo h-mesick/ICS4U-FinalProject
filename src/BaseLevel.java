@@ -23,6 +23,7 @@ import javafx.stage.*;
  *  - May 17, 2019: Updated ~Evan Zhang
  *  - May 18, 2019: Updated ~Evan Zhang
  *  - May 19, 2019: Updated ~Evan Zhang
+ *  - May 21, 2019: Updated ~Evan Zhang
  */
 public abstract class BaseLevel extends BaseScene {
     protected AnimationTimer mainTimer;
@@ -125,4 +126,6 @@ public abstract class BaseLevel extends BaseScene {
     protected void handleKeyReleased(KeyCode key) {}
 
     protected abstract void update();
+    public abstract GameSave save();
+    public abstract void load(GameSave save);
 }

@@ -148,4 +148,20 @@ public class LevelThree extends BasePlatformer {
 
         setOverlay(overlayBase);
     }
+
+    public PlatformerGameSave save() {
+        return new PlatformerGameSave(referencePoint, player, removedNodes, coinCount, pointCount);
+    }
+
+    public void load(GameSave baseSave) {
+        if (baseSave == null) {
+            return;
+        }
+        PlatformerGameSave save = (PlatformerGameSave)baseSave;
+        super.load(save);
+        incrementCoinCount(-coinCount);
+        incrementCoinCount(save.scores[0]);
+        incrementPointCount(-pointCount);
+        incrementPointCount(save.scores[1]);
+    }
 }

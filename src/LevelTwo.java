@@ -125,4 +125,18 @@ public class LevelTwo extends BasePlatformer {
 
         setOverlay(overlayBase);
     }
+
+    public PlatformerGameSave save() {
+        return new PlatformerGameSave(referencePoint, player, removedNodes, coinCount);
+    }
+
+    public void load(GameSave baseSave) {
+        if (baseSave == null) {
+            return;
+        }
+        PlatformerGameSave save = (PlatformerGameSave)baseSave;
+        super.load(save);
+        incrementCoinCount(-coinCount);
+        incrementCoinCount(save.scores[0]);
+    }
 }
