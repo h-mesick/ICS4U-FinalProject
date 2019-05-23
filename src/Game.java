@@ -28,7 +28,9 @@ public class Game {
 
     public Game(Stage stage) {
         this.stage = stage;
-        updateState(State.LOADING_SCREEN);
+        // TODO: change to loading screen
+        // updateState(State.LOADING_SCREEN);
+        updateState(State.MAIN_MENU);
     }
 
     public void setScene(Scene scene) {
