@@ -80,10 +80,6 @@ public class Game {
             case LEVEL_THREE: currentScene = new LevelThree(this); break;
         }
         currentScene.initScene();
-        switch(this.currentState) {
-            case LEVEL_ONE: ((BaseLevel)currentScene).load(levelSave[0]); break;
-            case LEVEL_TWO: ((BaseLevel)currentScene).load(levelSave[1]); break;
-            case LEVEL_THREE: ((BaseLevel)currentScene).load(levelSave[2]); break;
-        }
+        currentScene.onEnter();
     }
 }

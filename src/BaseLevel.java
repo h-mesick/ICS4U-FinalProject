@@ -55,6 +55,12 @@ public abstract class BaseLevel extends BaseScene {
         this.game.levelSave[getLevel() - 1] = save();
     }
 
+    public void onEnter() {
+        if (this.game.levelSave[getLevel() - 1] != null) {
+            load(this.game.levelSave[getLevel() - 1]);
+        }
+    }
+
     public void start() {
         mainTimer.start();
     }
@@ -131,6 +137,6 @@ public abstract class BaseLevel extends BaseScene {
 
     protected abstract void update();
     protected abstract int getLevel();
-    public abstract GameSave save();
-    public abstract void load(GameSave save);
+    protected abstract GameSave save();
+    protected abstract void load(GameSave save);
 }

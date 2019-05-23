@@ -78,4 +78,5 @@ public abstract class BaseScene implements Constants {
     }
 
     public void onExit() {}
+    public void onEnter() {}
 }

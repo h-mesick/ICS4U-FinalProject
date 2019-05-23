@@ -44,13 +44,10 @@ public class LevelOne extends BaseLevel {
         return 1;
     }
 
-    public GameSave save() {
+    protected GameSave save() {
         return null;
     }
 
-    public void load(GameSave save) {
-        if (save == null) {
-            return;
-        }
+    protected void load(GameSave save) {
     }
 }
