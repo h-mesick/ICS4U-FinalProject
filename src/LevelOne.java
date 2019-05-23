@@ -16,6 +16,7 @@ import javafx.stage.*;
  *  - May 13, 2019: Created ~Evan Zhang
  *  - May 17, 2019: Updated ~Evan Zhang
  *  - May 21, 2019: Updated ~Evan Zhang
+ *  - May 22, 2019: Updated ~Evan Zhang
  */
 public class LevelOne extends BaseLevel {
     public LevelOne(Game game) {

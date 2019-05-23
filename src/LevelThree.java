@@ -18,6 +18,7 @@ import javafx.stage.*;
  *  - May 13, 2019: Created ~Evan Zhang
  *  - May 15, 2019: Updated ~Evan Zhang
  *  - May 21, 2019: Updated ~Evan Zhang
+ *  - May 22, 2019: Updated ~Evan Zhang
  */
 public class LevelThree extends BasePlatformer {
     private VBox scoreCountOverlay;

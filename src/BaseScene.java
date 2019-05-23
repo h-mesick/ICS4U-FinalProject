@@ -18,6 +18,7 @@ import javafx.stage.*;
  *  - May 13, 2019: Created ~Evan Zhang
  *  - May 16, 2019: Updated ~Evan Zhang
  *  - May 17, 2019: Updated ~Evan Zhang
+ *  - May 22, 2019: Updated ~Evan Zhang
  */
 public abstract class BaseScene implements Constants {
     protected Game game;

@@ -17,6 +17,7 @@ import javafx.stage.*;
  *  - May 16, 2019: Updated ~Evan Zhang
  *  - May 18, 2019: Updated ~Evan Zhang
  *  - May 21, 2019: Updated ~Evan Zhang
+ *  - May 22, 2019: Updated ~Evan Zhang
  */
 public class Game {
     private State currentState = null, nextState = null;
