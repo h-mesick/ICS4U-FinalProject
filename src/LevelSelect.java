@@ -20,6 +20,7 @@ import javafx.stage.*;
  *  - May 16, 2019: Updated ~Evan Zhang
  *  - May 17, 2019: Updated ~Evan Zhang
  *  - May 18, 2019: Updated ~Evan Zhang
+ *  - May 23, 2019: Finished ~Evan Zhang
  */
 public class LevelSelect extends BaseScene {
     public LevelSelect(Game game) {
@@ -36,7 +37,7 @@ public class LevelSelect extends BaseScene {
         BorderPane root = new BorderPane();
 
         root.setBackground(new Background(new BackgroundImage(
-            ResourceLoader.loadImage("platform.png"),
+            ResourceLoader.loadImage("background.png"),
             BackgroundRepeat.NO_REPEAT,
             BackgroundRepeat.NO_REPEAT,
             BackgroundPosition.CENTER,
