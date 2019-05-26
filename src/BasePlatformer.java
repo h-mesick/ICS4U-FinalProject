@@ -26,6 +26,7 @@ import javafx.stage.*;
  *  - May 19, 2019: Updated ~Evan Zhang
  *  - May 21, 2019: Updated ~Evan Zhang
  *  - May 22, 2019: Updated ~Evan Zhang
+ *  - May 25, 2019: Updated ~Evan Zhang
 */
 public abstract class BasePlatformer extends BaseLevel {
     protected Sprite player;
@@ -71,7 +72,8 @@ public abstract class BasePlatformer extends BaseLevel {
     }
 
     private void updatePlayer() {
-        BoundingBox box = new BoundingBox(player.getTranslateX(), getRealY(player.getTranslateY()),
+        double yy = getRealY(player.getTranslateY());
+        BoundingBox box = new BoundingBox(player.getTranslateX(), yy,
                                           player.getWidth(), player.getHeight());
 
         double ground = getScreenY(this.level.getLowerBound(box) - player.getHeight());
@@ -87,6 +89,10 @@ public abstract class BasePlatformer extends BaseLevel {
             player.moveRight(this.level.getRightBound(box) - player.getWidth());
         }
         player.fall(ground, ceiling);
+
+        if (player.onGround(ground) && ceiling < 1e-10 && yy < player.getHeight() * 2) {
+            handleFinish();
+        }
     }
 
     private double calcSlide(double cur, double max) {
@@ -209,4 +215,5 @@ public abstract class BasePlatformer extends BaseLevel {
     }
 
     protected abstract void handleSpecial(int specialType);
+    protected abstract void handleFinish();
 }

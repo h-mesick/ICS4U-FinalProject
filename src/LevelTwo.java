@@ -23,6 +23,7 @@ import javafx.stage.*;
  *  - May 19, 2019: Updated ~Evan Zhang
  *  - May 21, 2019: Updated ~Evan Zhang
  *  - May 22, 2019: Updated ~Evan Zhang
+ *  - May 25, 2019: Updated ~Evan Zhang
  */
 public class LevelTwo extends BasePlatformer {
     private HBox scoreCountOverlay;
@@ -125,6 +126,10 @@ public class LevelTwo extends BasePlatformer {
         overlayBase.setMargin(overlay, new Insets(100, 50, 100, 50));
 
         setOverlay(overlayBase);
+    }
+
+    protected void handleFinish() {
+        //this.game.updateState(State.LEVEL_SELECT);
     }
 
     protected PlatformerGameSave save() {

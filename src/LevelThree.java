@@ -19,6 +19,7 @@ import javafx.stage.*;
  *  - May 15, 2019: Updated ~Evan Zhang
  *  - May 21, 2019: Updated ~Evan Zhang
  *  - May 22, 2019: Updated ~Evan Zhang
+ *  - May 25, 2019: Updated ~Evan Zhang
  */
 public class LevelThree extends BasePlatformer {
     private VBox scoreCountOverlay;
@@ -148,6 +149,9 @@ public class LevelThree extends BasePlatformer {
         overlayBase.setMargin(overlay, new Insets(100, 50, 100, 50));
 
         setOverlay(overlayBase);
+    }
+
+    protected void handleFinish() {
     }
 
     protected PlatformerGameSave save() {
