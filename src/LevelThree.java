@@ -21,30 +21,54 @@ import javafx.stage.*;
  *  - May 22, 2019: Updated ~Evan Zhang
  *  - May 25, 2019: Updated ~Evan Zhang
  *  - May 26, 2019: Updated ~Evan Zhang
+ *  - May 27, 2019: Commented ~Evan Zhang
  */
 public class LevelThree extends BasePlatformer {
+    /** Instance variables */
     private VBox scoreCountOverlay;
     private Text coinText, pointText;
     private int coinCount = 0, pointCount = 0;
 
+    /**
+     * Constructor
+     * @param  game The current game
+     */
     public LevelThree(Game game) {
         super(game);
     }
 
+    /**
+     * Get the level number that this class represents
+     * @return The level
+     */
     protected int getLevel() {
         return 3;
     }
 
+    /**
+     * Increments the coin count
+     * @param delta The amount to increase the coin count
+     */
     private void incrementCoinCount(int delta) {
         coinCount += delta;
         coinText.setText("" + coinCount);
     }
 
+    /**
+     * Increments the score count
+     * @param delta The amount to increase the score count
+     */
     private void incrementPointCount(int delta) {
         pointCount += delta;
         pointText.setText("" + pointCount);
     }
 
+
+    /**
+     * Gets the question specified by specialType
+     * @param  specialType The question number
+     * @return             The question
+     */
     protected Question getQuestion(int specialType) {
         String question = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa " + specialType;
         String[] answers = {
@@ -75,6 +99,9 @@ public class LevelThree extends BasePlatformer {
         return new Question(question, answers, handlers);
     }
 
+    /**
+     * Initializes the scene
+     */
     public void initScene() {
         HBox coinCountOverlay = new HBox(5);
         coinCountOverlay.setAlignment(Pos.CENTER);
@@ -110,10 +137,17 @@ public class LevelThree extends BasePlatformer {
         root.getChildren().add(scoreCountOverlay);
     }
 
+    /**
+     * Handles when the player touches a special block
+     * @param specialType The special block's number
+     */
     protected void handleSpecial(int specialType) {
         handleDefaultSpecial(specialType);
     }
 
+    /**
+     * Handle when the player reaches the top of the game
+     */
     protected void handleFinish() {
         Text finishText = new Text("Congratulations! You completed level three!");
         finishText.setFont(new Font("Verdana", 25));
@@ -126,10 +160,18 @@ public class LevelThree extends BasePlatformer {
         setOverlay(initBasicOverlay(finishText, nextLevel));
     }
 
+    /**
+     * Saves the level state
+     * @return The PlatformerGameSave object
+     */
     protected PlatformerGameSave save() {
         return new PlatformerGameSave(referencePoint, player, removedNodes, coinCount, pointCount);
     }
 
+    /**
+     * Load the level state from a GameSave
+     * @param baseSave The game save to load from
+     */
     protected void load(GameSave baseSave) {
         PlatformerGameSave save = (PlatformerGameSave)baseSave;
         super.load(save);

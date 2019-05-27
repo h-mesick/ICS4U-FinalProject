@@ -22,12 +22,18 @@ import javafx.stage.*;
  *  - May 15, 2019: Updated ~Evan Zhang
  *  - May 17, 2019: Updated ~Evan Zhang
  *  - May 19, 2019: Updated ~Evan Zhang
+ *  - May 27, 2019: Commented ~Evan Zhang
  */
 public class Level {
+    /** Instance variables */
     private final double OFFSET = 0.1;
     private int[][] arr;
     private Sprite[][] blocks;
 
+    /**
+     * Constructor
+     * @param  file The filename to load from
+     */
     public Level(String file) {
         ArrayList<String> lines = new ArrayList();
         try {
@@ -61,6 +67,12 @@ public class Level {
         }
     }
 
+    /**
+     * Gets the block specified by the x and y coordinate
+     * @param  x The x coordinate
+     * @param  y The y coordinate
+     * @return   The specified block
+     */
     private Sprite getBlock(double x, double y) {
         boolean topBlocked = y - Constants.PLATFORM_BLOCK_HEIGHT >= 0 &&
                              isBlocked(x, y - Constants.PLATFORM_BLOCK_HEIGHT);
@@ -82,31 +94,63 @@ public class Level {
         return null;
     }
 
+    /**
+     * Gets the length of the level in blocks
+     * @return The length
+     */
     public int length() {
         return this.arr.length;
     }
 
+    /**
+     * Gets the length of the level in pixels
+     * @return The length
+     */
     public int screenLength() {
         return this.arr.length * Constants.PLATFORM_BLOCK_HEIGHT;
     }
 
+    /**
+     * Converts from block x to pixel x
+     * @param  x The block x
+     * @return   The pixel x
+     */
     public int getActX(int x) {
         return x * Constants.PLATFORM_BLOCK_WIDTH;
     }
 
+    /**
+     * Converts from block y to pixel y
+     * @param  y The block y
+     * @return   The block y
+     */
     public int getActY(int y) {
         return y * Constants.PLATFORM_BLOCK_HEIGHT;
     }
 
+    /**
+     * Converts from pixel x to block x
+     * @param  x The pixel x
+     * @return   The block x
+     */
     public int getBlockX(double x) {
         return (int)x / Constants.PLATFORM_BLOCK_WIDTH;
     }
 
+    /**
+     * Converts from pixel y to block y
+     * @param  y The pixel y
+     * @return   The block y
+     */
     public int getBlockY(double y) {
         return (int)y / Constants.PLATFORM_BLOCK_HEIGHT;
     }
 
     //TODO: optimize
+    /**
+     * Gets all the special blocks
+     * @return The list of special blocks
+     */
     public List<Sprite> getSpecialSprites() {
         List<Sprite> ret = new ArrayList();
         for (int y = 0; y < length(); y++) {
@@ -120,6 +164,10 @@ public class Level {
     }
 
     //TODO: optimize
+    /**
+     * Gets all the blocks
+     * @return The list of all blocks
+     */
     public List<Sprite> getAllSprites() {
         List<Sprite> ret = new ArrayList();
         for (int y = 0; y < length(); y++) {
@@ -132,22 +180,51 @@ public class Level {
         return ret;
     }
 
+    /**
+     * Gets the block specified by the x and y coordinate
+     * @param  x The x coordinate
+     * @param  y The y coordinate
+     * @return   The block specified by the coordinates
+     */
     public Sprite getSprite(double x, double y) {
         return blocks[getBlockY(y)][getBlockX(x)];
     }
 
+    /**
+     * Gets the value specified by the x and y coordinates
+     * @param  x The x coordinate
+     * @param  y The y coordinate
+     * @return   The value speciifed by the coordinates
+     */
     public int getPosition(double x, double y) {
         return arr[getBlockY(y)][getBlockX(x)];
     }
 
+    /**
+     * Checks whether there is a block at the specified x and y coordinates
+     * @param  x The x coordinate
+     * @param  y The y coordinate
+     * @return   Whether there is a block
+     */
     public boolean isBlocked(double x, double y) {
         return getPosition(x, y) == 1;
     }
 
+    /**
+     * Checks whether there is a special at the specified x and y coordinates
+     * @param  x The x coordinate
+     * @param  y The y coordinate
+     * @return   Whether there is a special block
+     */
     public boolean isSpecial(double x, double y) {
         return getPosition(x, y) < 0;
     }
 
+    /**
+     * Gets the min x the object specified by the bounding box can go
+     * @param  obj The object to check
+     * @return     The min x the object can go
+     */
     public double getLeftBound(BoundingBox obj) {
         int jumpX = Constants.PLATFORM_BLOCK_WIDTH / 2;
         int jumpY = Constants.PLATFORM_BLOCK_HEIGHT / 2;
@@ -164,6 +241,11 @@ public class Level {
         return 0;
     }
 
+    /**
+     * Gets the max x the object specified by the bounding box can go
+     * @param  obj The object to check
+     * @return     The max x the object can go
+     */
     public double getRightBound(BoundingBox obj) {
         int jumpX = Constants.PLATFORM_BLOCK_WIDTH / 2;
         int jumpY = Constants.PLATFORM_BLOCK_HEIGHT / 2;
@@ -180,6 +262,11 @@ public class Level {
         return Constants.SCREEN_WIDTH - 1;
     }
 
+    /**
+     * Gets the min y the object specified by the bounding box can go
+     * @param  obj The object to check
+     * @return     The min y the object can go
+     */
     public double getUpperBound(BoundingBox obj) {
         int jumpX = Constants.PLATFORM_BLOCK_WIDTH / 2;
         int jumpY = Constants.PLATFORM_BLOCK_HEIGHT / 2;
@@ -196,6 +283,11 @@ public class Level {
         return 0;
     }
 
+    /**
+     * Gets the max x the object specified by the bounding box can go
+     * @param  obj The object to check
+     * @return     The max x the object can go
+     */
     public double getLowerBound(BoundingBox obj) {
         int jumpX = Constants.PLATFORM_BLOCK_WIDTH / 2;
         int jumpY = Constants.PLATFORM_BLOCK_HEIGHT / 2;

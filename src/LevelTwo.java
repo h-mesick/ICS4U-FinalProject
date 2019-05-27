@@ -25,24 +25,44 @@ import javafx.stage.*;
  *  - May 22, 2019: Updated ~Evan Zhang
  *  - May 25, 2019: Updated ~Evan Zhang
  *  - May 26, 2019: Updated ~Evan Zhang
+ *  - May 27, 2019: Commented ~Evan Zhang
  */
 public class LevelTwo extends BasePlatformer {
+    /** Instance variables */
     private HBox scoreCountOverlay;
     private Text coinText;
     private int coinCount = 0;
+
+    /**
+     * Constructor
+     * @param  game The current game
+     */
     public LevelTwo(Game game) {
         super(game);
     }
 
+    /**
+     * Get the level number that this class represents
+     * @return The level
+     */
     protected int getLevel() {
         return 2;
     }
 
+    /**
+     * Increments the coin count
+     * @param delta The amount to increase the coin count
+     */
     private void incrementCoinCount(int delta) {
         coinCount += delta;
         coinText.setText("" + coinCount);
     }
 
+    /**
+     * Gets the question specified by specialType
+     * @param  specialType The question number
+     * @return             The question
+     */
     protected Question getQuestion(int specialType) {
         String question = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa " + specialType;
         String[] answers = {
@@ -69,6 +89,9 @@ public class LevelTwo extends BasePlatformer {
         return new Question(question, answers, handlers);
     }
 
+    /**
+     * Initializes the scene
+     */
     public void initScene() {
         scoreCountOverlay = new HBox(5);
         scoreCountOverlay.setAlignment(Pos.CENTER);
@@ -87,10 +110,17 @@ public class LevelTwo extends BasePlatformer {
         root.getChildren().add(scoreCountOverlay);
     }
 
+    /**
+     * Handles when the player touches a special block
+     * @param specialType The special block's number
+     */
     protected void handleSpecial(int specialType) {
         handleDefaultSpecial(specialType);
     }
 
+    /**
+     * Handle when the player reaches the top of the game
+     */
     protected void handleFinish() {
         Text finishText = new Text("Congratulations! You completed level two!");
         finishText.setFont(new Font("Verdana", 25));
@@ -103,10 +133,18 @@ public class LevelTwo extends BasePlatformer {
         setOverlay(initBasicOverlay(finishText, nextLevel));
     }
 
+    /**
+     * Saves the level state
+     * @return The PlatformerGameSave object
+     */
     protected PlatformerGameSave save() {
         return new PlatformerGameSave(referencePoint, player, removedNodes, coinCount);
     }
 
+    /**
+     * Load the level state from a GameSave
+     * @param baseSave The game save to load from
+     */
     protected void load(GameSave baseSave) {
         PlatformerGameSave save = (PlatformerGameSave)baseSave;
         super.load(save);

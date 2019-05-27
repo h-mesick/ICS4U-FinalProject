@@ -21,12 +21,20 @@ import javafx.stage.*;
  *  - May 17, 2019: Updated ~Evan Zhang
  *  - May 18, 2019: Updated ~Evan Zhang
  *  - May 23, 2019: Finished ~Evan Zhang
+ *  - May 27, 2019: Commented ~Evan Zhang
  */
 public class LevelSelect extends BaseScene {
+    /**
+     * Constructor
+     * @param  game The current game
+     */
     public LevelSelect(Game game) {
         super(game);
     }
 
+    /**
+     * Initializes the scene
+     */
     public void initScene() {
         EventHandler[] handlers = {
             event -> game.updateState(State.LEVEL_ONE),

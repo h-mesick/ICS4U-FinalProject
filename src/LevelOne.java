@@ -17,12 +17,28 @@ import javafx.stage.*;
  *  - May 17, 2019: Updated ~Evan Zhang
  *  - May 21, 2019: Updated ~Evan Zhang
  *  - May 22, 2019: Updated ~Evan Zhang
+ *  - May 27, 2019: Commented ~Evan Zhang
  */
 public class LevelOne extends BaseLevel {
+    /**
+     * Constructor
+     * @param  game The current game
+     */
     public LevelOne(Game game) {
         super(game);
     }
 
+    /**
+     * Get the level number that this class represents
+     * @return The level
+     */
+    protected int getLevel() {
+        return 1;
+    }
+
+    /**
+     * Initializes the scene
+     */
     public void initScene() {
         root = new Group();
         Canvas c = new Canvas(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -38,17 +54,24 @@ public class LevelOne extends BaseLevel {
         gc.strokeText("Hello, World!", 60, 50);
     }
 
+    /**
+     * Update method called every game tick
+     */
     protected void update() {
     }
 
-    protected int getLevel() {
-        return 1;
-    }
-
+    /**
+     * Saves the level state
+     * @return The GameSave object
+     */
     protected GameSave save() {
         return null;
     }
 
+    /**
+     * Load the level state from a GameSave
+     * @param baseSave The game save to load from
+     */
     protected void load(GameSave save) {
     }
 }
