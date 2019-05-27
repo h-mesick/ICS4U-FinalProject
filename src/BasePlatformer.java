@@ -28,8 +28,10 @@ import javafx.stage.*;
  *  - May 22, 2019: Updated ~Evan Zhang
  *  - May 25, 2019: Updated ~Evan Zhang
  *  - May 26, 2019: Updated ~Evan Zhang
+ *  - May 27, 2019: Commented ~Evan Zhang
 */
 public abstract class BasePlatformer extends BaseLevel {
+    /** Instance variables */
     protected Sprite player;
     protected ProgressBar progress;
     protected VBox escapeOverlay;
@@ -37,6 +39,10 @@ public abstract class BasePlatformer extends BaseLevel {
     protected double referencePoint;
     protected ArrayList<Node> removedNodes = new ArrayList();
 
+    /**
+     * Constructor
+     * @param  game The current game
+     */
     public BasePlatformer(Game game) {
         super(game);
         level = new Level(getLevelFile());
@@ -44,6 +50,9 @@ public abstract class BasePlatformer extends BaseLevel {
         root = new Group();
     }
 
+    /**
+     * Initializes the scene
+     */
     public void initScene() {
         // add blocks
         for (Sprite s : level.getAllSprites()) {
@@ -81,6 +90,9 @@ public abstract class BasePlatformer extends BaseLevel {
         start();
     }
 
+    /**
+     * Updates the player position
+     */
     private void updatePlayer() {
         double yy = getRealY(player.getTranslateY());
         BoundingBox box = new BoundingBox(player.getTranslateX(), yy,
@@ -105,11 +117,20 @@ public abstract class BasePlatformer extends BaseLevel {
         }
     }
 
+    /**
+     * Calculates how much to shift the screen location by
+     * @param  cur The current value
+     * @param  max The max value
+     * @return     The amount to shift by
+     */
     private double calcSlide(double cur, double max) {
         double ret = 10 * (max - cur) / max;
         return ret < 0 ? 10 : ret;
     }
 
+    /**
+     * Updates the screen position based on the player position
+     */
     private void updateScreen() {
         double mod = 0;
         double posY = player.getTranslateY();
@@ -130,6 +151,9 @@ public abstract class BasePlatformer extends BaseLevel {
         }
     }
 
+    /**
+     * Checks whether the player is touching a special block and update accordingly
+     */
     private void updateSpecial() {
         this.level.getSpecialSprites().stream()
             .filter(s -> s.getBoundsInParent().intersects(player.getBoundsInParent()))
@@ -140,6 +164,9 @@ public abstract class BasePlatformer extends BaseLevel {
             });
     }
 
+    /**
+     * Updates the progress bar
+     */
     private void updateProgress() {
         /**
          * Calculating the progress bar.
@@ -167,6 +194,9 @@ public abstract class BasePlatformer extends BaseLevel {
         progress.setProgress(1 - (referencePoint + add) / this.level.screenLength());
     }
 
+    /**
+     * Update method that is called every frame
+     */
     protected void update() {
         if (currentOverlay != null) {
             return;
@@ -177,6 +207,10 @@ public abstract class BasePlatformer extends BaseLevel {
         updateProgress();
     }
 
+    /**
+     * Handler when a key is pressed
+     * @param key The key pressed
+     */
     protected void handleKeyPressed(KeyCode key) {
         switch(key) {
             case ESCAPE: {
@@ -192,6 +226,10 @@ public abstract class BasePlatformer extends BaseLevel {
         }
     }
 
+    /**
+     * Loads a game save
+     * @param save The game save to load from
+     */
     protected void load(PlatformerGameSave save) {
         root.getChildren().remove(this.player);
         this.player = (Sprite)save.player;
@@ -212,18 +250,36 @@ public abstract class BasePlatformer extends BaseLevel {
         }
     }
 
+    /**
+     * Gets the actual y value given the screen y
+     * @param  y The screen y
+     * @return   The actual y
+     */
     protected double getRealY(double y) {
         return y + referencePoint;
     }
 
+    /**
+     * Gets the screen y value given the actual y
+     * @param  y The actual y
+     * @return   The screen y
+     */
     protected double getScreenY(double y) {
         return y - referencePoint;
     }
 
+    /**
+     * Gets the level file for the current level
+     * @return The level filename
+     */
     protected String getLevelFile() {
         return "level" + getLevel() + ".txt";
     }
 
+    /**
+     * Handles the default special action
+     * @param specialType The special number
+     */
     protected void handleDefaultSpecial(int specialType) {
         Question question = getQuestion(specialType);
 
