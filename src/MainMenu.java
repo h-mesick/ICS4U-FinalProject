@@ -19,22 +19,31 @@ import javafx.stage.*;
  * - May 13, 2019: Created ~Evan Zhang
  * - May 22, 2019: Finished ~Max Li
  * - May 23, 2019: Finishing touches ~Evan Zhang
+ * - May 27, 2019: Commented ~Max Li
  * @version 1
  */
 public class MainMenu extends BaseScene {
+    /**
+     * Constructor for the MainMenu class.
+     *
+     * @param game The current game that is running.
+     */
     public MainMenu(Game game) {
         super(game);
     }
 
+    /**
+     * Initializes the scene to the main menu window.
+     */
     public void initScene() {
         BorderPane root = new BorderPane();
 
         root.setBackground(new Background(new BackgroundImage(
-            ResourceLoader.loadImage("background.png"),
-            BackgroundRepeat.NO_REPEAT,
-            BackgroundRepeat.NO_REPEAT,
-            BackgroundPosition.CENTER,
-            new BackgroundSize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, false, false, false, false)
+                ResourceLoader.loadImage("background.png"),
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.CENTER,
+                new BackgroundSize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, false, false, false, false)
         )));
 
         root.setTop(getTitle());
