@@ -29,6 +29,7 @@ import javafx.stage.*;
  *  - May 25, 2019: Updated ~Evan Zhang
  *  - May 26, 2019: Updated ~Evan Zhang
  *  - May 27, 2019: Commented ~Evan Zhang
+ *  - May 27, 2019: Updated ~Evan Zhang
 */
 public abstract class BasePlatformer extends BaseLevel {
     /** Instance variables */
@@ -76,10 +77,13 @@ public abstract class BasePlatformer extends BaseLevel {
         root.getChildren().add(progress);
 
         // add pause button
-        Button pause = new Button("||");
-        pause.setTranslateX(Constants.SCREEN_WIDTH - 45);
+        ImageButton pause = new ImageButton();
+        pause.setImages(ResourceLoader.loadImage("pause-button.png"),
+                        ResourceLoader.loadImage("pause-button-hover.png"),
+                        ResourceLoader.loadImage("pause-button-selected.png"));
+        pause.setTranslateX(Constants.SCREEN_WIDTH - 50);
         pause.setMinWidth(20);
-        pause.setTranslateY(15);
+        pause.setTranslateY(10);
         pause.setMinHeight(20);
         pause.setOnAction(event -> handleKeyPressed(KeyCode.ESCAPE));
         root.getChildren().add(pause);

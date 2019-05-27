@@ -7,6 +7,7 @@ import javafx.geometry.*;
 import javafx.scene.*;
 import javafx.scene.canvas.*;
 import javafx.scene.control.*;
+import javafx.scene.effect.*;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.*;
@@ -26,9 +27,11 @@ import javafx.stage.*;
  *  - May 21, 2019: Updated ~Evan Zhang
  *  - May 22, 2019: Updated ~Evan Zhang
  *  - May 26, 2019: Updated ~Evan Zhang
+ *  - May 27, 2019: Updated ~Evan Zhang
  */
 public abstract class BaseLevel extends BaseScene {
     /** Instance variables */
+    private Group baseRoot = new Group();
     protected AnimationTimer mainTimer;
     protected Node currentOverlay;
     protected Set<KeyCode> pressedKeys = new HashSet();
@@ -126,11 +129,6 @@ public abstract class BaseLevel extends BaseScene {
     }
 
 
-    /**
-     *
-     * @param nodes
-     * @return
-     */
     protected StackPane initBasicOverlay(Node... nodes) {
         StackPane overlayBase = new StackPane();
         overlayBase.setAlignment(Pos.CENTER);
@@ -139,11 +137,6 @@ public abstract class BaseLevel extends BaseScene {
         VBox overlay = new VBox(10);
         overlay.setPadding(new Insets(50, 25, 50, 25));
         overlay.setAlignment(Pos.CENTER);
-        overlay.setBackground(new Background(new BackgroundFill(
-            new Color(1, 215.0/255, 64.0/255, 0.75),
-            new CornerRadii(10),
-            new Insets(0)
-        )));
         overlay.getChildren().addAll(nodes);
 
         overlayBase.getChildren().add(overlay);
@@ -158,7 +151,8 @@ public abstract class BaseLevel extends BaseScene {
             System.err.println("Warning: overlay is already set.");
             return;
         }
-        root.getChildren().add(overlay);
+        root.setEffect(new GaussianBlur());
+        baseRoot.getChildren().add(overlay);
         currentOverlay = overlay;
     }
 
@@ -167,12 +161,14 @@ public abstract class BaseLevel extends BaseScene {
             System.err.println("Warning: overlay is not set.");
             return;
         }
-        root.getChildren().remove(currentOverlay);
+        root.setEffect(null);
+        baseRoot.getChildren().remove(currentOverlay);
         currentOverlay = null;
     }
 
     protected void setScene(Parent root) {
-        Scene scene = new Scene(root);
+        baseRoot.getChildren().add(root);
+        Scene scene = new Scene(baseRoot);
         scene.setOnKeyPressed(e -> {
             pressedKeys.add(e.getCode());
             handleKeyPressed(e.getCode());
