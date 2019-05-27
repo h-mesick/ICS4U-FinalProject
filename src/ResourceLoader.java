@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.TreeMap;
 
 import javafx.event.*;
 import javafx.geometry.*;
@@ -17,9 +18,12 @@ import javafx.stage.*;
  * Revision history:
  *  - May 15, 2019: Created ~Evan Zhang
  *  - May 16, 2019: Updated ~Evan Zhang
+ *  - May 27, 2019: Updated ~Evan Zhang
  */
 public class ResourceLoader
 {
+    private static TreeMap<String,Image> imageCache = new TreeMap();
+
     public static InputStream getResource(String location) {
         return ResourceLoader.class.getClassLoader().getResourceAsStream(location);
     }
@@ -29,7 +33,12 @@ public class ResourceLoader
     }
 
     public static Image loadImage(String filename) {
-        return new Image(getResource("resources/images/" + filename));
+        Image ret = imageCache.get(filename);
+        if (ret == null) {
+            ret = new Image(getResource("resources/images/" + filename));
+            imageCache.put(filename, ret);
+        }
+        return ret;
     }
 
     public static Reader loadLevel(String filename) {
