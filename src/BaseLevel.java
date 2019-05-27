@@ -28,6 +28,7 @@ import javafx.stage.*;
  *  - May 26, 2019: Updated ~Evan Zhang
  */
 public abstract class BaseLevel extends BaseScene {
+    /** Instance variables */
     protected AnimationTimer mainTimer;
     protected Node currentOverlay;
     protected Set<KeyCode> pressedKeys = new HashSet();

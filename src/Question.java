@@ -17,11 +17,21 @@ import javafx.stage.*;
  * @author Evan Zhang
  * Revision history:
  *  - May 18, 2019: Created ~Evan Zhang
+ *  - May 27, 2019: Finished ~Evan Zhang
+ *  - May 27, 2019: Commented ~Evan Zhang
  */
 public class Question {
+    /** Instance variables */
     private String question;
     private String[] answers;
     private EventHandler[] handlers;
+
+    /**
+     * Constructor
+     * @param  question The question
+     * @param  answers  The possible answer choices
+     * @param  handlers The handler for each answer choice
+     */
     public Question(String question, String[] answers, EventHandler[] handlers) {
         if (answers.length != 4) {
             throw new IllegalArgumentException("Answers array must be exactly length 4.");
@@ -34,14 +44,26 @@ public class Question {
         this.handlers = handlers;
     }
 
+    /**
+     * Gets the question
+     * @return The question
+     */
     public String getQuestion() {
         return this.question;
     }
 
+    /**
+     * Gets the answers
+     * @return The answers
+     */
     public String[] getAnswers() {
         return this.answers;
     }
 
+    /**
+     * Gets the handlers
+     * @return The handlers
+     */
     public EventHandler[] getHandlers() {
         return this.handlers;
     }
