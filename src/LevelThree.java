@@ -20,6 +20,7 @@ import javafx.stage.*;
  *  - May 21, 2019: Updated ~Evan Zhang
  *  - May 22, 2019: Updated ~Evan Zhang
  *  - May 25, 2019: Updated ~Evan Zhang
+ *  - May 26, 2019: Updated ~Evan Zhang
  */
 public class LevelThree extends BasePlatformer {
     private VBox scoreCountOverlay;
@@ -110,48 +111,19 @@ public class LevelThree extends BasePlatformer {
     }
 
     protected void handleSpecial(int specialType) {
-        StackPane overlayBase = new StackPane();
-        overlayBase.setAlignment(Pos.CENTER);
-        overlayBase.setMinWidth(Constants.SCREEN_WIDTH);
-
-        VBox overlay = new VBox(10);
-        overlay.setPadding(new Insets(50, 25, 50, 25));
-        overlay.setAlignment(Pos.CENTER);
-
-        overlay.setBackground(new Background(new BackgroundFill(
-            new Color(1, 215.0/255, 64.0/255, 0.75),
-            new CornerRadii(10),
-            new Insets(0)
-        )));
-
-        Question question = getQuestion(specialType);
-
-        StackPane questionPane = new StackPane();
-        questionPane.setAlignment(Pos.CENTER);
-        Text questionText = new Text(question.getQuestion());
-        questionText.setFont(new Font("Verdana", 20));
-        questionText.setFill(Color.RED);
-        questionText.setWrappingWidth(Constants.SCREEN_WIDTH / 3 * 2);
-        questionPane.getChildren().add(questionText);
-
-        GridPane answersPane = new GridPane();
-        answersPane.setAlignment(Pos.CENTER);
-        answersPane.setHgap(10);
-        answersPane.setVgap(10);
-
-        for (int x = 0; x < 4; x++) {
-            StackPane button = getMainButton(question.getAnswers()[x], question.getHandlers()[x], 15);
-            answersPane.add(button, x / 2, x % 2);
-        }
-        overlay.getChildren().addAll(questionPane, answersPane);
-
-        overlayBase.getChildren().add(overlay);
-        overlayBase.setMargin(overlay, new Insets(100, 50, 100, 50));
-
-        setOverlay(overlayBase);
+        handleDefaultSpecial(specialType);
     }
 
     protected void handleFinish() {
+        Text finishText = new Text("Congratulations! You completed level three!");
+        finishText.setFont(new Font("Verdana", 25));
+        finishText.setFill(Color.RED);
+        finishText.setTextAlignment(TextAlignment.CENTER);
+        finishText.setWrappingWidth(Constants.SCREEN_WIDTH / 3 * 2);
+
+        StackPane nextLevel = getMainButton("Finish Game", event -> this.game.updateState(State.MAIN_MENU), 15);
+
+        setOverlay(initBasicOverlay(finishText, nextLevel));
     }
 
     protected PlatformerGameSave save() {

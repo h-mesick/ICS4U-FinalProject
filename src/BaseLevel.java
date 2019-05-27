@@ -25,6 +25,7 @@ import javafx.stage.*;
  *  - May 19, 2019: Updated ~Evan Zhang
  *  - May 21, 2019: Updated ~Evan Zhang
  *  - May 22, 2019: Updated ~Evan Zhang
+ *  - May 26, 2019: Updated ~Evan Zhang
  */
 public abstract class BaseLevel extends BaseScene {
     protected AnimationTimer mainTimer;
@@ -101,6 +102,29 @@ public abstract class BaseLevel extends BaseScene {
         }
         return overlay;
     }
+
+
+    protected StackPane initBasicOverlay(Node... nodes) {
+        StackPane overlayBase = new StackPane();
+        overlayBase.setAlignment(Pos.CENTER);
+        overlayBase.setMinWidth(Constants.SCREEN_WIDTH);
+
+        VBox overlay = new VBox(10);
+        overlay.setPadding(new Insets(50, 25, 50, 25));
+        overlay.setAlignment(Pos.CENTER);
+        overlay.setBackground(new Background(new BackgroundFill(
+            new Color(1, 215.0/255, 64.0/255, 0.75),
+            new CornerRadii(10),
+            new Insets(0)
+        )));
+        overlay.getChildren().addAll(nodes);
+
+        overlayBase.getChildren().add(overlay);
+        overlayBase.setMargin(overlay, new Insets(100, 50, 100, 50));
+
+        return overlayBase;
+    }
+
 
     protected void setOverlay(Node overlay) {
         if (currentOverlay != null) {

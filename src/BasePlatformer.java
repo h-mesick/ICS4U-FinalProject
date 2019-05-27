@@ -27,6 +27,7 @@ import javafx.stage.*;
  *  - May 21, 2019: Updated ~Evan Zhang
  *  - May 22, 2019: Updated ~Evan Zhang
  *  - May 25, 2019: Updated ~Evan Zhang
+ *  - May 26, 2019: Updated ~Evan Zhang
 */
 public abstract class BasePlatformer extends BaseLevel {
     protected Sprite player;
@@ -214,6 +215,31 @@ public abstract class BasePlatformer extends BaseLevel {
         return "level" + getLevel() + ".txt";
     }
 
+    protected void handleDefaultSpecial(int specialType) {
+        Question question = getQuestion(specialType);
+
+        StackPane questionPane = new StackPane();
+        questionPane.setAlignment(Pos.CENTER);
+        Text questionText = new Text(question.getQuestion());
+        questionText.setFont(new Font("Verdana", 20));
+        questionText.setFill(Color.RED);
+        questionText.setWrappingWidth(Constants.SCREEN_WIDTH / 3 * 2);
+        questionPane.getChildren().add(questionText);
+
+        GridPane answersPane = new GridPane();
+        answersPane.setAlignment(Pos.CENTER);
+        answersPane.setHgap(10);
+        answersPane.setVgap(10);
+
+        for (int x = 0; x < 4; x++) {
+            StackPane button = getMainButton(question.getAnswers()[x], question.getHandlers()[x], 15);
+            answersPane.add(button, x / 2, x % 2);
+        }
+
+        setOverlay(initBasicOverlay(questionPane, answersPane));
+    }
+
+    protected abstract Question getQuestion(int specialType);
     protected abstract void handleSpecial(int specialType);
     protected abstract void handleFinish();
 }
