@@ -34,6 +34,11 @@ public abstract class BaseLevel extends BaseScene {
     protected Set<KeyCode> pressedKeys = new HashSet();
     protected Group root;
 
+    /**
+     * Constructor for the BaseLevel class.
+     *
+     * @param game The current game that is running.
+     */
     public BaseLevel(Game game) {
         super(game);
 
@@ -54,24 +59,40 @@ public abstract class BaseLevel extends BaseScene {
         };
     }
 
+    /**
+     * Saves the game on exit.
+     */
     public void onExit() {
         this.game.levelSave[getLevel() - 1] = save();
     }
 
+    /**
+     * Loads a game on enter.
+     */
     public void onEnter() {
         if (this.game.levelSave[getLevel() - 1] != null) {
             load(this.game.levelSave[getLevel() - 1]);
         }
     }
 
+    /**
+     * Starts the timer.
+     */
     public void start() {
         mainTimer.start();
     }
 
+    /**
+     * Stops the timer.
+     */
     public void stop() {
         mainTimer.stop();
     }
 
+    /**
+     * Creates the pause menu.
+     * @return The pause menu to be overlaid.
+     */
     protected VBox initEscapeOverlay() {
         VBox overlay = new VBox(10);
         overlay.setPadding(new Insets(100));
@@ -105,6 +126,11 @@ public abstract class BaseLevel extends BaseScene {
     }
 
 
+    /**
+     *
+     * @param nodes
+     * @return
+     */
     protected StackPane initBasicOverlay(Node... nodes) {
         StackPane overlayBase = new StackPane();
         overlayBase.setAlignment(Pos.CENTER);

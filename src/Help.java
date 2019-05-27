@@ -15,12 +15,21 @@ import javafx.stage.*;
  * Revision history:
  *  - May 16, 2019: Created ~Evan Zhang
  *  - May 18, 2019: Updated ~Evan Zhang
+ *  - May 27, 2019: Commented ~Max Li
  */
 public class Help extends BaseScene {
+    /**
+     * Constructor for the Help class.
+     *
+     * @param game The current game that is running.
+     */
     public Help(Game game) {
         super(game);
     }
 
+    /**
+     * Initializes the scene to the help window.
+     */
     public void initScene() {
         VBox root = new VBox();
 
