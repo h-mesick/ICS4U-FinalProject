@@ -66,6 +66,15 @@ public abstract class BasePlatformer extends BaseLevel {
         progress.getStylesheets().add(ResourceLoader.loadCSS("game-progress-bar.css"));
         root.getChildren().add(progress);
 
+        // add pause button
+        Button pause = new Button("||");
+        pause.setTranslateX(Constants.SCREEN_WIDTH - 45);
+        pause.setMinWidth(20);
+        pause.setTranslateY(15);
+        pause.setMinHeight(20);
+        pause.setOnAction(event -> handleKeyPressed(KeyCode.ESCAPE));
+        root.getChildren().add(pause);
+
         escapeOverlay = initEscapeOverlay();
 
         setScene(root);
