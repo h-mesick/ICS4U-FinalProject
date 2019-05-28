@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 import javafx.animation.*;
 import javafx.event.*;
 import javafx.scene.*;
@@ -18,6 +20,7 @@ import javafx.stage.*;
  *  - May 18, 2019: Updated ~Evan Zhang
  *  - May 21, 2019: Updated ~Evan Zhang
  *  - May 22, 2019: Updated ~Evan Zhang
+ *  - May 28, 2019: Updated ~Evan Zhang
  */
 public class Game {
     private State currentState = null, nextState = null;
@@ -31,6 +34,11 @@ public class Game {
         // TODO: change to loading screen
         // updateState(State.LOADING_SCREEN);
         updateState(State.MAIN_MENU);
+    }
+
+    //TODO
+    public ArrayList<User> getAllUsers() {
+        return new ArrayList();
     }
 
     public void setScene(Scene scene) {
@@ -70,9 +78,7 @@ public class Game {
         switch(this.currentState) {
             case LOADING_SCREEN: currentScene =  new LoadingScreen(this); break;
             case MAIN_MENU: currentScene = new MainMenu(this); break;
-            case HIGH_SCORES:
-                // currentScene = new HighScores(this);
-                break;
+            case HIGH_SCORES: currentScene = new Highscores(this); break;
             case HELP: currentScene = new Help(this); break;
             case TUTORIAL:
                 // currentScene = new Tutorial(this);
