@@ -159,13 +159,13 @@ public abstract class BasePlatformer extends BaseLevel {
      * Checks whether the player is touching a special block and update accordingly
      */
     private void updateSpecial() {
-        this.level.getSpecialSprites().stream()
-            .filter(s -> s.getBoundsInParent().intersects(player.getBoundsInParent()))
-            .filter(s -> root.getChildren().remove(s))
-            .forEach(s -> {
+        for (Sprite s : this.level.getSpecialSprites()) {
+            if (s.getBoundsInParent().intersects(player.getBoundsInParent()) && root.getChildren().remove(s)) {
                 removedNodes.add(s);
                 handleSpecial(-this.level.getPosition(s.getCenterX(), getRealY(s.getCenterY())));
-            });
+                break;
+            }
+        }
     }
 
     /**
@@ -235,9 +235,7 @@ public abstract class BasePlatformer extends BaseLevel {
      * @param save The game save to load from
      */
     protected void load(PlatformerGameSave save) {
-        root.getChildren().remove(this.player);
-        this.player = (Sprite)save.player;
-        root.getChildren().add(this.player);
+        this.player.setPosition(save.player);
 
         double mod = save.referencePoint - this.referencePoint;
         this.referencePoint = save.referencePoint;
@@ -246,11 +244,13 @@ public abstract class BasePlatformer extends BaseLevel {
             obj.setVisible(0 <= obj.getTranslateY() + obj.getHeight() && obj.getTranslateY() < Constants.SCREEN_HEIGHT);
         }
 
-        this.removedNodes = save.removedNodes;
-        for (Node n : this.removedNodes) {
-            double x = n.getTranslateX();
-            double y = getRealY(n.getTranslateY());
-            root.getChildren().remove(this.level.getSprite(x, y));
+        this.removedNodes.clear();
+        for (Point2D p : save.removedNodes) {
+            double x = p.getX();
+            double y = getRealY(p.getY());
+            Sprite s = this.level.getSprite(x, y);
+            this.removedNodes.add(s);
+            root.getChildren().remove(s);
         }
     }
 

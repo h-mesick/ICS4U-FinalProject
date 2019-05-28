@@ -1,5 +1,6 @@
 import javafx.animation.*;
 import javafx.event.*;
+import javafx.geometry.*;
 import javafx.scene.*;
 import javafx.scene.canvas.*;
 import javafx.scene.control.*;
@@ -34,8 +35,7 @@ public class Sprite extends ImageView {
      */
     public Sprite(double x, double y, double w, double h, Image c) {
         super(c);
-        setTranslateX(x);
-        setTranslateY(y);
+        setPosition(x, y);
         setFitWidth(w);
         setFitHeight(h);
     }
@@ -46,8 +46,7 @@ public class Sprite extends ImageView {
      * @param y Delta y
      */
     private void move(double x, double y) {
-        setTranslateX(getTranslateX() + x);
-        setTranslateY(getTranslateY() + y);
+        setPosition(getTranslateX() + x, getTranslateY() + y);
     }
 
     /**
@@ -137,5 +136,23 @@ public class Sprite extends ImageView {
     public void moveRight(double boundary) {
         move(1.5, 0);
         setTranslateX(Math.min(boundary, getTranslateX()));
+    }
+
+    /**
+     * Set the position of the sprite
+     * @param point The point position
+     */
+    public void setPosition(Point2D point) {
+        setPosition(point.getX(), point.getY());
+    }
+
+    /**
+     * Set the position of the sprite
+     * @param x The x coordinate
+     * @param y The y coordinate
+     */
+    public void setPosition(double x, double y) {
+        setTranslateX(x);
+        setTranslateY(y);
     }
 }

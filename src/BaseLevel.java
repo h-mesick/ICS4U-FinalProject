@@ -66,15 +66,16 @@ public abstract class BaseLevel extends BaseScene {
      * Saves the game on exit.
      */
     public void onExit() {
-        this.game.levelSave[getLevel() - 1] = save();
+        this.game.currentUser.levelSaves[getLevel() - 1] = save();
     }
 
     /**
      * Loads a game on enter.
      */
     public void onEnter() {
-        if (this.game.levelSave[getLevel() - 1] != null) {
-            load(this.game.levelSave[getLevel() - 1]);
+        GameSave save = this.game.currentUser.levelSaves[getLevel() - 1];
+        if (save != null) {
+            load(save);
         }
     }
 

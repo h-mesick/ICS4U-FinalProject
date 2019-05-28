@@ -27,10 +27,11 @@ public class Game {
     private BaseScene currentScene;
 
     public Stage stage;
-    public GameSave[] levelSave = new GameSave[Constants.NUM_LEVELS];
+    public User currentUser;
 
     public Game(Stage stage) {
         this.stage = stage;
+        this.currentUser = new User();
         // TODO: change to loading screen
         // updateState(State.LOADING_SCREEN);
         updateState(State.MAIN_MENU);

@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 import javafx.animation.*;
 import javafx.event.*;
+import javafx.geometry.*;
 import javafx.scene.*;
 import javafx.scene.canvas.*;
 import javafx.scene.control.*;
@@ -21,8 +22,8 @@ import javafx.stage.*;
 public class PlatformerGameSave extends GameSave {
     /** Instance variables */
     public double referencePoint;
-    public Node player;
-    public ArrayList<Node> removedNodes;
+    public Point2D player;
+    public ArrayList<Point2D> removedNodes;
     public int[] scores;
 
     /**
@@ -34,8 +35,41 @@ public class PlatformerGameSave extends GameSave {
      */
     public PlatformerGameSave(double referencePoint, Node player, ArrayList<Node> removedNodes, int... scores) {
         this.referencePoint = referencePoint;
-        this.player = player;
-        this.removedNodes = removedNodes;
+        this.player = new Point2D(player.getTranslateX(), player.getTranslateY());
+        this.removedNodes = new ArrayList();
+        for (Node n : removedNodes) {
+            this.removedNodes.add(new Point2D(n.getTranslateX(), n.getTranslateY()));
+        }
         this.scores = scores;
     }
+
+    public String saveToFile() {
+        String ret = "";
+        ret += referencePoint + "\n";
+        ret += player.getX() + " " + player.getY() + "\n";
+        for (int i = 0; i < scores.length; i++) {
+            ret += "" + scores[i];
+            if (i == scores.length - 1) {
+                ret += "\n";
+            } else {
+                ret += " ";
+            }
+        }
+        ret += "-----\n";
+        for (Point2D p : removedNodes) {
+            ret += p.getX() + " " + p.getY() + "\n";
+        }
+        return ret;
+    }
+
+/*    public static GameSave loadFromFile(String data) {
+        try {
+            String[] splitData = data.split("-----\n");
+            String[] mainData = splitData[0].split("\n");
+            String[] removedNodeData = splitData[1].split("\n");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }*/
 }
