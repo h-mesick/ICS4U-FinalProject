@@ -2,5 +2,5 @@
 
 rm ClimbToGrace.jar
 mkdir out
-javac src/*.java -d out/ && cp -r src/resources/ out/ && jar cvfm ClimbToGrace.jar MANIFEST.MF -C out/ .
+javac -cp javax.json-api-1.1.jar:javax.json-1.1.jar:src/ src/*.java -d out/ && cp -r src/resources/ out/ && jar cvfm ClimbToGrace.jar MANIFEST.MF -C out/ .
 rm -r out/
