@@ -1,5 +1,7 @@
 import java.io.*;
 
+import javax.json.*;
+
 /**
  * @version 1
  * @author Evan Zhang
@@ -14,13 +16,23 @@ public class User implements Comparable {
     public void saveToFile() {
         try {
             FileWriter stream = new FileWriter(username + ".data");
-            stream.write(username + "\n");
-            stream.write("" + score + "\n");
+
+            JsonArrayBuilder saves = Json.createArrayBuilder();
             for (GameSave g : levelSaves) {
-                stream.write("----------\n");
-                stream.write(g.saveToFile());
+                saves = saves.add(g.toJson());
             }
-        } catch (IOException e) {
+
+            JsonWriter writer = Json.createWriter(stream);
+            writer.writeObject(
+                Json.createObjectBuilder()
+                    .add("username", username)
+                    .add("score", score)
+                    .add("saves", saves.build())
+                    .build()
+            );
+            writer.close();
+            stream.close();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

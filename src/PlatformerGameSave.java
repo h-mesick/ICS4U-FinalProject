@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 
+import javax.json.*;
+
 import javafx.animation.*;
 import javafx.event.*;
 import javafx.geometry.*;
@@ -43,23 +45,22 @@ public class PlatformerGameSave extends GameSave {
         this.scores = scores;
     }
 
-    public String saveToFile() {
-        String ret = "";
-        ret += referencePoint + "\n";
-        ret += player.getX() + " " + player.getY() + "\n";
-        for (int i = 0; i < scores.length; i++) {
-            ret += "" + scores[i];
-            if (i == scores.length - 1) {
-                ret += "\n";
-            } else {
-                ret += " ";
-            }
-        }
-        ret += "-----\n";
+    public JsonObject toJson() {
+        JsonArrayBuilder jsonNodes = Json.createArrayBuilder();
         for (Point2D p : removedNodes) {
-            ret += p.getX() + " " + p.getY() + "\n";
+            jsonNodes = jsonNodes.add(pointToJson(p));
         }
-        return ret;
+        JsonArrayBuilder jsonScores = Json.createArrayBuilder();
+        for (int s : scores) {
+            jsonScores.add(s);
+        }
+
+        return Json.createObjectBuilder()
+                   .add("referencePoint", referencePoint)
+                   .add("player", pointToJson(player))
+                   .add("scores", jsonScores.build())
+                   .add("removedNodes", jsonNodes.build())
+                   .build();
     }
 
 /*    public static GameSave loadFromFile(String data) {
