@@ -28,6 +28,14 @@ public class PlatformerGameSave extends GameSave {
     public ArrayList<Point2D> removedNodes;
     public int[] scores;
 
+    private static ArrayList<Point2D> convertToPoints(ArrayList<Node> removedNodes) {
+        ArrayList<Point2D> ret = new ArrayList();
+        for (Node n : removedNodes) {
+            ret.add(new Point2D(n.getTranslateX(), n.getTranslateY()));
+        }
+        return ret;
+    }
+
     /**
      * Constructor
      * @param  referencePoint The reference point of the screen
@@ -36,12 +44,14 @@ public class PlatformerGameSave extends GameSave {
      * @param  scores         The scores for the game level
      */
     public PlatformerGameSave(double referencePoint, Node player, ArrayList<Node> removedNodes, int... scores) {
+        this(referencePoint, new Point2D(player.getTranslateX(), player.getTranslateY()),
+             convertToPoints(removedNodes), scores);
+    }
+
+    private PlatformerGameSave(double referencePoint, Point2D player, ArrayList<Point2D> removedNodes, int[] scores) {
         this.referencePoint = referencePoint;
-        this.player = new Point2D(player.getTranslateX(), player.getTranslateY());
-        this.removedNodes = new ArrayList();
-        for (Node n : removedNodes) {
-            this.removedNodes.add(new Point2D(n.getTranslateX(), n.getTranslateY()));
-        }
+        this.player = player;
+        this.removedNodes = removedNodes;
         this.scores = scores;
     }
 
@@ -63,14 +73,18 @@ public class PlatformerGameSave extends GameSave {
                    .build();
     }
 
-/*    public static GameSave loadFromFile(String data) {
-        try {
-            String[] splitData = data.split("-----\n");
-            String[] mainData = splitData[0].split("\n");
-            String[] removedNodeData = splitData[1].split("\n");
-        } catch (Exception e) {
-            e.printStackTrace();
+    public static GameSave fromJson(JsonObject data) {
+        double referencePoint = data.getJsonNumber("referencePoint").doubleValue();
+        Point2D player = jsonToPoint(data.getJsonObject("player"));
+        JsonArray jsonScores = data.getJsonArray("scores");
+        int[] scores = new int[jsonScores.size()];
+        for (int i = 0; i < jsonScores.size(); i++) {
+            scores[i] = jsonScores.getInt(i);
         }
-        return null;
-    }*/
+        ArrayList<Point2D> removedNodes = new ArrayList();
+        for (JsonValue obj : data.getJsonArray("removedNodes")) {
+            removedNodes.add(jsonToPoint((JsonObject)obj));
+        }
+        return new PlatformerGameSave(referencePoint, player, removedNodes, scores);
+    }
 }

@@ -1,3 +1,5 @@
+import java.io.File;
+
 import javafx.application.Application;
 import javafx.animation.*;
 import javafx.event.*;
@@ -25,6 +27,7 @@ public class Main extends Application {
      * @param args command line arguments
      */
     public static void main(String[] args) {
+        new File(Constants.DATA_DIRECTORY).mkdirs();
         launch(args);
     }
 

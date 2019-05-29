@@ -9,18 +9,22 @@ import javafx.geometry.*;
  *  - May 21, 2019: Created ~Evan Zhang
  */
 public class GameSave {
-    public static JsonArray pointToJson(Point2D p) {
-        return Json.createArrayBuilder()
-                   .add(p.getX())
-                   .add(p.getY())
+    public static JsonObject pointToJson(Point2D p) {
+        return Json.createObjectBuilder()
+                   .add("x", p.getX())
+                   .add("y", p.getY())
                    .build();
+    }
+
+    public static Point2D jsonToPoint(JsonObject p) {
+        return new Point2D(p.getJsonNumber("x").doubleValue(), p.getJsonNumber("y").doubleValue());
     }
 
     public JsonObject toJson() {
         return null;
     }
 
-    public static GameSave loadFromFile(String data) {
+    public static GameSave fromJson(JsonObject data) {
         return null;
     }
 }

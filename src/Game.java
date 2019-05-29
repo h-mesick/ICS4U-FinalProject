@@ -31,7 +31,8 @@ public class Game {
 
     public Game(Stage stage) {
         this.stage = stage;
-        this.currentUser = new User();
+        //TODO: read username from user
+        this.currentUser = User.loadFromFile("Ninjaclasher");
         // TODO: change to loading screen
         // updateState(State.LOADING_SCREEN);
         updateState(State.MAIN_MENU);
@@ -67,6 +68,9 @@ public class Game {
     }
 
     public void updateState(State newState) {
+        // save everytime the user goes to a different state
+        // note that this might not be the most efficient way
+        this.currentUser.saveToFile();
         if (this.currentScene != null) {
             this.currentScene.onExit();
         }
