@@ -62,14 +62,7 @@ public class EnterUsername extends BaseScene {
             return change;
         }));
 
-        ImageButton enterButton = new ImageButton();
-        enterButton.setFitWidth(50);
-        enterButton.setFitHeight(50);
-        enterButton.setDisable(true);
-        enterButton.setImages(ResourceLoader.loadImage("forward-button.png"),
-                              ResourceLoader.loadImage("forward-button-hover.png"),
-                              ResourceLoader.loadImage("forward-button-selected.png"));
-        EventHandler usernameEntered = (event -> {
+        ImageButton enterButton = getMainImageButton("forward-button", event -> {
             String username = usernameField.getText();
             if (username.length() == 0) {
                 return;
@@ -77,7 +70,7 @@ public class EnterUsername extends BaseScene {
             this.game.setCurrentUser(username);
             this.game.updateState(State.MAIN_MENU);
         });
-        enterButton.setOnAction(usernameEntered);
+        enterButton.setDisable(true);
 
         usernameField.textProperty().addListener((observable, oldValue, newValue) -> {
             enterButton.setDisable(newValue.length() == 0);

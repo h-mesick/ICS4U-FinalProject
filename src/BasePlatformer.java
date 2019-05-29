@@ -79,15 +79,11 @@ public abstract class BasePlatformer extends BaseLevel {
         root.getChildren().add(progress);
 
         // add pause button
-        ImageButton pause = new ImageButton();
-        pause.setImages(ResourceLoader.loadImage("pause-button.png"),
-                        ResourceLoader.loadImage("pause-button-hover.png"),
-                        ResourceLoader.loadImage("pause-button-selected.png"));
+        ImageButton pause = getMainImageButton("pause-button", event -> handleKeyPressed(KeyCode.ESCAPE));
         pause.setTranslateX(Constants.SCREEN_WIDTH - 50);
-        pause.setMinWidth(20);
+        pause.setFitWidth(40);
         pause.setTranslateY(10);
-        pause.setMinHeight(20);
-        pause.setOnAction(event -> handleKeyPressed(KeyCode.ESCAPE));
+        pause.setFitHeight(40);
         root.getChildren().add(pause);
 
         setScene(root);

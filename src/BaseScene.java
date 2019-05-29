@@ -39,17 +39,24 @@ public abstract class BaseScene implements Constants {
         return title;
     }
 
-    public BorderPane getFooter(Node left, Node right) {
+    public BorderPane getFooter(Node left, Node center, Node right) {
         BorderPane footer = new BorderPane();
         footer.setPadding(new Insets(10));
 
         if (left != null) {
             footer.setLeft(left);
         }
+        if (center != null) {
+            footer.setCenter(center);
+        }
         if (right != null) {
             footer.setRight(right);
         }
         return footer;
+    }
+
+    public BorderPane getFooter(Node left, Node right) {
+        return getFooter(left, null, right);
     }
 
     public BorderPane getMainRoot(Node body, Node footer) {
@@ -98,6 +105,17 @@ public abstract class BaseScene implements Constants {
 
     public StackPane getMainButton(String text, EventHandler onClick) {
         return getMainButton(text, onClick, 30);
+    }
+
+    public ImageButton getMainImageButton(String baseFilename, EventHandler onClick) {
+        ImageButton button = new ImageButton();
+        button.setFitWidth(50);
+        button.setFitHeight(50);
+        button.setImages(ResourceLoader.loadImage(baseFilename + ".png"),
+                         ResourceLoader.loadImage(baseFilename + "-hover.png"),
+                         ResourceLoader.loadImage(baseFilename + "-selected.png"));
+        button.setOnAction(onClick);
+        return button;
     }
 
     public void onExit() {}

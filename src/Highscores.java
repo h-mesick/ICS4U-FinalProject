@@ -72,21 +72,9 @@ public class Highscores extends BaseScene {
         }
         body.getChildren().add(rankings);
 
-        ImageButton backButton = new ImageButton();
-        backButton.setFitWidth(50);
-        backButton.setFitHeight(50);
-        backButton.setImages(ResourceLoader.loadImage("back-button.png"),
-                             ResourceLoader.loadImage("back-button-hover.png"),
-                             ResourceLoader.loadImage("back-button-selected.png"));
-        backButton.setOnAction(event -> game.updateState(State.MAIN_MENU));
+        ImageButton backButton = getMainImageButton("back-button", event -> game.updateState(State.MAIN_MENU));
 
-        ImageButton helpButton = new ImageButton();
-        helpButton.setFitWidth(50);
-        helpButton.setFitHeight(50);
-        helpButton.setImages(ResourceLoader.loadImage("help-button.png"),
-                             ResourceLoader.loadImage("help-button-hover.png"),
-                             ResourceLoader.loadImage("help-button-selected.png"));
-        helpButton.setOnAction(event -> {
+        ImageButton helpButton = getMainImageButton("help-button", event -> {
             game.setNextState(game.getCurrentState());
             game.updateState(State.HELP);
         });
