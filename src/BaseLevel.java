@@ -38,6 +38,10 @@ public abstract class BaseLevel extends BaseScene {
     protected Set<KeyCode> pressedKeys = new HashSet();
     protected Group root;
 
+    protected int[] scores;
+    protected Text[] scoresText;
+    protected boolean levelComplete;
+
     /**
      * Constructor for the BaseLevel class.
      *
@@ -61,6 +65,27 @@ public abstract class BaseLevel extends BaseScene {
                 prev.set(now);
             }
         };
+
+        scores = new int[getScoreCount()];
+        scoresText = new Text[getScoreCount()];
+
+        for (int i = 0; i < getScoreCount(); i++) {
+            scoresText[i] = new Text("0");
+            scoresText[i].setFont(Font.font("Verdana", FontWeight.BOLD, 20));
+        }
+    }
+
+    protected void incrementScore(int index, int delta) {
+        scores[index] += delta;
+        scoresText[index].setText("" + scores[index]);
+    }
+
+    protected void loadScores(int[] newScores) {
+        newScores = Arrays.copyOf(newScores, getScoreCount());
+        for (int i = 0; i < getScoreCount(); i++) {
+            scores[i] = 0;
+            incrementScore(i, newScores[i]);
+        }
     }
 
     /**
@@ -77,7 +102,20 @@ public abstract class BaseLevel extends BaseScene {
         GameSave save = this.game.currentUser.levelSaves[getLevel() - 1];
         if (save != null) {
             load(save);
+        } else {
+            onFirstEnter();
         }
+    }
+
+    protected void onFirstEnter() {
+        if (getLevel() > 1) {
+            GameSave prevSave = this.game.currentUser.levelSaves[getLevel() - 2];
+            if (prevSave != null) {
+                loadScores(prevSave.scores);
+                return;
+            }
+        }
+        loadScores(new int[getScoreCount()]);
     }
 
     /**
@@ -182,11 +220,26 @@ public abstract class BaseLevel extends BaseScene {
         this.game.setScene(scene);
     }
 
+    /**
+     * Gets the level file for the current level
+     * @return The level filename
+     */
+    protected String getLevelFile() {
+        return "level" + getLevel() + ".txt";
+    }
+
+    protected void onFinish() {
+        this.levelComplete = true;
+        handleFinish();
+    }
+
     protected void handleKeyPressed(KeyCode key) {}
     protected void handleKeyReleased(KeyCode key) {}
 
     protected abstract void update();
     protected abstract int getLevel();
+    protected abstract int getScoreCount();
     protected abstract GameSave save();
     protected abstract void load(GameSave save);
+    protected abstract void handleFinish();
 }

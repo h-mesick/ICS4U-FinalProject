@@ -35,6 +35,13 @@ public class LevelOne extends BaseLevel {
     protected int getLevel() {
         return 1;
     }
+    /**
+     * Get the number of scores to save
+     * @return The score count
+     */
+    protected int getScoreCount() {
+        return 0;
+    }
 
     /**
      * Initializes the scene
@@ -58,6 +65,9 @@ public class LevelOne extends BaseLevel {
      * Update method called every game tick
      */
     protected void update() {
+    }
+
+    protected void handleFinish() {
     }
 
     /**

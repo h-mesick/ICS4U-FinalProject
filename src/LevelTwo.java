@@ -32,7 +32,6 @@ public class LevelTwo extends BasePlatformer {
     /** Instance variables */
     private HBox scoreCountOverlay;
     private Text coinText;
-    private int coinCount = 0;
 
     /**
      * Constructor
@@ -51,12 +50,11 @@ public class LevelTwo extends BasePlatformer {
     }
 
     /**
-     * Increments the coin count
-     * @param delta The amount to increase the coin count
+     * Get the number of scores to save
+     * @return The score count
      */
-    private void incrementCoinCount(int delta) {
-        coinCount += delta;
-        coinText.setText("" + coinCount);
+    protected int getScoreCount() {
+        return 1;
     }
 
     /**
@@ -71,19 +69,19 @@ public class LevelTwo extends BasePlatformer {
         };
         EventHandler[] handlers = {
             event -> {
-                incrementCoinCount(1);
+                incrementScore(0, 1);
                 removeOverlay();
             },
             event -> {
-                incrementCoinCount(3);
+                incrementScore(0, 3);
                 removeOverlay();
             },
             event -> {
-                incrementCoinCount(10);
+                incrementScore(0, 10);
                 removeOverlay();
             },
             event -> {
-                incrementCoinCount(-1);
+                incrementScore(0, -1);
                 removeOverlay();
             },
         };
@@ -102,10 +100,7 @@ public class LevelTwo extends BasePlatformer {
         coinImage.setPreserveRatio(true);
         coinImage.setFitWidth(40);
 
-        coinText = new Text("0");
-        coinText.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
-
-        scoreCountOverlay.getChildren().addAll(coinImage, coinText);
+        scoreCountOverlay.getChildren().addAll(coinImage, scoresText[0]);
 
         super.initScene();
         root.getChildren().add(scoreCountOverlay);
@@ -132,24 +127,5 @@ public class LevelTwo extends BasePlatformer {
         StackPane nextLevel = getMainButton("Continue to the next level", event -> this.game.updateState(State.LEVEL_THREE), 15);
 
         setOverlay(initBasicOverlay(finishText, nextLevel));
-    }
-
-    /**
-     * Saves the level state
-     * @return The PlatformerGameSave object
-     */
-    protected PlatformerGameSave save() {
-        return super.save(coinCount);
-    }
-
-    /**
-     * Load the level state from a GameSave
-     * @param baseSave The game save to load from
-     */
-    protected void load(GameSave baseSave) {
-        PlatformerGameSave save = (PlatformerGameSave)baseSave;
-        super.load(save);
-        incrementCoinCount(-coinCount);
-        incrementCoinCount(save.scores[0]);
     }
 }

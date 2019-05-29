@@ -27,7 +27,6 @@ public class PlatformerGameSave extends GameSave {
     public double referencePoint;
     public Point2D player;
     public ArrayList<Point2D> removedNodes;
-    public int[] scores;
 
     /**
      * Constructor
@@ -36,7 +35,9 @@ public class PlatformerGameSave extends GameSave {
      * @param  removedNodes   The location of the removed blocks on the screen
      * @param  scores         The scores for the game level
      */
-    public PlatformerGameSave(double referencePoint, Point2D player, ArrayList<Point2D> removedNodes, int[] scores) {
+    public PlatformerGameSave(double referencePoint, Point2D player, ArrayList<Point2D> removedNodes,
+                              int[] scores, boolean levelComplete) {
+        super(scores, levelComplete);
         this.referencePoint = referencePoint;
         this.player = player;
         this.removedNodes = removedNodes;
@@ -54,6 +55,7 @@ public class PlatformerGameSave extends GameSave {
         }
 
         return Json.createObjectBuilder()
+                   .add("levelComplete", levelComplete)
                    .add("referencePoint", referencePoint)
                    .add("player", pointToJson(player))
                    .add("scores", jsonScores.build())
@@ -62,6 +64,7 @@ public class PlatformerGameSave extends GameSave {
     }
 
     public static GameSave fromJson(JsonObject data) {
+        boolean levelComplete = data.getBoolean("levelComplete", false);
         double referencePoint = data.getJsonNumber("referencePoint").doubleValue();
         Point2D player = jsonToPoint(data.getJsonObject("player"));
         JsonArray jsonScores = data.getJsonArray("scores");
@@ -73,6 +76,6 @@ public class PlatformerGameSave extends GameSave {
         for (JsonValue obj : data.getJsonArray("removedNodes")) {
             removedNodes.add(jsonToPoint((JsonObject)obj));
         }
-        return new PlatformerGameSave(referencePoint, player, removedNodes, scores);
+        return new PlatformerGameSave(referencePoint, player, removedNodes, scores, levelComplete);
     }
 }

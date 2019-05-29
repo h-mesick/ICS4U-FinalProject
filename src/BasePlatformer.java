@@ -118,7 +118,7 @@ public abstract class BasePlatformer extends BaseLevel {
         player.fall(ground, ceiling);
 
         if (player.onGround(ground) && ceiling < 1e-10 && yy < player.getHeight() * 2) {
-            handleFinish();
+            onFinish();
         }
     }
 
@@ -233,9 +233,11 @@ public abstract class BasePlatformer extends BaseLevel {
 
     /**
      * Loads a game save
-     * @param save The game save to load from
+     * @param baseSave The game save to load from
      */
-    protected void load(PlatformerGameSave save) {
+    protected void load(GameSave baseSave) {
+        PlatformerGameSave save = (PlatformerGameSave)baseSave;
+
         this.player.setCenterPosition(save.player);
 
         double mod = save.referencePoint - this.referencePoint;
@@ -253,18 +255,20 @@ public abstract class BasePlatformer extends BaseLevel {
             this.removedNodes.add(s);
             root.getChildren().remove(s);
         }
+
+        loadScores(save.scores);
     }
 
     /**
      * Saves a game
      * @param scores The scores for the level
      */
-    protected PlatformerGameSave save(int... scores) {
+    protected PlatformerGameSave save() {
         ArrayList<Point2D> nodes = new ArrayList();
         for (Sprite s : removedNodes) {
             nodes.add(s.getCenterPosition());
         }
-        return new PlatformerGameSave(referencePoint, player.getCenterPosition(), nodes, scores);
+        return new PlatformerGameSave(referencePoint, player.getCenterPosition(), nodes, scores, levelComplete);
     }
 
     /**
@@ -283,14 +287,6 @@ public abstract class BasePlatformer extends BaseLevel {
      */
     protected double getScreenY(double y) {
         return y - referencePoint;
-    }
-
-    /**
-     * Gets the level file for the current level
-     * @return The level filename
-     */
-    protected String getLevelFile() {
-        return "level" + getLevel() + ".txt";
     }
 
     /**
@@ -323,5 +319,4 @@ public abstract class BasePlatformer extends BaseLevel {
 
     protected abstract Question getQuestion(int specialType);
     protected abstract void handleSpecial(int specialType);
-    protected abstract void handleFinish();
 }

@@ -86,6 +86,13 @@ public class EnterUsername extends BaseScene {
         usernameRow.getChildren().addAll(usernameField, enterButton);
         body.getChildren().add(usernameRow);
 
+        Text text = new Text("Your username defines where your game state is saved, so please use the same username everytime!");
+        text.setFont(new Font("Verdana", 15));
+        text.setFill(Color.WHITE);
+        text.setTextAlignment(TextAlignment.CENTER);
+        text.setWrappingWidth(Constants.SCREEN_WIDTH - 400);
+        body.getChildren().add(text);
+
         Scene scene = new Scene(getMainRoot(body));
         scene.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {

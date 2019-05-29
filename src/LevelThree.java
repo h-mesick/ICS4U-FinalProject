@@ -28,7 +28,6 @@ public class LevelThree extends BasePlatformer {
     /** Instance variables */
     private VBox scoreCountOverlay;
     private Text coinText, pointText;
-    private int coinCount = 0, pointCount = 0;
 
     /**
      * Constructor
@@ -47,23 +46,12 @@ public class LevelThree extends BasePlatformer {
     }
 
     /**
-     * Increments the coin count
-     * @param delta The amount to increase the coin count
+     * Get the number of scores to save
+     * @return The score count
      */
-    private void incrementCoinCount(int delta) {
-        coinCount += delta;
-        coinText.setText("" + coinCount);
+    protected int getScoreCount() {
+        return 2;
     }
-
-    /**
-     * Increments the score count
-     * @param delta The amount to increase the score count
-     */
-    private void incrementPointCount(int delta) {
-        pointCount += delta;
-        pointText.setText("" + pointCount);
-    }
-
 
     /**
      * Gets the question specified by specialType
@@ -77,23 +65,23 @@ public class LevelThree extends BasePlatformer {
         };
         EventHandler[] handlers = {
             event -> {
-                incrementPointCount(2);
-                incrementCoinCount(-1);
+                incrementScore(0, -1);
+                incrementScore(1, 2);
                 removeOverlay();
             },
             event -> {
-                incrementPointCount(6);
-                incrementCoinCount(-3);
+                incrementScore(0, -3);
+                incrementScore(1, 6);
                 removeOverlay();
             },
             event -> {
-                incrementPointCount(20);
-                incrementCoinCount(-10);
+                incrementScore(0, -10);
+                incrementScore(1, 20);
                 removeOverlay();
             },
             event -> {
-                incrementPointCount(2);
-                incrementCoinCount(-1);
+                incrementScore(0, -1);
+                incrementScore(1, 2);
                 removeOverlay();
             },
         };
@@ -112,10 +100,7 @@ public class LevelThree extends BasePlatformer {
         coinImage.setPreserveRatio(true);
         coinImage.setFitWidth(40);
 
-        coinText = new Text("0");
-        coinText.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
-
-        coinCountOverlay.getChildren().addAll(coinImage, coinText);
+        coinCountOverlay.getChildren().addAll(coinImage, scoresText[0]);
 
 
         HBox pointCountOverlay = new HBox(5);
@@ -126,10 +111,7 @@ public class LevelThree extends BasePlatformer {
         pointImage.setPreserveRatio(true);
         pointImage.setFitWidth(40);
 
-        pointText = new Text("0");
-        pointText.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
-
-        pointCountOverlay.getChildren().addAll(pointImage, pointText);
+        pointCountOverlay.getChildren().addAll(pointImage, scoresText[1]);
 
 
         scoreCountOverlay = new VBox(0, coinCountOverlay, pointCountOverlay);
@@ -159,26 +141,5 @@ public class LevelThree extends BasePlatformer {
         StackPane nextLevel = getMainButton("Finish Game", event -> this.game.updateState(State.MAIN_MENU), 15);
 
         setOverlay(initBasicOverlay(finishText, nextLevel));
-    }
-
-    /**
-     * Saves the level state
-     * @return The PlatformerGameSave object
-     */
-    protected PlatformerGameSave save() {
-        return super.save(coinCount, pointCount);
-    }
-
-    /**
-     * Load the level state from a GameSave
-     * @param baseSave The game save to load from
-     */
-    protected void load(GameSave baseSave) {
-        PlatformerGameSave save = (PlatformerGameSave)baseSave;
-        super.load(save);
-        incrementCoinCount(-coinCount);
-        incrementCoinCount(save.scores[0]);
-        incrementPointCount(-pointCount);
-        incrementPointCount(save.scores[1]);
     }
 }

@@ -10,6 +10,14 @@ import javafx.geometry.*;
  *  - May 28, 2019: Updated ~Evan Zhang
  */
 public class GameSave {
+    public int scores[];
+    public boolean levelComplete;
+
+    public GameSave(int[] scores, boolean levelComplete) {
+        this.scores = scores;
+        this.levelComplete = levelComplete;
+    }
+
     public static JsonObject pointToJson(Point2D p) {
         return Json.createObjectBuilder()
                    .add("x", p.getX())
