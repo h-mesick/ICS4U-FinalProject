@@ -1,12 +1,11 @@
 import javafx.animation.*;
 import javafx.application.Platform;
 import javafx.event.*;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
+import javafx.geometry.*;
 import javafx.scene.*;
 import javafx.scene.canvas.*;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
+import javafx.scene.image.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.*;
 import javafx.scene.shape.*;
@@ -16,10 +15,11 @@ import javafx.stage.*;
 /**
  * @author Evan Zhang
  * Revision history:
- * - May 13, 2019: Created ~Evan Zhang
- * - May 22, 2019: Finished ~Max Li
- * - May 23, 2019: Finishing touches ~Evan Zhang
- * - May 27, 2019: Commented ~Max Li
+ *  - May 13, 2019: Created ~Evan Zhang
+ *  - May 22, 2019: Finished ~Max Li
+ *  - May 23, 2019: Finishing touches ~Evan Zhang
+ *  - May 27, 2019: Commented ~Max Li
+ *  - May 28, 2019: Updated ~Evan Zhang
  * @version 1
  */
 public class MainMenu extends BaseScene {

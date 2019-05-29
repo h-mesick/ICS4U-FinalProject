@@ -42,16 +42,18 @@ public class Game {
                 users.put(u.username, u);
             }
         }
-        //TODO: read username from user
-        if (!users.containsKey("Ninjaclasher")) {
-            this.currentUser = User.loadFromFile("Ninjaclasher");
-            users.put("Ninjaclasher", this.currentUser);
-        } else {
-            this.currentUser = users.get("Ninjaclasher");
-        }
         // TODO: change to loading screen
         // updateState(State.LOADING_SCREEN);
-        updateState(State.MAIN_MENU);
+        updateState(State.ENTER_USERNAME);
+    }
+
+    public void setCurrentUser(String username) {
+        if (!users.containsKey(username)) {
+            this.currentUser = User.loadFromFile(username);
+            users.put(username, this.currentUser);
+        } else {
+            this.currentUser = users.get(username);
+        }
     }
 
     public ArrayList<User> getAllUsers() {
@@ -85,7 +87,9 @@ public class Game {
     public void updateState(State newState) {
         // save everytime the user goes to a different state
         // note that this might not be the most efficient way
-        this.currentUser.updateAll();
+        if (this.currentUser != null) {
+            this.currentUser.updateAll();
+        }
         if (this.currentScene != null) {
             this.currentScene.onExit();
         }
@@ -97,6 +101,7 @@ public class Game {
         currentScene = null;
         switch(this.currentState) {
             case LOADING_SCREEN: currentScene =  new LoadingScreen(this); break;
+            case ENTER_USERNAME: currentScene = new EnterUsername(this); break;
             case MAIN_MENU: currentScene = new MainMenu(this); break;
             case HIGH_SCORES: currentScene = new Highscores(this); break;
             case HELP: currentScene = new Help(this); break;
