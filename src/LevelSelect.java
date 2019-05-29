@@ -22,6 +22,7 @@ import javafx.stage.*;
  *  - May 18, 2019: Updated ~Evan Zhang
  *  - May 23, 2019: Finished ~Evan Zhang
  *  - May 27, 2019: Commented ~Evan Zhang
+ *  - May 29, 2019: Updated ~Evan Zhang
  */
 public class LevelSelect extends BaseScene {
     /**
@@ -42,20 +43,8 @@ public class LevelSelect extends BaseScene {
             event -> game.updateState(State.LEVEL_THREE),
         };
 
-        BorderPane root = new BorderPane();
-
-        root.setBackground(new Background(new BackgroundImage(
-            ResourceLoader.loadImage("background.png"),
-            BackgroundRepeat.NO_REPEAT,
-            BackgroundRepeat.NO_REPEAT,
-            BackgroundPosition.CENTER,
-            new BackgroundSize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, false, false, false, false)
-        )));
-
-        root.setTop(getTitle());
-
         VBox body = new VBox(10);
-        body.setAlignment(Pos.CENTER);
+        body.setAlignment(Pos.TOP_CENTER);
 
         body.getChildren().add(new ImageView(ResourceLoader.loadImage("level-select-logo.png")));
 
@@ -85,8 +74,6 @@ public class LevelSelect extends BaseScene {
             game.updateState(State.HELP);
         });
 
-        root.setCenter(body);
-        root.setBottom(getFooter(backButton, helpButton));
-        this.game.setScene(new Scene(root));
+        this.game.setScene(new Scene(getMainRoot(body, getFooter(backButton, helpButton))));
     }
 }

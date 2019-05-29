@@ -16,7 +16,8 @@ import javafx.stage.*;
 /**
  * @author Evan Zhang
  * Revision history:
- * - May 28, 2019: Created ~Evan Zhang
+ *  - May 28, 2019: Created ~Evan Zhang
+ *  - May 29, 2019: Updated ~Evan Zhang
  * @version 1
  */
 public class EnterUsername extends BaseScene {
@@ -33,18 +34,6 @@ public class EnterUsername extends BaseScene {
      * Initializes the scene
      */
     public void initScene() {
-        BorderPane root = new BorderPane();
-
-        root.setBackground(new Background(new BackgroundImage(
-                ResourceLoader.loadImage("background.png"),
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundPosition.CENTER,
-                new BackgroundSize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, false, false, false, false)
-        )));
-
-        root.setTop(getTitle());
-
         VBox body = new VBox(10);
         body.setAlignment(Pos.TOP_CENTER);
 
@@ -97,9 +86,7 @@ public class EnterUsername extends BaseScene {
         usernameRow.getChildren().addAll(usernameField, enterButton);
         body.getChildren().add(usernameRow);
 
-        root.setCenter(body);
-
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(getMainRoot(body));
         scene.setOnKeyPressed(usernameEntered);
         this.game.setScene(scene);
     }

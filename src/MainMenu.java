@@ -20,6 +20,7 @@ import javafx.stage.*;
  *  - May 23, 2019: Finishing touches ~Evan Zhang
  *  - May 27, 2019: Commented ~Max Li
  *  - May 28, 2019: Updated ~Evan Zhang
+ *  - May 29, 2019: Updated ~Evan Zhang
  * @version 1
  */
 public class MainMenu extends BaseScene {
@@ -36,20 +37,8 @@ public class MainMenu extends BaseScene {
      * Initializes the scene to the main menu window.
      */
     public void initScene() {
-        BorderPane root = new BorderPane();
-
-        root.setBackground(new Background(new BackgroundImage(
-                ResourceLoader.loadImage("background.png"),
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundPosition.CENTER,
-                new BackgroundSize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, false, false, false, false)
-        )));
-
-        root.setTop(getTitle());
-
         VBox body = new VBox(10);
-        body.setAlignment(Pos.CENTER);
+        body.setAlignment(Pos.TOP_CENTER);
 
         body.getChildren().add(new ImageView(ResourceLoader.loadImage("main-menu-logo.png")));
         body.getChildren().add(getMainButton("Play", event -> game.updateState(State.LEVEL_SELECT)));
@@ -57,8 +46,6 @@ public class MainMenu extends BaseScene {
         body.getChildren().add(getMainButton("High Scores", event -> game.updateState(State.HIGH_SCORES)));
         body.getChildren().add(getMainButton("Quit", event -> Platform.exit()));
 
-        root.setCenter(body);
-
-        this.game.setScene(new Scene(root));
+        this.game.setScene(new Scene(getMainRoot(body)));
     }
 }

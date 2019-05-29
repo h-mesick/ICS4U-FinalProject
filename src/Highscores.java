@@ -19,6 +19,7 @@ import javafx.stage.*;
  * @author Evan Zhang
  * Revision history:
  *  - May 28, 2019: Created ~Evan Zhang
+ *  - May 29, 2019: Updated ~Evan Zhang
  */
 public class Highscores extends BaseScene {
     /**
@@ -33,18 +34,8 @@ public class Highscores extends BaseScene {
      * Initializes the scene
      */
     public void initScene() {
-        BorderPane root = new BorderPane();
-        root.setBackground(new Background(new BackgroundImage(
-            ResourceLoader.loadImage("background.png"),
-            BackgroundRepeat.NO_REPEAT,
-            BackgroundRepeat.NO_REPEAT,
-            BackgroundPosition.CENTER,
-            new BackgroundSize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, false, false, false, false)
-        )));
-        root.setTop(getTitle());
-
         VBox body = new VBox(10);
-        body.setAlignment(Pos.CENTER);
+        body.setAlignment(Pos.TOP_CENTER);
         body.getChildren().add(new ImageView(ResourceLoader.loadImage("highscores-logo.png")));
 
         ArrayList<User> users = this.game.getAllUsers();
@@ -100,8 +91,6 @@ public class Highscores extends BaseScene {
             game.updateState(State.HELP);
         });
 
-        root.setCenter(body);
-        root.setBottom(getFooter(backButton, helpButton));
-        this.game.setScene(new Scene(root));
+        this.game.setScene(new Scene(getMainRoot(body, getFooter(backButton, helpButton))));
     }
 }

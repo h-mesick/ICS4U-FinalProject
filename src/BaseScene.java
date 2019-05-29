@@ -19,6 +19,7 @@ import javafx.stage.*;
  *  - May 16, 2019: Updated ~Evan Zhang
  *  - May 17, 2019: Updated ~Evan Zhang
  *  - May 22, 2019: Updated ~Evan Zhang
+ *  - May 29, 2019: Updated ~Evan Zhang
  */
 public abstract class BaseScene implements Constants {
     protected Game game;
@@ -49,6 +50,27 @@ public abstract class BaseScene implements Constants {
             footer.setRight(right);
         }
         return footer;
+    }
+
+    public BorderPane getMainRoot(Node body, Node footer) {
+        BorderPane root = new BorderPane();
+
+        root.setBackground(new Background(new BackgroundImage(
+            ResourceLoader.loadImage("background.png"),
+            BackgroundRepeat.NO_REPEAT,
+            BackgroundRepeat.NO_REPEAT,
+            BackgroundPosition.CENTER,
+            new BackgroundSize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, false, false, false, false)
+        )));
+
+        root.setTop(getTitle());
+        root.setCenter(body);
+        root.setBottom(footer);
+        return root;
+    }
+
+    public BorderPane getMainRoot(Node body) {
+        return getMainRoot(body, null);
     }
 
     public StackPane getMainButton(String text, EventHandler onClick, int fontSize) {
