@@ -40,6 +40,8 @@ public abstract class BasePlatformer extends BaseLevel {
     protected double referencePoint;
     protected ArrayList<Sprite> removedNodes = new ArrayList();
 
+    protected int updateCount = 0;
+
     /**
      * Constructor
      * @param  game The current game
@@ -64,7 +66,7 @@ public abstract class BasePlatformer extends BaseLevel {
 
         // add player
         player = new Sprite(30, Constants.SCREEN_HEIGHT - Constants.PLATFORM_BLOCK_HEIGHT - 30,
-                            20, 29, ResourceLoader.loadImage("player.png"));
+                            25, 25, ResourceLoader.loadImage("player/still.png"));
         root.getChildren().add(player);
 
         // add progress bar
@@ -103,13 +105,26 @@ public abstract class BasePlatformer extends BaseLevel {
         double ground = getScreenY(this.level.getLowerBound(box) - player.getHeight());
         double ceiling = getScreenY(this.level.getUpperBound(box));
 
+        boolean moveLeft = pressedKeys.contains(KeyCode.LEFT), moveRight = pressedKeys.contains(KeyCode.RIGHT);
+
         if (pressedKeys.contains(KeyCode.UP) && player.onGround(ground)) {
             player.jump();
         }
-        if (pressedKeys.contains(KeyCode.LEFT)) {
+        if (moveLeft || moveRight) {
+            if (player.onGround(ground) || updateCount % 40 / 10 != 0) {
+                updateCount++;
+            }
+            player.setImage(ResourceLoader.loadImage("player/00" + (updateCount % 80 / 10) + ".png"));
+        } else {
+            player.setImage(ResourceLoader.loadImage("player/still.png"));
+        }
+
+        if (moveLeft) {
+            player.setScaleX(-1);
             player.moveLeft(this.level.getLeftBound(box));
         }
-        if (pressedKeys.contains(KeyCode.RIGHT)) {
+        if (moveRight) {
+            player.setScaleX(1);
             player.moveRight(this.level.getRightBound(box) - player.getWidth());
         }
         player.fall(ground, ceiling);
