@@ -38,7 +38,7 @@ public abstract class BasePlatformer extends BaseLevel {
     protected VBox escapeOverlay;
     protected Level level;
     protected double referencePoint;
-    protected ArrayList<Node> removedNodes = new ArrayList();
+    protected ArrayList<Sprite> removedNodes = new ArrayList();
 
     /**
      * Constructor
@@ -235,7 +235,7 @@ public abstract class BasePlatformer extends BaseLevel {
      * @param save The game save to load from
      */
     protected void load(PlatformerGameSave save) {
-        this.player.setPosition(save.player);
+        this.player.setCenterPosition(save.player);
 
         double mod = save.referencePoint - this.referencePoint;
         this.referencePoint = save.referencePoint;
@@ -252,6 +252,18 @@ public abstract class BasePlatformer extends BaseLevel {
             this.removedNodes.add(s);
             root.getChildren().remove(s);
         }
+    }
+
+    /**
+     * Saves a game
+     * @param scores The scores for the level
+     */
+    protected PlatformerGameSave save(int... scores) {
+        ArrayList<Point2D> nodes = new ArrayList();
+        for (Sprite s : removedNodes) {
+            nodes.add(s.getCenterPosition());
+        }
+        return new PlatformerGameSave(referencePoint, player.getCenterPosition(), nodes, scores);
     }
 
     /**

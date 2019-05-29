@@ -139,11 +139,19 @@ public class Sprite extends ImageView {
     }
 
     /**
-     * Set the position of the sprite
-     * @param point The point position
+     * Set the center position of the sprite
+     * @param point The center point position
      */
-    public void setPosition(Point2D point) {
-        setPosition(point.getX(), point.getY());
+    public void setCenterPosition(Point2D point) {
+        setPosition(point.getX() - getWidth() / 2, point.getY() - getHeight() / 2);
+    }
+
+    /**
+     * Get the center position of the sprite
+     * @return The center position of the sprite
+     */
+    public Point2D getCenterPosition() {
+        return new Point2D(getCenterX(), getCenterY());
     }
 
     /**

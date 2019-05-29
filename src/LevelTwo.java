@@ -138,7 +138,7 @@ public class LevelTwo extends BasePlatformer {
      * @return The PlatformerGameSave object
      */
     protected PlatformerGameSave save() {
-        return new PlatformerGameSave(referencePoint, player, removedNodes, coinCount);
+        return super.save(coinCount);
     }
 
     /**

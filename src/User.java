@@ -23,6 +23,22 @@ public class User implements Comparable {
         this.levelSaves = saves;
     }
 
+    public void updateAll() {
+        computeScore();
+        saveToFile();
+    }
+
+    public void computeScore() {
+        for (GameSave g : levelSaves) {
+            if (g instanceof PlatformerGameSave) {
+                this.score = 0;
+                for (int p : ((PlatformerGameSave)g).scores) {
+                    this.score += p;
+                }
+            }
+        }
+    }
+
     public void saveToFile() {
         try {
             FileWriter stream = new FileWriter(getDataFile(this.username));
@@ -53,10 +69,8 @@ public class User implements Comparable {
     }
 
     public static User loadFromFile(String username) {
-        try {
-            JsonReader reader = Json.createReader(new FileInputStream(getDataFile(username)));
+        try (JsonReader reader = Json.createReader(new FileInputStream(getDataFile(username)))) {
             JsonObject obj = reader.readObject();
-            reader.close();
 
             GameSave[] saves = new GameSave[Constants.NUM_LEVELS];
             JsonArray savesArray = obj.getJsonArray("saves");
@@ -85,6 +99,6 @@ public class User implements Comparable {
     }
 
     public static String getDataFile(String username) {
-        return Constants.DATA_DIRECTORY + username + ".data";
+        return Constants.DATA_DIRECTORY + username + Constants.DATA_EXTENSION;
     }
 }

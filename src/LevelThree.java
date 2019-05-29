@@ -165,7 +165,7 @@ public class LevelThree extends BasePlatformer {
      * @return The PlatformerGameSave object
      */
     protected PlatformerGameSave save() {
-        return new PlatformerGameSave(referencePoint, player, removedNodes, coinCount, pointCount);
+        return super.save(coinCount, pointCount);
     }
 
     /**

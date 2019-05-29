@@ -28,27 +28,14 @@ public class PlatformerGameSave extends GameSave {
     public ArrayList<Point2D> removedNodes;
     public int[] scores;
 
-    private static ArrayList<Point2D> convertToPoints(ArrayList<Node> removedNodes) {
-        ArrayList<Point2D> ret = new ArrayList();
-        for (Node n : removedNodes) {
-            ret.add(new Point2D(n.getTranslateX(), n.getTranslateY()));
-        }
-        return ret;
-    }
-
     /**
      * Constructor
      * @param  referencePoint The reference point of the screen
-     * @param  player         The player object
-     * @param  removedNodes   The removed blocks on the screen
+     * @param  player         The player location
+     * @param  removedNodes   The location of the removed blocks on the screen
      * @param  scores         The scores for the game level
      */
-    public PlatformerGameSave(double referencePoint, Node player, ArrayList<Node> removedNodes, int... scores) {
-        this(referencePoint, new Point2D(player.getTranslateX(), player.getTranslateY()),
-             convertToPoints(removedNodes), scores);
-    }
-
-    private PlatformerGameSave(double referencePoint, Point2D player, ArrayList<Point2D> removedNodes, int[] scores) {
+    public PlatformerGameSave(double referencePoint, Point2D player, ArrayList<Point2D> removedNodes, int[] scores) {
         this.referencePoint = referencePoint;
         this.player = player;
         this.removedNodes = removedNodes;

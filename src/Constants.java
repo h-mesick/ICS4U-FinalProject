@@ -17,4 +17,5 @@ public interface Constants {
     static final int BLOCK_HEIGHT_COUNT = SCREEN_HEIGHT / PLATFORM_BLOCK_HEIGHT;
 
     static final String DATA_DIRECTORY = "saves/";
+    static final String DATA_EXTENSION = ".ctgd";
 }

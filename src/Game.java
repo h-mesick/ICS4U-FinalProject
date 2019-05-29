@@ -1,4 +1,6 @@
+import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javafx.animation.*;
 import javafx.event.*;
@@ -25,22 +27,35 @@ import javafx.stage.*;
 public class Game {
     private State currentState = null, nextState = null;
     private BaseScene currentScene;
+    private HashMap<String, User> users = new HashMap();
 
     public Stage stage;
     public User currentUser;
 
     public Game(Stage stage) {
         this.stage = stage;
+
+        for (File f : new File(Constants.DATA_DIRECTORY).listFiles()) {
+            String filename = f.getName();
+            if (f.isFile() && filename.endsWith(Constants.DATA_EXTENSION)) {
+                User u = User.loadFromFile(filename.substring(0, filename.length() - Constants.DATA_EXTENSION.length()));
+                users.put(u.username, u);
+            }
+        }
         //TODO: read username from user
-        this.currentUser = User.loadFromFile("Ninjaclasher");
+        if (!users.containsKey("Ninjaclasher")) {
+            this.currentUser = User.loadFromFile("Ninjaclasher");
+            users.put("Ninjaclasher", this.currentUser);
+        } else {
+            this.currentUser = users.get("Ninjaclasher");
+        }
         // TODO: change to loading screen
         // updateState(State.LOADING_SCREEN);
         updateState(State.MAIN_MENU);
     }
 
-    //TODO
     public ArrayList<User> getAllUsers() {
-        return new ArrayList();
+        return new ArrayList<User>(users.values());
     }
 
     public void setScene(Scene scene) {
@@ -70,7 +85,7 @@ public class Game {
     public void updateState(State newState) {
         // save everytime the user goes to a different state
         // note that this might not be the most efficient way
-        this.currentUser.saveToFile();
+        this.currentUser.updateAll();
         if (this.currentScene != null) {
             this.currentScene.onExit();
         }
