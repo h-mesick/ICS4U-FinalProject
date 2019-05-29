@@ -50,14 +50,14 @@ public class EnterUsername extends BaseScene {
                 return change;
             }
             String text = change.getControlNewText();
+            if (text.length() > 50) {
+                return null;
+            }
             for (int i = 0; i < text.length(); i++) {
                 char c = text.charAt(i);
                 if (!(c < ' ' || (c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))) {
                     return null;
                 }
-            }
-            if (text.indexOf(" ") != -1) {
-                return null;
             }
             return change;
         }));
@@ -66,9 +66,9 @@ public class EnterUsername extends BaseScene {
         enterButton.setFitWidth(50);
         enterButton.setFitHeight(50);
         enterButton.setDisable(true);
-        enterButton.setImages(ResourceLoader.loadImage("help-button.png"),
-                              ResourceLoader.loadImage("help-button-hover.png"),
-                              ResourceLoader.loadImage("help-button-selected.png"));
+        enterButton.setImages(ResourceLoader.loadImage("forward-button.png"),
+                              ResourceLoader.loadImage("forward-button-hover.png"),
+                              ResourceLoader.loadImage("forward-button-selected.png"));
         EventHandler usernameEntered = (event -> {
             String username = usernameField.getText();
             if (username.length() == 0) {
@@ -87,7 +87,11 @@ public class EnterUsername extends BaseScene {
         body.getChildren().add(usernameRow);
 
         Scene scene = new Scene(getMainRoot(body));
-        scene.setOnKeyPressed(usernameEntered);
+        scene.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                enterButton.fire();
+            }
+        });
         this.game.setScene(scene);
     }
 }
