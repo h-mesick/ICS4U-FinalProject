@@ -50,15 +50,9 @@ public class LevelOne extends BaseLevel {
         root = new Group();
         Canvas c = new Canvas(SCREEN_WIDTH, SCREEN_HEIGHT);
         root.getChildren().add(c);
-        this.game.setScene(new Scene(root));
+        setScene(root);
 
-        GraphicsContext gc = c.getGraphicsContext2D();
-        gc.setFill(Color.RED);
-        gc.setLineWidth(2);
-        Font theFont = Font.font("Times New Roman", FontWeight.BOLD, 48);
-        gc.setFont(theFont);
-        gc.fillText("Hello, World!", 60, 50);
-        gc.strokeText("Hello, World!", 60, 50);
+        onFinish();
     }
 
     /**
@@ -68,6 +62,8 @@ public class LevelOne extends BaseLevel {
     }
 
     protected void handleFinish() {
+        StackPane nextLevel = getMainButton("Next Level", event -> this.game.updateState(State.LEVEL_TWO), 15);
+        root.getChildren().add(nextLevel);
     }
 
     /**
@@ -75,7 +71,7 @@ public class LevelOne extends BaseLevel {
      * @return The GameSave object
      */
     protected GameSave save() {
-        return null;
+        return new GameSave(scores, levelComplete);
     }
 
     /**
@@ -83,5 +79,7 @@ public class LevelOne extends BaseLevel {
      * @param baseSave The game save to load from
      */
     protected void load(GameSave save) {
+        loadScores(save.scores);
+        this.levelComplete = levelComplete;
     }
 }

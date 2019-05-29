@@ -48,10 +48,14 @@ public class LevelSelect extends BaseScene {
 
         body.getChildren().add(new ImageView(ResourceLoader.loadImage("level-select-logo.png")));
 
+        boolean prefixLevelComplete = true;
+
         for (int x = 0; x < NUM_LEVELS; x++) {
             StackPane button = getMainButton("" + (x+1), handlers[x]);
-            if (x == 0)
+            if (!prefixLevelComplete) {
                 button.setDisable(true);
+            }
+            prefixLevelComplete &= this.game.levelComplete(x);
             body.getChildren().add(button);
         }
 

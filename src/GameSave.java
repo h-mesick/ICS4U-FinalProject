@@ -30,10 +30,24 @@ public class GameSave {
     }
 
     public JsonObject toJson() {
-        return null;
+        JsonArrayBuilder jsonScores = Json.createArrayBuilder();
+        for (int s : scores) {
+            jsonScores.add(s);
+        }
+
+        return Json.createObjectBuilder()
+                   .add("levelComplete", levelComplete)
+                   .add("scores", jsonScores.build())
+                   .build();
     }
 
     public static GameSave fromJson(JsonObject data) {
-        return null;
+        boolean levelComplete = data.getBoolean("levelComplete", false);
+        JsonArray jsonScores = data.getJsonArray("scores");
+        int[] scores = new int[jsonScores.size()];
+        for (int i = 0; i < jsonScores.size(); i++) {
+            scores[i] = jsonScores.getInt(i);
+        }
+        return new GameSave(scores, levelComplete);
     }
 }

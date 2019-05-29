@@ -60,6 +60,11 @@ public class Game {
         return new ArrayList<User>(users.values());
     }
 
+    public boolean levelComplete(int index) {
+        return this.currentUser != null && this.currentUser.levelSaves[index] != null &&
+               this.currentUser.levelSaves[index].levelComplete;
+    }
+
     public void setScene(Scene scene) {
         this.stage.setScene(scene);
     }

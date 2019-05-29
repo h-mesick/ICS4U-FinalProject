@@ -35,6 +35,7 @@ public abstract class BaseLevel extends BaseScene {
     private Group baseRoot = new Group();
     protected AnimationTimer mainTimer;
     protected Node currentOverlay;
+    protected VBox escapeOverlay;
     protected Set<KeyCode> pressedKeys = new HashSet();
     protected Group root;
 
@@ -65,6 +66,8 @@ public abstract class BaseLevel extends BaseScene {
                 prev.set(now);
             }
         };
+
+        escapeOverlay = initEscapeOverlay();
 
         scores = new int[getScoreCount()];
         scoresText = new Text[getScoreCount()];
@@ -185,7 +188,6 @@ public abstract class BaseLevel extends BaseScene {
         return overlayBase;
     }
 
-
     protected void setOverlay(Node overlay) {
         if (currentOverlay != null) {
             System.err.println("Warning: overlay is already set.");
@@ -233,7 +235,20 @@ public abstract class BaseLevel extends BaseScene {
         handleFinish();
     }
 
-    protected void handleKeyPressed(KeyCode key) {}
+    protected void handleKeyPressed(KeyCode key) {
+        switch(key) {
+            case ESCAPE: {
+                if (currentOverlay != null) {
+                    if (currentOverlay.equals(escapeOverlay)) {
+                        removeOverlay();
+                    }
+                } else {
+                    setOverlay(escapeOverlay);
+                }
+                break;
+            }
+        }
+    }
     protected void handleKeyReleased(KeyCode key) {}
 
     protected abstract void update();

@@ -36,7 +36,6 @@ public abstract class BasePlatformer extends BaseLevel {
     /** Instance variables */
     protected Sprite player;
     protected ProgressBar progress;
-    protected VBox escapeOverlay;
     protected Level level;
     protected double referencePoint;
     protected ArrayList<Sprite> removedNodes = new ArrayList();
@@ -88,8 +87,6 @@ public abstract class BasePlatformer extends BaseLevel {
         pause.setMinHeight(20);
         pause.setOnAction(event -> handleKeyPressed(KeyCode.ESCAPE));
         root.getChildren().add(pause);
-
-        escapeOverlay = initEscapeOverlay();
 
         setScene(root);
         start();
@@ -213,25 +210,6 @@ public abstract class BasePlatformer extends BaseLevel {
     }
 
     /**
-     * Handler when a key is pressed
-     * @param key The key pressed
-     */
-    protected void handleKeyPressed(KeyCode key) {
-        switch(key) {
-            case ESCAPE: {
-                if (currentOverlay != null) {
-                    if (currentOverlay.equals(escapeOverlay)) {
-                        removeOverlay();
-                    }
-                } else {
-                    setOverlay(escapeOverlay);
-                }
-                break;
-            }
-        }
-    }
-
-    /**
      * Loads a game save
      * @param baseSave The game save to load from
      */
@@ -257,6 +235,7 @@ public abstract class BasePlatformer extends BaseLevel {
         }
 
         loadScores(save.scores);
+        this.levelComplete = save.levelComplete;
     }
 
     /**
