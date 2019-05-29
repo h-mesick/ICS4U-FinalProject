@@ -47,6 +47,7 @@ public class User implements Comparable {
             writer.close();
             stream.close();
         } catch (Exception e) {
+            System.err.println("Warning: Failed to save data file.");
             e.printStackTrace();
         }
     }
@@ -73,7 +74,7 @@ public class User implements Comparable {
         } catch (FileNotFoundException e) {
             System.err.println(username + " has no save file, creating it....");
         } catch (Exception e) {
-            System.err.println("Warning: GameSave has been tampered with! Not using it...");
+            System.err.println("Warning: Data file has been tampered with! Not using it.");
         }
         return new User(username, 0, new GameSave[3]);
     }
