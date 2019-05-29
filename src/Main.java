@@ -15,9 +15,10 @@ import javafx.stage.*;
 /**
  * @author Evan Zhang
  * Revision history:
- * - May 13, 2019: Created ~Evan Zhang
- * - May 14, 2019: Updated ~Evan Zhang
- * - May 27, 2019: Commented ~Max Li
+ *  - May 13, 2019: Created ~Evan Zhang
+ *  - May 14, 2019: Updated ~Evan Zhang
+ *  - May 27, 2019: Commented ~Max Li
+ *  - May 28, 2019: Updated ~Evan Zhang
  * @version 1
  */
 public class Main extends Application {

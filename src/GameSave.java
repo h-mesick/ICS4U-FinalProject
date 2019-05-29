@@ -7,6 +7,7 @@ import javafx.geometry.*;
  * @author Evan Zhang
  * Revision history:
  *  - May 21, 2019: Created ~Evan Zhang
+ *  - May 28, 2019: Updated ~Evan Zhang
  */
 public class GameSave {
     public static JsonObject pointToJson(Point2D p) {

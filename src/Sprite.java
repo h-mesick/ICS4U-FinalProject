@@ -19,6 +19,7 @@ import javafx.stage.*;
  *  - May 15, 2019: Updated ~Evan Zhang
  *  - May 17, 2019: Updated ~Evan Zhang
  *  - May 27, 2019: Commented ~Evan Zhang
+ *  - May 28, 2019: Updated ~Evan Zhang
  */
 public class Sprite extends ImageView {
     /** Instance variables */

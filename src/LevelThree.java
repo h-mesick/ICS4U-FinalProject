@@ -22,6 +22,7 @@ import javafx.stage.*;
  *  - May 25, 2019: Updated ~Evan Zhang
  *  - May 26, 2019: Updated ~Evan Zhang
  *  - May 27, 2019: Commented ~Evan Zhang
+ *  - May 28, 2019: Updated ~Evan Zhang
  */
 public class LevelThree extends BasePlatformer {
     /** Instance variables */

@@ -20,6 +20,7 @@ import javafx.stage.*;
  * Revision history:
  *  - May 21, 2019: Created ~Evan Zhang
  *  - May 27, 2019: Commented ~Evan Zhang
+ *  - May 28, 2019: Updated ~Evan Zhang
  */
 public class PlatformerGameSave extends GameSave {
     /** Instance variables */
