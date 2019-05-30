@@ -45,7 +45,7 @@ public class Highscores extends BaseScene {
         rankings.setVgap(10);
         rankings.setHgap(10);
         for (int x = 0; x < 10; x++) {
-            String username = "Empty", score = "0";
+            String username = "-----", score = "--";
             try {
                 User user = users.get(x);
                 username = user.username;
