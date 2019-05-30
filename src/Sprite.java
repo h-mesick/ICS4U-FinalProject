@@ -86,7 +86,7 @@ public class Sprite extends ImageView {
      * Make the sprite jump
      */
     public void jump() {
-        yVel -= 8;
+        yVel -= 6.6;
     }
 
     /**
