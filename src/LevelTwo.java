@@ -93,7 +93,7 @@ public class LevelTwo extends BasePlatformer {
      */
     public void initScene() {
         scoreCountOverlay = new HBox(5);
-        scoreCountOverlay.setAlignment(Pos.CENTER);
+        scoreCountOverlay.setAlignment(Pos.CENTER_LEFT);
         scoreCountOverlay.setPadding(new Insets(10));
 
         ImageView coinImage = new ImageView(ResourceLoader.loadImage("coin.png"));

@@ -93,7 +93,7 @@ public class LevelThree extends BasePlatformer {
      */
     public void initScene() {
         HBox coinCountOverlay = new HBox(5);
-        coinCountOverlay.setAlignment(Pos.CENTER);
+        coinCountOverlay.setAlignment(Pos.CENTER_LEFT);
         coinCountOverlay.setPadding(new Insets(10, 0, 0, 10));
 
         ImageView coinImage = new ImageView(ResourceLoader.loadImage("coin.png"));
@@ -104,7 +104,7 @@ public class LevelThree extends BasePlatformer {
 
 
         HBox pointCountOverlay = new HBox(5);
-        pointCountOverlay.setAlignment(Pos.CENTER);
+        pointCountOverlay.setAlignment(Pos.CENTER_LEFT);
         pointCountOverlay.setPadding(new Insets(0, 0, 0, 10));
 
         ImageView pointImage = new ImageView(ResourceLoader.loadImage("star.png"));
