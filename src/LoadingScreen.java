@@ -53,17 +53,20 @@ public class LoadingScreen extends BaseScene {
         KeyFrame fadein1 = new KeyFrame(Duration.seconds(2), new KeyValue(imageView.opacityProperty(), 1.0));
         KeyFrame fadeout1 = new KeyFrame(Duration.seconds(3), new KeyValue(imageView.opacityProperty(), 0.0));
         KeyFrame frame2 = new KeyFrame(Duration.seconds(3), new KeyValue(imageView.imageProperty(),
-                ResourceLoader.loadImage("game-logo.png")));
+                                       ResourceLoader.loadImage("game-logo.png")));
         KeyFrame fadein2 = new KeyFrame(Duration.seconds(5), new KeyValue(imageView.opacityProperty(), 1.0));
         KeyFrame fadeout2 = new KeyFrame(Duration.seconds(6), new KeyValue(imageView.opacityProperty(), 0.0));
         Timeline timeline = new Timeline(frame1, fadein1, fadeout1, frame2, fadein2, fadeout2);
 
 
-        for (int i = 1; i <= 6; i++)
-            timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(5 + i),
+        for (int i = 1; i <= 6; i++) {
+            timeline.getKeyFrames().add(
+                    new KeyFrame(Duration.seconds(5 + i),
                     new KeyValue(imageView.imageProperty(),
-                            ResourceLoader.loadImage("loadingscreen/house" + i + ".jpg")),
-                    new KeyValue(imageView.opacityProperty(), 1.0)));
+                                 ResourceLoader.loadImage("loadingscreen/house" + i + ".jpg")),
+                    new KeyValue(imageView.opacityProperty(), 1.0))
+            );
+        }
 
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.setAutoReverse(true);

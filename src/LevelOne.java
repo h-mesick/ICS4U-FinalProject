@@ -3,6 +3,7 @@ import javafx.event.*;
 import javafx.scene.*;
 import javafx.scene.canvas.*;
 import javafx.scene.control.*;
+import javafx.scene.image.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.*;
 import javafx.scene.shape.*;
@@ -27,6 +28,7 @@ public class LevelOne extends BaseLevel {
      */
     public LevelOne(Game game) {
         super(game);
+        root = new Group();
     }
 
     /**
@@ -41,30 +43,34 @@ public class LevelOne extends BaseLevel {
      * @return The score count
      */
     protected int getScoreCount() {
-        return 0;
+        return 1;
     }
 
     /**
      * Initializes the scene
      */
     public void initScene() {
-        root = new Group();
-        Canvas c = new Canvas(SCREEN_WIDTH, SCREEN_HEIGHT);
-        root.getChildren().add(c);
+        ImageView background = new ImageView(ResourceLoader.loadImage("background.png"));
+        background.setFitWidth(Constants.SCREEN_WIDTH);
+        background.setFitHeight(Constants.SCREEN_HEIGHT);
+        root.getChildren().add(background);
         setScene(root);
-
-        onFinish();
+        start();
     }
 
     /**
      * Update method called every game tick
      */
     protected void update() {
+        if (Math.random() > 0.99) {
+            onFinish();
+        }
     }
 
     protected void handleFinish() {
-        StackPane nextLevel = getMainButton("Next Level", event -> this.game.updateState(State.LEVEL_TWO), 15);
-        root.getChildren().add(nextLevel);
+        StackPane nextLevel = initBasicOverlay(getMainButton("Proceed to the next level",
+                                                             event -> this.game.updateState(State.LEVEL_TWO), 15));
+        setOverlay(nextLevel);
     }
 
     /**

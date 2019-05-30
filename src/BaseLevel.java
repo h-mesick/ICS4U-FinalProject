@@ -234,6 +234,7 @@ public abstract class BaseLevel extends BaseScene {
     protected void onFinish() {
         this.levelComplete = true;
         handleFinish();
+        stop();
     }
 
     protected void handleKeyPressed(KeyCode key) {
