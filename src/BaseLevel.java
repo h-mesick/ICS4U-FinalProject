@@ -29,6 +29,7 @@ import javafx.stage.*;
  *  - May 26, 2019: Updated ~Evan Zhang
  *  - May 27, 2019: Updated ~Evan Zhang
  *  - May 28, 2019: Updated ~Evan Zhang
+ *  - May 29, 2019: Updated ~Evan Zhang
  */
 public abstract class BaseLevel extends BaseScene {
     /** Instance variables */

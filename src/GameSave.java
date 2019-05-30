@@ -8,6 +8,7 @@ import javafx.geometry.*;
  * Revision history:
  *  - May 21, 2019: Created ~Evan Zhang
  *  - May 28, 2019: Updated ~Evan Zhang
+ *  - May 29, 2019: Updated ~Evan Zhang
  */
 public class GameSave {
     public int scores[];

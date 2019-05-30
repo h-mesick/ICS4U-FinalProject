@@ -27,7 +27,8 @@ import javafx.stage.*;
  *  - May 26, 2019: Updated ~Evan Zhang
  *  - May 27, 2019: Commented ~Evan Zhang
  *  - May 28, 2019: Updated ~Evan Zhang
- */
+ *  - May 29, 2019: Updated ~Evan Zhang
+*/
 public class LevelTwo extends BasePlatformer {
     /** Instance variables */
     private HBox scoreCountOverlay;
