@@ -126,7 +126,8 @@ public abstract class BasePlatformer extends BaseLevel {
         }
         player.fall(ground, ceiling);
 
-        if (player.onGround(ground) && ceiling < 1e-10 && yy < player.getHeight() * 2) {
+        if (player.onGround(ground) &&
+                this.level.isEndPlatform(player.getCenterX(), player.getCenterY() + Constants.PLATFORM_BLOCK_HEIGHT)) {
             onFinish();
         }
     }

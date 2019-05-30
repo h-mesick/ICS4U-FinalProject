@@ -52,6 +52,8 @@ public class Level {
                     arr[y][x] = 0;
                 } else if (line.charAt(x) == '#') {
                     arr[y][x] = 1;
+                } else if (line.charAt(x) == 'f') {
+                    arr[y][x] = 2;
                 } else {
                     arr[y][x] = --specialCnt;
                 }
@@ -75,9 +77,11 @@ public class Level {
      */
     private Sprite getBlock(double x, double y) {
         boolean topBlocked = y - Constants.PLATFORM_BLOCK_HEIGHT >= 0 &&
-                             isBlocked(x, y - Constants.PLATFORM_BLOCK_HEIGHT);
+                             isNormalPlatform(x, y - Constants.PLATFORM_BLOCK_HEIGHT);
         String image = null;
-        if (isBlocked(x, y)) {
+        if (isEndPlatform(x, y)) {
+            image = "platform-end.png";
+        } else if (isNormalPlatform(x, y)) {
             image = topBlocked ? "platform.png" : "platform-top.png";
         } else if (isSpecial(x, y)) {
             image = "coin.png";
@@ -200,6 +204,14 @@ public class Level {
         return arr[getBlockY(y)][getBlockX(x)];
     }
 
+    public boolean isEndPlatform(double x, double y) {
+        return getPosition(x, y) == 2;
+    }
+
+    public boolean isNormalPlatform(double x, double y) {
+        return getPosition(x, y) == 1;
+    }
+
     /**
      * Checks whether there is a block at the specified x and y coordinates
      * @param  x The x coordinate
@@ -207,7 +219,7 @@ public class Level {
      * @return   Whether there is a block
      */
     public boolean isBlocked(double x, double y) {
-        return getPosition(x, y) == 1;
+        return getPosition(x, y) >= 1;
     }
 
     /**
