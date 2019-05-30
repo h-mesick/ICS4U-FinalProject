@@ -111,11 +111,25 @@ public abstract class BaseScene implements Constants {
         ImageButton button = new ImageButton();
         button.setFitWidth(50);
         button.setFitHeight(50);
-        button.setImages(ResourceLoader.loadImage(baseFilename + ".png"),
-                         ResourceLoader.loadImage(baseFilename + "-hover.png"),
-                         ResourceLoader.loadImage(baseFilename + "-selected.png"));
+        Image image = ResourceLoader.loadImage("buttonimages/" + baseFilename + ".png");
+        button.setImages(overlayImage(ResourceLoader.loadImage("image-button.png"), image),
+                         overlayImage(ResourceLoader.loadImage("image-button-hover.png"), image),
+                         overlayImage(ResourceLoader.loadImage("image-button-selected.png"), image));
         button.setOnAction(onClick);
         return button;
+    }
+
+    public Image overlayImage(Image bottom, Image top) {
+        WritableImage ret = new WritableImage(bottom.getPixelReader(), (int)bottom.getWidth(), (int)top.getHeight());
+        PixelReader topPixelReader = top.getPixelReader();
+        for (int i = 0; i < top.getWidth(); i++) {
+            for (int j = 0; j < top.getHeight(); j++) {
+                if (topPixelReader.getColor(i, j).getOpacity() > 1 - 1e-7) {
+                    ret.getPixelWriter().setColor(i, j, topPixelReader.getColor(i, j));
+                }
+            }
+        }
+        return (Image)ret;
     }
 
     public void onExit() {}

@@ -62,7 +62,7 @@ public class EnterUsername extends BaseScene {
             return change;
         }));
 
-        ImageButton enterButton = getMainImageButton("forward-button", event -> {
+        ImageButton enterButton = getMainImageButton("forward", event -> {
             String username = usernameField.getText();
             if (username.length() == 0) {
                 return;
