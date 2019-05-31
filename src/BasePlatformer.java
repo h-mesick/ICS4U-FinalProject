@@ -98,8 +98,8 @@ public abstract class BasePlatformer extends BaseLevel {
      */
     private void updatePlayer() {
         double yy = getRealY(player.getTranslateY());
-        BoundingBox box = new BoundingBox(player.getTranslateX(), yy,
-                                          player.getWidth(), player.getHeight());
+        BoundingBox box = new BoundingBox(player.getTranslateX() + Constants.EPS, yy + Constants.EPS,
+                                          player.getWidth() - 2 * Constants.EPS, player.getHeight() - 2 * Constants.EPS);
 
         double ground = getScreenY(this.level.getLowerBound(box) - player.getHeight());
         double ceiling = getScreenY(this.level.getUpperBound(box));
@@ -118,6 +118,7 @@ public abstract class BasePlatformer extends BaseLevel {
             player.setImage(ResourceLoader.loadImage("player/still.png"));
         }
 
+        player.fall(ground, ceiling);
         if (moveLeft) {
             player.setScaleX(-1);
             player.moveLeft(this.level.getLeftBound(box));
@@ -126,10 +127,10 @@ public abstract class BasePlatformer extends BaseLevel {
             player.setScaleX(1);
             player.moveRight(this.level.getRightBound(box) - player.getWidth());
         }
-        player.fall(ground, ceiling);
 
         if (player.onGround(ground) &&
-                this.level.isEndPlatform(player.getCenterX(), player.getCenterY() + Constants.PLATFORM_BLOCK_HEIGHT)) {
+                this.level.isEndPlatform(player.getCenterX(), getRealY(player.getCenterY() +
+                                                                       Constants.PLATFORM_BLOCK_HEIGHT))) {
             onFinish();
         }
     }
@@ -157,7 +158,7 @@ public abstract class BasePlatformer extends BaseLevel {
         } else if (posY >= screenY * 2 / 3) {
             mod += calcSlide(screenY - posY, screenY / 3);
         }
-        if (Math.abs(mod) > 1e-7 &&
+        if (Math.abs(mod) > Constants.EPS &&
                 0 <= referencePoint + mod && referencePoint + mod + screenY < this.level.screenLength()) {
             referencePoint += mod;
             for (Sprite obj : this.level.getAllSprites()) {

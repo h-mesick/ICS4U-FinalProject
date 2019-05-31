@@ -111,7 +111,7 @@ public abstract class Util {
         PixelReader topPixelReader = top.getPixelReader();
         for (int i = 0; i < top.getWidth(); i++) {
             for (int j = 0; j < top.getHeight(); j++) {
-                if (topPixelReader.getColor(i, j).getOpacity() > 1 - 1e-7) {
+                if (topPixelReader.getColor(i, j).getOpacity() > 1 - Constants.EPS) {
                     ret.getPixelWriter().setColor(i, j, topPixelReader.getColor(i, j));
                 }
             }

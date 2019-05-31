@@ -19,4 +19,6 @@ public interface Constants {
 
     static final String DATA_DIRECTORY = "saves/";
     static final String DATA_EXTENSION = ".ctgd";
+
+    static final double EPS = 1e-7;
 }
