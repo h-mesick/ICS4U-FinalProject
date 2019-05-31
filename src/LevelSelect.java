@@ -51,7 +51,7 @@ public class LevelSelect extends BaseScene {
 
         boolean prefixLevelComplete = true;
 
-        for (int x = 0; x < NUM_LEVELS; x++) {
+        for (int x = 0; x < Constants.NUM_LEVELS; x++) {
             StackPane button = Util.getMainButton("" + (x+1), handlers[x]);
             if (!prefixLevelComplete) {
                 button.setDisable(true);

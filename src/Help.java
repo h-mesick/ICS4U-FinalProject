@@ -34,8 +34,8 @@ public class Help extends BaseScene {
         VBox root = new VBox();
 
         Button btn = new Button("Go Back");
-        btn.setMinWidth(SCREEN_WIDTH);
-        btn.setMinHeight(SCREEN_HEIGHT);
+        btn.setMinWidth(Constants.SCREEN_WIDTH);
+        btn.setMinHeight(Constants.SCREEN_HEIGHT);
         btn.setOnAction(event -> {
             if (this.game.hasNextState()) {
                 this.game.nextState();

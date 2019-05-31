@@ -23,7 +23,7 @@ import javafx.util.*;
  *  - May 29, 2019: Updated ~Evan Zhang
  *  - May 30, 2019: Updated ~Evan Zhang
  */
-public abstract class BaseScene implements Constants {
+public abstract class BaseScene {
     protected Game game;
 
     public BaseScene() {}
