@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.*;
 
 import javax.json.*;
 
@@ -45,8 +46,7 @@ public class LevelTwo extends BasePlatformer {
     public LevelTwo(Game game) {
         super(game);
         try (JsonReader reader = Json.createReader(ResourceLoader.loadLevel(getLevelDataFile()))) {
-            JsonObject obj = reader.readObject();
-            questions = obj.getJsonArray("questions");
+            questions = reader.readArray();
         } catch (Exception e) {
             throw e;
         }
@@ -93,13 +93,22 @@ public class LevelTwo extends BasePlatformer {
      */
     protected Question getQuestion(int specialType) {
         JsonObject curObj = questions.getJsonObject(questions.size() - specialType);
-        String question = curObj.getString("question");
+        String question = curObj.getString("question") + "\n";
+        ArrayList<JsonObject> choices = new ArrayList(Arrays.asList(curObj.getJsonArray("choices")
+                                                                          .toArray(new JsonObject[0])));
+        Collections.shuffle(choices);
+
         String[] answers = {
             "A", "B", "C", "D"
         };
+
+        for (int i = 0; i < 4; i++) {
+            question += answers[i] + ". " + choices.get(i).getString("choice") + "\n";
+        }
+        
         EventHandler[] handlers = new EventHandler[4];
         for (int i = 0; i < 4; i++) {
-            Integer delta = curObj.getJsonArray("choices").getInt(i);
+            Integer delta = choices.get(i).getInt("score");
             handlers[i] = (event -> {
                 incrementScore(0, (int)delta);
                 removeOverlay();
@@ -142,7 +151,7 @@ public class LevelTwo extends BasePlatformer {
     protected void handleFinish() {
         Text finishText = new Text("Congratulations! You completed level two!");
         finishText.setFont(new Font("Verdana", 25));
-        finishText.setFill(Color.RED);
+        finishText.setFill(Color.WHITE);
         finishText.setTextAlignment(TextAlignment.CENTER);
         finishText.setWrappingWidth(Constants.SCREEN_WIDTH / 3 * 2);
 
