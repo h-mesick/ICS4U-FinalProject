@@ -76,19 +76,23 @@ public class Level {
      * @return   The specified block
      */
     private Sprite getBlock(double x, double y) {
-        boolean topBlocked = y - Constants.PLATFORM_BLOCK_HEIGHT >= 0 &&
-                             isNormalPlatform(x, y - Constants.PLATFORM_BLOCK_HEIGHT);
+        boolean topNormalPlatform = y - Constants.PLATFORM_BLOCK_HEIGHT >= 0 &&
+                                    isNormalPlatform(x, y - Constants.PLATFORM_BLOCK_HEIGHT);
+        boolean bottomEndPlatform = y + Constants.PLATFORM_BLOCK_HEIGHT < screenLength() &&
+                                    isEndPlatform(x, y + Constants.PLATFORM_BLOCK_HEIGHT);
         String image = null;
         if (isEndPlatform(x, y)) {
             image = "platform-end.png";
         } else if (isNormalPlatform(x, y)) {
-            image = topBlocked ? "platform.png" : "platform-top.png";
+            image = topNormalPlatform ? "platform.png" : "platform-top.png";
         } else if (isSpecial(x, y)) {
             image = "coin.png";
         } else {
-            if (topBlocked) {
+            if (topNormalPlatform) {
                 int num = (int)(Math.random() * 3) + 1;
                 image = "platform-overhang-" + num + ".png";
+            } else if (bottomEndPlatform) {
+                image = "platform-door.png";
             }
         }
         if (image != null) {

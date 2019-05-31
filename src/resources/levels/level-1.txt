@@ -1,11 +1,16 @@
 BACKGROUND: IMAGE: background.png
 TEXT: Where am I?
+FADEIN:
 PAUSE:
 FADEOUT:
 TEXT: Hello?
 FADEIN:
 PAUSE:
+TEXT: Oh, I'm at the cafe working on a school project. I should probably go back home and check on things...
+PAUSE:
+FADEOUT:
+TEXT: WHAT!? WHAT HAPPENED TO MY HOUSE!?
 BACKGROUND: COLOR: blue
-TEXT: How did I get here? What?!
+FADEIN:
 PAUSE:
 CHOICE: What do I do? : 4 : A: B: C: D: 1: 2: 3: 4
