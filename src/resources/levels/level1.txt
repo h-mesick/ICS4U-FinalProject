@@ -1,0 +1,7 @@
+BACKGROUND: background.png
+TEXT: Where am I?
+PAUSE:
+FADEOUT:
+TEXT: Hello?
+FADEIN:
+PAUSE:
