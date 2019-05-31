@@ -1,3 +1,8 @@
+import java.io.*;
+import java.util.*;
+
+import javax.json.*;
+
 import javafx.animation.*;
 import javafx.event.*;
 import javafx.geometry.*;
@@ -29,6 +34,7 @@ import javafx.stage.*;
 public class LevelThree extends BasePlatformer {
     /** Instance variables */
     private VBox scoreCountOverlay;
+    private JsonArray questions;
 
     /**
      * Constructor
@@ -36,6 +42,11 @@ public class LevelThree extends BasePlatformer {
      */
     public LevelThree(Game game) {
         super(game);
+        try (JsonReader reader = Json.createReader(ResourceLoader.loadLevel(getLevelDataFile()))) {
+            questions = reader.readArray();
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     /**
@@ -52,41 +63,6 @@ public class LevelThree extends BasePlatformer {
      */
     protected int getScoreCount() {
         return 2;
-    }
-
-    /**
-     * Gets the question specified by specialType
-     * @param  specialType The question number
-     * @return             The question
-     */
-    protected Question getQuestion(int specialType) {
-        String question = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa " + specialType;
-        String[] answers = {
-            "a", "b", "c", "dasdasdsadasdasdsadadadsd"
-        };
-        EventHandler[] handlers = {
-            event -> {
-                incrementScore(0, -1);
-                incrementScore(1, 2);
-                removeOverlay();
-            },
-            event -> {
-                incrementScore(0, -3);
-                incrementScore(1, 6);
-                removeOverlay();
-            },
-            event -> {
-                incrementScore(0, -10);
-                incrementScore(1, 20);
-                removeOverlay();
-            },
-            event -> {
-                incrementScore(0, -1);
-                incrementScore(1, 2);
-                removeOverlay();
-            },
-        };
-        return new Question(question, answers, handlers);
     }
 
     /**
@@ -122,11 +98,39 @@ public class LevelThree extends BasePlatformer {
     }
 
     /**
+     * Gets the question specified by specialType
+     * @param  specialType The question number
+     * @return             The question
+     */
+    protected Question getQuestion(int specialType) {
+        JsonObject curObj = questions.getJsonObject(specialType - 1);
+        String question = curObj.getString("question");
+        int cost = curObj.getInt("cost");
+        ArrayList<JsonObject> choices = new ArrayList(Arrays.asList(curObj.getJsonArray("choices")
+                                                                          .toArray(new JsonObject[0])));
+        String[] answers = new String[choices.size()];
+        for (int i = 0; i < choices.size(); i++) {
+            answers[i] = choices.get(i).getString("choice");
+        }
+
+        EventHandler[] handlers = new EventHandler[choices.size()];
+        for (int i = 0; i < choices.size(); i++) {
+            Integer scoreDelta = choices.get(i).getInt("score");
+            Integer costDelta = answers[i].equals("Yes") ? cost : 0;
+            handlers[i] = (event -> {
+                incrementScore(0, -(int)costDelta);
+                incrementScore(1, (int)scoreDelta);
+                removeOverlay();
+            });
+        }
+        return new Question(question, answers, handlers);
+    }
+
+    /**
      * Handles when the player touches a special block
      * @param specialType The special block's number
      */
     protected void handleSpecial(int specialType) {
-        //TODO
         Question question = getQuestion(specialType);
         setOverlay(initBasicOverlay(question.getFormattedQuestion(), question.getFormattedChoices()));
     }
