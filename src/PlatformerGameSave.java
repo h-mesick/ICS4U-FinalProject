@@ -45,21 +45,25 @@ public class PlatformerGameSave extends GameSave {
         this.scores = scores;
     }
 
+    public static JsonObject pointToJson(Point2D p) {
+        return Json.createObjectBuilder()
+                   .add("x", p.getX())
+                   .add("y", p.getY())
+                   .build();
+    }
+
+    public static Point2D jsonToPoint(JsonObject p) {
+        return new Point2D(p.getJsonNumber("x").doubleValue(), p.getJsonNumber("y").doubleValue());
+    }
+
     public JsonObject toJson() {
         JsonArrayBuilder jsonNodes = Json.createArrayBuilder();
         for (Point2D p : removedNodes) {
             jsonNodes = jsonNodes.add(pointToJson(p));
         }
-        JsonArrayBuilder jsonScores = Json.createArrayBuilder();
-        for (int s : scores) {
-            jsonScores.add(s);
-        }
-
-        return Json.createObjectBuilder()
-                   .add("levelComplete", levelComplete)
+        return baseJsonObjectBuilder()
                    .add("referencePoint", referencePoint)
                    .add("player", pointToJson(player))
-                   .add("scores", jsonScores.build())
                    .add("removedNodes", jsonNodes.build())
                    .build();
     }

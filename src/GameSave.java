@@ -10,7 +10,7 @@ import javafx.geometry.*;
  *  - May 28, 2019: Updated ~Evan Zhang
  *  - May 29, 2019: Updated ~Evan Zhang
  */
-public class GameSave {
+public abstract class GameSave {
     public int scores[];
     public boolean levelComplete;
 
@@ -19,18 +19,7 @@ public class GameSave {
         this.levelComplete = levelComplete;
     }
 
-    public static JsonObject pointToJson(Point2D p) {
-        return Json.createObjectBuilder()
-                   .add("x", p.getX())
-                   .add("y", p.getY())
-                   .build();
-    }
-
-    public static Point2D jsonToPoint(JsonObject p) {
-        return new Point2D(p.getJsonNumber("x").doubleValue(), p.getJsonNumber("y").doubleValue());
-    }
-
-    public JsonObject toJson() {
+    protected JsonObjectBuilder baseJsonObjectBuilder() {
         JsonArrayBuilder jsonScores = Json.createArrayBuilder();
         for (int s : scores) {
             jsonScores.add(s);
@@ -38,17 +27,11 @@ public class GameSave {
 
         return Json.createObjectBuilder()
                    .add("levelComplete", levelComplete)
-                   .add("scores", jsonScores.build())
-                   .build();
+                   .add("scores", jsonScores.build());
     }
 
-    public static GameSave fromJson(JsonObject data) {
-        boolean levelComplete = data.getBoolean("levelComplete", false);
-        JsonArray jsonScores = data.getJsonArray("scores");
-        int[] scores = new int[jsonScores.size()];
-        for (int i = 0; i < jsonScores.size(); i++) {
-            scores[i] = jsonScores.getInt(i);
-        }
-        return new GameSave(scores, levelComplete);
+    public abstract JsonObject toJson();
+    public static GameSave fromJson() {
+        return null;
     }
 }
