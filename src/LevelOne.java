@@ -27,6 +27,7 @@ import javafx.util.*;
  *  - May 22, 2019: Updated ~Evan Zhang
  *  - May 27, 2019: Commented ~Evan Zhang
  *  - May 29, 2019: Updated ~Evan Zhang
+ *  - May 30, 2019: Updated ~Evan Zhang
  */
 public class LevelOne extends BaseLevel {
     final int TEXT_OVERLAY_WIDTH = Constants.SCREEN_WIDTH - 150;

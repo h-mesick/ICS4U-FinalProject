@@ -8,6 +8,7 @@ import javax.json.*;
  * @author Evan Zhang
  * Revision history:
  *  - May 28, 2019: Created ~Evan Zhang
+ *  - May 30, 2019: Updated ~Evan Zhang
  */
 public class User implements Comparable {
     public String username;

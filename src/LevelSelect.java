@@ -23,6 +23,7 @@ import javafx.stage.*;
  *  - May 23, 2019: Finished ~Evan Zhang
  *  - May 27, 2019: Commented ~Evan Zhang
  *  - May 29, 2019: Updated ~Evan Zhang
+ *  - May 30, 2019: Updated ~Evan Zhang
  */
 public class LevelSelect extends BaseScene {
     /**

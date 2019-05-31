@@ -20,6 +20,7 @@ import javafx.stage.*;
  * Revision history:
  *  - May 28, 2019: Created ~Evan Zhang
  *  - May 29, 2019: Updated ~Evan Zhang
+ *  - May 30, 2019: Updated ~Evan Zhang
  */
 public class Highscores extends BaseScene {
     /**

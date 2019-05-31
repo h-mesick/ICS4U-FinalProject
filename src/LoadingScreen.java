@@ -21,6 +21,7 @@ import javafx.util.*;
  *  - May 22, 2019: Finishing touches ~Evan Zhang
  *  - May 27, 2019: Commented ~Max Li
  *  - May 28, 2019: Updated ~Evan Zhang
+ *  - May 30, 2019: Updated ~Evan Zhang
  * @version 1
  */
 public class LoadingScreen extends BaseScene {
