@@ -243,11 +243,15 @@ public abstract class BaseLevel extends BaseScene {
         stop();
     }
 
+    protected boolean overlayVisible() {
+        return currentOverlay != null;
+    }
+
     protected void handleKeyPressed(KeyCode key) {
         switch(key) {
             case ESCAPE: {
-                if (currentOverlay != null) {
-                    if (currentOverlay.equals(escapeOverlay)) {
+                if (overlayVisible()) {
+                    if (currentOverlay != null && currentOverlay.equals(escapeOverlay)) {
                         removeOverlay();
                     }
                 } else {

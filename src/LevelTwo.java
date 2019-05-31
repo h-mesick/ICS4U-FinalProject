@@ -105,7 +105,7 @@ public class LevelTwo extends BasePlatformer {
         }
 
         EventHandler[] handlers = new EventHandler[choices.size()];
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < choices.size(); i++) {
             Integer delta = choices.get(i).getInt("score");
             handlers[i] = (event -> {
                 incrementScore(0, (int)delta);

@@ -101,8 +101,6 @@ public class LevelOne extends BaseLevel {
         transitionOverlay.setOpacity(0);
         setScene(root);
         start();
-
-        nextDialog();
     }
 
     /**
@@ -119,6 +117,15 @@ public class LevelOne extends BaseLevel {
             nextLevel.setOpacity(0);
             Util.fade(nextLevel, 1, 0, 1);
         });
+    }
+
+    protected void onFirstEnter() {
+        super.onFirstEnter();
+        nextDialog();
+    }
+
+    protected boolean overlayVisible() {
+        return super.overlayVisible() || transitionOverlay.getOpacity() > 0;
     }
 
     protected void handleKeyPressed(KeyCode key) {
@@ -211,13 +218,14 @@ public class LevelOne extends BaseLevel {
 
     private void nextDialog(boolean force) {
         if (!force) {
-            if (currentOverlay != null || transitionOverlay.getOpacity() > 0) {
+            if (overlayVisible()) {
                 return;
             }
         }
         if (dialogPosition < dialogCommands.length) {
             while(dialogPosition < dialogCommands.length && handleDialog(dialogPosition++));
         } else {
+            dialogPosition++;
             onFinish();
         }
     }
@@ -262,9 +270,11 @@ public class LevelOne extends BaseLevel {
         super.load(baseSave);
         StoryGameSave save = (StoryGameSave)baseSave;
         this.dialogPosition = 0;
-        while (this.dialogPosition < save.dialogPosition) {
+        while (this.dialogPosition < save.dialogPosition && this.dialogPosition < dialogCommands.length) {
             handleDialog(this.dialogPosition++, true);
         }
-        nextDialog(true);
+        if (this.dialogPosition == dialogCommands.length) {
+            onFinish();
+        }
     }
 }
