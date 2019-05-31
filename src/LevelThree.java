@@ -104,8 +104,12 @@ public class LevelThree extends BasePlatformer {
      */
     protected Question getQuestion(int specialType) {
         JsonObject curObj = questions.getJsonObject(specialType - 1);
+        String type = curObj.getString("type");
         String question = curObj.getString("question");
         int cost = curObj.getInt("cost");
+        if (type.equals("purchase")) {
+            question += " (Cost to purchase: " + cost + ")";
+        }
         ArrayList<JsonObject> choices = new ArrayList(Arrays.asList(curObj.getJsonArray("choices")
                                                                           .toArray(new JsonObject[0])));
         String[] answers = new String[choices.size()];
@@ -141,7 +145,7 @@ public class LevelThree extends BasePlatformer {
     protected void handleFinish() {
         Text finishText = new Text("Congratulations! You completed level three!");
         finishText.setFont(new Font("Verdana", 25));
-        finishText.setFill(Color.RED);
+        finishText.setFill(Color.WHITE);
         finishText.setTextAlignment(TextAlignment.CENTER);
         finishText.setWrappingWidth(Constants.SCREEN_WIDTH / 3 * 2);
 

@@ -65,6 +65,10 @@ public class Question {
         return this.handlers;
     }
 
+    public int size() {
+        return this.answers.length;
+    }
+
     public StackPane getFormattedQuestion() {
         String question = this.question + "\n";
         for (int i = 0; i < this.answers.length; i++) {
@@ -80,14 +84,14 @@ public class Question {
         return questionPane;
     }
 
-    public GridPane getFormattedChoices(int numCols) {
+    public GridPane getFormattedChoices(int numRows) {
         GridPane answersPane = new GridPane();
         answersPane.setAlignment(Pos.CENTER);
         answersPane.setHgap(10);
         answersPane.setVgap(10);
         for (int i = 0; i < this.answers.length; i++) {
             StackPane button = Util.getMainButton("" + (char)(i + 'A'), this.handlers[i], 15);
-            answersPane.add(button, i / numCols, i % numCols);
+            answersPane.add(button, i / numRows, i % numRows);
         }
         return answersPane;
     }
