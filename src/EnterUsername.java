@@ -63,7 +63,7 @@ public class EnterUsername extends BaseScene {
             return change;
         }));
 
-        ImageButton enterButton = getMainImageButton("forward", event -> {
+        ImageButton enterButton = Util.getMainImageButton("forward", event -> {
             String username = usernameField.getText();
             if (username.length() == 0) {
                 return;
@@ -87,7 +87,7 @@ public class EnterUsername extends BaseScene {
         text.setWrappingWidth(Constants.SCREEN_WIDTH - 400);
         body.getChildren().add(text);
 
-        Scene scene = new Scene(getMainRoot(body));
+        Scene scene = new Scene(Util.getMainRoot(body));
         scene.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 enterButton.fire();

@@ -41,11 +41,11 @@ public class MainMenu extends BaseScene {
         body.setAlignment(Pos.TOP_CENTER);
 
         body.getChildren().add(new ImageView(ResourceLoader.loadImage("main-menu-logo.png")));
-        body.getChildren().add(getMainButton("Play", event -> game.updateState(State.LEVEL_SELECT)));
-        body.getChildren().add(getMainButton("Help", event -> game.updateState(State.HELP)));
-        body.getChildren().add(getMainButton("High Scores", event -> game.updateState(State.HIGH_SCORES)));
-        body.getChildren().add(getMainButton("Quit", event -> Platform.exit()));
+        body.getChildren().add(Util.getMainButton("Play", event -> game.updateState(State.LEVEL_SELECT)));
+        body.getChildren().add(Util.getMainButton("Help", event -> game.updateState(State.HELP)));
+        body.getChildren().add(Util.getMainButton("High Scores", event -> game.updateState(State.HIGH_SCORES)));
+        body.getChildren().add(Util.getMainButton("Quit", event -> Platform.exit()));
 
-        this.game.setScene(new Scene(getMainRoot(body)));
+        this.game.setScene(new Scene(Util.getMainRoot(body)));
     }
 }

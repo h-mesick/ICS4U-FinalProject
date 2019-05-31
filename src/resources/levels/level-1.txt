@@ -1,7 +1,11 @@
-BACKGROUND: background.png
+BACKGROUND: IMAGE: background.png
 TEXT: Where am I?
 PAUSE:
 FADEOUT:
 TEXT: Hello?
 FADEIN:
 PAUSE:
+BACKGROUND: COLOR: blue
+TEXT: How did I get here? What?!
+PAUSE:
+CHOICE: What do I do? : 4 : A: B: C: D: 1: 2: 3: 4

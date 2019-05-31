@@ -167,7 +167,7 @@ public abstract class BaseLevel extends BaseScene {
         };
 
         for (int x = 0; x < buttonNames.length; x++) {
-            StackPane b = getMainButton(buttonNames[x], buttonHandlers[x]);
+            StackPane b = Util.getMainButton(buttonNames[x], buttonHandlers[x]);
             overlay.getChildren().add(b);
         }
         return overlay;

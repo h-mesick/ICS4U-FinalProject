@@ -94,20 +94,17 @@ public class LevelTwo extends BasePlatformer {
      */
     protected Question getQuestion(int specialType) {
         JsonObject curObj = questions.getJsonObject(questions.size() - specialType);
-        String question = curObj.getString("question") + "\n";
+        String question = curObj.getString("question");
         ArrayList<JsonObject> choices = new ArrayList(Arrays.asList(curObj.getJsonArray("choices")
                                                                           .toArray(new JsonObject[0])));
         Collections.shuffle(choices);
 
-        String[] answers = {
-            "A", "B", "C", "D"
-        };
-
-        for (int i = 0; i < 4; i++) {
-            question += answers[i] + ". " + choices.get(i).getString("choice") + "\n";
+        String[] answers = new String[choices.size()];
+        for (int i = 0; i < choices.size(); i++) {
+            answers[i] = choices.get(i).getString("choice");
         }
-        
-        EventHandler[] handlers = new EventHandler[4];
+
+        EventHandler[] handlers = new EventHandler[choices.size()];
         for (int i = 0; i < 4; i++) {
             Integer delta = choices.get(i).getInt("score");
             handlers[i] = (event -> {
@@ -124,26 +121,7 @@ public class LevelTwo extends BasePlatformer {
      */
     protected void handleSpecial(int specialType) {
         Question question = getQuestion(specialType);
-
-        StackPane questionPane = new StackPane();
-        questionPane.setAlignment(Pos.CENTER);
-        Text questionText = new Text(question.getQuestion());
-        questionText.setFont(new Font("Verdana", 18));
-        questionText.setFill(Color.WHITE);
-        questionText.setWrappingWidth(Constants.SCREEN_WIDTH - 250);
-        questionPane.getChildren().add(questionText);
-
-        GridPane answersPane = new GridPane();
-        answersPane.setAlignment(Pos.CENTER);
-        answersPane.setHgap(10);
-        answersPane.setVgap(10);
-
-        for (int x = 0; x < 4; x++) {
-            StackPane button = getMainButton(question.getAnswers()[x], question.getHandlers()[x], 15);
-            answersPane.add(button, x / 2, x % 2);
-        }
-
-        setOverlay(initBasicOverlay(questionPane, answersPane));
+        setOverlay(initBasicOverlay(question.getFormattedQuestion(), question.getFormattedChoices()));
     }
 
     /**
@@ -156,7 +134,7 @@ public class LevelTwo extends BasePlatformer {
         finishText.setTextAlignment(TextAlignment.CENTER);
         finishText.setWrappingWidth(Constants.SCREEN_WIDTH / 3 * 2);
 
-        StackPane nextLevel = getMainButton("Continue to the next level", event -> this.game.updateState(State.LEVEL_THREE), 15);
+        StackPane nextLevel = Util.getMainButton("Continue to the next level", event -> this.game.updateState(State.LEVEL_THREE), 15);
 
         setOverlay(initBasicOverlay(finishText, nextLevel));
     }

@@ -52,7 +52,7 @@ public class LevelSelect extends BaseScene {
         boolean prefixLevelComplete = true;
 
         for (int x = 0; x < NUM_LEVELS; x++) {
-            StackPane button = getMainButton("" + (x+1), handlers[x]);
+            StackPane button = Util.getMainButton("" + (x+1), handlers[x]);
             if (!prefixLevelComplete) {
                 button.setDisable(true);
             }
@@ -60,14 +60,14 @@ public class LevelSelect extends BaseScene {
             body.getChildren().add(button);
         }
 
-        ImageButton backButton = getMainImageButton("back", event -> game.updateState(State.MAIN_MENU));
+        ImageButton backButton = Util.getMainImageButton("back", event -> game.updateState(State.MAIN_MENU));
 
-        ImageButton helpButton = getMainImageButton("help", event -> {
+        ImageButton helpButton = Util.getMainImageButton("help", event -> {
             game.setNextState(game.getCurrentState());
             game.updateState(State.HELP);
         });
 
-        ImageButton deleteButton = getMainImageButton("trash-can", event -> {
+        ImageButton deleteButton = Util.getMainImageButton("trash-can", event -> {
             for (int i = 0; i < Constants.NUM_LEVELS; i++) {
                 game.currentUser.levelSaves[i] = null;
             }
@@ -77,6 +77,6 @@ public class LevelSelect extends BaseScene {
         // only allow game data deletion once the game is completed
         deleteButton.setVisible(this.game.levelComplete(Constants.NUM_LEVELS - 1));
 
-        this.game.setScene(new Scene(getMainRoot(body, getFooter(backButton, deleteButton, helpButton))));
+        this.game.setScene(new Scene(Util.getMainRoot(body, Util.getFooter(backButton, deleteButton, helpButton))));
     }
 }

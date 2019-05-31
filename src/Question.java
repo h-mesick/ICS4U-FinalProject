@@ -33,11 +33,8 @@ public class Question {
      * @param  handlers The handler for each answer choice
      */
     public Question(String question, String[] answers, EventHandler[] handlers) {
-        if (answers.length != 4) {
-            throw new IllegalArgumentException("Answers array must be exactly length 4.");
-        }
-        if (handlers.length != 4) {
-            throw new IllegalArgumentException("Handlers array must be exactly length 4.");
+        if (answers.length != handlers.length) {
+            throw new IllegalArgumentException("Length of answers array and length of handlers array must be the same.");
         }
         this.question = question;
         this.answers = answers;
@@ -66,5 +63,36 @@ public class Question {
      */
     public EventHandler[] getHandlers() {
         return this.handlers;
+    }
+
+    public StackPane getFormattedQuestion() {
+        String question = this.question + "\n";
+        for (int i = 0; i < this.answers.length; i++) {
+            question += (char)(i + 'A') + ". " + this.answers[i] + "\n";
+        }
+        StackPane questionPane = new StackPane();
+        questionPane.setAlignment(Pos.CENTER);
+        Text questionText = new Text(question);
+        questionText.setFont(new Font("Verdana", 18));
+        questionText.setFill(Color.WHITE);
+        questionText.setWrappingWidth(Constants.SCREEN_WIDTH - 250);
+        questionPane.getChildren().add(questionText);
+        return questionPane;
+    }
+
+    public GridPane getFormattedChoices(int numCols) {
+        GridPane answersPane = new GridPane();
+        answersPane.setAlignment(Pos.CENTER);
+        answersPane.setHgap(10);
+        answersPane.setVgap(10);
+        for (int i = 0; i < this.answers.length; i++) {
+            StackPane button = Util.getMainButton("" + (char)(i + 'A'), this.handlers[i], 15);
+            answersPane.add(button, i / numCols, i % numCols);
+        }
+        return answersPane;
+    }
+
+    public GridPane getFormattedChoices() {
+        return getFormattedChoices(2);
     }
 }

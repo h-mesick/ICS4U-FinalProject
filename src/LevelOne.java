@@ -113,11 +113,11 @@ public class LevelOne extends BaseLevel {
 
     protected void handleFinish() {
         fadeOut(e -> {
-            StackPane nextLevel = initBasicOverlay(getMainButton("Proceed to the next level",
-                                                                 event -> this.game.updateState(State.LEVEL_TWO), 15));
+            StackPane nextLevel = initBasicOverlay(Util.getMainButton("Proceed to the next level",
+                                                                      event -> this.game.updateState(State.LEVEL_TWO), 15));
             setOverlay(nextLevel);
             nextLevel.setOpacity(0);
-            fade(nextLevel, 1, 0, 1);
+            Util.fade(nextLevel, 1, 0, 1);
         });
     }
 
@@ -149,7 +149,16 @@ public class LevelOne extends BaseLevel {
                 textOverlay.getChildren().add(getFormattedText(tokens[1]));
                 break;
             case "BACKGROUND":
-                background.setImage(ResourceLoader.loadImage(tokens[1]));
+                switch(tokens[1]) {
+                    case "IMAGE":
+                        background.setImage(ResourceLoader.loadImage(tokens[2]));
+                        break;
+                    case "COLOR":
+                        WritableImage colorImage = new WritableImage(1, 1);
+                        colorImage.getPixelWriter().setColor(0, 0, Color.web(tokens[2]));
+                        background.setImage(colorImage);
+                        break;
+                }
                 break;
             case "FADEOUT":
                 if (!onlyMutatingCommands) {
@@ -161,6 +170,33 @@ public class LevelOne extends BaseLevel {
             case "FADEIN":
                 if (!onlyMutatingCommands) {
                     fadeIn(event -> nextDialog(true), 1);
+                    return false;
+                } else {
+                    return true;
+                }
+            case "CHOICE":
+                /**
+                 * CHOICE: [question] : [number of choices] : [choice1] : [choice2] : [choicen] : [score1] : [score2] : [scoren]
+                 */
+                if (!onlyMutatingCommands) {
+                    String question = tokens[1];
+                    int numChoices = Integer.parseInt(tokens[2]);
+                    String[] choices = new String[numChoices];
+                    EventHandler[] handlers = new EventHandler[numChoices];
+                    int jj = 3;
+                    for (int i = 0; i < numChoices; i++) {
+                        choices[i] = tokens[jj++];
+                    }
+                    for (int i = 0; i < numChoices; i++) {
+                        Integer delta = Integer.parseInt(tokens[jj++]);
+                        handlers[i] = (event -> {
+                            incrementScore(0, (int)delta);
+                            removeOverlay();
+                            nextDialog();
+                        });
+                    }
+                    Question curQuestion = new Question(question, choices, handlers);
+                    setOverlay(initBasicOverlay(curQuestion.getFormattedQuestion(), curQuestion.getFormattedChoices()));
                     return false;
                 } else {
                     return true;
@@ -191,7 +227,7 @@ public class LevelOne extends BaseLevel {
     }
 
     private void transitionFade(EventHandler onFinished, double duration, boolean direction) {
-        fade(transitionOverlay, duration, direction ? 1 : 0, direction ? 0 : 1, onFinished);
+        Util.fade(transitionOverlay, duration, direction ? 1 : 0, direction ? 0 : 1, onFinished);
     }
 
     private void fadeIn(EventHandler onFinished, double duration) {

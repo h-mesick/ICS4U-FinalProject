@@ -128,26 +128,7 @@ public class LevelThree extends BasePlatformer {
     protected void handleSpecial(int specialType) {
         //TODO
         Question question = getQuestion(specialType);
-
-        StackPane questionPane = new StackPane();
-        questionPane.setAlignment(Pos.CENTER);
-        Text questionText = new Text(question.getQuestion());
-        questionText.setFont(new Font("Verdana", 20));
-        questionText.setFill(Color.RED);
-        questionText.setWrappingWidth(Constants.SCREEN_WIDTH - 250);
-        questionPane.getChildren().add(questionText);
-
-        GridPane answersPane = new GridPane();
-        answersPane.setAlignment(Pos.CENTER);
-        answersPane.setHgap(10);
-        answersPane.setVgap(10);
-
-        for (int x = 0; x < 4; x++) {
-            StackPane button = getMainButton(question.getAnswers()[x], question.getHandlers()[x], 15);
-            answersPane.add(button, x / 2, x % 2);
-        }
-
-        setOverlay(initBasicOverlay(questionPane, answersPane));
+        setOverlay(initBasicOverlay(question.getFormattedQuestion(), question.getFormattedChoices()));
     }
 
     /**
@@ -160,7 +141,7 @@ public class LevelThree extends BasePlatformer {
         finishText.setTextAlignment(TextAlignment.CENTER);
         finishText.setWrappingWidth(Constants.SCREEN_WIDTH / 3 * 2);
 
-        StackPane nextLevel = getMainButton("Finish Game", event -> this.game.updateState(State.MAIN_MENU), 15);
+        StackPane nextLevel = Util.getMainButton("Finish Game", event -> this.game.updateState(State.MAIN_MENU), 15);
 
         setOverlay(initBasicOverlay(finishText, nextLevel));
     }
