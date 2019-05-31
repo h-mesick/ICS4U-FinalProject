@@ -78,7 +78,7 @@ public class User implements Comparable {
                 if (!savesArray.isNull(i)) {
                     // kind of a dirty way to do this but there's no better way
                     if (i == 0) {
-                        saves[i] = GameSave.fromJson(savesArray.getJsonObject(i));
+                        saves[i] = StoryGameSave.fromJson(savesArray.getJsonObject(i));
                     } else {
                         saves[i] = PlatformerGameSave.fromJson(savesArray.getJsonObject(i));
                     }

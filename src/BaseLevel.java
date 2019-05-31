@@ -194,7 +194,8 @@ public abstract class BaseLevel extends BaseScene {
             System.err.println("Warning: overlay is already set.");
             return;
         }
-        root.setEffect(new GaussianBlur());
+        ColorAdjust adj = new ColorAdjust(0, -0.1, -0.6, 0);
+        root.setEffect(adj);
         baseRoot.getChildren().add(overlay);
         currentOverlay = overlay;
     }
@@ -256,7 +257,10 @@ public abstract class BaseLevel extends BaseScene {
     protected abstract void update();
     protected abstract int getLevel();
     protected abstract int getScoreCount();
-    protected abstract GameSave save();
-    protected abstract void load(GameSave save);
     protected abstract void handleFinish();
+    protected abstract GameSave save();
+    protected void load(GameSave save) {
+        this.levelComplete = save.levelComplete;
+        loadScores(save.scores);
+    }
 }

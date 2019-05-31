@@ -58,6 +58,7 @@ public abstract class BasePlatformer extends BaseLevel {
      * Initializes the scene
      */
     public void initScene() {
+        root.getChildren().add(new Rectangle(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, Color.WHITE));
         // add blocks
         for (Sprite s : level.getAllSprites()) {
             root.getChildren().add(s);
@@ -227,6 +228,7 @@ public abstract class BasePlatformer extends BaseLevel {
      * @param baseSave The game save to load from
      */
     protected void load(GameSave baseSave) {
+        super.load(baseSave);
         PlatformerGameSave save = (PlatformerGameSave)baseSave;
 
         this.player.setCenterPosition(save.player);
@@ -246,9 +248,6 @@ public abstract class BasePlatformer extends BaseLevel {
             this.removedNodes.add(s);
             root.getChildren().remove(s);
         }
-
-        loadScores(save.scores);
-        this.levelComplete = save.levelComplete;
     }
 
     /**

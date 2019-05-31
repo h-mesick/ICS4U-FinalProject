@@ -10,6 +10,7 @@ import javafx.scene.paint.*;
 import javafx.scene.shape.*;
 import javafx.scene.text.*;
 import javafx.stage.*;
+import javafx.util.*;
 
 /**
  * @version 1
@@ -130,6 +131,20 @@ public abstract class BaseScene implements Constants {
             }
         }
         return (Image)ret;
+    }
+
+    public void fade(Node object, double duration, double from, double to, EventHandler onFinished) {
+        FadeTransition ft = new FadeTransition(Duration.seconds(duration), object);
+        ft.setFromValue(from);
+        ft.setToValue(to);
+        if (onFinished != null) {
+            ft.setOnFinished(onFinished);
+        }
+        ft.play();
+    }
+
+    public void fade(Node object, double duration, double from, double to) {
+        fade(object, duration, from, to, null);
     }
 
     public void onExit() {}

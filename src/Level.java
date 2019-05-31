@@ -36,8 +36,7 @@ public class Level {
      */
     public Level(String file) {
         ArrayList<String> lines = new ArrayList();
-        try {
-            BufferedReader in = new BufferedReader(ResourceLoader.loadLevel(file));
+        try (BufferedReader in = new BufferedReader(ResourceLoader.loadLevel(file))) {
             for (String line; (line = in.readLine()) != null;) {
                 lines.add(line);
             }
