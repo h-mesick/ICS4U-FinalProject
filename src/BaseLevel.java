@@ -229,7 +229,11 @@ public abstract class BaseLevel extends BaseScene {
      * @return The level filename
      */
     protected String getLevelFile() {
-        return "level" + getLevel() + ".txt";
+        return "level-" + getLevel() + ".txt";
+    }
+
+    protected String getLevelDataFile() {
+        return "level-data-" + getLevel() + ".txt";
     }
 
     protected void onFinish() {

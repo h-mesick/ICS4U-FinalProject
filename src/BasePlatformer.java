@@ -292,7 +292,7 @@ public abstract class BasePlatformer extends BaseLevel {
         Text questionText = new Text(question.getQuestion());
         questionText.setFont(new Font("Verdana", 20));
         questionText.setFill(Color.RED);
-        questionText.setWrappingWidth(Constants.SCREEN_WIDTH / 3 * 2);
+        questionText.setWrappingWidth(Constants.SCREEN_WIDTH - 250);
         questionPane.getChildren().add(questionText);
 
         GridPane answersPane = new GridPane();

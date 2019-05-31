@@ -1,3 +1,7 @@
+import java.io.*;
+
+import javax.json.*;
+
 import javafx.animation.*;
 import javafx.event.*;
 import javafx.geometry.*;
@@ -32,7 +36,7 @@ import javafx.stage.*;
 public class LevelTwo extends BasePlatformer {
     /** Instance variables */
     private HBox scoreCountOverlay;
-    private Text coinText;
+    private JsonArray questions;
 
     /**
      * Constructor
@@ -40,6 +44,12 @@ public class LevelTwo extends BasePlatformer {
      */
     public LevelTwo(Game game) {
         super(game);
+        try (JsonReader reader = Json.createReader(ResourceLoader.loadLevel(getLevelDataFile()))) {
+            JsonObject obj = reader.readObject();
+            questions = obj.getJsonArray("questions");
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     /**
@@ -64,28 +74,19 @@ public class LevelTwo extends BasePlatformer {
      * @return             The question
      */
     protected Question getQuestion(int specialType) {
-        String question = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa " + specialType;
+        JsonObject curObj = questions.getJsonObject(questions.size() - specialType);
+        String question = curObj.getString("question");
         String[] answers = {
-            "a", "b", "c", "dasdasdsadasdasdsadadadsd"
+            "A", "B", "C", "D"
         };
-        EventHandler[] handlers = {
-            event -> {
-                incrementScore(0, 1);
+        EventHandler[] handlers = new EventHandler[4];
+        for (int i = 0; i < 4; i++) {
+            Integer delta = curObj.getJsonArray("choices").getInt(i);
+            handlers[i] = (event -> {
+                incrementScore(0, (int)delta);
                 removeOverlay();
-            },
-            event -> {
-                incrementScore(0, 3);
-                removeOverlay();
-            },
-            event -> {
-                incrementScore(0, 10);
-                removeOverlay();
-            },
-            event -> {
-                incrementScore(0, -1);
-                removeOverlay();
-            },
-        };
+            });
+        }
         return new Question(question, answers, handlers);
     }
 

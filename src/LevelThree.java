@@ -28,7 +28,6 @@ import javafx.stage.*;
 public class LevelThree extends BasePlatformer {
     /** Instance variables */
     private VBox scoreCountOverlay;
-    private Text coinText, pointText;
 
     /**
      * Constructor
