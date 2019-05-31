@@ -69,6 +69,24 @@ public class LevelTwo extends BasePlatformer {
     }
 
     /**
+     * Initializes the scene
+     */
+    public void initScene() {
+        scoreCountOverlay = new HBox(5);
+        scoreCountOverlay.setAlignment(Pos.CENTER_LEFT);
+        scoreCountOverlay.setPadding(new Insets(10));
+
+        ImageView coinImage = new ImageView(ResourceLoader.loadImage("coin.png"));
+        coinImage.setPreserveRatio(true);
+        coinImage.setFitWidth(40);
+
+        scoreCountOverlay.getChildren().addAll(coinImage, scoresText[0]);
+
+        super.initScene();
+        root.getChildren().add(scoreCountOverlay);
+    }
+
+    /**
      * Gets the question specified by specialType
      * @param  specialType The question number
      * @return             The question
@@ -91,29 +109,31 @@ public class LevelTwo extends BasePlatformer {
     }
 
     /**
-     * Initializes the scene
-     */
-    public void initScene() {
-        scoreCountOverlay = new HBox(5);
-        scoreCountOverlay.setAlignment(Pos.CENTER_LEFT);
-        scoreCountOverlay.setPadding(new Insets(10));
-
-        ImageView coinImage = new ImageView(ResourceLoader.loadImage("coin.png"));
-        coinImage.setPreserveRatio(true);
-        coinImage.setFitWidth(40);
-
-        scoreCountOverlay.getChildren().addAll(coinImage, scoresText[0]);
-
-        super.initScene();
-        root.getChildren().add(scoreCountOverlay);
-    }
-
-    /**
      * Handles when the player touches a special block
      * @param specialType The special block's number
      */
     protected void handleSpecial(int specialType) {
-        handleDefaultSpecial(specialType);
+        Question question = getQuestion(specialType);
+
+        StackPane questionPane = new StackPane();
+        questionPane.setAlignment(Pos.CENTER);
+        Text questionText = new Text(question.getQuestion());
+        questionText.setFont(new Font("Verdana", 18));
+        questionText.setFill(Color.WHITE);
+        questionText.setWrappingWidth(Constants.SCREEN_WIDTH - 250);
+        questionPane.getChildren().add(questionText);
+
+        GridPane answersPane = new GridPane();
+        answersPane.setAlignment(Pos.CENTER);
+        answersPane.setHgap(10);
+        answersPane.setVgap(10);
+
+        for (int x = 0; x < 4; x++) {
+            StackPane button = getMainButton(question.getAnswers()[x], question.getHandlers()[x], 15);
+            answersPane.add(button, x / 2, x % 2);
+        }
+
+        setOverlay(initBasicOverlay(questionPane, answersPane));
     }
 
     /**
