@@ -1,6 +1,5 @@
 import java.io.File;
 import java.util.ArrayList;
-import java.util.EnumMap;
 import java.util.HashMap;
 
 import javafx.animation.*;
@@ -27,19 +26,6 @@ import javafx.stage.*;
  *  - May 29, 2019: Updated ~Evan Zhang
  */
 public class Game {
-    private final EnumMap<State, BaseScene> sceneMap = new EnumMap<State, BaseScene>(State.class){{
-        put(State.LOADING_SCREEN, new LoadingScreen(Game.this));
-        put(State.ENTER_USERNAME, new EnterUsername(Game.this));
-        put(State.MAIN_MENU, new MainMenu(Game.this));
-        put(State.HIGH_SCORES, new Highscores(Game.this));
-        put(State.HELP, new Help(Game.this));
-//        put(State.TUTORIAL, new Tutorial(Game.this));
-        put(State.LEVEL_SELECT, new LevelSelect(Game.this));
-        put(State.LEVEL_ONE, new LevelOne(Game.this));
-        put(State.LEVEL_TWO, new LevelTwo(Game.this));
-        put(State.LEVEL_THREE, new LevelThree(Game.this));
-    }};
-
     private State currentState = null, nextState = null;
     private BaseScene currentScene;
     private HashMap<String, User> users = new HashMap();
@@ -118,7 +104,21 @@ public class Game {
     }
 
     public void updateScene() {
-        currentScene = sceneMap.get(this.currentState);
+        currentScene = null;
+        switch(this.currentState) {
+            case LOADING_SCREEN: currentScene =  new LoadingScreen(this); break;
+            case ENTER_USERNAME: currentScene = new EnterUsername(this); break;
+            case MAIN_MENU: currentScene = new MainMenu(this); break;
+            case HIGH_SCORES: currentScene = new Highscores(this); break;
+            case HELP: currentScene = new Help(this); break;
+            case TUTORIAL:
+                // currentScene = new Tutorial(this);
+                break;
+            case LEVEL_SELECT: currentScene = new LevelSelect(this); break;
+            case LEVEL_ONE: currentScene = new LevelOne(this); break;
+            case LEVEL_TWO: currentScene = new LevelTwo(this); break;
+            case LEVEL_THREE: currentScene = new LevelThree(this); break;
+        }
         currentScene.initScene();
         currentScene.onEnter();
     }
