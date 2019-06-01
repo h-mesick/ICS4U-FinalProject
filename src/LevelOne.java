@@ -30,7 +30,41 @@ import javafx.util.*;
  *  - May 30, 2019: Updated ~Evan Zhang
  *  - May 31, 2019: Updated ~Evan Zhang
  */
+
 public class LevelOne extends BaseLevel {
+    private class Command {
+        private String command;
+        private String[] arguments;
+        private int argumentPointer = 0;
+        public Command(String line) {
+            String[] tokens = line.trim().split(":");
+            command = tokens[0].trim();
+            arguments = new String[tokens.length - 1];
+            for (int i = 0; i < arguments.length; i++) {
+                arguments[i] = tokens[i + 1].trim();
+            }
+        }
+        public Command(Command other) {
+            this.command = other.command;
+            this.arguments = new String[other.arguments.length];
+            for (int i = 0; i < this.arguments.length; i++) {
+                this.arguments[i] = other.arguments[i];
+            }
+        }
+        public String getCommand() {
+            return command;
+        }
+        public String[] getArguments() {
+            return arguments;
+        }
+        public String nextArgument() {
+            return arguments[argumentPointer++];
+        }
+        public boolean isComment() {
+            return command.startsWith("#");
+        }
+    }
+
     final int TEXT_OVERLAY_WIDTH = Constants.SCREEN_WIDTH - 150;
     final int TEXT_OVERLAY_HEIGHT = 200;
     final int TEXT_PADDING = 50;
@@ -39,7 +73,8 @@ public class LevelOne extends BaseLevel {
     private ImageView background;
     private StackPane textOverlay;
     private int dialogPosition = 0;
-    private String[] dialogCommands;
+    private Command[] dialogCommands;
+    private TreeMap<String, Integer> dialogCommandsLabelMap = new TreeMap();
 
     /**
      * Constructor
@@ -51,11 +86,19 @@ public class LevelOne extends BaseLevel {
         ArrayList<String> lines = new ArrayList();
         try (BufferedReader in = new BufferedReader(ResourceLoader.loadLevel(getLevelFile()))) {
             for (String line; (line = in.readLine()) != null;) {
-                lines.add(line);
+                if (line.length() > 0) {
+                    lines.add(line);
+                }
             }
         } catch (Exception e) {
         }
-        dialogCommands = lines.toArray(new String[0]);
+        dialogCommands = new Command[lines.size()];
+        for (int i = 0; i < lines.size(); i++) {
+            dialogCommands[i] = new Command(lines.get(i));
+            if (dialogCommands[i].getCommand().equals("LABEL")) {
+                dialogCommandsLabelMap.put(dialogCommands[i].getArguments()[0], i);
+            }
+        }
     }
 
     /**
@@ -88,7 +131,7 @@ public class LevelOne extends BaseLevel {
         textOverlay.setTranslateY(Constants.SCREEN_HEIGHT - TEXT_OVERLAY_HEIGHT);
         textOverlay.setMinHeight(TEXT_OVERLAY_HEIGHT);
         textOverlay.setBackground(new Background(
-            new BackgroundFill(Color.web("#FF9900"), new CornerRadii(20, 20, 0, 0, false), Insets.EMPTY),
+            new BackgroundFill(Color.web("#ff9900"), new CornerRadii(20, 20, 0, 0, false), Insets.EMPTY),
             new BackgroundFill(Color.web("#ffd640"), new CornerRadii(15, 15, 0, 0, false), new Insets(25, 25, 0, 25))
         ));
         textOverlay.setPadding(new Insets(TEXT_PADDING));
@@ -145,93 +188,108 @@ public class LevelOne extends BaseLevel {
     }
 
     private boolean handleDialog(int position, boolean onlyMutatingCommands) {
-        String[] tokens = dialogCommands[position].trim().split(":");
-        for (int i = 0; i < tokens.length; i++) {
-            tokens[i] = tokens[i].trim();
-        }
-        if (tokens[0].startsWith("#")) {
+        Command command = new Command(dialogCommands[position]);
+        if (command.isComment()) {
             return true;
         }
-        switch(tokens[0]) {
+        switch(command.getCommand()) {
             case "PAUSE":
                 return false;
             case "TEXT":
                 textOverlay.getChildren().clear();
-                textOverlay.getChildren().add(getFormattedText(tokens[1]));
+                textOverlay.getChildren().add(getFormattedText(command.nextArgument()));
                 break;
             case "NARRATION":
                 textOverlay.getChildren().clear();
-                Text text = getFormattedText(tokens[1]);
+                Text text = getFormattedText(command.nextArgument());
                 text.setStyle("-fx-font-style: italic");
                 textOverlay.getChildren().add(text);
                 break;
             case "BACKGROUND":
-                switch(tokens[1]) {
+                switch(command.nextArgument()) {
                     case "IMAGE":
-                        background.setImage(ResourceLoader.loadImage(tokens[2]));
+                        background.setImage(ResourceLoader.loadImage(command.nextArgument()));
                         break;
                     case "COLOR":
                         WritableImage colorImage = new WritableImage(1, 1);
-                        colorImage.getPixelWriter().setColor(0, 0, Color.web(tokens[2]));
+                        colorImage.getPixelWriter().setColor(0, 0, Color.web(command.nextArgument()));
                         background.setImage(colorImage);
                         break;
                 }
                 break;
+            case "CLEAR":
+                scores[0] = 0;
+                break;
             case "FADEOUT":
                 if (!onlyMutatingCommands) {
                     double delay = 0.5;
-                    if (tokens.length > 1) {
-                        delay = Double.parseDouble(tokens[1]);
-                    }
+                    try {
+                        delay = Double.parseDouble(command.nextArgument());
+                    } catch(Exception e) {}
                     fadeOut(event -> nextDialog(true), delay);
                     return false;
-                } else {
-                    return true;
                 }
+                break;
             case "FADEIN":
                 if (!onlyMutatingCommands) {
                     double delay = 0.5;
-                    if (tokens.length > 1) {
-                        delay = Double.parseDouble(tokens[1]);
-                    }
+                    try {
+                        delay = Double.parseDouble(command.nextArgument());
+                    } catch(Exception e) {}
                     fadeIn(event -> nextDialog(true), delay);
                     return false;
-                } else {
-                    return true;
                 }
+                break;
+            case "GOTO":
+            case "JUMP":
+                jumpToLabel(command.nextArgument());
+                break;
             case "CHOICE":
                 /**
-                 * CHOICE: [question] : [number of choices] : [choice1] : [choice2] : [choicen] : [score1] : [score2] : [scoren]
+                 * CHOICE: [question] : [number of choices] : [label1] : [label2] : [labeln] : [choice1] : [choice2] : [choicen] : [score1] : [score2] : [scoren]
                  */
                 if (!onlyMutatingCommands) {
-                    String question = tokens[1];
-                    int numChoices = Integer.parseInt(tokens[2]);
+                    String question = command.nextArgument();
+                    int numChoices = Integer.parseInt(command.nextArgument());
+
                     String[] choices = new String[numChoices];
+                    String[] labelJumps = new String[numChoices];
                     EventHandler[] handlers = new EventHandler[numChoices];
-                    int jj = 3;
                     for (int i = 0; i < numChoices; i++) {
-                        choices[i] = tokens[jj++];
+                        choices[i] = command.nextArgument();
                     }
                     for (int i = 0; i < numChoices; i++) {
-                        Integer delta = Integer.parseInt(tokens[jj++]);
+                        labelJumps[i] = command.nextArgument();
+                    }
+                    for (int i = 0; i < numChoices; i++) {
+                        Integer delta = Integer.parseInt(command.nextArgument());
+                        String label = labelJumps[i];
                         handlers[i] = (event -> {
                             incrementScore(0, (int)delta);
                             removeOverlay();
-                            nextDialog();
+                            jumpToLabel(label);
+                            nextDialog(true);
                         });
                     }
                     Question curQuestion = new Question(question, choices, handlers);
                     setOverlay(initBasicOverlay(curQuestion.getFormattedQuestion(), curQuestion.getFormattedChoices()));
                     return false;
-                } else {
-                    return true;
                 }
+                break;
         }
         return true;
     }
 
     private boolean handleDialog(int position) {
         return handleDialog(position, false);
+    }
+
+    private boolean jumpToLabel(String label) {
+        if (dialogCommandsLabelMap.containsKey(label)) {
+            this.dialogPosition = dialogCommandsLabelMap.get(label);
+            return true;
+        }
+        return false;
     }
 
     private void nextDialog(boolean force) {
