@@ -40,6 +40,7 @@ public abstract class BasePlatformer extends BaseLevel {
     protected ProgressBar progress;
     protected Level level;
     protected double referencePoint;
+    protected ImageView background;
     protected ArrayList<Sprite> removedNodes = new ArrayList();
 
     protected int updateCount = 0;
@@ -59,7 +60,11 @@ public abstract class BasePlatformer extends BaseLevel {
      * Initializes the scene
      */
     public void initScene() {
-        root.getChildren().add(new Rectangle(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, Color.WHITE));
+        background = new ImageView(ResourceLoader.loadImage("platform-background.png"));
+        background.setFitWidth(Constants.SCREEN_WIDTH);
+        background.setPreserveRatio(true);
+        updateBackground();
+        root.getChildren().add(background);
         // add blocks
         for (Sprite s : level.getAllSprites()) {
             root.getChildren().add(s);
@@ -91,6 +96,10 @@ public abstract class BasePlatformer extends BaseLevel {
 
         setScene(root);
         start();
+    }
+
+    private void updateBackground() {
+        background.setTranslateY(-referencePoint / 2);
     }
 
     /**
@@ -129,8 +138,7 @@ public abstract class BasePlatformer extends BaseLevel {
         }
 
         if (player.onGround(ground) &&
-                this.level.isEndPlatform(player.getCenterX(), getRealY(player.getCenterY() +
-                                                                       Constants.PLATFORM_BLOCK_HEIGHT))) {
+                this.level.aboveEndPlatform(player.getCenterX(), getRealY(player.getCenterY()))) {
             onFinish();
         }
     }
@@ -166,6 +174,7 @@ public abstract class BasePlatformer extends BaseLevel {
                 obj.setVisible(0 <= obj.getTranslateY() + obj.getHeight() && obj.getTranslateY() < screenY);
             }
             player.setTranslateY(player.getTranslateY() - mod);
+            updateBackground();
         }
     }
 
@@ -250,6 +259,8 @@ public abstract class BasePlatformer extends BaseLevel {
             this.removedNodes.add(s);
             root.getChildren().remove(s);
         }
+
+        updateBackground();
     }
 
     /**

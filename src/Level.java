@@ -30,6 +30,7 @@ public class Level {
     private final double OFFSET = 0.1;
     private int[][] arr;
     private Sprite[][] blocks;
+    private ArrayList<Sprite>[][] auxiliaryBlocks;
 
     /**
      * Constructor
@@ -61,10 +62,12 @@ public class Level {
         }
 
         blocks = new Sprite[lines.size()][Constants.BLOCK_WIDTH_COUNT];
+        auxiliaryBlocks = new ArrayList[lines.size()][Constants.BLOCK_WIDTH_COUNT];
         for (int y = 0; y < lines.size(); y++) {
             for (int x = 0; x < Constants.BLOCK_WIDTH_COUNT; x++) {
                 double xx = getActX(x), yy = getActY(y);
                 blocks[y][x] = getBlock(xx, yy);
+                auxiliaryBlocks[y][x] = getAuxiliaryBlocks(xx, yy);
             }
         }
     }
@@ -76,24 +79,13 @@ public class Level {
      * @return   The specified block
      */
     private Sprite getBlock(double x, double y) {
-        boolean topNormalPlatform = y - Constants.PLATFORM_BLOCK_HEIGHT >= 0 &&
-                                    isNormalPlatform(x, y - Constants.PLATFORM_BLOCK_HEIGHT);
-        boolean bottomEndPlatform = y + Constants.PLATFORM_BLOCK_HEIGHT < screenLength() &&
-                                    isEndPlatform(x, y + Constants.PLATFORM_BLOCK_HEIGHT);
         String image = null;
         if (isEndPlatform(x, y)) {
             image = "platform-end.png";
         } else if (isNormalPlatform(x, y)) {
-            image = topNormalPlatform ? "platform.png" : "platform-top.png";
+            image = belowNormalPlatform(x, y) ? "platform.png" : "platform-top.png";
         } else if (isSpecial(x, y)) {
             image = "coin.png";
-        } else {
-            if (topNormalPlatform) {
-                int num = (int)(Math.random() * 3) + 1;
-                image = "platform-overhang-" + num + ".png";
-            } else if (bottomEndPlatform) {
-                image = "platform-door.png";
-            }
         }
         if (image != null) {
             return new Sprite(x, y, Constants.PLATFORM_BLOCK_WIDTH,
@@ -101,6 +93,26 @@ public class Level {
         }
         return null;
     }
+
+    private ArrayList<Sprite> getAuxiliaryBlocks(double x, double y) {
+        ArrayList<String> imageNames = new ArrayList();
+        if (!isBlocked(x, y)) {
+            if (belowNormalPlatform(x, y)) {
+                int num = (int)(Math.random() * 3) + 1;
+                imageNames.add("platform-overhang-" + num + ".png");
+            }
+            if (aboveEndPlatform(x, y)) {
+                imageNames.add("platform-door.png");
+            }
+        }
+        ArrayList<Sprite> sprites = new ArrayList();
+        for (String image : imageNames) {
+            sprites.add(new Sprite(x, y, Constants.PLATFORM_BLOCK_WIDTH,
+                              Constants.PLATFORM_BLOCK_HEIGHT, ResourceLoader.loadImage(image)));
+        }
+        return sprites;
+    }
+
 
     /**
      * Gets the length of the level in blocks
@@ -180,6 +192,8 @@ public class Level {
         List<Sprite> ret = new ArrayList();
         for (int y = 0; y < length(); y++) {
             for (int x = 0; x < Constants.BLOCK_WIDTH_COUNT; x++) {
+                /** Add auxiliary blocks first so they are shown underneath */
+                ret.addAll(auxiliaryBlocks[y][x]);
                 if (blocks[y][x] != null) {
                     ret.add(blocks[y][x]);
                 }
@@ -206,6 +220,16 @@ public class Level {
      */
     public int getPosition(double x, double y) {
         return arr[getBlockY(y)][getBlockX(x)];
+    }
+
+    public boolean aboveEndPlatform(double x, double y) {
+        return y + Constants.PLATFORM_BLOCK_HEIGHT < screenLength() &&
+               isEndPlatform(x, y + Constants.PLATFORM_BLOCK_HEIGHT);
+    }
+
+    public boolean belowNormalPlatform(double x, double y) {
+        return y - Constants.PLATFORM_BLOCK_HEIGHT >= 0 &&
+               isNormalPlatform(x, y - Constants.PLATFORM_BLOCK_HEIGHT);
     }
 
     public boolean isEndPlatform(double x, double y) {
