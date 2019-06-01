@@ -1,0 +1,8 @@
+.text-input {
+    -fx-text-fill: red;
+    -fx-background-color: #ffd640;
+    -fx-background-radius: 16;
+    -fx-border-color: #ff9900;
+    -fx-border-width: 6;
+    -fx-border-radius: 10;
+}

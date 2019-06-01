@@ -1,5 +1,8 @@
 .progress-bar {
-    -fx-accent: #00a000;
-    -fx-background: #fff;
-    -fx-control-inner-background: #fff;
+    -fx-accent: #ffd640;
+    -fx-background: #ff9900;
+    -fx-control-inner-background: #ff9900;
+}
+.progress-bar > .bar {
+    -fx-background-insets: 5;
 }

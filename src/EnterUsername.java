@@ -63,6 +63,7 @@ public class EnterUsername extends BaseScene {
             }
             return change;
         }));
+        usernameField.getStylesheets().add(ResourceLoader.loadCSS("username-text-field.css"));
 
         ImageButton enterButton = Util.getMainImageButton("forward", event -> {
             String username = usernameField.getText();
