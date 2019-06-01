@@ -1,18 +1,100 @@
-BACKGROUND: IMAGE: background.png
+LABEL: LEVEL1_BEGIN
+BACKGROUND: COLOR: black
+NARRATION: Zzz
+FADEIN:
+PAUSE:
+
+TEXT: HUH? Oh boy, that was a horrible nightmare I just had.
+PAUSE:
+
+FADEOUT:
 TEXT: Where am I?
 FADEIN:
 PAUSE:
-FADEOUT:
-TEXT: Hello?
-FADEIN:
+
+TEXT: Oh, I'm at the local cafe working on a project.
 PAUSE:
-TEXT: Oh, I'm at the cafe working on a project. I should probably go back home and check on things...
+TEXT: I should probably go back home and check on things...
 PAUSE:
+
 FADEOUT:
+BACKGROUND: IMAGE: level1/burning-house.png
 TEXT: WHAT!? WHAT HAPPENED TO MY HOME!?
 FADEIN:
 PAUSE:
-NARRATION: Home Destroyed.
-BACKGROUND: COLOR: blue
+
+FADEOUT:
+TEXT: Oh no...
+FADEIN:
 PAUSE:
-CHOICE: What do I do? : 4 : A: B: C: D: 1: 2: 3: 4
+
+TEXT: All my posessions are in my home. The money that's stored underneath my mattress. My projects on my home computer. Everything is destroyed.
+PAUSE:
+
+TEXT: I have nothing left... Everything is gone. How did this even happen? This must have happened very recently as the fire is still burning.
+PAUSE:
+
+TEXT: I don't even have insurance for my home, so I won't even have a place to live. I also don't have a bank account, so all my money is also gone...
+PAUSE:
+
+FADEOUT:
+BACKGROUND: COLOR: black
+CHOICE: What do I do now? : 4 : Call the police. : Cry. : Sit down and make a plan. : Go into the house and try to salvage the leftovers while is fire is still burning. : CHOICE1_1 : CHOICE1_2 : CHOICE1_3 : CHOICE1_4 : 5 : 0 : 3 : 1
+
+GOTO: CHOICE1_FINISH
+
+LABEL: CHOICE1_1
+NARRATION: You call the police, and the firefighters clear the fire. Unfortunately, they can't help you much in your personal loss, but they do give you a bit of money. (+5)
+GOTO: CHOICE1_FINISH
+
+LABEL: CHOICE1_2
+NARRATION: You cry for a few hours on the lawn in front of your house, watching it burn down. Nobody comes to aid you.
+GOTO: CHOICE1_FINISH
+
+LABEL: CHOICE1_3
+NARRATION: You make a plan for what you will do with this loss. You call the firefighters, and they clear the fire. Luckily, someone walks by and aids you by giving you a place to stay for the night. (+3)
+GOTO: CHOICE1_FINISH
+
+LABEL: CHOICE1_4
+NARRATION: You run into the house, and salvage as much as you can while trying to avoid the raging fire. Fortunately, you come out unscathed and managed to save your favourite plant. (+1)
+GOTO: CHOICE1_FINISH
+
+LABEL: CHOICE1_FINISH
+FADEIN:
+PAUSE:
+
+TEXT: I should probably go to sleep and figure out what do tomorrow.
+PAUSE:
+
+TEXT: Maybe this is all just a dream.
+PAUSE:
+
+NARRATION: The next day.
+PAUSE:
+
+FADEOUT:
+TEXT: I need to figure out what is the best course of action. I regret not thinking more into the future and only caring about the now. If I had prepared more, I would not have been in this situation.
+FADEIN:
+PAUSE:
+
+FADEOUT:
+CHOICE: How to I get myself out of this situation? : 2 : Save up as much money through working and try to recover what was lost, this time making smarter decisions. : Continue to stay with the bad habits, and not make any other smarter situations. : CHOICE2_1 : CHOICE2_2 : 20 : 0
+
+GOTO: CHOICE2_FINISH
+
+LABEL: CHOICE2_1
+NARRATION: You regret your past decisions, and try to make better decisions. You save as much money as possible and think more long term. Overall, you begin to become better at making smart decisions. (+20)
+GOTO: CHOICE2_FINISH
+
+LABEL: CHOICE2_2
+NARRATION: You are stubborn and stay with your current bad habits. Everytime you make some money, you spend it immediately on eating out. Slowly, you become worse and worse, and end up becoming homeless.
+FADEIN:
+PAUSE:
+CLEAR:
+GOTO: LEVEL1_BEGIN
+
+LABEL: CHOICE2_FINISH
+FADEIN:
+PAUSE:
+
+LABEL: LEVEL1_FINISH
