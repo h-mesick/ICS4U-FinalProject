@@ -144,9 +144,12 @@ public class LevelOne extends BaseLevel {
     }
 
     private boolean handleDialog(int position, boolean onlyMutatingCommands) {
-        String[] tokens = dialogCommands[position].split(":");
+        String[] tokens = dialogCommands[position].trim().split(":");
         for (int i = 0; i < tokens.length; i++) {
             tokens[i] = tokens[i].trim();
+        }
+        if (tokens[0].startsWith("#")) {
+            return true;
         }
         switch(tokens[0]) {
             case "PAUSE":
@@ -154,6 +157,12 @@ public class LevelOne extends BaseLevel {
             case "TEXT":
                 textOverlay.getChildren().clear();
                 textOverlay.getChildren().add(getFormattedText(tokens[1]));
+                break;
+            case "NARRATION":
+                textOverlay.getChildren().clear();
+                Text text = getFormattedText(tokens[1]);
+                text.setStyle("-fx-font-style: italic");
+                textOverlay.getChildren().add(text);
                 break;
             case "BACKGROUND":
                 switch(tokens[1]) {
@@ -169,14 +178,22 @@ public class LevelOne extends BaseLevel {
                 break;
             case "FADEOUT":
                 if (!onlyMutatingCommands) {
-                    fadeOut(event -> nextDialog(true), 1);
+                    double delay = 0.5;
+                    if (tokens.length > 1) {
+                        delay = Double.parseDouble(tokens[1]);
+                    }
+                    fadeOut(event -> nextDialog(true), delay);
                     return false;
                 } else {
                     return true;
                 }
             case "FADEIN":
                 if (!onlyMutatingCommands) {
-                    fadeIn(event -> nextDialog(true), 1);
+                    double delay = 0.5;
+                    if (tokens.length > 1) {
+                        delay = Double.parseDouble(tokens[1]);
+                    }
+                    fadeIn(event -> nextDialog(true), delay);
                     return false;
                 } else {
                     return true;
