@@ -78,7 +78,7 @@ public abstract class Util {
 
         Text t = new Text(text);
         t.setTranslateY(5);
-        t.setFont(Font.font("Verdana", fontSize));
+        t.setFont(Util.getMainFont(fontSize));
         t.setFill(Color.RED);
         t.setMouseTransparent(true);
 
@@ -131,6 +131,14 @@ public abstract class Util {
 
     public static void fade(Node object, double duration, double from, double to) {
         fade(object, duration, from, to, null);
+    }
+
+    public static Font getMainFont(double size) {
+        return Font.loadFont(ResourceLoader.loadFont("nvscript_sc.ttf"), size + 4);
+    }
+
+    public static Font getDefaultFont(double size) {
+        return Font.font("Verdana", size);
     }
 
 }

@@ -137,7 +137,7 @@ public class LevelOne extends BaseLevel {
 
     private Text getFormattedText(String text) {
         Text ret = new Text(text);
-        ret.setFont(new Font("Verdana", 15));
+        ret.setFont(Util.getDefaultFont(15));
         ret.setFill(Color.RED);
         ret.setWrappingWidth(TEXT_OVERLAY_WIDTH - TEXT_PADDING * 2);
         return ret;

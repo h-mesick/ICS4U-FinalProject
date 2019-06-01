@@ -81,7 +81,7 @@ public class EnterUsername extends BaseScene {
         body.getChildren().add(usernameRow);
 
         Text text = new Text("Your username defines where your game state is saved, so please use the same username everytime!");
-        text.setFont(new Font("Verdana", 15));
+        text.setFont(Util.getMainFont(15));
         text.setFill(Color.WHITE);
         text.setTextAlignment(TextAlignment.CENTER);
         text.setWrappingWidth(Constants.SCREEN_WIDTH - 400);

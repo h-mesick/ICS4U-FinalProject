@@ -47,10 +47,10 @@ public class MainMenu extends BaseScene {
         body.getChildren().add(Util.getMainButton("Quit", event -> Platform.exit()));
 
         Text userGreeting = new Text("Hello, " + this.game.currentUser.username + "!");
-        userGreeting.setFont(new Font("Verdana", 14));
+        userGreeting.setFont(Util.getMainFont(14));
         userGreeting.setFill(Color.WHITE);
         Text about = new Text("Created by Evan Zhang and Max Li");
-        about.setFont(new Font("Verdana", 14));
+        about.setFont(Util.getMainFont(14));
         about.setFill(Color.WHITE);
 
         this.game.setScene(new Scene(Util.getMainRoot(body, Util.getFooter(userGreeting, about))));

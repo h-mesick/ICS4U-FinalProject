@@ -77,7 +77,7 @@ public class Question {
         StackPane questionPane = new StackPane();
         questionPane.setAlignment(Pos.CENTER);
         Text questionText = new Text(question);
-        questionText.setFont(new Font("Verdana", 18));
+        questionText.setFont(Util.getMainFont(18));
         questionText.setFill(Color.WHITE);
         questionText.setWrappingWidth(Constants.SCREEN_WIDTH - 250);
         questionPane.getChildren().add(questionText);

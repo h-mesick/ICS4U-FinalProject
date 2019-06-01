@@ -76,7 +76,8 @@ public abstract class BaseLevel extends BaseScene {
 
         for (int i = 0; i < getScoreCount(); i++) {
             scoresText[i] = new Text("0");
-            scoresText[i].setFont(Font.font("Verdana", FontWeight.BOLD, 20));
+            scoresText[i].setFont(Util.getDefaultFont(22));
+            scoresText[i].setStyle("-fx-font-weight: bold");
         }
     }
 

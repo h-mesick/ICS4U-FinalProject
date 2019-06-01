@@ -129,7 +129,7 @@ public class LevelTwo extends BasePlatformer {
      */
     protected void handleFinish() {
         Text finishText = new Text("Congratulations! You completed level two!");
-        finishText.setFont(new Font("Verdana", 25));
+        finishText.setFont(Util.getMainFont(25));
         finishText.setFill(Color.WHITE);
         finishText.setTextAlignment(TextAlignment.CENTER);
         finishText.setWrappingWidth(Constants.SCREEN_WIDTH / 3 * 2);

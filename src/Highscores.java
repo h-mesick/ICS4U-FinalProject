@@ -54,10 +54,10 @@ public class Highscores extends BaseScene {
             } catch (IndexOutOfBoundsException e) {
             }
             Text text = new Text(username);
-            text.setFont(new Font("Verdana", 15));
+            text.setFont(Util.getMainFont(15));
             text.setFill(Color.WHITE);
             Text text2 = new Text(score);
-            text2.setFont(new Font("Verdana", 15));
+            text2.setFont(Util.getMainFont(15));
             text2.setFill(Color.WHITE);
 
             StackPane usernamePane = new StackPane();

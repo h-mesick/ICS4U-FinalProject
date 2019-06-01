@@ -80,4 +80,8 @@ public class ResourceLoader
     public static String loadCSS(String filename) {
         return getResourceLocation("resources/css/" + filename);
     }
+
+    public static InputStream loadFont(String filename) {
+        return getResource("resources/fonts/" + filename);
+    }
 }
