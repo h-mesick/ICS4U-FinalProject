@@ -16,6 +16,7 @@ import javafx.stage.*;
  *  - May 16, 2019: Created ~Evan Zhang
  *  - May 18, 2019: Updated ~Evan Zhang
  *  - May 27, 2019: Commented ~Max Li
+ *  - May 31, 2019: Updated ~Evan Zhang
  */
 public class Help extends BaseScene {
     /**

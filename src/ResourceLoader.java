@@ -20,6 +20,7 @@ import javafx.stage.*;
  *  - May 16, 2019: Updated ~Evan Zhang
  *  - May 27, 2019: Updated ~Evan Zhang
  *  - May 27, 2019: Commented ~Evan Zhang
+ *  - May 31, 2019: Updated ~Evan Zhang
  */
 public class ResourceLoader
 {

@@ -22,6 +22,7 @@ import javafx.util.*;
  *  - May 22, 2019: Updated ~Evan Zhang
  *  - May 29, 2019: Updated ~Evan Zhang
  *  - May 30, 2019: Updated ~Evan Zhang
+ *  - May 31, 2019: Updated ~Evan Zhang
  */
 public abstract class BaseScene {
     protected Game game;
