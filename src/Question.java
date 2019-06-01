@@ -92,6 +92,9 @@ public class Question {
         answersPane.setVgap(10);
         for (int i = 0; i < this.answers.length; i++) {
             StackPane button = Util.getMainButton("" + (char)(i + 'A'), this.handlers[i], 15);
+            if (this.handlers[i] == null) {
+                button.setDisable(true);
+            }
             answersPane.add(button, i / numRows, i % numRows);
         }
         return answersPane;

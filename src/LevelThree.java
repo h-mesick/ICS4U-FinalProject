@@ -127,6 +127,9 @@ public class LevelThree extends BasePlatformer {
                 incrementScore(1, (int)scoreDelta);
                 removeOverlay();
             });
+            if (costDelta > 0 && costDelta > scores[0]) {
+                handlers[i] = null;
+            }
         }
         return new Question(question, answers, handlers);
     }
