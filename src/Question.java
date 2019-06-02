@@ -20,6 +20,7 @@ import javafx.stage.*;
  *  - May 27, 2019: Finished ~Evan Zhang
  *  - May 27, 2019: Commented ~Evan Zhang
  *  - May 31, 2019: Updated ~Evan Zhang
+ *  - Jun 1, 2019: Updated ~Evan Zhang
  */
 public class Question {
     /** Instance variables */

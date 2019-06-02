@@ -29,6 +29,7 @@ import javafx.util.*;
  *  - May 29, 2019: Updated ~Evan Zhang
  *  - May 30, 2019: Updated ~Evan Zhang
  *  - May 31, 2019: Updated ~Evan Zhang
+ *  - Jun 1, 2019: Updated ~Evan Zhang
  */
 
 public class LevelOne extends BaseLevel {
