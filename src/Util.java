@@ -97,7 +97,7 @@ public abstract class Util {
     }
 
     /**
-     * Gets the main image button with text overlayed
+     * Gets the main image button with text overlaid
      * @param  text     The text to overlay with
      * @param  onClick  The handler for when the button is clicked
      * @param  fontSize The font size of the overlay'd text
@@ -127,7 +127,7 @@ public abstract class Util {
     }
 
     /**
-     * Gets the main image button with text overlayed and a default font size of 30
+     * Gets the main image button with text overlaid and a default font size of 30
      * @param  text     The text to overlay with
      * @param  onClick  The handler for when the button is clicked
      * @return          The image button as a StackPane
@@ -137,10 +137,10 @@ public abstract class Util {
     }
 
     /**
-     * Get the main image button with an image overlayed
-     * @param  baseFilename The filename of the overlayed image
+     * Get the main image button with an image overlaid
+     * @param  baseFilename The filename of the overlaid image
      * @param  onClick      The handler for when the button is clicked
-     * @return              The iamge button as an ImageButton
+     * @return              The image button as an ImageButton
      */
     public static ImageButton getMainImageButton(String baseFilename, EventHandler onClick) {
         ImageButton button = new ImageButton();
@@ -176,7 +176,7 @@ public abstract class Util {
     /**
      * Fade the object (transition)
      * @param object     The target object
-     * @param duration   The duration of the transitiion
+     * @param duration   The duration of the transition
      * @param from       The opacity to begin at
      * @param to         The opacity to end at
      * @param onFinished The handler once the transition is completed
@@ -194,7 +194,7 @@ public abstract class Util {
     /**
      * Fade the object (transition) with no handler for when the transition is completed
      * @param object     The target object
-     * @param duration   The duration of the transitiion
+     * @param duration   The duration of the transition
      * @param from       The opacity to begin at
      * @param to         The opacity to end at
      */
