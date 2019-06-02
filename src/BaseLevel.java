@@ -33,6 +33,7 @@ import javafx.stage.*;
  *  - May 30, 2019: Updated ~Evan Zhang
  *  - May 31, 2019: Updated ~Evan Zhang
  *  - Jun 1, 2019: Commented ~Evan Zhang
+ *  - Jun 2, 2019: Commented ~Evan Zhang
  */
 public abstract class BaseLevel extends BaseScene {
     /** Instance variables */
@@ -272,7 +273,7 @@ public abstract class BaseLevel extends BaseScene {
     }
 
     /**
-     * Called when the levle is completed
+     * Called when the level is completed
      */
     protected void onFinish() {
         this.levelComplete = true;

@@ -35,6 +35,7 @@ import javafx.stage.*;
  *  - May 30, 2019: Updated ~Evan Zhang
  *  - May 31, 2019: Updated ~Evan Zhang
  *  - Jun 1, 2019: Commented ~Evan Zhang
+ *  - Jun 2, 2019: Commented ~Evan Zhang
 */
 public abstract class BasePlatformer extends BaseLevel {
     /** Instance variables */
@@ -270,7 +271,6 @@ public abstract class BasePlatformer extends BaseLevel {
 
     /**
      * Saves a game
-     * @param scores The scores for the level
      */
     protected PlatformerGameSave save() {
         ArrayList<Point2D> nodes = new ArrayList();
