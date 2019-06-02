@@ -23,8 +23,8 @@ import javafx.stage.*;
  */
 public class Sprite extends ImageView {
     /** Instance variables */
-    final double gravity = 0.2;
-    double yVel = 0;
+    public final double gravity = 0.2;
+    private double yVel = 0;
 
     /**
      * Constructor

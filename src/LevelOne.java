@@ -94,9 +94,9 @@ public class LevelOne extends BaseLevel {
     }
 
     /** Instance variables */
-    final int TEXT_OVERLAY_WIDTH = Constants.SCREEN_WIDTH - 150;
-    final int TEXT_OVERLAY_HEIGHT = 200;
-    final int TEXT_PADDING = 50;
+    public final int TEXT_OVERLAY_WIDTH = Constants.SCREEN_WIDTH - 150;
+    public final int TEXT_OVERLAY_HEIGHT = 200;
+    public final int TEXT_PADDING = 50;
 
     private Rectangle transitionOverlay = new Rectangle(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, Color.BLACK);
     private ImageView background;
