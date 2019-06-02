@@ -30,13 +30,20 @@ import javafx.util.*;
  *  - May 30, 2019: Updated ~Evan Zhang
  *  - May 31, 2019: Updated ~Evan Zhang
  *  - Jun 1, 2019: Updated ~Evan Zhang
+ *  - Jun 1, 2019: Commented ~Evan Zhang
  */
 
 public class LevelOne extends BaseLevel {
+    /** A local class to simulate a command */
     private class Command {
+        /** Instance variables */
         private String command;
         private String[] arguments;
         private int argumentPointer = 0;
+        /**
+         * Constructor
+         * @param  line The line to parse
+         */
         public Command(String line) {
             String[] tokens = line.trim().split(":");
             command = tokens[0].trim();
@@ -45,6 +52,10 @@ public class LevelOne extends BaseLevel {
                 arguments[i] = tokens[i + 1].trim();
             }
         }
+        /**
+         * Constructor
+         * @param  other The other Command to clone
+         */
         public Command(Command other) {
             this.command = other.command;
             this.arguments = new String[other.arguments.length];
@@ -52,20 +63,37 @@ public class LevelOne extends BaseLevel {
                 this.arguments[i] = other.arguments[i];
             }
         }
+        /**
+         * Gets the command
+         * @return The command
+         */
         public String getCommand() {
             return command;
         }
+        /**
+         * Gets the arguments
+         * @return The arguments
+         */
         public String[] getArguments() {
             return arguments;
         }
+        /**
+         * Gets the next argument and increments a pointer
+         * @return The next argument
+         */
         public String nextArgument() {
             return arguments[argumentPointer++];
         }
+        /**
+         * Returns whether the specified line is a comment
+         * @return Whether the specified line is a comment
+         */
         public boolean isComment() {
             return command.startsWith("#");
         }
     }
 
+    /** Instance variables */
     final int TEXT_OVERLAY_WIDTH = Constants.SCREEN_WIDTH - 150;
     final int TEXT_OVERLAY_HEIGHT = 200;
     final int TEXT_PADDING = 50;
@@ -154,6 +182,9 @@ public class LevelOne extends BaseLevel {
     protected void update() {
     }
 
+    /**
+     * Called when the level is completed
+     */
     protected void handleFinish() {
         fadeOut(e -> {
             StackPane nextLevel = initBasicOverlay(Util.getMainButton("Proceed to the next level",
@@ -164,15 +195,26 @@ public class LevelOne extends BaseLevel {
         });
     }
 
+    /**
+     * Called when it is the user's first time loading the level
+     */
     protected void onFirstEnter() {
         super.onFirstEnter();
         nextDialog();
     }
 
+    /**
+     * Returns whether the overlay is visible or not
+     * @return Whether the overlay is visible or not
+     */
     protected boolean overlayVisible() {
         return super.overlayVisible() || transitionOverlay.getOpacity() > 0;
     }
 
+    /**
+     * Called when a key is pressed
+     * @param key The key that is pressed
+     */
     protected void handleKeyPressed(KeyCode key) {
         super.handleKeyPressed(key);
         switch(key) {
@@ -180,6 +222,11 @@ public class LevelOne extends BaseLevel {
         }
     }
 
+    /**
+     * Formats the specified text
+     * @param  text The specified text
+     * @return      The formatted version of the specified text
+     */
     private Text getFormattedText(String text) {
         Text ret = new Text(text);
         ret.setFont(Util.getDefaultFont(15));
@@ -188,6 +235,12 @@ public class LevelOne extends BaseLevel {
         return ret;
     }
 
+    /**
+     * Handles the next dialog command
+     * @param  position             The index of the dialog command
+     * @param  onlyMutatingCommands Whether to run only mutating commands or all commands (e.g transition commands)
+     * @return                      Whether to continue onto the next command or pause
+     */
     private boolean handleDialog(int position, boolean onlyMutatingCommands) {
         Command command = new Command(dialogCommands[position]);
         if (command.isComment()) {
@@ -281,10 +334,20 @@ public class LevelOne extends BaseLevel {
         return true;
     }
 
+    /**
+     * Handles the next dialog command
+     * @param  position The index of the dialog command
+     * @return          
+     */
     private boolean handleDialog(int position) {
         return handleDialog(position, false);
     }
 
+    /**
+     * Jump to a label in the dialog commands
+     * @param  label The label name
+     * @return       Whether the jump was sucessful (The label exists)
+     */
     private boolean jumpToLabel(String label) {
         if (dialogCommandsLabelMap.containsKey(label)) {
             this.dialogPosition = dialogCommandsLabelMap.get(label);
@@ -293,6 +356,10 @@ public class LevelOne extends BaseLevel {
         return false;
     }
 
+    /**
+     * Runs the next dialog group
+     * @param force Whether to run the dialog even if an overlay is visible
+     */
     private void nextDialog(boolean force) {
         if (!force) {
             if (overlayVisible()) {
@@ -307,26 +374,53 @@ public class LevelOne extends BaseLevel {
         }
     }
 
+    /**
+     * Runs the next dialog group
+     */
     private void nextDialog() {
         nextDialog(false);
     }
 
+    /**
+     * A fade transition to/from black
+     * @param onFinished Handler to call once the transition is finished
+     * @param duration   The duration of the transition
+     * @param direction  Fade to black, or fade from black
+     */
     private void transitionFade(EventHandler onFinished, double duration, boolean direction) {
         Util.fade(transitionOverlay, duration, direction ? 1 : 0, direction ? 0 : 1, onFinished);
     }
 
+    /**
+     * Fade from black
+     * @param onFinished Handler to call once the transition is finished
+     * @param duration   The duration of the transition
+     */
     private void fadeIn(EventHandler onFinished, double duration) {
         transitionFade(onFinished, duration, true);
     }
 
+    /**
+     * Fade from black with a default duration of 1 second
+     * @param onFinished Handler to call once the transition is finished
+     */
     private void fadeIn(EventHandler onFinished) {
         fadeIn(onFinished, 1);
     }
 
+    /**
+     * Fade to black
+     * @param onFinished Handler to call once the transition is finished
+     * @param duration   The duration of the transition
+     */
     private void fadeOut(EventHandler onFinished, double duration) {
         transitionFade(onFinished, duration, false);
     }
 
+    /**
+     * Fade to black with a default duration of 1 second
+     * @param onFinished Handler to call once the transition is finished
+     */
     private void fadeOut(EventHandler onFinished) {
         fadeOut(onFinished, 1);
     }

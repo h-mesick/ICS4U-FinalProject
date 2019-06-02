@@ -23,6 +23,7 @@ import javafx.stage.*;
  *  - May 28, 2019: Updated ~Evan Zhang
  *  - May 29, 2019: Updated ~Evan Zhang
  *  - May 30, 2019: Updated ~Evan Zhang
+ *  - Jun 1, 2019: Commented ~Evan Zhang
  */
 public class PlatformerGameSave extends GameSave {
     /** Instance variables */
@@ -46,6 +47,11 @@ public class PlatformerGameSave extends GameSave {
         this.scores = scores;
     }
 
+    /**
+     * Converts a point to a JSONObject
+     * @param  p The specified point
+     * @return   The JsonObject of the specified point
+     */
     public static JsonObject pointToJson(Point2D p) {
         return Json.createObjectBuilder()
                    .add("x", p.getX())
@@ -53,10 +59,19 @@ public class PlatformerGameSave extends GameSave {
                    .build();
     }
 
+    /**
+     * Converts a JSONObject to a point
+     * @param  p The specified JSONObject
+     * @return   The Point of the specified JSONObject
+     */
     public static Point2D jsonToPoint(JsonObject p) {
         return new Point2D(p.getJsonNumber("x").doubleValue(), p.getJsonNumber("y").doubleValue());
     }
 
+    /**
+     * Converts the gamesave to a JsonObject
+     * @return The JSONOBject representing the current gamesave
+     */
     public JsonObject toJson() {
         JsonArrayBuilder jsonNodes = Json.createArrayBuilder();
         for (Point2D p : removedNodes) {
@@ -69,6 +84,11 @@ public class PlatformerGameSave extends GameSave {
                    .build();
     }
 
+    /**
+     * Loads the gamesave from a JSONObject
+     * @param  data The JSONObject to load from
+     * @return      The gamesave representing the JSONObject
+     */
     public static GameSave fromJson(JsonObject data) {
         boolean levelComplete = data.getBoolean("levelComplete", false);
         double referencePoint = data.getJsonNumber("referencePoint").doubleValue();

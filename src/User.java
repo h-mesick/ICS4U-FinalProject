@@ -9,12 +9,20 @@ import javax.json.*;
  * Revision history:
  *  - May 28, 2019: Created ~Evan Zhang
  *  - May 30, 2019: Updated ~Evan Zhang
+ *  - Jun 1, 2019: Commented ~Evan Zhang
  */
 public class User implements Comparable {
+    /** Instance variables */
     public String username;
     public int score;
     public GameSave[] levelSaves = new GameSave[Constants.NUM_LEVELS];
 
+    /**
+     * User Constructor
+     * @param  username The user's username
+     * @param  score    The user's score
+     * @param  saves    An array of the user's saves
+     */
     public User(String username, int score, GameSave[] saves) {
         this.username = username;
         this.score = score;
@@ -24,11 +32,17 @@ public class User implements Comparable {
         this.levelSaves = saves;
     }
 
+    /**
+     * Recomputes the user's score and saves it to file
+     */
     public void updateAll() {
         computeScore();
         saveToFile();
     }
 
+    /**
+     * Computes the user's score by taking the sum of the scores of the last non-null GameSave in the array
+     */
     public void computeScore() {
         for (GameSave g : levelSaves) {
             if (g instanceof PlatformerGameSave) {
@@ -40,6 +54,9 @@ public class User implements Comparable {
         }
     }
 
+    /**
+     * Saves the user to a file
+     */
     public void saveToFile() {
         try {
             FileWriter stream = new FileWriter(getDataFile(this.username));
@@ -69,6 +86,11 @@ public class User implements Comparable {
         }
     }
 
+    /**
+     * Loads the user from file
+     * @param  username The username of the user to load
+     * @return          The loaded user
+     */
     public static User loadFromFile(String username) {
         try (JsonReader reader = Json.createReader(new FileInputStream(getDataFile(username)))) {
             JsonObject obj = reader.readObject();
@@ -94,11 +116,21 @@ public class User implements Comparable {
         return new User(username, 0, new GameSave[3]);
     }
 
+    /**
+     * Compares two users
+     * @param  other The other user
+     * @return       > 0 if this > user, == 0 if this == user, and < 0 if this < user
+     */
     @Override
     public int compareTo(Object other) {
         return this.score - ((User)other).score;
     }
 
+    /**
+     * Gets the save file of the specified user
+     * @param  username The user's username
+     * @return          The location of the data file
+     */
     public static String getDataFile(String username) {
         return Constants.DATA_DIRECTORY + username + Constants.DATA_EXTENSION;
     }

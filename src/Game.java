@@ -24,8 +24,10 @@ import javafx.stage.*;
  *  - May 22, 2019: Updated ~Evan Zhang
  *  - May 28, 2019: Updated ~Evan Zhang
  *  - May 29, 2019: Updated ~Evan Zhang
+ *  - Jun 1, 2019: Commented ~Evan Zhang
  */
 public class Game {
+    /** Instance variables */
     private State currentState = null, nextState = null;
     private BaseScene currentScene;
     private HashMap<String, User> users = new HashMap();
@@ -48,6 +50,10 @@ public class Game {
         updateState(State.ENTER_USERNAME);
     }
 
+    /**
+     * Sets the current user of the game
+     * @param username The user's username
+     */
     public void setCurrentUser(String username) {
         if (!users.containsKey(username)) {
             this.currentUser = User.loadFromFile(username);
@@ -57,31 +63,59 @@ public class Game {
         }
     }
 
+    /**
+     * Gets all the users with a save file
+     * @return The list of all users
+     */
     public ArrayList<User> getAllUsers() {
         return new ArrayList<User>(users.values());
     }
 
+    /**
+     * Gets whether the level is complete or not
+     * @param  index The level number
+     * @return       Whether the level is complete
+     */
     public boolean levelComplete(int index) {
         return this.currentUser != null && this.currentUser.levelSaves[index] != null &&
                this.currentUser.levelSaves[index].levelComplete;
     }
 
+    /**
+     * Sets the scene of the stage
+     * @param scene The scene
+     */
     public void setScene(Scene scene) {
         this.stage.setScene(scene);
     }
 
+    /**
+     * Gets the current state of the game
+     * @return The current state of the game
+     */
     public State getCurrentState() {
         return this.currentState;
     }
 
+    /**
+     * Sets the next state of the game
+     * @param newState The next state of the game
+     */
     public void setNextState(State newState) {
         this.nextState = newState;
     }
 
+    /**
+     * Returns whether there is a next state or not
+     * @return Whether there is a next state or not
+     */
     public boolean hasNextState() {
         return this.nextState != null;
     }
 
+    /**
+     * Switchs to the next state, if there is one
+     */
     public void nextState() {
         if (hasNextState()) {
             State tmpState = nextState;
@@ -90,6 +124,10 @@ public class Game {
         }
     }
 
+    /**
+     * Changes the state to the one specified
+     * @param newState The new state
+     */
     public void updateState(State newState) {
         // save everytime the user goes to a different state
         // note that this might not be the most efficient way
@@ -103,6 +141,9 @@ public class Game {
         updateScene();
     }
 
+    /**
+     * Updates the scene to the new scene defined by the current state
+     */
     public void updateScene() {
         currentScene = null;
         switch(this.currentState) {

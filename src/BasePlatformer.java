@@ -34,6 +34,7 @@ import javafx.stage.*;
  *  - May 29, 2019: Updated ~Evan Zhang
  *  - May 30, 2019: Updated ~Evan Zhang
  *  - May 31, 2019: Updated ~Evan Zhang
+ *  - Jun 1, 2019: Commented ~Evan Zhang
 */
 public abstract class BasePlatformer extends BaseLevel {
     /** Instance variables */
@@ -99,6 +100,9 @@ public abstract class BasePlatformer extends BaseLevel {
         start();
     }
 
+    /**
+     * Updates the location of the background
+     */
     private void updateBackground() {
         background.setTranslateY(-referencePoint / 2);
     }
@@ -294,5 +298,6 @@ public abstract class BasePlatformer extends BaseLevel {
         return y - referencePoint;
     }
 
+    /** Called when the player touches a special block */
     protected abstract void handleSpecial(int specialType);
 }

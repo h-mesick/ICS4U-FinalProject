@@ -21,6 +21,7 @@ import javafx.stage.*;
  *  - May 27, 2019: Commented ~Evan Zhang
  *  - May 31, 2019: Updated ~Evan Zhang
  *  - Jun 1, 2019: Updated ~Evan Zhang
+ *  - Jun 1, 2019: Commented ~Evan Zhang
  */
 public class Question {
     /** Instance variables */
@@ -67,10 +68,18 @@ public class Question {
         return this.handlers;
     }
 
+    /**
+     * Gets the choices the user has
+     * @return The number of choices
+     */
     public int size() {
         return this.answers.length;
     }
 
+    /**
+     * Formats the question to display to the user
+     * @return The formatted question as a StackPane
+     */
     public StackPane getFormattedQuestion() {
         String question = this.question + "\n";
         for (int i = 0; i < this.answers.length; i++) {
@@ -86,6 +95,11 @@ public class Question {
         return questionPane;
     }
 
+    /**
+     * Formats the choices to display to the user
+     * @param  numRows The number of rows to format the choices into
+     * @return         The formatted choices as a GridPane
+     */
     public GridPane getFormattedChoices(int numRows) {
         GridPane answersPane = new GridPane();
         answersPane.setAlignment(Pos.CENTER);
@@ -101,6 +115,10 @@ public class Question {
         return answersPane;
     }
 
+    /**
+     * Formats the choices to display to the user with a default row count of 2
+     * @return The formatted choices as a GridPane
+     */
     public GridPane getFormattedChoices() {
         return getFormattedChoices(2);
     }

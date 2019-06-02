@@ -17,8 +17,13 @@ import javafx.util.*;
  * @author Evan Zhang
  * Revision history:
  *  - May 31, 2019: Created ~Evan Zhang
+ *  - Jun 1, 2019: Commented ~Evan Zhang
  */
 public abstract class Util {
+    /**
+     * Get the default title
+     * @return The default title as a VBox
+     */
     public static VBox getTitle() {
         VBox title = new VBox();
         title.setAlignment(Pos.CENTER);
@@ -26,6 +31,13 @@ public abstract class Util {
         return title;
     }
 
+    /**
+     * Get the default footer
+     * @param  left   The left side of the footer
+     * @param  center The center of the footer
+     * @param  right  The right side of the footer
+     * @return        The footer as a BorderPane
+     */
     public static BorderPane getFooter(Node left, Node center, Node right) {
         BorderPane footer = new BorderPane();
         footer.setPadding(new Insets(10));
@@ -42,10 +54,22 @@ public abstract class Util {
         return footer;
     }
 
+    /**
+     * Get the default footer without the center element
+     * @param  left  The left side of the footer
+     * @param  right The right side of the footer
+     * @return       The footer as a BorderPane
+     */
     public static BorderPane getFooter(Node left, Node right) {
         return getFooter(left, null, right);
     }
 
+    /**
+     * Gets the main scene
+     * @param  body   The body (center) of the scene
+     * @param  footer The footer of the scene
+     * @return        The main scene as a BorderPane
+     */
     public static BorderPane getMainRoot(Node body, Node footer) {
         BorderPane root = new BorderPane();
 
@@ -63,10 +87,22 @@ public abstract class Util {
         return root;
     }
 
+    /**
+     * Gets the main scene without a null footer
+     * @param  body The body (center) of the scene
+     * @return      The main scene as a BorderPane
+     */
     public static BorderPane getMainRoot(Node body) {
         return getMainRoot(body, null);
     }
 
+    /**
+     * Gets the main image button with text overlayed
+     * @param  text     The text to overlay with
+     * @param  onClick  The handler for when the button is clicked
+     * @param  fontSize The font size of the overlay'd text
+     * @return          The image button as a StackPane
+     */
     public static StackPane getMainButton(String text, EventHandler onClick, int fontSize) {
         ImageButton mainButton = new ImageButton();
         mainButton.setImages(ResourceLoader.loadImage("button.png"),
@@ -90,10 +126,22 @@ public abstract class Util {
         return button;
     }
 
+    /**
+     * Gets the main image button with text overlayed and a default font size of 30
+     * @param  text     The text to overlay with
+     * @param  onClick  The handler for when the button is clicked
+     * @return          The image button as a StackPane
+     */
     public static StackPane getMainButton(String text, EventHandler onClick) {
         return getMainButton(text, onClick, 30);
     }
 
+    /**
+     * Get the main image button with an image overlayed
+     * @param  baseFilename The filename of the overlayed image
+     * @param  onClick      The handler for when the button is clicked
+     * @return              The iamge button as an ImageButton
+     */
     public static ImageButton getMainImageButton(String baseFilename, EventHandler onClick) {
         ImageButton button = new ImageButton();
         button.setFitWidth(50);
@@ -106,6 +154,12 @@ public abstract class Util {
         return button;
     }
 
+    /**
+     * Overlay two images
+     * @param  bottom The bottom image
+     * @param  top    The top image
+     * @return        The combined image
+     */
     public static Image overlayImage(Image bottom, Image top) {
         WritableImage ret = new WritableImage(bottom.getPixelReader(), (int)bottom.getWidth(), (int)top.getHeight());
         PixelReader topPixelReader = top.getPixelReader();
@@ -119,6 +173,14 @@ public abstract class Util {
         return (Image)ret;
     }
 
+    /**
+     * Fade the object (transition)
+     * @param object     The target object
+     * @param duration   The duration of the transitiion
+     * @param from       The opacity to begin at
+     * @param to         The opacity to end at
+     * @param onFinished The handler once the transition is completed
+     */
     public static void fade(Node object, double duration, double from, double to, EventHandler onFinished) {
         FadeTransition ft = new FadeTransition(Duration.seconds(duration), object);
         ft.setFromValue(from);
@@ -129,14 +191,31 @@ public abstract class Util {
         ft.play();
     }
 
+    /**
+     * Fade the object (transition) with no handler for when the transition is completed
+     * @param object     The target object
+     * @param duration   The duration of the transitiion
+     * @param from       The opacity to begin at
+     * @param to         The opacity to end at
+     */
     public static void fade(Node object, double duration, double from, double to) {
         fade(object, duration, from, to, null);
     }
 
+    /**
+     * Gets the main font of the program
+     * @param  size The font size
+     * @return      The specified Font
+     */
     public static Font getMainFont(double size) {
         return Font.loadFont(ResourceLoader.loadFont("nvscript_sc.ttf"), size + 4);
     }
 
+    /**
+     * Gets the default font of the program
+     * @param  size The font size
+     * @return      The specified Font
+     */
     public static Font getDefaultFont(double size) {
         return Font.font("Verdana", size);
     }

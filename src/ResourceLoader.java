@@ -21,6 +21,7 @@ import javafx.stage.*;
  *  - May 27, 2019: Updated ~Evan Zhang
  *  - May 27, 2019: Commented ~Evan Zhang
  *  - May 31, 2019: Updated ~Evan Zhang
+ *  - Jun 1, 2019: Commented ~Evan Zhang
  */
 public class ResourceLoader
 {
@@ -82,6 +83,11 @@ public class ResourceLoader
         return getResourceLocation("resources/css/" + filename);
     }
 
+    /**
+     * Loads the font file as a stream
+     * @param  filename The font file to load
+     * @return          The stream containing the font file
+     */
     public static InputStream loadFont(String filename) {
         return getResource("resources/fonts/" + filename);
     }

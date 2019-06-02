@@ -32,6 +32,7 @@ import javafx.stage.*;
  *  - May 29, 2019: Updated ~Evan Zhang
  *  - May 30, 2019: Updated ~Evan Zhang
  *  - May 31, 2019: Updated ~Evan Zhang
+ *  - Jun 1, 2019: Commented ~Evan Zhang
  */
 public abstract class BaseLevel extends BaseScene {
     /** Instance variables */
@@ -82,11 +83,20 @@ public abstract class BaseLevel extends BaseScene {
         }
     }
 
+    /**
+     * Increments the score for the user given the index
+     * @param index The index to increment
+     * @param delta The amount to increment (can be negative)
+     */
     protected void incrementScore(int index, int delta) {
         scores[index] += delta;
         scoresText[index].setText("" + scores[index]);
     }
 
+    /**
+     * Reload the user's scores
+     * @param newScores The new scores
+     */
     protected void loadScores(int[] newScores) {
         newScores = Arrays.copyOf(newScores, getScoreCount());
         for (int i = 0; i < getScoreCount(); i++) {
@@ -114,6 +124,9 @@ public abstract class BaseLevel extends BaseScene {
         }
     }
 
+    /**
+     * Called when it is the user's first time entering the level in order to setup the necessary GameSave
+     */
     protected void onFirstEnter() {
         if (getLevel() > 1) {
             GameSave prevSave = this.game.currentUser.levelSaves[getLevel() - 2];
@@ -175,7 +188,11 @@ public abstract class BaseLevel extends BaseScene {
         return overlay;
     }
 
-
+    /**
+     * Initializes a barebone overlay
+     * @param  nodes The nodes to place on the overlay
+     * @return       The overlay as a StackPane
+     */
     protected StackPane initBasicOverlay(Node... nodes) {
         StackPane overlayBase = new StackPane();
         overlayBase.setAlignment(Pos.CENTER);
@@ -192,6 +209,10 @@ public abstract class BaseLevel extends BaseScene {
         return overlayBase;
     }
 
+    /**
+     * Sets the overlay to the current overlay
+     * @param overlay The overlay to set as the current overlay
+     */
     protected void setOverlay(Node overlay) {
         if (currentOverlay != null) {
             System.err.println("Warning: overlay is already set.");
@@ -203,6 +224,9 @@ public abstract class BaseLevel extends BaseScene {
         currentOverlay = overlay;
     }
 
+    /**
+     * Removes the set overlay, if present
+     */
     protected void removeOverlay() {
         if (currentOverlay == null) {
             System.err.println("Warning: overlay is not set.");
@@ -213,6 +237,10 @@ public abstract class BaseLevel extends BaseScene {
         currentOverlay = null;
     }
 
+    /**
+     * Sets the scene for the current level
+     * @param root The root to use for the current scene
+     */
     protected void setScene(Parent root) {
         baseRoot.getChildren().add(root);
         Scene scene = new Scene(baseRoot);
@@ -235,20 +263,35 @@ public abstract class BaseLevel extends BaseScene {
         return "level-" + getLevel() + ".txt";
     }
 
+    /**
+     * Gets the level data file for the current level
+     * @return [description]
+     */
     protected String getLevelDataFile() {
         return "level-data-" + getLevel() + ".txt";
     }
 
+    /**
+     * Called when the levle is completed
+     */
     protected void onFinish() {
         this.levelComplete = true;
         handleFinish();
         stop();
     }
 
+    /**
+     * Returns whether there is an overlay set or not
+     * @return Whether there is an overlay set or not
+     */
     protected boolean overlayVisible() {
         return currentOverlay != null;
     }
 
+    /**
+     * Called whenever a key is pressed
+     * @param key The key that is pressed
+     */
     protected void handleKeyPressed(KeyCode key) {
         switch(key) {
             case ESCAPE: {
@@ -263,13 +306,25 @@ public abstract class BaseLevel extends BaseScene {
             }
         }
     }
+
+    /**
+     * Called whenever a key is released
+     * @param key The key that was released
+     */
     protected void handleKeyReleased(KeyCode key) {}
 
+    /** Called on every game loop */
     protected abstract void update();
+
+    /** Gets the level number for the current level */
     protected abstract int getLevel();
+    /** Gets the number of scores to keep track of */
     protected abstract int getScoreCount();
+    /** Called when the game is completed */
     protected abstract void handleFinish();
+    /** Saves the current game to a GameSave object */
     protected abstract GameSave save();
+    /** Loads the game from a GameSave object */
     protected void load(GameSave save) {
         this.levelComplete = save.levelComplete;
         loadScores(save.scores);

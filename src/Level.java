@@ -25,6 +25,7 @@ import javafx.stage.*;
  *  - May 27, 2019: Commented ~Evan Zhang
  *  - May 30, 2019: Updated ~Evan Zhang
  *  - May 31, 2019: Updated ~Evan Zhang
+ *  - Jun 1, 2019: Commented ~Evan Zhang
  */
 public class Level {
     /** Instance variables */
@@ -95,6 +96,12 @@ public class Level {
         return null;
     }
 
+    /**
+     * Gets the auxiliary blocks specified by the x and y coordinate
+     * @param  x The x coordinate
+     * @param  y The y coordinate
+     * @return   An arraylist of auxiliary blocks
+     */
     private ArrayList<Sprite> getAuxiliaryBlocks(double x, double y) {
         ArrayList<String> imageNames = new ArrayList();
         if (!isBlocked(x, y)) {
@@ -223,20 +230,44 @@ public class Level {
         return arr[getBlockY(y)][getBlockX(x)];
     }
 
+    /**
+     * Returns whether the specified x and y is directly above an end platform
+     * @param  x The x coordinate
+     * @param  y The y coordinate
+     * @return   Whether the speciifed coordinate is directly above an end platform
+     */
     public boolean aboveEndPlatform(double x, double y) {
         return y + Constants.PLATFORM_BLOCK_HEIGHT < screenLength() &&
                isEndPlatform(x, y + Constants.PLATFORM_BLOCK_HEIGHT);
     }
 
+    /**
+     * Returns whether the specified x and y is directly below a normal platform
+     * @param  x The x coordinate
+     * @param  y The y coordinate
+     * @return   Whether the speciifed coordinate is directly below a normal platform
+     */
     public boolean belowNormalPlatform(double x, double y) {
         return y - Constants.PLATFORM_BLOCK_HEIGHT >= 0 &&
                isNormalPlatform(x, y - Constants.PLATFORM_BLOCK_HEIGHT);
     }
 
+    /**
+     * Returns whether the specified x and y is an end platform
+     * @param  x The x coordinate
+     * @param  y The y coordinate
+     * @return   Whether the specified coordinate is an end platform
+     */
     public boolean isEndPlatform(double x, double y) {
         return getPosition(x, y) == 2;
     }
 
+    /**
+     * Returns whether the specified x and y is a normal platform
+     * @param  x The x coordinate
+     * @param  y The y coordinate
+     * @return   Whether the specified coordinate is a normal platform
+     */
     public boolean isNormalPlatform(double x, double y) {
         return getPosition(x, y) == 1;
     }
