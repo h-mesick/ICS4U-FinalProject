@@ -1,6 +1,4 @@
-import java.io.BufferedReader;
 import java.util.ArrayList;
-import java.util.List;
 
 import javafx.animation.*;
 import javafx.event.*;
@@ -34,18 +32,15 @@ public class Level {
     private Sprite[][] blocks;
     private ArrayList<Sprite>[][] auxiliaryBlocks;
 
+    private ArrayList<Sprite> allSprites = new ArrayList();
+    private ArrayList<Sprite> specialSprites = new ArrayList();
+
     /**
      * Constructor
      * @param  file The filename to load from
      */
     public Level(String file) {
-        ArrayList<String> lines = new ArrayList();
-        try (BufferedReader in = new BufferedReader(ResourceLoader.loadLevel(file))) {
-            for (String line; (line = in.readLine()) != null;) {
-                lines.add(line);
-            }
-        } catch (Exception e) {
-        }
+        ArrayList<String> lines = Util.readLines(ResourceLoader.loadLevel(file));
         int specialCnt = 0;
         arr = new int[lines.size()][Constants.BLOCK_WIDTH_COUNT];
         for (int y = 0; y < lines.size(); y++) {
@@ -70,6 +65,15 @@ public class Level {
                 double xx = getActX(x), yy = getActY(y);
                 blocks[y][x] = getBlock(xx, yy);
                 auxiliaryBlocks[y][x] = getAuxiliaryBlocks(xx, yy);
+
+                if (arr[y][x] < 0) {
+                    specialSprites.add(blocks[y][x]);
+                }
+                /** Add auxiliary blocks first so they are shown underneath */
+                allSprites.addAll(auxiliaryBlocks[y][x]);
+                if (blocks[y][x] != null) {
+                    allSprites.add(blocks[y][x]);
+                }
             }
         }
     }
@@ -174,40 +178,20 @@ public class Level {
         return (int)y / Constants.PLATFORM_BLOCK_HEIGHT;
     }
 
-    //TODO: optimize
     /**
      * Gets all the special blocks
      * @return The list of special blocks
      */
-    public List<Sprite> getSpecialSprites() {
-        List<Sprite> ret = new ArrayList();
-        for (int y = 0; y < length(); y++) {
-            for (int x = 0; x < Constants.BLOCK_WIDTH_COUNT; x++) {
-                if (arr[y][x] < 0) {
-                    ret.add(blocks[y][x]);
-                }
-            }
-        }
-        return ret;
+    public ArrayList<Sprite> getSpecialSprites() {
+        return specialSprites;
     }
 
-    //TODO: optimize
     /**
      * Gets all the blocks
      * @return The list of all blocks
      */
-    public List<Sprite> getAllSprites() {
-        List<Sprite> ret = new ArrayList();
-        for (int y = 0; y < length(); y++) {
-            for (int x = 0; x < Constants.BLOCK_WIDTH_COUNT; x++) {
-                /** Add auxiliary blocks first so they are shown underneath */
-                ret.addAll(auxiliaryBlocks[y][x]);
-                if (blocks[y][x] != null) {
-                    ret.add(blocks[y][x]);
-                }
-            }
-        }
-        return ret;
+    public ArrayList<Sprite> getAllSprites() {
+        return allSprites;
     }
 
     /**

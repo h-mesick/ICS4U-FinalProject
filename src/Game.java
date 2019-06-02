@@ -129,16 +129,19 @@ public class Game {
      * @param newState The new state
      */
     public void updateState(State newState) {
-        // save everytime the user goes to a different state
-        // note that this might not be the most efficient way
-        if (this.currentUser != null) {
-            this.currentUser.updateAll();
-        }
         if (this.currentScene != null) {
             this.currentScene.onExit();
         }
         this.currentState = newState;
         updateScene();
+        /**
+         * Saves everytime the user goes to a different state.
+         * Note that this might not be the most efficient way,
+         * but it is the most transparent way.
+         */
+        if (this.currentUser != null) {
+            this.currentUser.updateAll();
+        }
     }
 
     /**

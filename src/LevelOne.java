@@ -1,5 +1,5 @@
-import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.TreeMap;
 
 import javafx.animation.*;
 import javafx.event.*;
@@ -112,15 +112,7 @@ public class LevelOne extends BaseLevel {
     public LevelOne(Game game) {
         super(game);
         root = new Group();
-        ArrayList<String> lines = new ArrayList();
-        try (BufferedReader in = new BufferedReader(ResourceLoader.loadLevel(getLevelFile()))) {
-            for (String line; (line = in.readLine()) != null;) {
-                if (line.length() > 0) {
-                    lines.add(line);
-                }
-            }
-        } catch (Exception e) {
-        }
+        ArrayList<String> lines = Util.readLines(ResourceLoader.loadLevel(getLevelFile()));
         dialogCommands = new Command[lines.size()];
         for (int i = 0; i < lines.size(); i++) {
             dialogCommands[i] = new Command(lines.get(i));

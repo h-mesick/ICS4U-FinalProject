@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.Reader;
+import java.util.ArrayList;
+
 import javafx.animation.*;
 import javafx.event.*;
 import javafx.geometry.*;
@@ -220,4 +224,21 @@ public abstract class Util {
         return Font.font("Verdana", size);
     }
 
+    /**
+     * Parses data from an Reader into lines
+     * @param  stream The Reader
+     * @return        The ArrayList of lines from the Reader
+     */
+    public static ArrayList<String> readLines(Reader reader) {
+        ArrayList<String> lines = new ArrayList<String>();
+        try (BufferedReader in = new BufferedReader(reader)) {
+            for (String line; (line = in.readLine()) != null;) {
+                if (line.length() > 0) {
+                    lines.add(line);
+                }
+            }
+        } catch (Exception e) {
+        }
+        return lines;
+    }
 }
