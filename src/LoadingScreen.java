@@ -14,7 +14,6 @@ import javafx.stage.*;
 import javafx.util.*;
 
 /**
- * @author Evan Zhang
  * Revision history:
  *  - May 13, 2019: Created ~Evan Zhang
  *  - May 22, 2019: Finished ~Max Li
@@ -22,12 +21,12 @@ import javafx.util.*;
  *  - May 27, 2019: Commented ~Max Li
  *  - May 28, 2019: Updated ~Evan Zhang
  *  - May 30, 2019: Updated ~Evan Zhang
+ * @author Evan Zhang
  * @version 1
  */
 public class LoadingScreen extends BaseScene {
     /**
      * Constructor for the LoadingScreen class.
-     *
      * @param game The current game that is running.
      */
     public LoadingScreen(Game game) {
@@ -35,7 +34,7 @@ public class LoadingScreen extends BaseScene {
     }
 
     /**
-     * Initializes the scene to the loading screen animation.
+     * {@inheritDoc}
      */
     public void initScene() {
         BorderPane root = new BorderPane();

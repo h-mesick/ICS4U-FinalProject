@@ -4,13 +4,13 @@ import java.lang.IllegalArgumentException;
 import javax.json.*;
 
 /**
- * @version 1
- * @author Evan Zhang
  * Revision history:
  *  - May 28, 2019: Created ~Evan Zhang
  *  - May 30, 2019: Updated ~Evan Zhang
  *  - Jun 1, 2019: Commented ~Evan Zhang
  *  - Jun 2, 2019: Commented ~Evan Zhang
+ * @author Evan Zhang
+ * @version 1
  */
 public class User implements Comparable {
     /** Instance variables */
@@ -118,9 +118,7 @@ public class User implements Comparable {
     }
 
     /**
-     * Compares two users
-     * @param  other The other user
-     * @return       The comparison of the 2 objects
+     * {@inheritDoc}
      */
     @Override
     public int compareTo(Object other) {

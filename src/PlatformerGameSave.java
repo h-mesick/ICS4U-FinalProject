@@ -15,8 +15,6 @@ import javafx.scene.text.*;
 import javafx.stage.*;
 
 /**
- * @version 1
- * @author Evan Zhang
  * Revision history:
  *  - May 21, 2019: Created ~Evan Zhang
  *  - May 27, 2019: Commented ~Evan Zhang
@@ -25,6 +23,8 @@ import javafx.stage.*;
  *  - May 30, 2019: Updated ~Evan Zhang
  *  - Jun 1, 2019: Commented ~Evan Zhang
  *  - Jun 2, 2019: Commented ~Evan Zhang
+ * @author Evan Zhang
+ * @version 1
  */
 public class PlatformerGameSave extends GameSave {
     /** Instance variables */
@@ -71,8 +71,7 @@ public class PlatformerGameSave extends GameSave {
     }
 
     /**
-     * Converts the gamesave to a JsonObject
-     * @return The JSONOBject representing the current gamesave
+     * {@inheritDoc}
      */
     public JsonObject toJson() {
         JsonArrayBuilder jsonNodes = Json.createArrayBuilder();
@@ -87,9 +86,7 @@ public class PlatformerGameSave extends GameSave {
     }
 
     /**
-     * Loads the gamesave from a JSONObject
-     * @param  data The JSONObject to load from
-     * @return      The gamesave representing the JSONObject
+     * {@inheritDoc}
      */
     public static GameSave fromJson(JsonObject data) {
         boolean levelComplete = data.getBoolean("levelComplete", false);

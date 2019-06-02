@@ -18,8 +18,6 @@ import javafx.stage.*;
 import javafx.util.*;
 
 /**
- * @version 1
- * @author Evan Zhang
  * Revision history:
  *  - May 13, 2019: Created ~Evan Zhang
  *  - May 17, 2019: Updated ~Evan Zhang
@@ -31,6 +29,8 @@ import javafx.util.*;
  *  - May 31, 2019: Updated ~Evan Zhang
  *  - Jun 1, 2019: Updated ~Evan Zhang
  *  - Jun 1, 2019: Commented ~Evan Zhang
+ * @author Evan Zhang
+ * @version 1
  */
 
 public class LevelOne extends BaseLevel {
@@ -123,22 +123,21 @@ public class LevelOne extends BaseLevel {
     }
 
     /**
-     * Get the level number that this class represents
-     * @return The level
+     * {@inheritDoc}
      */
     protected int getLevel() {
         return 1;
     }
+
     /**
-     * Get the number of scores to save
-     * @return The score count
+     * {@inheritDoc}
      */
     protected int getScoreCount() {
         return 1;
     }
 
     /**
-     * Initializes the scene
+     * {@inheritDoc}
      */
     public void initScene() {
         background = new ImageView();
@@ -169,13 +168,13 @@ public class LevelOne extends BaseLevel {
     }
 
     /**
-     * Update method called every game tick
+     * {@inheritDoc}
      */
     protected void update() {
     }
 
     /**
-     * Called when the level is completed
+     * {@inheritDoc}
      */
     protected void handleFinish() {
         fadeOut(e -> {
@@ -188,7 +187,7 @@ public class LevelOne extends BaseLevel {
     }
 
     /**
-     * Called when it is the user's first time loading the level
+     * {@inheritDoc}
      */
     protected void onFirstEnter() {
         super.onFirstEnter();
@@ -196,16 +195,14 @@ public class LevelOne extends BaseLevel {
     }
 
     /**
-     * Returns whether the overlay is visible or not
-     * @return Whether the overlay is visible or not
+     * {@inheritDoc}
      */
     protected boolean overlayVisible() {
         return super.overlayVisible() || transitionOverlay.getOpacity() > 0;
     }
 
     /**
-     * Called when a key is pressed
-     * @param key The key that is pressed
+     * {@inheritDoc}
      */
     protected void handleKeyPressed(KeyCode key) {
         super.handleKeyPressed(key);
@@ -418,16 +415,14 @@ public class LevelOne extends BaseLevel {
     }
 
     /**
-     * Saves the level state
-     * @return The GameSave object
+     * {@inheritDoc}
      */
     protected GameSave save() {
         return new StoryGameSave(dialogPosition, scores, levelComplete);
     }
 
     /**
-     * Load the level state from a GameSave
-     * @param baseSave The game save to load from
+     * {@inheritDoc}
      */
     protected void load(GameSave baseSave) {
         super.load(baseSave);

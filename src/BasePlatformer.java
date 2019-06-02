@@ -14,8 +14,6 @@ import javafx.scene.text.*;
 import javafx.stage.*;
 
 /**
- * @version 1
- * @author Evan Zhang
  * Revision history:
  *  - May 13, 2019: Created ~Evan Zhang
  *  - May 14, 2019: Updated ~Evan Zhang
@@ -36,6 +34,8 @@ import javafx.stage.*;
  *  - May 31, 2019: Updated ~Evan Zhang
  *  - Jun 1, 2019: Commented ~Evan Zhang
  *  - Jun 2, 2019: Commented ~Evan Zhang
+ * @author Evan Zhang
+ * @version 1
 */
 public abstract class BasePlatformer extends BaseLevel {
     /** Instance variables */
@@ -60,7 +60,7 @@ public abstract class BasePlatformer extends BaseLevel {
     }
 
     /**
-     * Initializes the scene
+     * {@inheritDoc}
      */
     public void initScene() {
         background = new ImageView(ResourceLoader.loadImage("platform-background.png"));
@@ -228,7 +228,7 @@ public abstract class BasePlatformer extends BaseLevel {
     }
 
     /**
-     * Update method that is called every frame
+     * {@inheritDoc}
      */
     protected void update() {
         if (currentOverlay != null) {
@@ -241,8 +241,7 @@ public abstract class BasePlatformer extends BaseLevel {
     }
 
     /**
-     * Loads a game save
-     * @param baseSave The game save to load from
+     * {@inheritDoc}
      */
     protected void load(GameSave baseSave) {
         super.load(baseSave);
@@ -270,7 +269,7 @@ public abstract class BasePlatformer extends BaseLevel {
     }
 
     /**
-     * Saves a game
+     * {@inheritDoc}
      */
     protected PlatformerGameSave save() {
         ArrayList<Point2D> nodes = new ArrayList<Point2D>();
@@ -298,6 +297,9 @@ public abstract class BasePlatformer extends BaseLevel {
         return y - referencePoint;
     }
 
-    /** Called when the player touches a special block */
+    /**
+     * Called when the player touches a special block
+     * @param specialType The unique id of the special block
+     */
     protected abstract void handleSpecial(int specialType);
 }

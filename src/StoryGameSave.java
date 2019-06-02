@@ -15,11 +15,11 @@ import javafx.scene.text.*;
 import javafx.stage.*;
 
 /**
- * @version 1
- * @author Evan Zhang
  * Revision history:
  *  - May 30, 2019: Created ~Evan Zhang
  *  - Jun 1, 2019: Commented ~Evan Zhang
+ * @author Evan Zhang
+ * @version 1
  */
 public class StoryGameSave extends GameSave {
     /** Instance variables */
@@ -37,8 +37,7 @@ public class StoryGameSave extends GameSave {
     }
 
     /**
-     * Converts the gamesave to a JSONObject
-     * @return The converted save
+     * {@inheritDoc}
      */
     public JsonObject toJson() {
         return baseJsonObjectBuilder()
@@ -47,9 +46,7 @@ public class StoryGameSave extends GameSave {
     }
 
     /**
-     * Loads the gamesave from a JSONObject
-     * @param  data The json object to load from
-     * @return      The loaded gamesave
+     * {@inheritDoc}
      */
     public static GameSave fromJson(JsonObject data) {
         boolean levelComplete = data.getBoolean("levelComplete", false);

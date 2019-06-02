@@ -16,8 +16,6 @@ import javafx.scene.text.*;
 import javafx.stage.*;
 
 /**
- * @version 1
- * @author Evan Zhang
  * Revision history:
  *  - May 13, 2019: Created ~Evan Zhang
  *  - May 14, 2019: Updated ~Evan Zhang
@@ -34,6 +32,8 @@ import javafx.stage.*;
  *  - May 31, 2019: Updated ~Evan Zhang
  *  - Jun 1, 2019: Commented ~Evan Zhang
  *  - Jun 2, 2019: Commented ~Evan Zhang
+ * @author Evan Zhang
+ * @version 1
  */
 public abstract class BaseLevel extends BaseScene {
     /** Instance variables */
@@ -50,7 +50,6 @@ public abstract class BaseLevel extends BaseScene {
 
     /**
      * Constructor for the BaseLevel class.
-     *
      * @param game The current game that is running.
      */
     public BaseLevel(Game game) {
@@ -266,7 +265,7 @@ public abstract class BaseLevel extends BaseScene {
 
     /**
      * Gets the level data file for the current level
-     * @return [description]
+     * @return The level data filename
      */
     protected String getLevelDataFile() {
         return "level-data-" + getLevel() + ".txt";
@@ -314,20 +313,37 @@ public abstract class BaseLevel extends BaseScene {
      */
     protected void handleKeyReleased(KeyCode key) {}
 
-    /** Called on every game loop */
+    /**
+     * Called on every game tick
+     */
     protected abstract void update();
 
-    /** Gets the level number for the current level */
+    /**
+     * Gets the level number for the current level
+     * @return The level number of the current level
+     */
     protected abstract int getLevel();
-    /** Gets the number of scores to keep track of */
+
+    /**
+     * Gets the number of scores to keep track of
+     * @return The number of scores to keep track of
+     */
     protected abstract int getScoreCount();
-    /** Called when the game is completed */
+    /**
+     * Called when the game is completed
+     */
     protected abstract void handleFinish();
-    /** Saves the current game to a GameSave object */
+    /**
+     * Saves the current game to a GameSave object
+     * @return The GameSave object representing this level
+     */
     protected abstract GameSave save();
-    /** Loads the game from a GameSave object */
-    protected void load(GameSave save) {
-        this.levelComplete = save.levelComplete;
-        loadScores(save.scores);
+    /**
+     * Loads the game from a GameSave object
+     * @param baseSave The GameSave object
+     */
+    protected void load(GameSave baseSave) {
+        this.levelComplete = baseSave.levelComplete;
+        loadScores(baseSave.scores);
     }
 }

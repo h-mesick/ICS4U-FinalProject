@@ -17,11 +17,11 @@ import javafx.stage.*;
 import javafx.util.*;
 
 /**
- * @version 1
- * @author Evan Zhang
  * Revision history:
  *  - May 31, 2019: Created ~Evan Zhang
  *  - Jun 1, 2019: Commented ~Evan Zhang
+ * @author Evan Zhang
+ * @version 1
  */
 public abstract class Util {
     /**
@@ -229,7 +229,7 @@ public abstract class Util {
 
     /**
      * Parses data from an Reader into lines
-     * @param  stream The Reader
+     * @param  reader The Reader
      * @return        The ArrayList of lines from the Reader
      */
     public static ArrayList<String> readLines(Reader reader) {
