@@ -12,16 +12,14 @@ import javafx.scene.text.*;
 import javafx.stage.*;
 
 /**
- * @author Evan Zhang
  * Revision history:
  * - May 16, 2019: Created ~Evan Zhang
  * - May 27, 2019: Commented ~Max Li
+ * @author Evan Zhang
  * @version 1
  */
 public class ImageButton extends Button {
-    /**
-     * Instance variables
-     */
+    /** Instance variables */
     private ImageView image;
 
     /**

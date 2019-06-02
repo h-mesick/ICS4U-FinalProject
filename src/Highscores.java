@@ -15,13 +15,13 @@ import javafx.scene.text.*;
 import javafx.stage.*;
 
 /**
- * @version 1
- * @author Evan Zhang
  * Revision history:
  *  - May 28, 2019: Created ~Evan Zhang
  *  - May 29, 2019: Updated ~Evan Zhang
  *  - May 30, 2019: Updated ~Evan Zhang
  *  - May 31, 2019: Updated ~Evan Zhang
+ * @author Evan Zhang
+ * @version 1
  */
 public class Highscores extends BaseScene {
     /**
@@ -33,7 +33,7 @@ public class Highscores extends BaseScene {
     }
 
     /**
-     * Initializes the scene
+     * {@inheritDoc}
      */
     public void initScene() {
         VBox body = new VBox(10);

@@ -17,8 +17,6 @@ import javafx.scene.text.*;
 import javafx.stage.*;
 
 /**
- * @version 1
- * @author Evan Zhang
  * Revision history:
  *  - May 13, 2019: Created ~Evan Zhang
  *  - May 15, 2019: Updated ~Evan Zhang
@@ -32,6 +30,8 @@ import javafx.stage.*;
  *  - May 30, 2019: Updated ~Evan Zhang
  *  - May 31, 2019: Updated ~Evan Zhang
  *  - Jun 1, 2019: Updated ~Evan Zhang
+ * @author Evan Zhang
+ * @version 1
  */
 public class LevelThree extends BasePlatformer {
     /** Instance variables */
@@ -53,23 +53,21 @@ public class LevelThree extends BasePlatformer {
     }
 
     /**
-     * Get the level number that this class represents
-     * @return The level
+     * {@inheritDoc}
      */
     protected int getLevel() {
         return 3;
     }
 
     /**
-     * Get the number of scores to save
-     * @return The score count
+     * {@inheritDoc}
      */
     protected int getScoreCount() {
         return 2;
     }
 
     /**
-     * Initializes the scene
+     * {@inheritDoc}
      */
     public void initScene() {
         HBox coinCountOverlay = new HBox(5);
@@ -137,8 +135,7 @@ public class LevelThree extends BasePlatformer {
     }
 
     /**
-     * Handles when the player touches a special block
-     * @param specialType The special block's number
+     * {@inheritDoc}
      */
     protected void handleSpecial(int specialType) {
         Question question = getQuestion(specialType);
@@ -146,7 +143,7 @@ public class LevelThree extends BasePlatformer {
     }
 
     /**
-     * Handle when the player reaches the top of the game
+     * {@inheritDoc}
      */
     protected void handleFinish() {
         Text finishText = new Text("Congratulations! You completed level three!");

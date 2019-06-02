@@ -36,7 +36,7 @@ public class LevelSelect extends BaseScene {
     }
 
     /**
-     * Initializes the scene
+     * {@inheritDoc}
      */
     public void initScene() {
         EventHandler[] handlers = {

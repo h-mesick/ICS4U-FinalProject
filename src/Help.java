@@ -13,13 +13,13 @@ import javafx.scene.text.*;
 import javafx.stage.*;
 
 /**
- * @author Evan Zhang
  * Revision history:
- * - May 16, 2019: Created ~Evan Zhang
- * - May 18, 2019: Updated ~Evan Zhang
- * - May 27, 2019: Commented ~Max Li
- * - May 31, 2019: Updated ~Evan Zhang
- * - June 2, 2019: Updated ~Max Li
+ *  - May 16, 2019: Created ~Evan Zhang
+ *  - May 18, 2019: Updated ~Evan Zhang
+ *  - May 27, 2019: Commented ~Max Li
+ *  - May 31, 2019: Updated ~Evan Zhang
+ *  - June 2, 2019: Updated ~Max Li
+ * @author Evan Zhang
  * @version 1
  */
 public class Help extends BaseScene {
@@ -33,7 +33,7 @@ public class Help extends BaseScene {
     }
 
     /**
-     * Initializes the scene to the help window.
+     * {@inheritDoc}
      */
     public void initScene() {
         // TODO: set to page 1 once level 1 is done

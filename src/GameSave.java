@@ -3,14 +3,14 @@ import javax.json.*;
 import javafx.geometry.*;
 
 /**
- * @version 1
- * @author Evan Zhang
  * Revision history:
  *  - May 21, 2019: Created ~Evan Zhang
  *  - May 28, 2019: Updated ~Evan Zhang
  *  - May 29, 2019: Updated ~Evan Zhang
  *  - May 30, 2019: Updated ~Evan Zhang
  *  - Jun 1, 2019: Commented ~Evan Zhang
+ * @author Evan Zhang
+ * @version 1
  */
 public abstract class GameSave {
     /** Instance variables */
@@ -42,10 +42,18 @@ public abstract class GameSave {
                    .add("scores", jsonScores.build());
     }
 
-    /** Converts the gamesave to a JSONObject */
+    /**
+     * Converts the gamesave to a JSONObject
+     * @return The converted save
+     */
     public abstract JsonObject toJson();
-    /** Loads the gamesave from a JSONObject */
-    public static GameSave fromJson() {
+
+    /**
+     * Loads the gamesave from a JSONObject
+     * @param  data The json object to load from
+     * @return      The loaded gamesave
+     */
+    public static GameSave fromJson(JsonObject data) {
         return null;
     }
 }

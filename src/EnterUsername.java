@@ -14,18 +14,17 @@ import javafx.scene.text.*;
 import javafx.stage.*;
 
 /**
- * @author Evan Zhang
  * Revision history:
  *  - May 28, 2019: Created ~Evan Zhang
  *  - May 29, 2019: Updated ~Evan Zhang
  *  - May 30, 2019: Updated ~Evan Zhang
  *  - May 31, 2019: Updated ~Evan Zhang
+ * @author Evan Zhang
  * @version 1
  */
 public class EnterUsername extends BaseScene {
     /**
      * Constructor
-     *
      * @param game The current game that is running
      */
     public EnterUsername(Game game) {
@@ -33,7 +32,7 @@ public class EnterUsername extends BaseScene {
     }
 
     /**
-     * Initializes the scene
+     * {@inheritDoc}
      */
     public void initScene() {
         VBox body = new VBox(10);

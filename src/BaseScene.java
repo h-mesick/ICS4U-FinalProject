@@ -13,8 +13,6 @@ import javafx.stage.*;
 import javafx.util.*;
 
 /**
- * @version 1
- * @author Evan Zhang
  * Revision history:
  *  - May 13, 2019: Created ~Evan Zhang
  *  - May 16, 2019: Updated ~Evan Zhang
@@ -24,6 +22,8 @@ import javafx.util.*;
  *  - May 30, 2019: Updated ~Evan Zhang
  *  - May 31, 2019: Updated ~Evan Zhang
  *  - Jun 1, 2019: Commented ~Evan Zhang
+ * @author Evan Zhang
+ * @version 1
  */
 public abstract class BaseScene {
     /** Instance variables */

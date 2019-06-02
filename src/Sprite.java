@@ -12,14 +12,14 @@ import javafx.scene.text.*;
 import javafx.stage.*;
 
 /**
- * @version 1
- * @author Evan Zhang
  * Revision history:
  *  - May 14, 2019: Created ~Evan Zhang
  *  - May 15, 2019: Updated ~Evan Zhang
  *  - May 17, 2019: Updated ~Evan Zhang
  *  - May 27, 2019: Commented ~Evan Zhang
  *  - May 28, 2019: Updated ~Evan Zhang
+ * @author Evan Zhang
+ * @version 1
  */
 public class Sprite extends ImageView {
     /** Instance variables */

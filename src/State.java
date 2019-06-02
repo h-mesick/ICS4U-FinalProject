@@ -1,9 +1,9 @@
 /**
- * @version 1
- * @author Evan Zhang
  * Revision history:
  *  - May 14, 2019: Created ~Evan Zhang
  *  - May 28, 2019: Updated ~Evan Zhang
+ * @author Evan Zhang
+ * @version 1
  */
 public enum State {
     LOADING_SCREEN,
