@@ -28,6 +28,7 @@ import javafx.stage.*;
 public class Level {
     /** Instance variables */
     private final double OFFSET = 0.1;
+    private final String DEFAULT_SPECIAL_IMAGE = "coin.png";
     private int[][] arr;
     private Sprite[][] blocks;
     private ArrayList<Sprite>[][] auxiliaryBlocks;
@@ -91,7 +92,7 @@ public class Level {
         } else if (isNormalPlatform(x, y)) {
             image = belowNormalPlatform(x, y) ? "platform.png" : "platform-top.png";
         } else if (isSpecial(x, y)) {
-            image = "coin.png";
+            image = DEFAULT_SPECIAL_IMAGE;
         }
         if (image != null) {
             return new Sprite(x, y, Constants.PLATFORM_BLOCK_WIDTH,
@@ -125,6 +126,15 @@ public class Level {
         return sprites;
     }
 
+    /**
+     * Sets the image of all special blocks
+     * @param imageFilename The filename of the new special image
+     */
+    public void setSpecialImage(String imageFilename) {
+        for (Sprite s : specialSprites) {
+            s.setImage(ResourceLoader.loadImage(imageFilename));
+        }
+    }
 
     /**
      * Gets the length of the level in blocks

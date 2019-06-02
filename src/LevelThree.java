@@ -49,6 +49,7 @@ public class LevelThree extends BasePlatformer {
         } catch (Exception e) {
             throw e;
         }
+        this.level.setSpecialImage("star.png");
     }
 
     /**
