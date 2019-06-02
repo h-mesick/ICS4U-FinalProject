@@ -44,7 +44,7 @@ public class Main extends Application {
 
         new Game(primaryStage);
 
-        primaryStage.setResizable(false);
+        //primaryStage.setResizable(false);
         primaryStage.setHeight(Constants.SCREEN_HEIGHT);
         primaryStage.setWidth(Constants.SCREEN_WIDTH);
 
