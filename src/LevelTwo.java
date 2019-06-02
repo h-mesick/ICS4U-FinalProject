@@ -96,8 +96,8 @@ public class LevelTwo extends BasePlatformer {
     protected Question getQuestion(int specialType) {
         JsonObject curObj = questions.getJsonObject(questions.size() - specialType);
         String question = curObj.getString("question");
-        ArrayList<JsonObject> choices = new ArrayList(Arrays.asList(curObj.getJsonArray("choices")
-                                                                          .toArray(new JsonObject[0])));
+        ArrayList<JsonObject> choices = new ArrayList<JsonObject>(Arrays.asList(curObj.getJsonArray("choices")
+                                                                                      .toArray(new JsonObject[0])));
         Collections.shuffle(choices);
 
         String[] answers = new String[choices.size()];

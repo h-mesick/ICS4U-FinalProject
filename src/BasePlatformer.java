@@ -44,7 +44,7 @@ public abstract class BasePlatformer extends BaseLevel {
     protected Level level;
     protected double referencePoint;
     protected ImageView background;
-    protected ArrayList<Sprite> removedNodes = new ArrayList();
+    protected ArrayList<Sprite> removedNodes = new ArrayList<Sprite>();
 
     protected int updateCount = 0;
 
@@ -273,7 +273,7 @@ public abstract class BasePlatformer extends BaseLevel {
      * Saves a game
      */
     protected PlatformerGameSave save() {
-        ArrayList<Point2D> nodes = new ArrayList();
+        ArrayList<Point2D> nodes = new ArrayList<Point2D>();
         for (Sprite s : removedNodes) {
             nodes.add(s.getCenterPosition());
         }

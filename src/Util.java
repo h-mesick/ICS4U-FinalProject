@@ -107,6 +107,7 @@ public abstract class Util {
      * @param  fontSize The font size of the overlay'd text
      * @return          The image button as a StackPane
      */
+    @SuppressWarnings("unchecked")
     public static StackPane getMainButton(String text, EventHandler onClick, int fontSize) {
         ImageButton mainButton = new ImageButton();
         mainButton.setImages(ResourceLoader.loadImage("button.png"),
@@ -146,6 +147,7 @@ public abstract class Util {
      * @param  onClick      The handler for when the button is clicked
      * @return              The image button as an ImageButton
      */
+    @SuppressWarnings("unchecked")
     public static ImageButton getMainImageButton(String baseFilename, EventHandler onClick) {
         ImageButton button = new ImageButton();
         button.setFitWidth(50);
@@ -185,6 +187,7 @@ public abstract class Util {
      * @param to         The opacity to end at
      * @param onFinished The handler once the transition is completed
      */
+    @SuppressWarnings("unchecked")
     public static void fade(Node object, double duration, double from, double to, EventHandler onFinished) {
         FadeTransition ft = new FadeTransition(Duration.seconds(duration), object);
         ft.setFromValue(from);

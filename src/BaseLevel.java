@@ -41,7 +41,7 @@ public abstract class BaseLevel extends BaseScene {
     protected AnimationTimer mainTimer;
     protected Node currentOverlay;
     protected VBox escapeOverlay;
-    protected Set<KeyCode> pressedKeys = new HashSet();
+    protected Set<KeyCode> pressedKeys = new HashSet<KeyCode>();
     protected Group root;
 
     protected int[] scores;

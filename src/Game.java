@@ -30,7 +30,7 @@ public class Game {
     /** Instance variables */
     private State currentState = null, nextState = null;
     private BaseScene currentScene;
-    private HashMap<String, User> users = new HashMap();
+    private HashMap<String, User> users = new HashMap<String, User>();
 
     public Stage stage;
     public User currentUser;

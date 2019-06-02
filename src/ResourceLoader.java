@@ -26,7 +26,7 @@ import javafx.stage.*;
 public class ResourceLoader
 {
     /** Static variables */
-    private static TreeMap<String,Image> imageCache = new TreeMap();
+    private static TreeMap<String, Image> imageCache = new TreeMap<String, Image>();
 
     /**
      * Get the resource from the location

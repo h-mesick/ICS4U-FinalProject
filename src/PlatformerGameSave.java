@@ -100,7 +100,7 @@ public class PlatformerGameSave extends GameSave {
         for (int i = 0; i < jsonScores.size(); i++) {
             scores[i] = jsonScores.getInt(i);
         }
-        ArrayList<Point2D> removedNodes = new ArrayList();
+        ArrayList<Point2D> removedNodes = new ArrayList<Point2D>();
         for (JsonValue obj : data.getJsonArray("removedNodes")) {
             removedNodes.add(jsonToPoint((JsonObject)obj));
         }

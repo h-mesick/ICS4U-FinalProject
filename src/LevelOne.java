@@ -103,7 +103,7 @@ public class LevelOne extends BaseLevel {
     private StackPane textOverlay;
     private int dialogPosition = 0;
     private Command[] dialogCommands;
-    private TreeMap<String, Integer> dialogCommandsLabelMap = new TreeMap();
+    private TreeMap<String, Integer> dialogCommandsLabelMap = new TreeMap<String, Integer>();
 
     /**
      * Constructor

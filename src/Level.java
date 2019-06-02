@@ -33,13 +33,14 @@ public class Level {
     private Sprite[][] blocks;
     private ArrayList<Sprite>[][] auxiliaryBlocks;
 
-    private ArrayList<Sprite> allSprites = new ArrayList();
-    private ArrayList<Sprite> specialSprites = new ArrayList();
+    private ArrayList<Sprite> allSprites = new ArrayList<Sprite>();
+    private ArrayList<Sprite> specialSprites = new ArrayList<Sprite>();
 
     /**
      * Constructor
      * @param  file The filename to load from
      */
+    @SuppressWarnings("unchecked")
     public Level(String file) {
         ArrayList<String> lines = Util.readLines(ResourceLoader.loadLevel(file));
         int specialCnt = 0;
@@ -108,7 +109,7 @@ public class Level {
      * @return   An arraylist of auxiliary blocks
      */
     private ArrayList<Sprite> getAuxiliaryBlocks(double x, double y) {
-        ArrayList<String> imageNames = new ArrayList();
+        ArrayList<String> imageNames = new ArrayList<String>();
         if (!isBlocked(x, y)) {
             if (belowNormalPlatform(x, y)) {
                 int num = (int)(Math.random() * 3) + 1;
@@ -118,7 +119,7 @@ public class Level {
                 imageNames.add("platform-door.png");
             }
         }
-        ArrayList<Sprite> sprites = new ArrayList();
+        ArrayList<Sprite> sprites = new ArrayList<Sprite>();
         for (String image : imageNames) {
             sprites.add(new Sprite(x, y, Constants.PLATFORM_BLOCK_WIDTH,
                               Constants.PLATFORM_BLOCK_HEIGHT, ResourceLoader.loadImage(image)));

@@ -113,8 +113,8 @@ public class LevelThree extends BasePlatformer {
         if (type.equals("purchase")) {
             question += " (Cost to purchase: " + cost + ")";
         }
-        ArrayList<JsonObject> choices = new ArrayList(Arrays.asList(curObj.getJsonArray("choices")
-                                                                          .toArray(new JsonObject[0])));
+        ArrayList<JsonObject> choices = new ArrayList<JsonObject>(Arrays.asList(curObj.getJsonArray("choices")
+                                                                                      .toArray(new JsonObject[0])));
         String[] answers = new String[choices.size()];
         for (int i = 0; i < choices.size(); i++) {
             answers[i] = choices.get(i).getString("choice");
