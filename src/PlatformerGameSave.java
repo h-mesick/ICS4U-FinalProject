@@ -24,6 +24,7 @@ import javafx.stage.*;
  *  - May 29, 2019: Updated ~Evan Zhang
  *  - May 30, 2019: Updated ~Evan Zhang
  *  - Jun 1, 2019: Commented ~Evan Zhang
+ *  - Jun 2, 2019: Commented ~Evan Zhang
  */
 public class PlatformerGameSave extends GameSave {
     /** Instance variables */
@@ -37,6 +38,7 @@ public class PlatformerGameSave extends GameSave {
      * @param  player         The player location
      * @param  removedNodes   The location of the removed blocks on the screen
      * @param  scores         The scores for the game level
+     * @param  levelComplete  Whether the level is completed or not
      */
     public PlatformerGameSave(double referencePoint, Point2D player, ArrayList<Point2D> removedNodes,
                               int[] scores, boolean levelComplete) {

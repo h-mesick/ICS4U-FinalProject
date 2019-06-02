@@ -10,6 +10,7 @@ import javax.json.*;
  *  - May 28, 2019: Created ~Evan Zhang
  *  - May 30, 2019: Updated ~Evan Zhang
  *  - Jun 1, 2019: Commented ~Evan Zhang
+ *  - Jun 2, 2019: Commented ~Evan Zhang
  */
 public class User implements Comparable {
     /** Instance variables */
@@ -119,7 +120,7 @@ public class User implements Comparable {
     /**
      * Compares two users
      * @param  other The other user
-     * @return       > 0 if this > user, == 0 if this == user, and < 0 if this < user
+     * @return       The comparison of the 2 objects
      */
     @Override
     public int compareTo(Object other) {
