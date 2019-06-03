@@ -121,17 +121,19 @@ public abstract class BasePlatformer extends BaseLevel {
         double ceiling = getScreenY(this.level.getUpperBound(box));
 
         boolean moveLeft = pressedKeys.contains(KeyCode.LEFT), moveRight = pressedKeys.contains(KeyCode.RIGHT);
+        boolean onGround = player.onGround(ground);
 
-        if (pressedKeys.contains(KeyCode.UP) && player.onGround(ground)) {
-            player.jump();
-        }
-        if (moveLeft || moveRight) {
-            if (player.onGround(ground) || updateCount % 40 / 10 != 0) {
+        if (moveLeft || moveRight || !onGround) {
+            if (onGround || updateCount % 40 / 10 != 0) {
                 updateCount++;
             }
             player.setImage(ResourceLoader.loadImage("player/00" + (updateCount % 80 / 10) + ".png"));
         } else {
             player.setImage(ResourceLoader.loadImage("player/still.png"));
+        }
+
+        if (pressedKeys.contains(KeyCode.UP) && onGround) {
+            player.jump();
         }
 
         player.fall(ground, ceiling);
