@@ -16,7 +16,7 @@ import javax.json.*;
  * @author Evan Zhang
  * @version 1
  */
-public class StoryGameSave extends GameSave {
+public class StoryGameSave extends BaseGameSave {
     /** Instance variables */
     public int dialogPosition;
 
@@ -43,7 +43,7 @@ public class StoryGameSave extends GameSave {
     /**
      * {@inheritDoc}
      */
-    public static GameSave fromJson(JsonObject data) {
+    public static BaseGameSave fromJson(JsonObject data) {
         boolean levelComplete = data.getBoolean("levelComplete", false);
         JsonArray jsonScores = data.getJsonArray("scores");
         int[] scores = new int[jsonScores.size()];

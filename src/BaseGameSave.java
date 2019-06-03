@@ -19,23 +19,23 @@ import javax.json.*;
  * @author Evan Zhang
  * @version 1
  */
-public abstract class GameSave {
+public abstract class BaseGameSave {
     /** Instance variables */
     public int scores[];
     public boolean levelComplete;
 
     /**
-     * GameSave constructor
+     * BaseGameSave constructor
      * @param  scores         The scores for the game
      * @param  levelComplete  Whether the level is completed or not
      */
-    public GameSave(int[] scores, boolean levelComplete) {
+    public BaseGameSave(int[] scores, boolean levelComplete) {
         this.scores = scores;
         this.levelComplete = levelComplete;
     }
 
     /**
-     * Gets the JsonObjectBuilder for the GameSave, to be used by its subclasses
+     * Gets the JsonObjectBuilder for the BaseGameSave, to be used by its subclasses
      * @return The JsonObjectBuilder
      */
     protected JsonObjectBuilder baseJsonObjectBuilder() {
@@ -60,7 +60,7 @@ public abstract class GameSave {
      * @param  data The json object to load from
      * @return      The loaded gamesave
      */
-    public static GameSave fromJson(JsonObject data) {
+    public static BaseGameSave fromJson(JsonObject data) {
         return null;
     }
 }

@@ -427,14 +427,14 @@ public class LevelOne extends BaseLevel {
     /**
      * {@inheritDoc}
      */
-    protected GameSave save() {
+    protected BaseGameSave save() {
         return new StoryGameSave(dialogPosition, scores, levelComplete);
     }
 
     /**
      * {@inheritDoc}
      */
-    protected void load(GameSave baseSave) {
+    protected void load(BaseGameSave baseSave) {
         super.load(baseSave);
         StoryGameSave save = (StoryGameSave)baseSave;
         this.dialogPosition = 0;

@@ -26,7 +26,7 @@ public class User implements Comparable {
     /** Instance variables */
     public String username;
     public int score;
-    public GameSave[] levelSaves = new GameSave[Constants.NUM_LEVELS];
+    public BaseGameSave[] levelSaves = new BaseGameSave[Constants.NUM_LEVELS];
 
     /**
      * User Constructor
@@ -34,7 +34,7 @@ public class User implements Comparable {
      * @param  score    The user's score
      * @param  saves    An array of the user's saves
      */
-    public User(String username, int score, GameSave[] saves) {
+    public User(String username, int score, BaseGameSave[] saves) {
         this.username = username;
         this.score = score;
         if (saves.length != Constants.NUM_LEVELS) {
@@ -52,10 +52,10 @@ public class User implements Comparable {
     }
 
     /**
-     * Computes the user's score by taking the sum of the scores of the last non-null GameSave in the array
+     * Computes the user's score by taking the sum of the scores of the last non-null BaseGameSave in the array
      */
     public void computeScore() {
-        for (GameSave g : levelSaves) {
+        for (BaseGameSave g : levelSaves) {
             if (g instanceof PlatformerGameSave) {
                 this.score = 0;
                 for (int p : ((PlatformerGameSave)g).scores) {
@@ -73,7 +73,7 @@ public class User implements Comparable {
             FileWriter stream = new FileWriter(getDataFile(this.username));
 
             JsonArrayBuilder saves = Json.createArrayBuilder();
-            for (GameSave g : levelSaves) {
+            for (BaseGameSave g : levelSaves) {
                 if (g == null) {
                     saves = saves.addNull();
                 } else {
@@ -106,7 +106,7 @@ public class User implements Comparable {
         try (JsonReader reader = Json.createReader(new FileInputStream(getDataFile(username)))) {
             JsonObject obj = reader.readObject();
 
-            GameSave[] saves = new GameSave[Constants.NUM_LEVELS];
+            BaseGameSave[] saves = new BaseGameSave[Constants.NUM_LEVELS];
             JsonArray savesArray = obj.getJsonArray("saves");
             for (int i = 0; i < Constants.NUM_LEVELS; i++) {
                 if (!savesArray.isNull(i)) {
@@ -124,7 +124,7 @@ public class User implements Comparable {
         } catch (Exception e) {
             System.err.println("Warning: Data file has been tampered with! Not using it.");
         }
-        return new User(username, 0, new GameSave[3]);
+        return new User(username, 0, new BaseGameSave[3]);
     }
 
     /**

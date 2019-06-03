@@ -250,7 +250,7 @@ public abstract class BasePlatformer extends BaseLevel {
     /**
      * {@inheritDoc}
      */
-    protected void load(GameSave baseSave) {
+    protected void load(BaseGameSave baseSave) {
         super.load(baseSave);
         PlatformerGameSave save = (PlatformerGameSave)baseSave;
 

@@ -123,7 +123,7 @@ public abstract class BaseLevel extends BaseScene {
      * Loads a game on enter.
      */
     public void onEnter() {
-        GameSave save = this.game.currentUser.levelSaves[getLevel() - 1];
+        BaseGameSave save = this.game.currentUser.levelSaves[getLevel() - 1];
         if (save != null) {
             load(save);
         } else {
@@ -132,11 +132,11 @@ public abstract class BaseLevel extends BaseScene {
     }
 
     /**
-     * Called when it is the user's first time entering the level in order to setup the necessary GameSave
+     * Called when it is the user's first time entering the level in order to setup the necessary BaseGameSave
      */
     protected void onFirstEnter() {
         if (getLevel() > 1) {
-            GameSave prevSave = this.game.currentUser.levelSaves[getLevel() - 2];
+            BaseGameSave prevSave = this.game.currentUser.levelSaves[getLevel() - 2];
             if (prevSave != null) {
                 loadScores(prevSave.scores);
                 return;
@@ -345,16 +345,16 @@ public abstract class BaseLevel extends BaseScene {
     protected abstract void handleFinish();
 
     /**
-     * Saves the current game to a GameSave object
-     * @return The GameSave object representing this level
+     * Saves the current game to a BaseGameSave object
+     * @return The BaseGameSave object representing this level
      */
-    protected abstract GameSave save();
+    protected abstract BaseGameSave save();
 
     /**
-     * Loads the game from a GameSave object
-     * @param baseSave The GameSave object
+     * Loads the game from a BaseGameSave object
+     * @param baseSave The BaseGameSave object
      */
-    protected void load(GameSave baseSave) {
+    protected void load(BaseGameSave baseSave) {
         this.levelComplete = baseSave.levelComplete;
         loadScores(baseSave.scores);
     }

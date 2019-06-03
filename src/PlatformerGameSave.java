@@ -27,7 +27,7 @@ import javafx.geometry.*;
  * @author Evan Zhang
  * @version 1
  */
-public class PlatformerGameSave extends GameSave {
+public class PlatformerGameSave extends BaseGameSave {
     /** Instance variables */
     public double referencePoint;
     public Point2D player;
@@ -89,7 +89,7 @@ public class PlatformerGameSave extends GameSave {
     /**
      * {@inheritDoc}
      */
-    public static GameSave fromJson(JsonObject data) {
+    public static BaseGameSave fromJson(JsonObject data) {
         boolean levelComplete = data.getBoolean("levelComplete", false);
         double referencePoint = data.getJsonNumber("referencePoint").doubleValue();
         Point2D player = jsonToPoint(data.getJsonObject("player"));
