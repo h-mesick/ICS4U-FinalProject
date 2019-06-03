@@ -1,15 +1,9 @@
-import javafx.animation.*;
 import javafx.event.*;
 import javafx.geometry.*;
 import javafx.scene.*;
-import javafx.scene.canvas.*;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
 import javafx.scene.layout.*;
-import javafx.scene.paint.*;
-import javafx.scene.shape.*;
-import javafx.scene.text.*;
-import javafx.stage.*;
 
 /**
  * @version 1
@@ -75,7 +69,7 @@ public class LevelSelect extends BaseScene {
             game.updateState(game.getCurrentState());
         });
         deleteButton.setTooltip(new Tooltip("Clear your game data"));
-        // only allow game data deletion once the game is completed
+        /** Only allow game data deletion once the game is completed */
         deleteButton.setVisible(this.game.levelComplete(Constants.NUM_LEVELS - 1));
 
         this.game.setScene(new Scene(Util.getMainRoot(body, Util.getFooter(backButton, deleteButton, helpButton))));

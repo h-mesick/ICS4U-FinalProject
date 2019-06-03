@@ -1,20 +1,14 @@
-import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.json.*;
 
-import javafx.animation.*;
 import javafx.event.*;
 import javafx.geometry.*;
-import javafx.scene.*;
-import javafx.scene.canvas.*;
-import javafx.scene.control.*;
 import javafx.scene.image.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.*;
-import javafx.scene.shape.*;
 import javafx.scene.text.*;
-import javafx.stage.*;
 
 /**
  * Revision history:
@@ -36,7 +30,6 @@ import javafx.stage.*;
  */
 public class LevelThree extends BasePlatformer {
     /** Instance variables */
-    private VBox scoreCountOverlay;
     private JsonArray questions;
 
     /**
@@ -93,7 +86,7 @@ public class LevelThree extends BasePlatformer {
         pointCountOverlay.getChildren().addAll(pointImage, scoresText[1]);
 
 
-        scoreCountOverlay = new VBox(0, coinCountOverlay, pointCountOverlay);
+        VBox scoreCountOverlay = new VBox(0, coinCountOverlay, pointCountOverlay);
 
         super.initScene();
         root.getChildren().add(scoreCountOverlay);

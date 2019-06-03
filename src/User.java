@@ -1,5 +1,6 @@
-import java.io.*;
-import java.lang.IllegalArgumentException;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 
 import javax.json.*;
 
@@ -100,7 +101,7 @@ public class User implements Comparable {
             JsonArray savesArray = obj.getJsonArray("saves");
             for (int i = 0; i < Constants.NUM_LEVELS; i++) {
                 if (!savesArray.isNull(i)) {
-                    // kind of a dirty way to do this but there's no better way
+                    /** kind of a dirty way to do this but there's no better way */
                     if (i == 0) {
                         saves[i] = StoryGameSave.fromJson(savesArray.getJsonObject(i));
                     } else {

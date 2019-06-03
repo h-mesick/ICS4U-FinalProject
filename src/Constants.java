@@ -9,7 +9,7 @@
  * @author Evan Zhang
  * @version 1
  */
-public interface Constants {
+public abstract class Constants {
     /** The number of the levels */
     static final int NUM_LEVELS = 3;
 

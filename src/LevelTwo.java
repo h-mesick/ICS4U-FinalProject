@@ -1,20 +1,15 @@
-import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 import javax.json.*;
 
-import javafx.animation.*;
 import javafx.event.*;
 import javafx.geometry.*;
-import javafx.scene.*;
-import javafx.scene.canvas.*;
-import javafx.scene.control.*;
 import javafx.scene.image.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.*;
-import javafx.scene.shape.*;
 import javafx.scene.text.*;
-import javafx.stage.*;
 
 /**
  * Revision history:
@@ -39,7 +34,6 @@ import javafx.stage.*;
 */
 public class LevelTwo extends BasePlatformer {
     /** Instance variables */
-    private HBox scoreCountOverlay;
     private JsonArray questions;
 
     /**
@@ -73,7 +67,7 @@ public class LevelTwo extends BasePlatformer {
      * {@inheritDoc}
      */
     public void initScene() {
-        scoreCountOverlay = new HBox(5);
+        HBox scoreCountOverlay = new HBox(5);
         scoreCountOverlay.setAlignment(Pos.CENTER_LEFT);
         scoreCountOverlay.setPadding(new Insets(10));
 

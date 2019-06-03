@@ -1,19 +1,16 @@
 import java.io.BufferedReader;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.List;
 
 import javafx.animation.*;
 import javafx.event.*;
 import javafx.geometry.*;
 import javafx.scene.*;
-import javafx.scene.canvas.*;
-import javafx.scene.control.*;
 import javafx.scene.image.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.*;
-import javafx.scene.shape.*;
 import javafx.scene.text.*;
-import javafx.stage.*;
 import javafx.util.*;
 
 /**
@@ -231,10 +228,10 @@ public abstract class Util {
     /**
      * Parses data from an Reader into lines
      * @param  reader The Reader
-     * @return        The ArrayList of lines from the Reader
+     * @return        The List of lines from the Reader
      */
-    public static ArrayList<String> readLines(Reader reader) {
-        ArrayList<String> lines = new ArrayList<String>();
+    public static List<String> readLines(Reader reader) {
+        List<String> lines = new ArrayList<String>();
         try (BufferedReader in = new BufferedReader(reader)) {
             for (String line; (line = in.readLine()) != null;) {
                 if (line.length() > 0) {

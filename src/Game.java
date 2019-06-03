@@ -1,16 +1,10 @@
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import javafx.animation.*;
-import javafx.event.*;
 import javafx.scene.*;
-import javafx.scene.canvas.*;
-import javafx.scene.control.*;
-import javafx.scene.layout.*;
-import javafx.scene.paint.*;
-import javafx.scene.shape.*;
-import javafx.scene.text.*;
 import javafx.stage.*;
 
 /**
@@ -29,9 +23,10 @@ import javafx.stage.*;
  */
 public class Game {
     /** Instance variables */
-    private State currentState = null, nextState = null;
+    private State currentState = null;
+    private State nextState = null;
     private BaseScene currentScene;
-    private HashMap<String, User> users = new HashMap<String, User>();
+    private Map<String, User> users = new HashMap<String, User>();
 
     public Stage stage;
     public User currentUser;
@@ -68,7 +63,7 @@ public class Game {
      * Gets all the users with a save file
      * @return The list of all users
      */
-    public ArrayList<User> getAllUsers() {
+    public List<User> getAllUsers() {
         return new ArrayList<User>(users.values());
     }
 
@@ -163,6 +158,7 @@ public class Game {
             case LEVEL_ONE: currentScene = new LevelOne(this); break;
             case LEVEL_TWO: currentScene = new LevelTwo(this); break;
             case LEVEL_THREE: currentScene = new LevelThree(this); break;
+            default: break;
         }
         currentScene.initScene();
         currentScene.onEnter();

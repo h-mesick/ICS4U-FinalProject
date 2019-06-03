@@ -1,19 +1,16 @@
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import javafx.animation.*;
 import javafx.beans.property.*;
 import javafx.event.*;
 import javafx.geometry.*;
 import javafx.scene.*;
-import javafx.scene.canvas.*;
-import javafx.scene.control.*;
 import javafx.scene.effect.*;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
-import javafx.scene.paint.*;
-import javafx.scene.shape.*;
 import javafx.scene.text.*;
-import javafx.stage.*;
 
 /**
  * Revision history:
@@ -295,7 +292,7 @@ public abstract class BaseLevel extends BaseScene {
      */
     protected void handleKeyPressed(KeyCode key) {
         switch(key) {
-            case ESCAPE: {
+            case ESCAPE:
                 if (overlayVisible()) {
                     if (currentOverlay != null && currentOverlay.equals(escapeOverlay)) {
                         removeOverlay();
@@ -304,7 +301,7 @@ public abstract class BaseLevel extends BaseScene {
                     setOverlay(escapeOverlay);
                 }
                 break;
-            }
+            default: break;
         }
     }
 
@@ -312,7 +309,9 @@ public abstract class BaseLevel extends BaseScene {
      * Called whenever a key is released
      * @param key The key that was released
      */
-    protected void handleKeyReleased(KeyCode key) {}
+    protected void handleKeyReleased(KeyCode key) {
+        /** No key needs to be handled by default */
+    }
 
     /**
      * Called on every game tick
@@ -330,15 +329,18 @@ public abstract class BaseLevel extends BaseScene {
      * @return The number of scores to keep track of
      */
     protected abstract int getScoreCount();
+
     /**
      * Called when the game is completed
      */
     protected abstract void handleFinish();
+
     /**
      * Saves the current game to a GameSave object
      * @return The GameSave object representing this level
      */
     protected abstract GameSave save();
+
     /**
      * Loads the game from a GameSave object
      * @param baseSave The GameSave object

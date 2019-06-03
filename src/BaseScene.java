@@ -1,17 +1,3 @@
-import javafx.animation.*;
-import javafx.event.*;
-import javafx.geometry.*;
-import javafx.scene.*;
-import javafx.scene.canvas.*;
-import javafx.scene.control.*;
-import javafx.scene.image.*;
-import javafx.scene.layout.*;
-import javafx.scene.paint.*;
-import javafx.scene.shape.*;
-import javafx.scene.text.*;
-import javafx.stage.*;
-import javafx.util.*;
-
 /**
  * Revision history:
  *  - May 13, 2019: Created ~Evan Zhang
@@ -30,11 +16,6 @@ public abstract class BaseScene {
     protected Game game;
 
     /**
-     * Default constructor
-     */
-    public BaseScene() {}
-
-    /**
      * Constructor
      * @param  game The game to link with
      */
@@ -47,8 +28,17 @@ public abstract class BaseScene {
      */
     public abstract void initScene();
 
-    /** Called on enter to the scene */
-    public void onExit() {}
-    /** Called on exit from the scene */
-    public void onEnter() {}
+    /**
+     * Called on enter to the scene
+     */
+    public void onEnter() {
+        /** Nothing needs to be done by default */
+    }
+
+    /**
+     * Called on exit from the scene
+     */
+    public void onExit() {
+        /** Nothing needs to be done by default */
+    }
 }

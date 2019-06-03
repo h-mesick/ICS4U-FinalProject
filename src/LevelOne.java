@@ -1,21 +1,16 @@
-import java.util.ArrayList;
+import java.util.List;
 import java.util.TreeMap;
+import java.util.Map;
 
-import javafx.animation.*;
 import javafx.event.*;
 import javafx.geometry.*;
 import javafx.scene.*;
-import javafx.scene.canvas.*;
-import javafx.scene.control.*;
-import javafx.scene.effect.*;
 import javafx.scene.image.*;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.*;
 import javafx.scene.shape.*;
 import javafx.scene.text.*;
-import javafx.stage.*;
-import javafx.util.*;
 
 /**
  * Revision history:
@@ -94,17 +89,18 @@ public class LevelOne extends BaseLevel {
         }
     }
 
-    /** Instance variables */
-    public final int TEXT_OVERLAY_WIDTH = Constants.SCREEN_WIDTH - 150;
-    public final int TEXT_OVERLAY_HEIGHT = 200;
-    public final int TEXT_PADDING = 50;
+    /** Static constants */
+    public static final int TEXT_OVERLAY_WIDTH = Constants.SCREEN_WIDTH - 150;
+    public static final int TEXT_OVERLAY_HEIGHT = 200;
+    public static final int TEXT_PADDING = 50;
 
+    /** Instance variables */
     private Rectangle transitionOverlay = new Rectangle(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, Color.BLACK);
     private ImageView background;
     private StackPane textOverlay;
     private int dialogPosition = 0;
     private Command[] dialogCommands;
-    private TreeMap<String, Integer> dialogCommandsLabelMap = new TreeMap<String, Integer>();
+    private Map<String, Integer> dialogCommandsLabelMap = new TreeMap<String, Integer>();
 
     /**
      * Constructor
@@ -113,7 +109,7 @@ public class LevelOne extends BaseLevel {
     public LevelOne(Game game) {
         super(game);
         root = new Group();
-        ArrayList<String> lines = Util.readLines(ResourceLoader.loadLevel(getLevelFile()));
+        List<String> lines = Util.readLines(ResourceLoader.loadLevel(getLevelFile()));
         dialogCommands = new Command[lines.size()];
         for (int i = 0; i < lines.size(); i++) {
             dialogCommands[i] = new Command(lines.get(i));
@@ -172,6 +168,7 @@ public class LevelOne extends BaseLevel {
      * {@inheritDoc}
      */
     protected void update() {
+        /** No game loop */
     }
 
     /**
@@ -209,6 +206,7 @@ public class LevelOne extends BaseLevel {
         super.handleKeyPressed(key);
         switch(key) {
             case ENTER: nextDialog(); break;
+            default: break;
         }
     }
 
@@ -259,6 +257,7 @@ public class LevelOne extends BaseLevel {
                         colorImage.getPixelWriter().setColor(0, 0, Color.web(command.nextArgument()));
                         background.setImage(colorImage);
                         break;
+                    default: break;
                 }
                 break;
             case "CLEAR":
@@ -320,6 +319,7 @@ public class LevelOne extends BaseLevel {
                     return false;
                 }
                 break;
+            default: break;
         }
         return true;
     }
@@ -357,7 +357,7 @@ public class LevelOne extends BaseLevel {
             }
         }
         if (dialogPosition < dialogCommands.length) {
-            while(dialogPosition < dialogCommands.length && handleDialog(dialogPosition++));
+            while (dialogPosition < dialogCommands.length && handleDialog(dialogPosition++));
         } else {
             dialogPosition++;
             onFinish();

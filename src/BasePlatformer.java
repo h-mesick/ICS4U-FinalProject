@@ -1,17 +1,11 @@
 import java.util.ArrayList;
+import java.util.List;
 
-import javafx.animation.*;
-import javafx.event.*;
 import javafx.geometry.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
 import javafx.scene.input.*;
-import javafx.scene.layout.*;
-import javafx.scene.paint.*;
-import javafx.scene.shape.*;
-import javafx.scene.text.*;
-import javafx.stage.*;
 
 /**
  * Revision history:
@@ -45,7 +39,7 @@ public abstract class BasePlatformer extends BaseLevel {
     protected Level level;
     protected double referencePoint;
     protected ImageView background;
-    protected ArrayList<Sprite> removedNodes = new ArrayList<Sprite>();
+    protected List<Sprite> removedNodes = new ArrayList<Sprite>();
 
     protected int updateCount = 0;
 
@@ -69,19 +63,19 @@ public abstract class BasePlatformer extends BaseLevel {
         background.setPreserveRatio(true);
         updateBackground();
         root.getChildren().add(background);
-        // add blocks
+        /** Add blocks */
         for (Sprite s : level.getAllSprites()) {
             root.getChildren().add(s);
             s.setTranslateY(getScreenY(s.getTranslateY()));
             s.setVisible(0 <= s.getTranslateY() + s.getHeight() && s.getTranslateY() < Constants.SCREEN_HEIGHT);
         }
 
-        // add player
+        /** Add the player */
         player = new Sprite(30, Constants.SCREEN_HEIGHT - Constants.PLATFORM_BLOCK_HEIGHT - 30,
                             25, 25, ResourceLoader.loadImage("player/still.png"));
         root.getChildren().add(player);
 
-        // add progress bar
+        /** Add the progress bar */
         progress = new ProgressBar();
         progress.setTranslateX(Constants.SCREEN_WIDTH / 3);
         progress.setMinWidth(Constants.SCREEN_WIDTH / 3);
@@ -90,7 +84,7 @@ public abstract class BasePlatformer extends BaseLevel {
         progress.getStylesheets().add(ResourceLoader.loadCSS("game-progress-bar.css"));
         root.getChildren().add(progress);
 
-        // add pause button
+        /** Add the pause button */
         ImageButton pause = Util.getMainImageButton("pause", event -> handleKeyPressed(KeyCode.ESCAPE));
         pause.setTranslateX(Constants.SCREEN_WIDTH - 50);
         pause.setFitWidth(40);
@@ -120,7 +114,8 @@ public abstract class BasePlatformer extends BaseLevel {
         double ground = getScreenY(this.level.getLowerBound(box) - player.getHeight());
         double ceiling = getScreenY(this.level.getUpperBound(box));
 
-        boolean moveLeft = pressedKeys.contains(KeyCode.LEFT), moveRight = pressedKeys.contains(KeyCode.RIGHT);
+        boolean moveLeft = pressedKeys.contains(KeyCode.LEFT);
+        boolean moveRight = pressedKeys.contains(KeyCode.RIGHT);
         boolean onGround = player.onGround(ground);
 
         if (moveLeft || moveRight || !onGround) {

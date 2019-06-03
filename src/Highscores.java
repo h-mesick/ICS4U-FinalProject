@@ -1,18 +1,12 @@
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Collections;
 
-import javafx.animation.*;
-import javafx.event.*;
 import javafx.geometry.*;
 import javafx.scene.*;
-import javafx.scene.canvas.*;
-import javafx.scene.control.*;
 import javafx.scene.image.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.*;
-import javafx.scene.shape.*;
 import javafx.scene.text.*;
-import javafx.stage.*;
 
 /**
  * Revision history:
@@ -40,7 +34,7 @@ public class Highscores extends BaseScene {
         body.setAlignment(Pos.TOP_CENTER);
         body.getChildren().add(new ImageView(ResourceLoader.loadImage("highscores-logo.png")));
 
-        ArrayList<User> users = this.game.getAllUsers();
+        List<User> users = this.game.getAllUsers();
         Collections.sort(users, Collections.reverseOrder());
         GridPane rankings = new GridPane();
         rankings.setAlignment(Pos.CENTER);
@@ -48,11 +42,10 @@ public class Highscores extends BaseScene {
         rankings.setHgap(10);
         for (int x = 0; x < 10; x++) {
             String username = "-----", score = "--";
-            try {
+            if (x < users.size()) {
                 User user = users.get(x);
                 username = user.username;
                 score = "" + user.score;
-            } catch (IndexOutOfBoundsException e) {
             }
             Text text = new Text(username);
             text.setFont(Util.getMainFont(15));

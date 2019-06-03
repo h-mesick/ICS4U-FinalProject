@@ -1,16 +1,7 @@
 import java.util.ArrayList;
+import java.util.List;
 
-import javafx.animation.*;
-import javafx.event.*;
 import javafx.geometry.*;
-import javafx.scene.*;
-import javafx.scene.canvas.*;
-import javafx.scene.control.*;
-import javafx.scene.layout.*;
-import javafx.scene.paint.*;
-import javafx.scene.shape.*;
-import javafx.scene.text.*;
-import javafx.stage.*;
 
 /**
  * Revision history:
@@ -27,23 +18,23 @@ import javafx.stage.*;
  * @version 1
  */
 public class Level {
+    /** Static constants */
+    private static final double OFFSET = 0.1;
+    private static final String DEFAULT_SPECIAL_IMAGE = "coin.png";
+
     /** Instance variables */
-    private final double OFFSET = 0.1;
-    private final String DEFAULT_SPECIAL_IMAGE = "coin.png";
     private int[][] arr;
     private Sprite[][] blocks;
-    private ArrayList<Sprite>[][] auxiliaryBlocks;
 
-    private ArrayList<Sprite> allSprites = new ArrayList<Sprite>();
-    private ArrayList<Sprite> specialSprites = new ArrayList<Sprite>();
+    private List<Sprite> allSprites = new ArrayList<Sprite>();
+    private List<Sprite> specialSprites = new ArrayList<Sprite>();
 
     /**
      * Constructor
      * @param  file The filename to load from
      */
-    @SuppressWarnings("unchecked")
     public Level(String file) {
-        ArrayList<String> lines = Util.readLines(ResourceLoader.loadLevel(file));
+        List<String> lines = Util.readLines(ResourceLoader.loadLevel(file));
         int specialCnt = 0;
         arr = new int[lines.size()][Constants.BLOCK_WIDTH_COUNT];
         for (int y = 0; y < lines.size(); y++) {
@@ -62,18 +53,16 @@ public class Level {
         }
 
         blocks = new Sprite[lines.size()][Constants.BLOCK_WIDTH_COUNT];
-        auxiliaryBlocks = new ArrayList[lines.size()][Constants.BLOCK_WIDTH_COUNT];
         for (int y = 0; y < lines.size(); y++) {
             for (int x = 0; x < Constants.BLOCK_WIDTH_COUNT; x++) {
                 double xx = getActX(x), yy = getActY(y);
                 blocks[y][x] = getBlock(xx, yy);
-                auxiliaryBlocks[y][x] = getAuxiliaryBlocks(xx, yy);
 
                 if (arr[y][x] < 0) {
                     specialSprites.add(blocks[y][x]);
                 }
                 /** Add auxiliary blocks first so they are shown underneath */
-                allSprites.addAll(auxiliaryBlocks[y][x]);
+                allSprites.addAll(getAuxiliaryBlocks(xx, yy));
                 if (blocks[y][x] != null) {
                     allSprites.add(blocks[y][x]);
                 }
@@ -109,8 +98,8 @@ public class Level {
      * @param  y The y coordinate
      * @return   An arraylist of auxiliary blocks
      */
-    private ArrayList<Sprite> getAuxiliaryBlocks(double x, double y) {
-        ArrayList<String> imageNames = new ArrayList<String>();
+    private List<Sprite> getAuxiliaryBlocks(double x, double y) {
+        List<String> imageNames = new ArrayList<String>();
         if (!isBlocked(x, y)) {
             if (belowNormalPlatform(x, y)) {
                 int num = (int)(Math.random() * 3) + 1;
@@ -120,7 +109,7 @@ public class Level {
                 imageNames.add("platform-door.png");
             }
         }
-        ArrayList<Sprite> sprites = new ArrayList<Sprite>();
+        List<Sprite> sprites = new ArrayList<Sprite>();
         for (String image : imageNames) {
             sprites.add(new Sprite(x, y, Constants.PLATFORM_BLOCK_WIDTH,
                               Constants.PLATFORM_BLOCK_HEIGHT, ResourceLoader.loadImage(image)));
@@ -194,7 +183,7 @@ public class Level {
      * Gets all the special blocks
      * @return The list of special blocks
      */
-    public ArrayList<Sprite> getSpecialSprites() {
+    public List<Sprite> getSpecialSprites() {
         return specialSprites;
     }
 
@@ -202,7 +191,7 @@ public class Level {
      * Gets all the blocks
      * @return The list of all blocks
      */
-    public ArrayList<Sprite> getAllSprites() {
+    public List<Sprite> getAllSprites() {
         return allSprites;
     }
 

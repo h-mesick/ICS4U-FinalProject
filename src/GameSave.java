@@ -1,7 +1,5 @@
 import javax.json.*;
 
-import javafx.geometry.*;
-
 /**
  * Revision history:
  *  - May 21, 2019: Created ~Evan Zhang

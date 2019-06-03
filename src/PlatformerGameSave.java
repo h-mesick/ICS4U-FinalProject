@@ -1,18 +1,9 @@
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.json.*;
 
-import javafx.animation.*;
-import javafx.event.*;
 import javafx.geometry.*;
-import javafx.scene.*;
-import javafx.scene.canvas.*;
-import javafx.scene.control.*;
-import javafx.scene.layout.*;
-import javafx.scene.paint.*;
-import javafx.scene.shape.*;
-import javafx.scene.text.*;
-import javafx.stage.*;
 
 /**
  * Revision history:
@@ -31,7 +22,7 @@ public class PlatformerGameSave extends GameSave {
     /** Instance variables */
     public double referencePoint;
     public Point2D player;
-    public ArrayList<Point2D> removedNodes;
+    public List<Point2D> removedNodes;
 
     /**
      * Constructor
@@ -41,7 +32,7 @@ public class PlatformerGameSave extends GameSave {
      * @param  scores         The scores for the game level
      * @param  levelComplete  Whether the level is completed or not
      */
-    public PlatformerGameSave(double referencePoint, Point2D player, ArrayList<Point2D> removedNodes,
+    public PlatformerGameSave(double referencePoint, Point2D player, List<Point2D> removedNodes,
                               int[] scores, boolean levelComplete) {
         super(scores, levelComplete);
         this.referencePoint = referencePoint;
@@ -98,7 +89,7 @@ public class PlatformerGameSave extends GameSave {
         for (int i = 0; i < jsonScores.size(); i++) {
             scores[i] = jsonScores.getInt(i);
         }
-        ArrayList<Point2D> removedNodes = new ArrayList<Point2D>();
+        List<Point2D> removedNodes = new ArrayList<Point2D>();
         for (JsonValue obj : data.getJsonArray("removedNodes")) {
             removedNodes.add(jsonToPoint((JsonObject)obj));
         }

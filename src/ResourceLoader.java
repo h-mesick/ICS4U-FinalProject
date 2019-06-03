@@ -1,17 +1,11 @@
-import java.io.*;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.UnsupportedEncodingException;
 import java.util.TreeMap;
+import java.util.Map;
 
-import javafx.event.*;
-import javafx.geometry.*;
-import javafx.scene.*;
-import javafx.scene.control.*;
 import javafx.scene.image.*;
-import javafx.scene.layout.*;
-import javafx.scene.paint.*;
-import javafx.scene.shape.*;
-import javafx.scene.text.*;
-import javafx.stage.*;
-
 /**
  * Revision history:
  *  - May 15, 2019: Created ~Evan Zhang
@@ -24,10 +18,10 @@ import javafx.stage.*;
  * @author Evan Zhang
  * @version 1
  */
-public class ResourceLoader
+public abstract class ResourceLoader
 {
     /** Static variables */
-    private static TreeMap<String, Image> imageCache = new TreeMap<String, Image>();
+    private static Map<String, Image> imageCache = new TreeMap<String, Image>();
 
     /**
      * Get the resource from the location
