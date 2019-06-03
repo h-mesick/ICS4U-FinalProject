@@ -18,6 +18,7 @@ import javafx.stage.*;
  *  - May 17, 2019: Updated ~Evan Zhang
  *  - May 27, 2019: Commented ~Evan Zhang
  *  - May 28, 2019: Updated ~Evan Zhang
+ *  - Jun 2, 2019: Updated ~Evan Zhang
  * @author Evan Zhang
  * @version 1
  */
