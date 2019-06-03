@@ -1,3 +1,9 @@
+/**
+ * Evan Zhang and Max Li
+ * Mrs Krasteva
+ * Due: June 10, 2019
+ * The utility class for creating default objects for the game.
+ */
 import java.io.BufferedReader;
 import java.io.Reader;
 import java.util.ArrayList;
@@ -14,10 +20,13 @@ import javafx.scene.text.*;
 import javafx.util.*;
 
 /**
+ * The utility class for creating default objects for the game.
+ * <pre>
  * Revision history:
  *  - May 31, 2019: Created ~Evan Zhang
  *  - Jun 1, 2019: Commented ~Evan Zhang
  *  - Jun 2, 2019: Updated ~Evan Zhang
+ * </pre>
  * @author Evan Zhang
  * @version 1
  */

@@ -1,4 +1,13 @@
 /**
+ * Evan Zhang and Max Li
+ * Mrs Krasteva
+ * Due: June 10, 2019
+ * Class containing all the global constants in the game.
+ */
+
+/**
+ * Class containing all the global constants in the game.
+ * <pre>
  * Revision history:
  *  - May 13, 2019: Created ~Evan Zhang
  *  - May 14, 2019: Updated ~Evan Zhang
@@ -6,6 +15,7 @@
  *  - May 28, 2019: Updated ~Evan Zhang
  *  - May 31, 2019: Updated ~Evan Zhang
  *  - Jun 1, 2019: Commented ~Evan Zhang
+ * </pre>
  * @author Evan Zhang
  * @version 1
  */

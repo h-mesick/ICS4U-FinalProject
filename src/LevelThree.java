@@ -1,3 +1,9 @@
+/**
+ * Evan Zhang and Max Li
+ * Mrs Krasteva
+ * Due: June 10, 2019
+ * Level three of the game.
+ */
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -11,6 +17,8 @@ import javafx.scene.paint.*;
 import javafx.scene.text.*;
 
 /**
+ * Level three of the game.
+ * <pre>
  * Revision history:
  *  - May 13, 2019: Created ~Evan Zhang
  *  - May 15, 2019: Updated ~Evan Zhang
@@ -25,6 +33,7 @@ import javafx.scene.text.*;
  *  - May 31, 2019: Updated ~Evan Zhang
  *  - Jun 1, 2019: Updated ~Evan Zhang
  *  - Jun 2, 2019: Updated ~Evan Zhang
+ * </pre>
  * @author Evan Zhang
  * @version 1
  */

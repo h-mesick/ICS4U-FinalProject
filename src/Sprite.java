@@ -1,7 +1,15 @@
+/**
+ * Evan Zhang and Max Li
+ * Mrs Krasteva
+ * Due: June 10, 2019
+ * The Sprite class for drawing movable and stationary images on the screen.
+ */
 import javafx.geometry.*;
 import javafx.scene.image.*;
 
 /**
+ * The Sprite class for drawing movable and stationary images on the screen.
+ * <pre>
  * Revision history:
  *  - May 14, 2019: Created ~Evan Zhang
  *  - May 15, 2019: Updated ~Evan Zhang
@@ -9,6 +17,7 @@ import javafx.scene.image.*;
  *  - May 27, 2019: Commented ~Evan Zhang
  *  - May 28, 2019: Updated ~Evan Zhang
  *  - Jun 2, 2019: Updated ~Evan Zhang
+ * </pre>
  * @author Evan Zhang
  * @version 1
  */

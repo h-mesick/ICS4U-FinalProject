@@ -1,3 +1,9 @@
+/**
+ * Evan Zhang and Max Li
+ * Mrs Krasteva
+ * Due: June 10, 2019
+ * The Level Select scene.
+ */
 import javafx.event.*;
 import javafx.geometry.*;
 import javafx.scene.*;
@@ -6,8 +12,8 @@ import javafx.scene.image.*;
 import javafx.scene.layout.*;
 
 /**
- * @version 1
- * @author Evan Zhang
+ * The Level Select scene.
+ * <pre>
  * Revision history:
  *  - May 13, 2019: Created ~Evan Zhang
  *  - May 14, 2019: Updated ~Evan Zhang
@@ -19,6 +25,9 @@ import javafx.scene.layout.*;
  *  - May 29, 2019: Updated ~Evan Zhang
  *  - May 30, 2019: Updated ~Evan Zhang
  *  - May 31, 2019: Updated ~Evan Zhang
+ * @author Evan Zhang
+ * @version 1
+ * </pre>
  */
 public class LevelSelect extends BaseScene {
     /**

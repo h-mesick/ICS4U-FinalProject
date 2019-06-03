@@ -1,3 +1,10 @@
+/**
+ * Evan Zhang and Max Li
+ * Mrs Krasteva
+ * Due: June 10, 2019
+ * The Enter Username scene.
+ */
+
 import javafx.geometry.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
@@ -8,11 +15,14 @@ import javafx.scene.paint.*;
 import javafx.scene.text.*;
 
 /**
+ * The Enter Username scene.
+ * <pre>
  * Revision history:
  *  - May 28, 2019: Created ~Evan Zhang
  *  - May 29, 2019: Updated ~Evan Zhang
  *  - May 30, 2019: Updated ~Evan Zhang
  *  - May 31, 2019: Updated ~Evan Zhang
+ * </pre>
  * @author Evan Zhang
  * @version 1
  */

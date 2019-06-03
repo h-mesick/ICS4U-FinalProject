@@ -1,14 +1,23 @@
+/**
+ * Evan Zhang and Max Li
+ * Mrs Krasteva
+ * Due: June 10, 2019
+ * The main driver class that runs the entire game.
+ */
 import java.io.File;
 
 import javafx.application.Application;
 import javafx.stage.*;
 
 /**
+ * The main driver class that runs the entire game.
+ * <pre>
  * Revision history:
  *  - May 13, 2019: Created ~Evan Zhang
  *  - May 14, 2019: Updated ~Evan Zhang
  *  - May 27, 2019: Commented ~Max Li
  *  - May 28, 2019: Updated ~Evan Zhang
+ * </pre>
  * @author Evan Zhang
  * @version 1
  */

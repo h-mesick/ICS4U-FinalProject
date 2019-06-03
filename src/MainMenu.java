@@ -1,3 +1,9 @@
+/**
+ * Evan Zhang and Max Li
+ * Mrs Krasteva
+ * Due: June 10, 2019
+ * The Main Menu scene.
+ */
 import javafx.application.Platform;
 import javafx.geometry.*;
 import javafx.scene.*;
@@ -7,6 +13,8 @@ import javafx.scene.paint.*;
 import javafx.scene.text.*;
 
 /**
+ * The Main Menu scene.
+ * <pre>
  * Revision history:
  *  - May 13, 2019: Created ~Evan Zhang
  *  - May 22, 2019: Finished ~Max Li
@@ -15,6 +23,7 @@ import javafx.scene.text.*;
  *  - May 28, 2019: Updated ~Evan Zhang
  *  - May 29, 2019: Updated ~Evan Zhang
  *  - May 31, 2019: Updated ~Evan Zhang
+ * </pre>
  * @author Evan Zhang
  * @version 1
  */

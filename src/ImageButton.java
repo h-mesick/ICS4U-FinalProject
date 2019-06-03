@@ -1,11 +1,20 @@
+/**
+ * Evan Zhang and Max Li
+ * Mrs Krasteva
+ * Due: June 10, 2019
+ * The ImageButton class for buttons with images instead of text.
+ */
 import javafx.geometry.*;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
 
 /**
+ * The ImageButton class for buttons with images instead of text.
+ * <pre>
  * Revision history:
  * - May 16, 2019: Created ~Evan Zhang
  * - May 27, 2019: Commented ~Max Li
+ * </pre>
  * @author Evan Zhang
  * @version 1
  */

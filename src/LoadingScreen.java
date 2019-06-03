@@ -1,3 +1,9 @@
+/**
+ * Evan Zhang and Max Li
+ * Mrs Krasteva
+ * Due: June 10, 2019
+ * The Loading Screen scene.
+ */
 import javafx.animation.*;
 import javafx.geometry.*;
 import javafx.scene.*;
@@ -6,6 +12,8 @@ import javafx.scene.image.*;
 import javafx.util.*;
 
 /**
+ * The Loading Screen scene.
+ * <pre>
  * Revision history:
  *  - May 13, 2019: Created ~Evan Zhang
  *  - May 22, 2019: Finished ~Max Li
@@ -13,6 +21,7 @@ import javafx.util.*;
  *  - May 27, 2019: Commented ~Max Li
  *  - May 28, 2019: Updated ~Evan Zhang
  *  - May 30, 2019: Updated ~Evan Zhang
+ * </pre>
  * @author Evan Zhang
  * @version 1
  */

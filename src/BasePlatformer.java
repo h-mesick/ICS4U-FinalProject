@@ -1,3 +1,9 @@
+/**
+ * Evan Zhang and Max Li
+ * Mrs Krasteva
+ * Due: June 10, 2019
+ * Base class for platformer levels.
+ */
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +14,8 @@ import javafx.scene.image.*;
 import javafx.scene.input.*;
 
 /**
+ * Base class for platformer levels.
+ * <pre>
  * Revision history:
  *  - May 13, 2019: Created ~Evan Zhang
  *  - May 14, 2019: Updated ~Evan Zhang
@@ -29,6 +37,7 @@ import javafx.scene.input.*;
  *  - Jun 1, 2019: Commented ~Evan Zhang
  *  - Jun 2, 2019: Commented ~Evan Zhang
  *  - Jun 2, 2019: Updated ~Evan Zhang
+ * </pre>
  * @author Evan Zhang
  * @version 1
 */

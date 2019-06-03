@@ -1,12 +1,21 @@
+/**
+ * Evan Zhang and Max Li
+ * Mrs Krasteva
+ * Due: June 10, 2019
+ * Base class for game saves.
+ */
 import javax.json.*;
 
 /**
+ * Base class for game saves.
+ * <pre>
  * Revision history:
  *  - May 21, 2019: Created ~Evan Zhang
  *  - May 28, 2019: Updated ~Evan Zhang
  *  - May 29, 2019: Updated ~Evan Zhang
  *  - May 30, 2019: Updated ~Evan Zhang
  *  - Jun 1, 2019: Commented ~Evan Zhang
+ * </pre>
  * @author Evan Zhang
  * @version 1
  */

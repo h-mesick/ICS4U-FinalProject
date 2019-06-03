@@ -1,3 +1,9 @@
+/**
+ * Evan Zhang and Max Li
+ * Mrs Krasteva
+ * Due: June 10, 2019
+ * The Help scene.
+ */
 import javafx.geometry.*;
 import javafx.scene.*;
 import javafx.scene.image.*;
@@ -5,6 +11,8 @@ import javafx.scene.layout.*;
 import javafx.scene.text.*;
 
 /**
+ * The Help scene.
+ * <pre>
  * Revision history:
  * - May 16, 2019: Created ~Evan Zhang
  * - May 18, 2019: Updated ~Evan Zhang
@@ -12,7 +20,7 @@ import javafx.scene.text.*;
  * - May 31, 2019: Updated ~Evan Zhang
  * - June 2, 2019: Updated ~Max Li
  * - June 2, 2019: Finished ~Max Li
- *
+ * </pre>
  * @author Evan Zhang
  * @version 1
  */

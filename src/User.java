@@ -1,3 +1,9 @@
+/**
+ * Evan Zhang and Max Li
+ * Mrs Krasteva
+ * Due: June 10, 2019
+ * The User class for storing user data.
+ */
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -5,11 +11,14 @@ import java.io.FileWriter;
 import javax.json.*;
 
 /**
+ * The User class for storing user data.
+ * <pre>
  * Revision history:
  *  - May 28, 2019: Created ~Evan Zhang
  *  - May 30, 2019: Updated ~Evan Zhang
  *  - Jun 1, 2019: Commented ~Evan Zhang
  *  - Jun 2, 2019: Commented ~Evan Zhang
+ * </pre>
  * @author Evan Zhang
  * @version 1
  */

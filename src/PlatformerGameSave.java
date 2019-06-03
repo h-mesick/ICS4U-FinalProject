@@ -1,3 +1,9 @@
+/**
+ * Evan Zhang and Max Li
+ * Mrs Krasteva
+ * Due: June 10, 2019
+ * The platformer game save subclass.
+ */
 import java.util.ArrayList;
 import java.util.List;
 
@@ -6,6 +12,8 @@ import javax.json.*;
 import javafx.geometry.*;
 
 /**
+ * The platformer game save subclass.
+ * <pre>
  * Revision history:
  *  - May 21, 2019: Created ~Evan Zhang
  *  - May 27, 2019: Commented ~Evan Zhang
@@ -15,6 +23,7 @@ import javafx.geometry.*;
  *  - Jun 1, 2019: Commented ~Evan Zhang
  *  - Jun 2, 2019: Commented ~Evan Zhang
  *  - Jun 2, 2019: Updated ~Evan Zhang
+ * </pre>
  * @author Evan Zhang
  * @version 1
  */

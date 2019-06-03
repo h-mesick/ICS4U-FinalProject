@@ -1,9 +1,17 @@
+/**
+ * Evan Zhang and Max Li
+ * Mrs Krasteva
+ * Due: June 10, 2019
+ * The Level utility class for platformer level management.
+ */
 import java.util.ArrayList;
 import java.util.List;
 
 import javafx.geometry.*;
 
 /**
+ * The Level utility class for platformer level management.
+ * <pre>
  * Revision history:
  *  - May 14, 2019: Created ~Evan Zhang
  *  - May 15, 2019: Updated ~Evan Zhang
@@ -14,6 +22,7 @@ import javafx.geometry.*;
  *  - May 31, 2019: Updated ~Evan Zhang
  *  - Jun 1, 2019: Commented ~Evan Zhang
  *  - Jun 2, 2019: Updated ~Evan Zhang
+ * </pre>
  * @author Evan Zhang
  * @version 1
  */

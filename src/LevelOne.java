@@ -1,3 +1,9 @@
+/**
+ * Evan Zhang and Max Li
+ * Mrs Krasteva
+ * Due: June 10, 2019
+ * Level one of the game.
+ */
 import java.util.List;
 import java.util.TreeMap;
 import java.util.Map;
@@ -13,6 +19,8 @@ import javafx.scene.shape.*;
 import javafx.scene.text.*;
 
 /**
+ * Level one of the game.
+ * <pre>
  * Revision history:
  *  - May 13, 2019: Created ~Evan Zhang
  *  - May 17, 2019: Updated ~Evan Zhang
@@ -25,6 +33,7 @@ import javafx.scene.text.*;
  *  - Jun 1, 2019: Updated ~Evan Zhang
  *  - Jun 1, 2019: Commented ~Evan Zhang
  *  - Jun 2, 2019: Updated ~Evan Zhang
+ * </pre>
  * @author Evan Zhang
  * @version 1
  */

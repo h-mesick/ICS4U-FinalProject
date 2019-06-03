@@ -1,3 +1,9 @@
+/**
+ * Evan Zhang and Max Li
+ * Mrs Krasteva
+ * Due: June 10, 2019
+ * The Resource Loader utility class for loading resources from files.
+ */
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -7,6 +13,8 @@ import java.util.Map;
 
 import javafx.scene.image.*;
 /**
+ * The Resource Loader utility class for loading resources from files.
+ * <pre>
  * Revision history:
  *  - May 15, 2019: Created ~Evan Zhang
  *  - May 16, 2019: Updated ~Evan Zhang
@@ -15,6 +23,7 @@ import javafx.scene.image.*;
  *  - May 31, 2019: Updated ~Evan Zhang
  *  - Jun 1, 2019: Commented ~Evan Zhang
  *  - Jun 2, 2019: Updated ~Evan Zhang
+ * </pre>
  * @author Evan Zhang
  * @version 1
  */

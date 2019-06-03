@@ -1,9 +1,18 @@
+/**
+ * Evan Zhang and Max Li
+ * Mrs Krasteva
+ * Due: June 10, 2019
+ * The story game save subclass.
+ */
 import javax.json.*;
 
 /**
+ * The story game save subclass.
+ * <pre>
  * Revision history:
  *  - May 30, 2019: Created ~Evan Zhang
  *  - Jun 1, 2019: Commented ~Evan Zhang
+ * </pre>
  * @author Evan Zhang
  * @version 1
  */

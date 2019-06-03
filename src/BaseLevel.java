@@ -1,3 +1,9 @@
+/**
+ * Evan Zhang and Max Li
+ * Mrs Krasteva
+ * Due: June 10, 2019
+ * Base class for levels.
+ */
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,6 +19,8 @@ import javafx.scene.layout.*;
 import javafx.scene.text.*;
 
 /**
+ * Base class for levels.
+ * <pre>
  * Revision history:
  *  - May 13, 2019: Created ~Evan Zhang
  *  - May 14, 2019: Updated ~Evan Zhang
@@ -30,6 +38,7 @@ import javafx.scene.text.*;
  *  - Jun 1, 2019: Commented ~Evan Zhang
  *  - Jun 2, 2019: Commented ~Evan Zhang
  *  - Jun 2, 2019: Updated ~Evan Zhang
+ * </pre>
  * @author Evan Zhang
  * @version 1
  */
