@@ -25,9 +25,9 @@ import javafx.scene.layout.*;
  *  - May 29, 2019: Updated ~Evan Zhang
  *  - May 30, 2019: Updated ~Evan Zhang
  *  - May 31, 2019: Updated ~Evan Zhang
+ * </pre>
  * @author Evan Zhang
  * @version 1
- * </pre>
  */
 public class LevelSelect extends BaseScene {
     /**
