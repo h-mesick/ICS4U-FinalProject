@@ -260,11 +260,11 @@ public class Help extends BaseScene {
         list.setHgap(30);
         list.setVgap(10);
 
-        ImageView imageView = new ImageView(ResourceLoader.loadImage("help/arrows.png"));
+        ImageView imageView = new ImageView(ResourceLoader.loadImage("help/keys.png"));
         imageView.setPreserveRatio(true);
         imageView.setFitHeight(40);
         list.add(imageView, 0, 0);
-        content = new Text("Use the left/right arrow (alternatively A/S) keys to move left/right.\n" +
+        content = new Text("Use the left/right arrow (alternatively A/D) keys to move left/right.\n" +
                 "Use the up arrow (alternatively W) key to jump.");
         content.setFont(Util.getMainFont(15));
         list.add(content, 1, 0);
