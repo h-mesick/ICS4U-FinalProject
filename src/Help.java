@@ -4,6 +4,7 @@
  * Due: June 10, 2019
  * The Help scene.
  */
+
 import javafx.geometry.*;
 import javafx.scene.*;
 import javafx.scene.image.*;
@@ -21,6 +22,7 @@ import javafx.scene.text.*;
  * - June 2, 2019: Updated ~Max Li
  * - June 2, 2019: Finished ~Max Li
  * </pre>
+ *
  * @author Evan Zhang
  * @version 1
  */
@@ -45,7 +47,7 @@ public class Help extends BaseScene {
      * Page 1 of the help window.
      */
     private void page1() {
-        VBox body = new VBox(10);
+        VBox body = new VBox(5);
         body.setAlignment(Pos.TOP_CENTER);
         body.getChildren().add(new ImageView(ResourceLoader.loadImage("help-logo.png")));
         Text heading1 = new Text("Objectives");
@@ -57,31 +59,29 @@ public class Help extends BaseScene {
         body.getChildren().add(heading2);
 
         Text content = new Text(
-                "Level 1 is a choose your own adventure. This means that the player has to explore the world by themselves and make\n" +
-                        "their own choices. By playing through the scenes in the story, the player will come across prompts, where they will\n" +
-                        "be given a list of possible choices they can make. By good making choices, the player will get coins and will open\n" +
-                        "more good opportunities for themselves. However, by making bad choices, the player will lose opportunities.\n");
-        content.setFont(Util.getMainFont(12));
-
-        body.getChildren().add(content);
-
-        Text heading3 = new Text("Level 2 & 3");
-        heading3.setFont(Util.getMainFont(20));
-        body.getChildren().add(heading3);
-
-        content = new Text(
-                "Level 2 & 3 are platformer based levels. This means that there are platforms the player can jump on to. The objective\n" +
-                        "of these levels are to collect the collectibles, coins for level 2 and stars for level 3. A prompt will open up when\n" +
-                        "collecting a coin or star, and the player has to choose the correct choices to get coins/points. In level 3 you can buy\n" +
-                        "buy things with previously acquired coins to gain more points.\n");
-        content.setFont(Util.getMainFont(12));
-
-        body.getChildren().add(content);
-
-        content = new Text("Final score is calculated as: Coins(money) left + Stars(score from level 3)");
+                "Level 1 is a choose your own adventure. This means that the player has to explore the world by\n" +
+                        "themselves and make their own choices. By playing through the scenes in the story, the player\n" +
+                        "will come across prompts, where they will be given a list of possible choices they can make.\n" +
+                        "By good making choices, the player will get coins and will open more good opportunities for\n" +
+                        "themselves. However, by making bad choices, the player will lose opportunities.\n");
         content.setFont(Util.getMainFont(15));
-
         body.getChildren().add(content);
+
+        GridPane list = new GridPane();
+        list.setAlignment(Pos.CENTER);
+        list.setHgap(50);
+
+        ImageView imageView = new ImageView(ResourceLoader.loadImage("help/level1select.png"));
+        imageView.setPreserveRatio(true);
+        imageView.setFitHeight(140);
+        list.add(imageView, 0, 0);
+
+        content = new Text("An example of a choice the player will get in Level 1,\n" +
+                "and the choices that the user can choose.");
+        content.setFont(Util.getMainFont(15));
+        list.add(content, 1, 0);
+
+        body.getChildren().add(list);
 
         ImageButton backButton = Util.getMainImageButton("back", event -> {
             if (this.game.hasNextState()) {
@@ -100,6 +100,58 @@ public class Help extends BaseScene {
      * Page 2 of the help window.
      */
     private void page2() {
+        VBox body = new VBox(5);
+        body.setAlignment(Pos.TOP_CENTER);
+        body.getChildren().add(new ImageView(ResourceLoader.loadImage("help-logo.png")));
+        Text heading1 = new Text("Objectives");
+        heading1.setFont(Util.getMainFont(25));
+        body.getChildren().add(heading1);
+
+        Text heading2 = new Text("Level 2 & 3");
+        heading2.setFont(Util.getMainFont(20));
+        body.getChildren().add(heading2);
+
+        Text content = new Text(
+                "Level 2 & 3 are platformer based levels. This means that there are platforms the player can\n" +
+                        "jump on to. The objective of these levels are to collect the collectibles, coins for level 2\n" +
+                        "and stars for level 3. A prompt will open up when collecting a coin or star, and the player has\n" +
+                        "to choose the correct choices to get coins/points. In level 3 you can buy things with previously\n" +
+                        "acquired coins to gain more points.");
+        content.setFont(Util.getMainFont(15));
+        body.getChildren().add(content);
+
+
+        GridPane list = new GridPane();
+        list.setAlignment(Pos.CENTER);
+        list.setHgap(50);
+
+        ImageView imageView = new ImageView(ResourceLoader.loadImage("help/level2select.png"));
+        imageView.setPreserveRatio(true);
+        imageView.setFitHeight(140);
+        list.add(imageView, 0, 0);
+
+        content = new Text("An example of a choice the player will get in Level 2/3,\n" +
+                "and the choices that the user can choose.");
+        content.setFont(Util.getMainFont(15));
+        list.add(content, 1, 0);
+
+        body.getChildren().add(list);
+
+        content = new Text("Final score is calculated as: Coins(money) left + Stars(score from level 3)");
+        content.setFont(Util.getMainFont(17));
+        body.getChildren().add(content);
+
+        ImageButton backButton = Util.getMainImageButton("back", event -> page1());
+
+        ImageButton forwardButton = Util.getMainImageButton("forward", event -> page2());
+
+        this.game.setScene(new Scene(Util.getMainRoot(body, Util.getFooter(backButton, forwardButton))));
+    }
+
+    /**
+     * Page 3 of the help window.
+     */
+    private void page3() {
         VBox body = new VBox();
         body.setAlignment(Pos.TOP_CENTER);
         body.getChildren().add(new ImageView(ResourceLoader.loadImage("help-logo.png")));
@@ -162,17 +214,17 @@ public class Help extends BaseScene {
 
         body.getChildren().add(list);
 
-        ImageButton backButton = Util.getMainImageButton("back", event -> page1());
+        ImageButton backButton = Util.getMainImageButton("back", event -> page2());
 
-        ImageButton forwardButton = Util.getMainImageButton("forward", event -> page3());
+        ImageButton forwardButton = Util.getMainImageButton("forward", event -> page4());
 
         this.game.setScene(new Scene(Util.getMainRoot(body, Util.getFooter(backButton, forwardButton))));
     }
 
     /**
-     * Page 3 of the help window.
+     * Page 4 of the help window.
      */
-    private void page3() {
+    private void page4() {
         VBox body = new VBox(15);
         body.setAlignment(Pos.TOP_CENTER);
         body.getChildren().add(new ImageView(ResourceLoader.loadImage("help-logo.png")));
@@ -224,7 +276,7 @@ public class Help extends BaseScene {
 
         body.getChildren().add(list);
 
-        ImageButton backButton = Util.getMainImageButton("back", event -> page2());
+        ImageButton backButton = Util.getMainImageButton("back", event -> page3());
 
         ImageButton forwardButton = Util.getMainImageButton("forward", event -> {
             this.game.updateState(State.MAIN_MENU);
