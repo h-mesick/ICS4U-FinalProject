@@ -4,8 +4,8 @@
  * Due: June 10, 2019
  * The Highscores scene.
  */
-import java.util.List;
 import java.util.Collections;
+import java.util.List;
 
 import javafx.geometry.*;
 import javafx.scene.*;
@@ -50,7 +50,8 @@ public class Highscores extends BaseScene {
         rankings.setVgap(10);
         rankings.setHgap(10);
         for (int x = 0; x < 10; x++) {
-            String username = "-----", score = "--";
+            String username = "-----";
+            String score = "--";
             if (x < users.size()) {
                 User user = users.get(x);
                 username = user.username;

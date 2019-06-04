@@ -7,8 +7,8 @@
 import javafx.animation.*;
 import javafx.geometry.*;
 import javafx.scene.*;
-import javafx.scene.layout.*;
 import javafx.scene.image.*;
+import javafx.scene.layout.*;
 import javafx.util.*;
 
 /**
@@ -38,8 +38,6 @@ public class LoadingScreen extends BaseScene {
      * {@inheritDoc}
      */
     public void initScene() {
-        BorderPane root = new BorderPane();
-
         VBox body = new VBox(10);
         body.setAlignment(Pos.CENTER);
 
@@ -77,8 +75,8 @@ public class LoadingScreen extends BaseScene {
         timeline.getKeyFrames().add(end);
         timeline.play();
 
+        BorderPane root = new BorderPane();
         root.setCenter(body);
-
         this.game.setScene(new Scene(root));
     }
 }

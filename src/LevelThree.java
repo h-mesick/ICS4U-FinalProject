@@ -7,14 +7,14 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import javax.json.*;
-
 import javafx.event.*;
 import javafx.geometry.*;
 import javafx.scene.image.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.*;
 import javafx.scene.text.*;
+
+import javax.json.*;
 
 /**
  * Level three of the game.

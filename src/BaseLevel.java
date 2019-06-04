@@ -300,7 +300,7 @@ public abstract class BaseLevel extends BaseScene {
      * @param key The key that is pressed
      */
     protected void handleKeyPressed(KeyCode key) {
-        switch(key) {
+        switch (key) {
             case ESCAPE:
                 if (overlayVisible()) {
                     if (currentOverlay != null && currentOverlay.equals(escapeOverlay)) {

@@ -5,8 +5,8 @@
  * Level one of the game.
  */
 import java.util.List;
-import java.util.TreeMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import javafx.event.*;
 import javafx.geometry.*;
@@ -45,6 +45,7 @@ public class LevelOne extends BaseLevel {
         private String command;
         private String[] arguments;
         private int argumentPointer = 0;
+
         /**
          * Constructor
          * @param  line The line to parse
@@ -57,6 +58,7 @@ public class LevelOne extends BaseLevel {
                 arguments[i] = tokens[i + 1].trim();
             }
         }
+
         /**
          * Constructor
          * @param  other The other Command to clone
@@ -68,6 +70,7 @@ public class LevelOne extends BaseLevel {
                 this.arguments[i] = other.arguments[i];
             }
         }
+
         /**
          * Gets the command
          * @return The command
@@ -75,6 +78,7 @@ public class LevelOne extends BaseLevel {
         public String getCommand() {
             return command;
         }
+
         /**
          * Gets the arguments
          * @return The arguments
@@ -82,6 +86,7 @@ public class LevelOne extends BaseLevel {
         public String[] getArguments() {
             return arguments;
         }
+
         /**
          * Gets the next argument and increments a pointer
          * @return The next argument
@@ -89,6 +94,7 @@ public class LevelOne extends BaseLevel {
         public String nextArgument() {
             return arguments[argumentPointer++];
         }
+
         /**
          * Returns whether the specified line is a comment
          * @return Whether the specified line is a comment
@@ -186,7 +192,8 @@ public class LevelOne extends BaseLevel {
     protected void handleFinish() {
         fadeOut(e -> {
             StackPane nextLevel = initBasicOverlay(Util.getMainButton("Proceed to the next level",
-                                                                      event -> this.game.updateState(State.LEVEL_TWO), 15));
+                                                                      event -> this.game.updateState(State.LEVEL_TWO),
+                                                                      15));
             setOverlay(nextLevel);
             nextLevel.setOpacity(0);
             Util.fade(nextLevel, 1, 0, 1);
@@ -213,8 +220,10 @@ public class LevelOne extends BaseLevel {
      */
     protected void handleKeyPressed(KeyCode key) {
         super.handleKeyPressed(key);
-        switch(key) {
-            case ENTER: nextDialog(); break;
+        switch (key) {
+            case ENTER:
+                nextDialog();
+                break;
             default: break;
         }
     }
@@ -243,7 +252,7 @@ public class LevelOne extends BaseLevel {
         if (command.isComment()) {
             return true;
         }
-        switch(command.getCommand()) {
+        switch (command.getCommand()) {
             case "PAUSE":
                 return false;
             case "TEXT":
@@ -257,7 +266,7 @@ public class LevelOne extends BaseLevel {
                 textOverlay.getChildren().add(text);
                 break;
             case "BACKGROUND":
-                switch(command.nextArgument()) {
+                switch (command.nextArgument()) {
                     case "IMAGE":
                         background.setImage(ResourceLoader.loadImage(command.nextArgument()));
                         break;
@@ -277,7 +286,11 @@ public class LevelOne extends BaseLevel {
                     double delay = 0.5;
                     try {
                         delay = Double.parseDouble(command.nextArgument());
-                    } catch(Exception e) {}
+                    } catch (NumberFormatException e) {
+                        System.err.println("Warning: failed to parse FADEOUT delay");
+                    } catch (Exception e) {
+                        /** Catch all */
+                    }
                     fadeOut(event -> nextDialog(true), delay);
                     return false;
                 }
@@ -287,7 +300,11 @@ public class LevelOne extends BaseLevel {
                     double delay = 0.5;
                     try {
                         delay = Double.parseDouble(command.nextArgument());
-                    } catch(Exception e) {}
+                    } catch (NumberFormatException e) {
+                        System.err.println("Warning: failed to parse FADEOUT delay");
+                    } catch (Exception e) {
+                        /** Catch all */
+                    }
                     fadeIn(event -> nextDialog(true), delay);
                     return false;
                 }

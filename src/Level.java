@@ -64,7 +64,8 @@ public class Level {
         blocks = new Sprite[lines.size()][Constants.BLOCK_WIDTH_COUNT];
         for (int y = 0; y < lines.size(); y++) {
             for (int x = 0; x < Constants.BLOCK_WIDTH_COUNT; x++) {
-                double xx = getActX(x), yy = getActY(y);
+                double xx = getActX(x);
+                double yy = getActY(y);
                 blocks[y][x] = getBlock(xx, yy);
 
                 if (arr[y][x] < 0) {

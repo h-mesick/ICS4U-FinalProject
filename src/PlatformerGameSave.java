@@ -7,9 +7,9 @@
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.json.*;
-
 import javafx.geometry.*;
+
+import javax.json.*;
 
 /**
  * The platformer game save subclass.

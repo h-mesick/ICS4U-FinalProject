@@ -2,7 +2,7 @@
  * Evan Zhang and Max Li
  * Mrs Krasteva
  * Due: June 10, 2019
- * The Question class for level two and three of the game for storing questions.
+ * The Question class for storing questions in the game.
  */
 import javafx.event.*;
 import javafx.geometry.*;
@@ -11,7 +11,7 @@ import javafx.scene.paint.*;
 import javafx.scene.text.*;
 
 /**
- * The Question class for level two and three of the game for storing questions.
+ * The Question class for storing questions in the game.
  * <pre>
  * Revision history:
  *  - May 18, 2019: Created ~Evan Zhang

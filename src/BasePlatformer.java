@@ -118,7 +118,8 @@ public abstract class BasePlatformer extends BaseLevel {
     private void updatePlayer() {
         double yy = getRealY(player.getTranslateY());
         BoundingBox box = new BoundingBox(player.getTranslateX() + Constants.EPS, yy + Constants.EPS,
-                                          player.getWidth() - 2 * Constants.EPS, player.getHeight() - 2 * Constants.EPS);
+                                          player.getWidth() - 2 * Constants.EPS,
+                                          player.getHeight() - 2 * Constants.EPS);
 
         double ground = getScreenY(this.level.getLowerBound(box) - player.getHeight());
         double ceiling = getScreenY(this.level.getUpperBound(box));

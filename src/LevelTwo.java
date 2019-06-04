@@ -8,14 +8,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
-import javax.json.*;
-
 import javafx.event.*;
 import javafx.geometry.*;
 import javafx.scene.image.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.*;
 import javafx.scene.text.*;
+
+import javax.json.*;
 
 /**
  * Level two of the game.
@@ -136,7 +136,9 @@ public class LevelTwo extends BasePlatformer {
         finishText.setTextAlignment(TextAlignment.CENTER);
         finishText.setWrappingWidth(Constants.SCREEN_WIDTH / 3 * 2);
 
-        StackPane nextLevel = Util.getMainButton("Continue to the next level", event -> this.game.updateState(State.LEVEL_THREE), 15);
+        StackPane nextLevel = Util.getMainButton("Continue to the next level",
+                                                 event -> this.game.updateState(State.LEVEL_THREE),
+                                                 15);
 
         setOverlay(initBasicOverlay(finishText, nextLevel));
     }

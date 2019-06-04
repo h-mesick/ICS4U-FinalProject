@@ -21,7 +21,7 @@ import javax.json.*;
  */
 public abstract class BaseGameSave {
     /** Instance variables */
-    public int scores[];
+    public int[] scores;
     public boolean levelComplete;
 
     /**

@@ -41,6 +41,10 @@ public class Game {
     public Stage stage;
     public User currentUser;
 
+    /**
+     * Constructor
+     * @param stage The current stage to draw everything
+     */
     public Game(Stage stage) {
         this.stage = stage;
 
@@ -155,7 +159,7 @@ public class Game {
      */
     public void updateScene() {
         currentScene = null;
-        switch(this.currentState) {
+        switch (this.currentState) {
             case LOADING_SCREEN: currentScene =  new LoadingScreen(this); break;
             case ENTER_USERNAME: currentScene = new EnterUsername(this); break;
             case MAIN_MENU: currentScene = new MainMenu(this); break;

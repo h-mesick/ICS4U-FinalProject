@@ -8,10 +8,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
-import java.util.TreeMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import javafx.scene.image.*;
+
 /**
  * The Resource Loader utility class for loading resources from files.
  * <pre>
@@ -27,8 +28,7 @@ import javafx.scene.image.*;
  * @author Evan Zhang
  * @version 1
  */
-public abstract class ResourceLoader
-{
+public abstract class ResourceLoader {
     /** Static variables */
     private static Map<String, Image> imageCache = new TreeMap<String, Image>();
 
@@ -72,7 +72,7 @@ public abstract class ResourceLoader
     public static Reader loadLevel(String filename) {
         try {
             return new InputStreamReader(getResource("resources/levels/" + filename), "UTF-8");
-        } catch(UnsupportedEncodingException e) {
+        } catch (UnsupportedEncodingException e) {
             System.err.println("Cannot decode level file: \"" + filename + "\".");
         }
         return null;

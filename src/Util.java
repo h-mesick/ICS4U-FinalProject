@@ -248,6 +248,7 @@ public abstract class Util {
                 }
             }
         } catch (Exception e) {
+            /** Catch all */
         }
         return lines;
     }
