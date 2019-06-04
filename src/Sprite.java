@@ -95,7 +95,7 @@ public class Sprite extends ImageView {
      * @return        Whether the sprite is on the ground or not
      */
     public boolean onGround(double ground) {
-        return ground <= getTranslateY();
+        return ground - Constants.EPS <= getTranslateY();
     }
 
     /**
