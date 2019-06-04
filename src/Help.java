@@ -264,7 +264,8 @@ public class Help extends BaseScene {
         imageView.setPreserveRatio(true);
         imageView.setFitHeight(40);
         list.add(imageView, 0, 0);
-        content = new Text("Use the left/right arrow keys to move left/right. Use the up arrow key to jump.");
+        content = new Text("Use the left/right arrow (alternatively A/S) keys to move left/right.\n" +
+                "Use the up arrow (alternatively W) key to jump.");
         content.setFont(Util.getMainFont(15));
         list.add(content, 1, 0);
 
