@@ -112,7 +112,7 @@ public class LevelThree extends BasePlatformer {
         String question = curObj.getString("question");
         int cost = curObj.getInt("cost");
         if (type.equals("purchase")) {
-            question += " (Cost to purchase: " + cost + ")";
+            question += " (Costs " + cost + " coins)";
         }
         ArrayList<JsonObject> choices = new ArrayList<JsonObject>(Arrays.asList(curObj.getJsonArray("choices")
                                                                                       .toArray(new JsonObject[0])));
@@ -124,7 +124,7 @@ public class LevelThree extends BasePlatformer {
         EventHandler[] handlers = new EventHandler[choices.size()];
         for (int i = 0; i < choices.size(); i++) {
             Integer scoreDelta = choices.get(i).getInt("score");
-            Integer costDelta = answers[i].equals("Yes") ? cost : 0;
+            Integer costDelta = i < choices.size() - 1 ? cost : 0;
             handlers[i] = (event -> {
                 incrementScore(0, -(int)costDelta);
                 incrementScore(1, (int)scoreDelta);

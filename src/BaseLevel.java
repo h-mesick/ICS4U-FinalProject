@@ -70,7 +70,7 @@ public abstract class BaseLevel extends BaseScene {
                 if (prev.get() == 0) {
                     update();
                 } else {
-                    long TPS = 5500000;
+                    long TPS = 7000000;
                     long diff = now - prev.get() + prevExtra.get();
                     long iterations = diff / TPS;
                     prevExtra.set(diff % TPS);
