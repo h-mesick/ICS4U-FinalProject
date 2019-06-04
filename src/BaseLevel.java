@@ -63,13 +63,17 @@ public abstract class BaseLevel extends BaseScene {
         super(game);
 
         SimpleLongProperty prev = new SimpleLongProperty();
+        SimpleLongProperty prevExtra = new SimpleLongProperty();
         mainTimer = new AnimationTimer() {
             @Override
             public void handle(long now) {
                 if (prev.get() == 0) {
                     update();
                 } else {
-                    long iterations = (now - prev.get()) / 5000000;
+                    long TPS = 5500000;
+                    long diff = now - prev.get() + prevExtra.get();
+                    long iterations = diff / TPS;
+                    prevExtra.set(diff % TPS);
                     for (int x = 0; x < iterations; x++) {
                         update();
                     }

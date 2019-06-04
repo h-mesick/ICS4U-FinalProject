@@ -124,8 +124,9 @@ public abstract class BasePlatformer extends BaseLevel {
         double ground = getScreenY(this.level.getLowerBound(box) - player.getHeight());
         double ceiling = getScreenY(this.level.getUpperBound(box));
 
-        boolean moveLeft = pressedKeys.contains(KeyCode.LEFT);
-        boolean moveRight = pressedKeys.contains(KeyCode.RIGHT);
+        boolean moveLeft = pressedKeys.contains(KeyCode.LEFT) || pressedKeys.contains(KeyCode.A);
+        boolean moveRight = pressedKeys.contains(KeyCode.RIGHT) || pressedKeys.contains(KeyCode.D);
+        boolean moveUp = pressedKeys.contains(KeyCode.UP) || pressedKeys.contains(KeyCode.W);
         boolean onGround = player.onGround(ground);
 
         if (moveLeft || moveRight || !onGround) {
@@ -137,7 +138,7 @@ public abstract class BasePlatformer extends BaseLevel {
             player.setImage(ResourceLoader.loadImage("player/still.png"));
         }
 
-        if (pressedKeys.contains(KeyCode.UP) && onGround) {
+        if (moveUp && onGround) {
             player.jump();
         }
 
