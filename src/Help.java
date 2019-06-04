@@ -169,7 +169,7 @@ public class Help extends BaseScene {
         list.setHgap(50);
         list.setVgap(10);
 
-        ImageView imageView = new ImageView(ResourceLoader.loadImage("/player/004.png"));
+        ImageView imageView = new ImageView(ResourceLoader.loadImage("player/004.png"));
         imageView.setPreserveRatio(true);
         imageView.setFitHeight(40);
         list.add(imageView, 0, 0);
@@ -260,7 +260,7 @@ public class Help extends BaseScene {
         list.setHgap(30);
         list.setVgap(10);
 
-        ImageView imageView = new ImageView(ResourceLoader.loadImage("/help/arrows.png"));
+        ImageView imageView = new ImageView(ResourceLoader.loadImage("help/arrows.png"));
         imageView.setPreserveRatio(true);
         imageView.setFitHeight(40);
         list.add(imageView, 0, 0);

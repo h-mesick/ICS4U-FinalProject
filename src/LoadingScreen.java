@@ -49,18 +49,18 @@ public class LoadingScreen extends BaseScene {
                 new KeyValue(imageView.imageProperty(),
                         ResourceLoader.loadImage("company-logo.png")),
                 new KeyValue(imageView.opacityProperty(), 0.0));
-        KeyFrame fadein1 = new KeyFrame(Duration.seconds(2), new KeyValue(imageView.opacityProperty(), 1.0));
-        KeyFrame fadeout1 = new KeyFrame(Duration.seconds(3), new KeyValue(imageView.opacityProperty(), 0.0));
-        KeyFrame frame2 = new KeyFrame(Duration.seconds(3), new KeyValue(imageView.imageProperty(),
+        KeyFrame fadein1 = new KeyFrame(Duration.seconds(1), new KeyValue(imageView.opacityProperty(), 1.0));
+        KeyFrame fadeout1 = new KeyFrame(Duration.seconds(1.5), new KeyValue(imageView.opacityProperty(), 0.0));
+        KeyFrame frame2 = new KeyFrame(Duration.seconds(1.5), new KeyValue(imageView.imageProperty(),
                                        ResourceLoader.loadImage("game-logo.png")));
-        KeyFrame fadein2 = new KeyFrame(Duration.seconds(5), new KeyValue(imageView.opacityProperty(), 1.0));
-        KeyFrame fadeout2 = new KeyFrame(Duration.seconds(6), new KeyValue(imageView.opacityProperty(), 0.0));
+        KeyFrame fadein2 = new KeyFrame(Duration.seconds(2.5), new KeyValue(imageView.opacityProperty(), 1.0));
+        KeyFrame fadeout2 = new KeyFrame(Duration.seconds(3), new KeyValue(imageView.opacityProperty(), 0.0));
         Timeline timeline = new Timeline(frame1, fadein1, fadeout1, frame2, fadein2, fadeout2);
 
 
         for (int i = 1; i <= 6; i++) {
             timeline.getKeyFrames().add(
-                    new KeyFrame(Duration.seconds(5 + i),
+                    new KeyFrame(Duration.seconds(2 + i),
                     new KeyValue(imageView.imageProperty(),
                                  ResourceLoader.loadImage("loadingscreen/house" + i + ".jpg")),
                     new KeyValue(imageView.opacityProperty(), 1.0))
@@ -70,7 +70,7 @@ public class LoadingScreen extends BaseScene {
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.setAutoReverse(true);
 
-        KeyFrame end = new KeyFrame(Duration.seconds(12), event -> game.updateState(State.ENTER_USERNAME));
+        KeyFrame end = new KeyFrame(Duration.seconds(9), event -> game.updateState(State.ENTER_USERNAME));
 
         timeline.getKeyFrames().add(end);
         timeline.play();
