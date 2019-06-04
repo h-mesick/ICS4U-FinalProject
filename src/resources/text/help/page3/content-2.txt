@@ -1,0 +1,1 @@
+These are platform blocks that your sprite can jump onto.

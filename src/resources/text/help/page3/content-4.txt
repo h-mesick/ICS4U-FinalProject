@@ -1,0 +1,1 @@
+Stars are what you are trying to collect in level 3 and represent points. A prompt will show up when you collect a star. This prompt can be a buying choice or a lifestyle choice. Depending on your choice you will gain or lose points.

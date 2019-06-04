@@ -1,0 +1,1 @@
+In level 3, some choices require using the coins you acquired in level 2 to make smart decisions and gain more points. Of course, if you did not gain enough coins in level 2, you will not be able to make some decisions that require coins.

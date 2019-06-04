@@ -65,17 +65,35 @@ public abstract class ResourceLoader {
     }
 
     /**
-     * Loads the game level specified by the filename
-     * @param  filename The level filename
-     * @return          An InputStreamReader specified by the filename
+     * Loads the text file specified by the filename
+     * @param  filename The text filename
+     * @return          A Reader specified by the filename
      */
-    public static Reader loadLevel(String filename) {
+    public static Reader loadText(String filename) {
         try {
-            return new InputStreamReader(getResource("resources/levels/" + filename), "UTF-8");
+            return new InputStreamReader(getResource("resources/text/" + filename), "UTF-8");
         } catch (UnsupportedEncodingException e) {
-            System.err.println("Cannot decode level file: \"" + filename + "\".");
+            System.err.println("Cannot decode text file: \"" + filename + "\".");
         }
         return null;
+    }
+
+    /**
+     * Loads the game level specified by the filename
+     * @param  filename The level filename
+     * @return          A Reader specified by the filename
+     */
+    public static Reader loadLevel(String filename) {
+        return loadText("levels/" + filename);
+    }
+
+    /**
+     * Loads the help file specified by the filename
+     * @param  filename The help filename
+     * @return          A Reader specified by the filename
+     */
+    public static Reader loadHelp(String filename) {
+        return loadText("help/" + filename);
     }
 
     /**

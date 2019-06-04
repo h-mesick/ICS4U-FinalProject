@@ -1,0 +1,1 @@
+Coins are what you are trying to collect in level 2 and represent money. A prompt will show up when you collect a coin and you choose an option which will make you either gain or lose money.
