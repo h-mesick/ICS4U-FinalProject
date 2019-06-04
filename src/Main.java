@@ -47,7 +47,8 @@ public class Main extends Application {
         primaryStage.setResizable(false);
         primaryStage.setHeight(Constants.SCREEN_HEIGHT);
         primaryStage.setWidth(Constants.SCREEN_WIDTH);
-
+        primaryStage.widthProperty().addListener((observable, oldValue, newValue) -> primaryStage.setWidth(Constants.SCREEN_WIDTH));
+        primaryStage.heightProperty().addListener((observable, oldValue, newValue) -> primaryStage.setHeight(Constants.SCREEN_HEIGHT));
         primaryStage.show();
     }
 }
