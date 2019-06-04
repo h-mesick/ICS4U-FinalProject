@@ -21,6 +21,7 @@ import javafx.scene.text.*;
  * - May 31, 2019: Updated ~Evan Zhang
  * - June 2, 2019: Updated ~Max Li
  * - June 2, 2019: Finished ~Max Li
+ * - June 3, 2019: Finishing touches ~Max Li
  * </pre>
  *
  * @author Evan Zhang
@@ -143,7 +144,7 @@ public class Help extends BaseScene {
 
         ImageButton backButton = Util.getMainImageButton("back", event -> page1());
 
-        ImageButton forwardButton = Util.getMainImageButton("forward", event -> page2());
+        ImageButton forwardButton = Util.getMainImageButton("forward", event -> page3());
 
         this.game.setScene(new Scene(Util.getMainRoot(body, Util.getFooter(backButton, forwardButton))));
     }
