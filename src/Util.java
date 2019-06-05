@@ -8,6 +8,8 @@ import java.io.BufferedReader;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import javafx.animation.*;
 import javafx.event.*;
@@ -31,6 +33,9 @@ import javafx.util.*;
  * @version 1
  */
 public abstract class Util {
+    /** Static variables */
+    private static Map<Double, Font> fontCache = new TreeMap<Double, Font>();
+
     /**
      * Get the default title
      * @return The default title as a VBox
@@ -222,7 +227,12 @@ public abstract class Util {
      * @return      The specified Font
      */
     public static Font getMainFont(double size) {
-        return Font.loadFont(ResourceLoader.loadFont("nvscript_sc.ttf"), size + 4);
+        Font ret = fontCache.get(size);
+        if (ret == null) {
+            ret = Font.loadFont(ResourceLoader.loadFont("nvscript_sc.ttf"), size + 4);
+            fontCache.put(size, ret);
+        }
+        return ret;
     }
 
     /**
