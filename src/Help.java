@@ -9,6 +9,7 @@ import javafx.geometry.*;
 import javafx.scene.*;
 import javafx.scene.image.*;
 import javafx.scene.layout.*;
+import javafx.scene.paint.*;
 import javafx.scene.text.*;
 
 /**
@@ -61,17 +62,20 @@ public class Help extends BaseScene {
         body.setAlignment(Pos.TOP_CENTER);
         body.getChildren().add(new ImageView(ResourceLoader.loadImage("help-logo.png")));
         Text heading1 = new Text("Objectives");
+        heading1.setFill(Color.WHITE);
         heading1.setFont(Util.getMainFont(25));
         body.getChildren().add(heading1);
 
         Text heading2 = new Text("Level 1");
+        heading2.setFill(Color.WHITE);
         heading2.setFont(Util.getMainFont(20));
         body.getChildren().add(heading2);
 
         Text content = new Text(readText("page1/content-1.txt"));
+        content.setFill(Color.WHITE);
+        content.setFont(Util.getMainFont(15));
         content.setWrappingWidth(Constants.SCREEN_WIDTH * 3 / 5);
         content.setTextAlignment(TextAlignment.JUSTIFY);
-        content.setFont(Util.getMainFont(15));
 
 
         ImageView imageView = new ImageView(ResourceLoader.loadImage("help/level1select.png"));
@@ -86,6 +90,7 @@ public class Help extends BaseScene {
         body.getChildren().add(list);
 
         content = new Text(readText("page1/footer.txt"));
+        content.setFill(Color.WHITE);
         content.setFont(Util.getMainFont(17));
         body.getChildren().add(content);
 
@@ -110,18 +115,22 @@ public class Help extends BaseScene {
         body.setAlignment(Pos.TOP_CENTER);
         body.getChildren().add(new ImageView(ResourceLoader.loadImage("help-logo.png")));
         Text heading1 = new Text("Objectives");
+        heading1.setFill(Color.WHITE);
         heading1.setFont(Util.getMainFont(25));
         body.getChildren().add(heading1);
 
         Text heading2 = new Text("Level 2 & 3");
+        heading2.setFill(Color.WHITE);
         heading2.setFont(Util.getMainFont(20));
         body.getChildren().add(heading2);
 
         Text content1 = new Text(readText("page2/content-1.txt"));
+        content1.setFill(Color.WHITE);
         content1.setWrappingWidth(Constants.SCREEN_WIDTH * 3 / 5);
         content1.setTextAlignment(TextAlignment.JUSTIFY);
         content1.setFont(Util.getMainFont(15));
         Text content2 = new Text(readText("page2/content-2.txt"));
+        content2.setFill(Color.WHITE);
         content2.setWrappingWidth(Constants.SCREEN_WIDTH * 3 / 5);
         content2.setTextAlignment(TextAlignment.JUSTIFY);
         content2.setFont(Util.getMainFont(15));
@@ -140,6 +149,7 @@ public class Help extends BaseScene {
         body.getChildren().add(list);
 
         content1 = new Text(readText("page2/footer.txt"));
+        content1.setFill(Color.WHITE);
         content1.setFont(Util.getMainFont(17));
         body.getChildren().add(content1);
 
@@ -158,10 +168,12 @@ public class Help extends BaseScene {
         body.setAlignment(Pos.TOP_CENTER);
         body.getChildren().add(new ImageView(ResourceLoader.loadImage("help-logo.png")));
         Text heading1 = new Text("Special Objects");
+        heading1.setFill(Color.WHITE);
         heading1.setFont(Util.getMainFont(25));
         body.getChildren().add(heading1);
 
         Text heading2 = new Text("Levels 2 & 3");
+        heading2.setFill(Color.WHITE);
         heading2.setFont(Util.getMainFont(20));
         body.getChildren().add(heading2);
 
@@ -184,6 +196,7 @@ public class Help extends BaseScene {
             imageView.setFitHeight(40);
             list.add(imageView, 0, i);
             Text content = new Text(readText("page3/content-" + (i + 1) +".txt"));
+            content.setFill(Color.WHITE);
             content.setWrappingWidth(Constants.SCREEN_WIDTH - 200);
             content.setFont(Util.getMainFont(13));
             list.add(content, 1, i);
@@ -205,6 +218,7 @@ public class Help extends BaseScene {
         body.setAlignment(Pos.TOP_CENTER);
         body.getChildren().add(new ImageView(ResourceLoader.loadImage("help-logo.png")));
         Text heading1 = new Text("Controls");
+        heading1.setFill(Color.WHITE);
         heading1.setFont(Util.getMainFont(25));
         body.getChildren().add(heading1);
 
@@ -215,6 +229,7 @@ public class Help extends BaseScene {
         list.setVgap(20);
 
         Text heading2 = new Text("Level 1");
+        heading2.setFill(Color.WHITE);
         heading2.setFont(Util.getMainFont(20));
         list.add(new StackPane() {{
             getChildren().add(heading2);
@@ -222,14 +237,17 @@ public class Help extends BaseScene {
         }}, 0, 0, 2, 1);
 
         Text enter = new Text("ENTER / LEFT-CLICK");
+        enter.setFill(Color.WHITE);
         enter.setFont(Util.getMainFont(17));
         list.add(enter, 0, 1);
         Text content = new Text(readText("page4/content-1.txt"));
+        content.setFill(Color.WHITE);
         content.setWrappingWidth(Constants.SCREEN_WIDTH - 300);
         content.setFont(Util.getMainFont(15));
         list.add(content, 1, 1);
 
         Text heading3 = new Text("Levels 2 & 3");
+        heading3.setFill(Color.WHITE);
         heading3.setFont(Util.getMainFont(20));
         list.add(new StackPane() {{
             getChildren().add(heading3);
@@ -241,14 +259,17 @@ public class Help extends BaseScene {
         imageView.setFitHeight(40);
         list.add(imageView, 0, 3);
         content = new Text(readText("page4/content-2.txt"));
+        content.setFill(Color.WHITE);
         content.setWrappingWidth(Constants.SCREEN_WIDTH - 300);
         content.setFont(Util.getMainFont(15));
         list.add(content, 1, 3);
 
         Text space = new Text("SPACE / ESC");
+        space.setFill(Color.WHITE);
         space.setFont(Util.getMainFont(17));
         list.add(space, 0, 4);
         content = new Text(readText("page4/content-3.txt"));
+        content.setFill(Color.WHITE);
         content.setWrappingWidth(Constants.SCREEN_WIDTH - 300);
         content.setFont(Util.getMainFont(15));
         list.add(content, 1, 4);
