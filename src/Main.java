@@ -41,14 +41,15 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Climb to Grace");
-
-        new Game(primaryStage);
+        primaryStage.getIcons().add(ResourceLoader.loadImage("company-logo.png"));
 
         primaryStage.setResizable(false);
         primaryStage.setHeight(Constants.SCREEN_HEIGHT);
         primaryStage.setWidth(Constants.SCREEN_WIDTH);
         primaryStage.widthProperty().addListener((observable, oldValue, newValue) -> primaryStage.setWidth(Constants.SCREEN_WIDTH));
         primaryStage.heightProperty().addListener((observable, oldValue, newValue) -> primaryStage.setHeight(Constants.SCREEN_HEIGHT));
+
+        new Game(primaryStage);
         primaryStage.show();
     }
 }
