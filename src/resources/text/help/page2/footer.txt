@@ -1,1 +1,1 @@
-Final score is calculated as: Coins left + Points
+Final score is calculated as: Coins left + Stars
