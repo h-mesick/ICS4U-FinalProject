@@ -112,7 +112,7 @@ public class LevelOne extends BaseLevel {
     /** Instance variables */
     private Rectangle transitionOverlay = new Rectangle(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, Color.BLACK);
     private ImageView background;
-    private StackPane textOverlay;
+    private BorderPane textOverlay;
     private int dialogPosition = 0;
     private Command[] dialogCommands;
     private Map<String, Integer> dialogCommandsLabelMap = new TreeMap<String, Integer>();
@@ -157,7 +157,7 @@ public class LevelOne extends BaseLevel {
         background.setFitHeight(Constants.SCREEN_HEIGHT);
         root.getChildren().add(background);
 
-        textOverlay = new StackPane();
+        textOverlay = new BorderPane();
         textOverlay.setTranslateX((Constants.SCREEN_WIDTH - TEXT_OVERLAY_WIDTH) / 2);
         textOverlay.setMinWidth(TEXT_OVERLAY_WIDTH);
         textOverlay.setTranslateY(Constants.SCREEN_HEIGHT - TEXT_OVERLAY_HEIGHT);
@@ -167,7 +167,6 @@ public class LevelOne extends BaseLevel {
             new BackgroundFill(Color.web("#ffd640"), new CornerRadii(15, 15, 0, 0, false), new Insets(25, 25, 0, 25))
         ));
         textOverlay.setPadding(new Insets(TEXT_PADDING));
-        textOverlay.setAlignment(Pos.TOP_LEFT);
 
         root.setOnMouseClicked(e -> nextDialog());
 
@@ -242,6 +241,18 @@ public class LevelOne extends BaseLevel {
     }
 
     /**
+     * Sets the text overlay to the specified text
+     * @param text The specified text
+     */
+    private void setTextOverlay(Text text) {
+        textOverlay.setTop(text);
+        Text footer = getFormattedText("Press enter or left click to continue...\nPress escape to pause...");
+        footer.setTextAlignment(TextAlignment.RIGHT);
+        footer.setStyle("-fx-font-style: italic");
+        textOverlay.setBottom(footer);
+    }
+
+    /**
      * Handles the next dialog command
      * @param  position             The index of the dialog command
      * @param  onlyMutatingCommands Whether to run only mutating commands or all commands (e.g transition commands)
@@ -256,14 +267,12 @@ public class LevelOne extends BaseLevel {
             case "PAUSE":
                 return false;
             case "TEXT":
-                textOverlay.getChildren().clear();
-                textOverlay.getChildren().add(getFormattedText(command.nextArgument()));
+                setTextOverlay(getFormattedText(command.nextArgument()));
                 break;
             case "NARRATION":
-                textOverlay.getChildren().clear();
                 Text text = getFormattedText(command.nextArgument());
                 text.setStyle("-fx-font-style: italic");
-                textOverlay.getChildren().add(text);
+                setTextOverlay(text);
                 break;
             case "BACKGROUND":
                 switch (command.nextArgument()) {
