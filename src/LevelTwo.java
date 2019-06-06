@@ -102,7 +102,7 @@ public class LevelTwo extends BasePlatformer {
      * TODO: disable movement
      */
     protected void tutorial() {
-        Tutorial t = new Tutorial(root, 2);
+        Tutorial t = new Tutorial(this, 2);
         root.setOnMouseClicked(e -> t.nextDialog());
     }
 

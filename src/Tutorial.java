@@ -27,19 +27,19 @@ import java.util.List;
  */
 public class Tutorial {
     // TODO: change the design of the boxes, add arrows, implement level 3 (basically same as level 2), implement level 1, javadoc
-    protected Group root;
+    protected BaseLevel baseLevel;
     protected int level;
     private List<StackPane> boxes;
     private int curIdx;
     private StackPane curBox;
 
-    public Tutorial(Group root, int level) {
-        this.root = root;
+    public Tutorial(BaseLevel baseLevel, int level) {
+        this.baseLevel = baseLevel;
         this.level = level;
         curIdx = 0;
         if (level == 2 || level == 3)
             curBox = dialogBox("Welcome to Level " + level + " !\n\nClick to begin...", 20, 300, 200, (Constants.SCREEN_WIDTH - 300) / 2, (Constants.SCREEN_HEIGHT - 200) / 2);
-        root.getChildren().add(curBox);
+        baseLevel.root.getChildren().add(curBox);
         boxes = new ArrayList<>();
         List<String> lines = Util.readLines(ResourceLoader.loadTutorial("level-" + level + ".txt"));
         for (String s : lines) {
@@ -54,13 +54,13 @@ public class Tutorial {
 
     public void nextDialog() {
         if (curIdx < boxes.size()) {
-            root.getChildren().remove(curBox);
+            baseLevel.root.getChildren().remove(curBox);
             curBox = boxes.get(curIdx);
-            root.getChildren().add(curBox);
+            baseLevel.root.getChildren().add(curBox);
             curIdx++;
         } else {
-            root.getChildren().remove(curBox);
-            root.setOnMouseClicked(null);
+            baseLevel.root.getChildren().remove(curBox);
+            baseLevel.root.setOnMouseClicked(null);
         }
     }
 
