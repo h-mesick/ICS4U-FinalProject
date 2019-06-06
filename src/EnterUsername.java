@@ -48,6 +48,7 @@ public class EnterUsername extends BaseScene {
         usernameRow.setAlignment(Pos.CENTER);
 
         TextField usernameField = new TextField();
+        usernameField.setFont(Util.getMainFont(13));
         usernameField.setMinWidth(Constants.SCREEN_WIDTH / 2);
 
         usernameField.setTextFormatter(new TextFormatter<>(change -> {
@@ -69,7 +70,7 @@ public class EnterUsername extends BaseScene {
         usernameField.getStylesheets().add(ResourceLoader.loadCSS("username-text-field.css"));
 
         ImageButton enterButton = Util.getMainImageButton("forward", event -> {
-            String username = usernameField.getText();
+            String username = usernameField.getText().toUpperCase();
             if (username.length() == 0) {
                 return;
             }
