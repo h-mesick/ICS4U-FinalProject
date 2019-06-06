@@ -39,15 +39,22 @@ public class Highscores extends BaseScene {
      * {@inheritDoc}
      */
     public void initScene() {
+        Image highscoresLogo = ResourceLoader.loadImage("highscores-logo.png");
+
         VBox body = new VBox(10);
         body.setAlignment(Pos.TOP_CENTER);
-        body.getChildren().add(new ImageView(ResourceLoader.loadImage("highscores-logo.png")));
+        body.getChildren().add(new ImageView(highscoresLogo));
+        body.setBackground(new Background(new BackgroundFill(
+            Color.web("#000000", 0.4),
+            CornerRadii.EMPTY,
+            new Insets(highscoresLogo.getHeight() - 10, 0, 0, 0)
+        )));
 
         List<User> users = this.game.getAllUsers();
         Collections.sort(users, Collections.reverseOrder());
         GridPane rankings = new GridPane();
         rankings.setAlignment(Pos.CENTER);
-        rankings.setVgap(10);
+        rankings.setVgap(13);
         rankings.setHgap(10);
         for (int x = 0; x < 10; x++) {
             String username = "-----";

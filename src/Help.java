@@ -39,14 +39,14 @@ public class Help extends BaseScene {
     }
 
     /**
-     * Initializes the scene to the help window.
+     * {@inheritDoc}
      */
     public void initScene() {
         page1();
     }
 
     /**
-     * Reads the help content from a file
+     * Reads the help content from a file.
      * @param  filename The filename to load
      * @return          The String of text loaded
      */
@@ -55,12 +55,31 @@ public class Help extends BaseScene {
     }
 
     /**
+     * Gets the main body for help.
+     * @param  spacing The VBOX spacing
+     * @return The main body forhelp
+     */
+    private VBox getMainBody(double spacing) {
+        Image helpLogo = ResourceLoader.loadImage("help-logo.png");
+
+        VBox body = new VBox(spacing);
+        body.setAlignment(Pos.TOP_CENTER);
+        body.setBackground(new Background(new BackgroundFill(
+            Color.web("#000000", 0.4),
+            CornerRadii.EMPTY,
+            new Insets(helpLogo.getHeight() - 10, 0, 0, 0)
+        )));
+
+        body.getChildren().add(new ImageView(helpLogo));
+        return body;
+    }
+
+    /**
      * Page 1 of the help window.
      */
     private void page1() {
-        VBox body = new VBox(5);
-        body.setAlignment(Pos.TOP_CENTER);
-        body.getChildren().add(new ImageView(ResourceLoader.loadImage("help-logo.png")));
+        VBox body = getMainBody(5);
+
         Text heading1 = new Text("Objectives");
         heading1.setFill(Color.WHITE);
         heading1.setFont(Util.getMainFont(25));
@@ -111,9 +130,8 @@ public class Help extends BaseScene {
      * Page 2 of the help window.
      */
     private void page2() {
-        VBox body = new VBox(5);
-        body.setAlignment(Pos.TOP_CENTER);
-        body.getChildren().add(new ImageView(ResourceLoader.loadImage("help-logo.png")));
+        VBox body = getMainBody(5);
+
         Text heading1 = new Text("Objectives");
         heading1.setFill(Color.WHITE);
         heading1.setFont(Util.getMainFont(25));
@@ -128,12 +146,12 @@ public class Help extends BaseScene {
         content1.setFill(Color.WHITE);
         content1.setWrappingWidth(Constants.SCREEN_WIDTH * 3 / 5);
         content1.setTextAlignment(TextAlignment.JUSTIFY);
-        content1.setFont(Util.getMainFont(15));
+        content1.setFont(Util.getMainFont(13));
         Text content2 = new Text(readText("page2/content-2.txt"));
         content2.setFill(Color.WHITE);
         content2.setWrappingWidth(Constants.SCREEN_WIDTH * 3 / 5);
         content2.setTextAlignment(TextAlignment.JUSTIFY);
-        content2.setFont(Util.getMainFont(15));
+        content2.setFont(Util.getMainFont(13));
 
         VBox content = new VBox(7);
         content.getChildren().addAll(content1, content2);
@@ -164,9 +182,8 @@ public class Help extends BaseScene {
      * Page 3 of the help window.
      */
     private void page3() {
-        VBox body = new VBox();
-        body.setAlignment(Pos.TOP_CENTER);
-        body.getChildren().add(new ImageView(ResourceLoader.loadImage("help-logo.png")));
+        VBox body = getMainBody(0);
+
         Text heading1 = new Text("Special Objects");
         heading1.setFill(Color.WHITE);
         heading1.setFont(Util.getMainFont(25));
@@ -198,7 +215,7 @@ public class Help extends BaseScene {
             Text content = new Text(readText("page3/content-" + (i + 1) +".txt"));
             content.setFill(Color.WHITE);
             content.setWrappingWidth(Constants.SCREEN_WIDTH - 200);
-            content.setFont(Util.getMainFont(13));
+            content.setFont(Util.getMainFont(12));
             list.add(content, 1, i);
         }
         body.getChildren().add(list);
@@ -214,9 +231,8 @@ public class Help extends BaseScene {
      * Page 4 of the help window.
      */
     private void page4() {
-        VBox body = new VBox(15);
-        body.setAlignment(Pos.TOP_CENTER);
-        body.getChildren().add(new ImageView(ResourceLoader.loadImage("help-logo.png")));
+        VBox body = getMainBody(15);
+
         Text heading1 = new Text("Controls");
         heading1.setFill(Color.WHITE);
         heading1.setFont(Util.getMainFont(25));
