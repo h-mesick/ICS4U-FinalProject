@@ -1,0 +1,9 @@
+#!/usr/bin/sh
+
+export TARGET="target/"
+
+rm -r $TARGET
+mkdir $TARGET
+
+javac -cp lib/javax.json-1.1.jar:src/ -d $TARGET src/*.java &&
+cp -r src/resources/ $TARGET

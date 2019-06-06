@@ -1,13 +1,9 @@
 #!/usr/bin/sh
 
-rm ClimbToGrace.jar
-mkdir out
+export TARGET="target/"
 
-javac -cp lib/javax.json-1.1.jar:src/ src/*.java -d out/ &&
-cp -r src/resources/ out/ &&
-cd out/ &&
+./compile &&
+cd $TARGET &&
 unzip -uo ../lib/javax.json-1.1.jar &&
 cd .. &&
-jar cvfm ClimbToGrace.jar MANIFEST.MF -C out/ .
-
-rm -r out/
+jar cvfm ClimbToGrace-8.jar MANIFEST.MF -C $TARGET .
