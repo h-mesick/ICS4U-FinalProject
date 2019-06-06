@@ -137,8 +137,12 @@ public abstract class BaseLevel extends BaseScene {
 
     /**
      * Called when it is the user's first time entering the level in order to setup the necessary BaseGameSave
+     * as well as initialize the tutorial.
      */
     protected void onFirstEnter() {
+        Tutorial tutorial = new Tutorial(this, getLevel());
+        root.setOnMouseClicked(event -> tutorial.nextDialog());
+
         if (getLevel() > 1) {
             BaseGameSave prevSave = this.game.currentUser.levelSaves[getLevel() - 2];
             if (prevSave != null) {

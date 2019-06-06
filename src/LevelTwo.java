@@ -81,6 +81,8 @@ public class LevelTwo extends BasePlatformer {
      * {@inheritDoc}
      */
     public void initScene() {
+        super.initScene();
+
         HBox scoreCountOverlay = new HBox(5);
         scoreCountOverlay.setAlignment(Pos.CENTER_LEFT);
         scoreCountOverlay.setPadding(new Insets(10));
@@ -90,20 +92,7 @@ public class LevelTwo extends BasePlatformer {
         coinImage.setFitWidth(40);
 
         scoreCountOverlay.getChildren().addAll(coinImage, scoresText[0]);
-
-        super.initScene();
         root.getChildren().add(scoreCountOverlay);
-
-        tutorial();
-    }
-
-    /**
-     * Initializes with the tutorial.
-     * TODO: disable movement
-     */
-    protected void tutorial() {
-        Tutorial t = new Tutorial(this, 2);
-        root.setOnMouseClicked(e -> t.nextDialog());
     }
 
     /**
