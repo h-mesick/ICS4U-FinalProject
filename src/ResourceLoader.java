@@ -88,6 +88,15 @@ public abstract class ResourceLoader {
     }
 
     /**
+     * Loads the tutorial file specified by the filename
+     * @param  filename The tutorial filename
+     * @return          A Reader specified by the filename
+     */
+    public static Reader loadTutorial(String filename) {
+        return loadText("tutorials/" + filename);
+    }
+
+    /**
      * Loads the help file specified by the filename
      * @param  filename The help filename
      * @return          A Reader specified by the filename

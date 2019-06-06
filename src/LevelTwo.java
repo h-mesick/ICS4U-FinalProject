@@ -4,6 +4,7 @@
  * Due: June 10, 2019
  * Level two of the game.
  */
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -38,16 +39,20 @@ import javax.json.*;
  *  - May 31, 2019: Updated ~Evan Zhang
  *  - Jun 2, 2019: Updated ~Evan Zhang
  * </pre>
+ *
  * @author Evan Zhang
  * @version 1
-*/
+ */
 public class LevelTwo extends BasePlatformer {
-    /** Instance variables */
+    /**
+     * Instance variables
+     */
     private JsonArray questions;
 
     /**
      * Constructor
-     * @param  game The current game
+     *
+     * @param game The current game
      */
     public LevelTwo(Game game) {
         super(game);
@@ -88,18 +93,30 @@ public class LevelTwo extends BasePlatformer {
 
         super.initScene();
         root.getChildren().add(scoreCountOverlay);
+
+        tutorial();
+    }
+
+    /**
+     * Initializes with the tutorial.
+     * TODO: disable movement
+     */
+    protected void tutorial() {
+        Tutorial t = new Tutorial(root, 2);
+        root.setOnMouseClicked(e -> t.nextDialog());
     }
 
     /**
      * Gets the question specified by specialType
-     * @param  specialType The question number
-     * @return             The question
+     *
+     * @param specialType The question number
+     * @return The question
      */
     protected Question getQuestion(int specialType) {
         JsonObject curObj = questions.getJsonObject(questions.size() - specialType);
         String question = curObj.getString("question");
         ArrayList<JsonObject> choices = new ArrayList<JsonObject>(Arrays.asList(curObj.getJsonArray("choices")
-                                                                                      .toArray(new JsonObject[0])));
+                .toArray(new JsonObject[0])));
         Collections.shuffle(choices);
 
         String[] answers = new String[choices.size()];
@@ -111,7 +128,7 @@ public class LevelTwo extends BasePlatformer {
         for (int i = 0; i < choices.size(); i++) {
             Integer delta = choices.get(i).getInt("score");
             handlers[i] = (event -> {
-                incrementScore(0, (int)delta);
+                incrementScore(0, (int) delta);
                 removeOverlay();
             });
         }
@@ -137,8 +154,8 @@ public class LevelTwo extends BasePlatformer {
         finishText.setWrappingWidth(Constants.SCREEN_WIDTH / 3 * 2);
 
         StackPane nextLevel = Util.getMainButton("Continue to the next level",
-                                                 event -> this.game.updateState(State.LEVEL_THREE),
-                                                 15);
+                event -> this.game.updateState(State.LEVEL_THREE),
+                15);
 
         setOverlay(initBasicOverlay(finishText, nextLevel));
     }
