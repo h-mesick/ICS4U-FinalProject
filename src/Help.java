@@ -57,7 +57,7 @@ public class Help extends BaseScene {
     /**
      * Gets the main body for help.
      * @param  spacing The VBOX spacing
-     * @return The main body forhelp
+     * @return         The main body forhelp
      */
     private VBox getMainBody(double spacing) {
         Image helpLogo = ResourceLoader.loadImage("help-logo.png");

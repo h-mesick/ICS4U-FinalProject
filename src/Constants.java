@@ -37,7 +37,7 @@ public abstract class Constants {
     static final int BLOCK_HEIGHT_COUNT = SCREEN_HEIGHT / PLATFORM_BLOCK_HEIGHT;
 
     /** The directory to store the save files */
-    static final String DATA_DIRECTORY = "saves/";
+    static final String DATA_DIRECTORY = System.getProperty("user.home") + "/climbtograce_saves/";
     /** The extension for the save files */
     static final String DATA_EXTENSION = ".ctgd";
 
