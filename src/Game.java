@@ -165,9 +165,6 @@ public class Game {
             case MAIN_MENU: currentScene = new MainMenu(this); break;
             case HIGH_SCORES: currentScene = new Highscores(this); break;
             case HELP: currentScene = new Help(this); break;
-            case TUTORIAL:
-                // currentScene = new Tutorial(this);
-                break;
             case LEVEL_SELECT: currentScene = new LevelSelect(this); break;
             case LEVEL_ONE: currentScene = new LevelOne(this); break;
             case LEVEL_TWO: currentScene = new LevelTwo(this); break;

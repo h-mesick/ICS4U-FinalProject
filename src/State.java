@@ -20,7 +20,6 @@ public enum State {
     MAIN_MENU,
     HIGH_SCORES,
     HELP,
-    TUTORIAL,
     LEVEL_SELECT,
     LEVEL_ONE,
     LEVEL_TWO,
