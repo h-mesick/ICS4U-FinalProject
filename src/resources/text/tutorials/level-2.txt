@@ -1,0 +1,17 @@
+Before you start playing, let's go over some details of the level. 100 400
+These blocks are platform blocks. This means that you can jump on them. 100 400
+These are coins. 100 150
+Your objective is to collect coins and answer the prompts correctly. 100 150
+Moving up and collecting more coins represents you regaining your old life and money. 100 150
+Evey time you have to answer a prompt, there will be right and wrong choices. 100 150
+If you answer the financially beneficial choices, you will gain coins. 100 150
+Otherwise, you will either not gain anything, or lose some of your coins. 100 150
+Remember, you want to collect as many coins as possible. 100 150
+The amount of coins you collect will be shown here. 75 75
+Your progress though the level will be shown with this bar. 350 75
+Finally, this is the sprite you control. 75 450
+The controls are the arrow keys, or the WAS keys. 75 450
+If you want to revisit any of these, you can visit the help window in the pause menu. 75 450
+Good luck! 75 450
+
+
