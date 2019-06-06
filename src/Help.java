@@ -249,13 +249,16 @@ public class Help extends BaseScene {
         heading2.setFont(Util.getMainFont(20));
         list.add(new StackPane() {{
             getChildren().add(heading2);
-            setMinWidth(list.getWidth());
+            setMinWidth(super.getWidth());
         }}, 0, 0, 2, 1);
 
         Text enter = new Text("ENTER / LEFT-CLICK");
         enter.setFill(Color.WHITE);
         enter.setFont(Util.getMainFont(17));
-        list.add(enter, 0, 1);
+        list.add(new StackPane() {{
+            getChildren().add(enter);
+            setMinWidth(super.getWidth());
+        }}, 0, 1);
         Text content = new Text(readText("page4/content-1.txt"));
         content.setFill(Color.WHITE);
         content.setWrappingWidth(Constants.SCREEN_WIDTH - 300);
@@ -267,13 +270,17 @@ public class Help extends BaseScene {
         heading3.setFont(Util.getMainFont(20));
         list.add(new StackPane() {{
             getChildren().add(heading3);
-            setMinWidth(list.getWidth());
+            setMinWidth(super.getWidth());
         }}, 0, 2, 2, 1);
 
-        ImageView imageView = new ImageView(ResourceLoader.loadImage("help/keys.png"));
-        imageView.setPreserveRatio(true);
-        imageView.setFitHeight(40);
-        list.add(imageView, 0, 3);
+        ImageView keysImage = new ImageView(ResourceLoader.loadImage("help/keys.png"));
+        keysImage.setPreserveRatio(true);
+        keysImage.setFitHeight(40);
+        list.add(new StackPane() {{
+            getChildren().add(keysImage);
+            setMinWidth(super.getWidth());
+        }}, 0, 3);
+
         content = new Text(readText("page4/content-2.txt"));
         content.setFill(Color.WHITE);
         content.setWrappingWidth(Constants.SCREEN_WIDTH - 300);
@@ -283,7 +290,10 @@ public class Help extends BaseScene {
         Text space = new Text("SPACE / ESC");
         space.setFill(Color.WHITE);
         space.setFont(Util.getMainFont(17));
-        list.add(space, 0, 4);
+        list.add(new StackPane() {{
+            getChildren().add(space);
+            setMinWidth(super.getWidth());
+        }}, 0, 4);
         content = new Text(readText("page4/content-3.txt"));
         content.setFill(Color.WHITE);
         content.setWrappingWidth(Constants.SCREEN_WIDTH - 300);
