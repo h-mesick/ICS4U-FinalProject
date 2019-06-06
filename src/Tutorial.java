@@ -71,6 +71,7 @@ public class Tutorial {
         box.setMinHeight(height);
         box.setTranslateX(x);
         box.setTranslateY(y);
+        box.setPadding(new Insets(10));
 
         Text text = new Text();
         text.setFont(Util.getMainFont(fontSize));
