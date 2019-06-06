@@ -29,6 +29,7 @@ public class ImageButton extends Button {
         image = new ImageView();
         this.getChildren().add(image);
         this.setPadding(new Insets(0));
+        setFocusTraversable(false);
     }
 
     /**

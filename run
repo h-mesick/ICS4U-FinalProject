@@ -1,3 +1,6 @@
 #!/usr/bin/sh
 
-javac -cp lib/javax.json-1.1.jar:src/ src/*.java && java -cp lib/javax.json-1.1.jar:src/ Main
+export TARGET="target/"
+
+./compile &&
+java -cp lib/javax.json-1.1.jar:$TARGET Launcher
