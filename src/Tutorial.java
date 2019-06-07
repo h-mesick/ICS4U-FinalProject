@@ -2,80 +2,82 @@
  * Evan Zhang and Max Li
  * Mrs Krasteva
  * Due: June 10, 2019
- * The tutorial class that offers a tutorial for every level
+ * The tutorial class that offers a tutorial for every level.
  */
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javafx.geometry.*;
 import javafx.scene.*;
 import javafx.scene.image.*;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.LineTo;
-import javafx.scene.shape.MoveTo;
-import javafx.scene.shape.Path;
+import javafx.scene.paint.*;
+import javafx.scene.shape.*;
 import javafx.scene.text.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * The class for creating tutorial objects.
+ * The tutorial class that offers a tutorial for every level.
  * <pre>
  * Revision history:
  *  - June 4, 2019: Created ~Max Li
  *  - June 5, 2019: Updated ~Max Li
  *  - June 6, 2019: Finished ~Max Li
+ *  - June 6, 2019: Finishing touches ~Evan Zhang
  * </pre>
- *
  * @author Max Li
  * @version 1
  */
 public class Tutorial {
-    /**
-     * Instance variables
-     */
+    /** The current level */
     protected BaseLevel baseLevel;
-    protected int level;
+    /** A list of the tutorial boxes */
     private List<StackPane> boxes;
+    /** A list of the tutorial arrows */
     private List<Arrow> arrows;
+    /** The current box and arrow index */
     private int curBoxIdx, curArrowIdx;
+    /** The current box */
     private StackPane curBox;
+    /** The current arrow */
     private Arrow curArrow;
+    /** Whether this tutorial box has an arrow */
     private boolean[] hasArrow;
+    /** Whether there is an arrow drawn on the screen */
     private boolean arrowPresent;
 
     /**
      * Constructor for the tutorial class.
      * Reads in the separate tutorial files for each level and make the corresponding tutorial dialogues.
-     *
      * @param baseLevel The level in which components are being added to
-     * @param level     The level on which the tutorial is running
      */
-    public Tutorial(BaseLevel baseLevel, int level) {
+    public Tutorial(BaseLevel baseLevel) {
         this.baseLevel = baseLevel;
-        this.level = level;
         curBoxIdx = 0;
-        curBox = dialogBox("Welcome to Level " + level + " !\n\nClick to begin...", 20, 300, 200, (Constants.SCREEN_WIDTH - 300) / 2, (Constants.SCREEN_HEIGHT - 200) / 2);
+        curBox = dialogBox("Welcome to Level " + baseLevel.getLevel() + " !\n\nClick to begin...", 20, 300, 200,
+                           (Constants.SCREEN_WIDTH - 300) / 2, (Constants.SCREEN_HEIGHT - 200) / 2);
         curArrowIdx = 0;
         curArrow = null;
         baseLevel.root.getChildren().add(curBox);
         boxes = new ArrayList<>();
         arrows = new ArrayList<>();
-        List<String> lines = Util.readLines(ResourceLoader.loadTutorial("level-" + level + ".txt"));
+        List<String> lines = Util.readLines(ResourceLoader.loadTutorial(baseLevel.getLevelFile()));
         hasArrow = new boolean[lines.size()];
         for (int j = 0; j < lines.size(); j++) {
             String[] tokens = lines.get(j).split(" ");
             int i = 0;
             if (tokens[0].equals("?")) {
-                arrows.add(new Arrow(Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4])));
+                arrows.add(new Arrow(Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]),
+                                     Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4])));
                 hasArrow[j] = true;
                 i = 5;
             }
             String temp = tokens[i];
-            for (i += 1; i < tokens.length - 2; i++) {
+            for (i++; i < tokens.length - 2; i++) {
                 temp += " " + tokens[i];
             }
-            boxes.add(contentDialogBox(temp, Integer.parseInt(tokens[tokens.length - 2]), Integer.parseInt(tokens[tokens.length - 1])));
+            boxes.add(contentDialogBox(temp, Integer.parseInt(tokens[tokens.length - 2]),
+                                       Integer.parseInt(tokens[tokens.length - 1])));
         }
     }
 
@@ -85,8 +87,9 @@ public class Tutorial {
     public void nextDialog() {
         if (curBoxIdx < boxes.size()) {
             if (hasArrow[curBoxIdx]) {
-                if (arrowPresent)
+                if (arrowPresent) {
                     baseLevel.root.getChildren().remove(curArrow);
+                }
                 arrowPresent = true;
                 curArrow = arrows.get(curArrowIdx);
                 baseLevel.root.getChildren().add(curArrow);
@@ -102,7 +105,7 @@ public class Tutorial {
         } else {
             baseLevel.root.getChildren().remove(curBox);
             baseLevel.root.setOnMouseClicked(null);
-            if (level == 1) {
+            if (baseLevel.getLevel() == 1) {
                 LevelOne temp = (LevelOne) baseLevel;
                 baseLevel.root.setOnMouseClicked(e -> temp.nextDialog());
             }
@@ -111,14 +114,13 @@ public class Tutorial {
 
     /**
      * Creates a tutorial dialog box.
-     *
      * @param content  Content of the dialog box
      * @param fontSize Size of the font in the box
      * @param width    Width of the box
      * @param height   Height of the box
      * @param x        Translates x by this amount
      * @param y        Translates y by this amount
-     * @return The dialog box, made using a StackPane
+     * @return         The dialog box, made using a StackPane
      */
     public StackPane dialogBox(String content, int fontSize, int width, int height, int x, int y) {
         StackPane box = new StackPane();
@@ -141,23 +143,19 @@ public class Tutorial {
 
     /**
      * Creates a tutorial dialog box for content.
-     *
      * @param content Content of the dialog box
      * @param x       Translates x by this amount
      * @param y       Translates y by this amount
-     * @return The dialog box, made using a StackPane
+     * @return        The dialog box, made using a StackPane
      */
     public StackPane contentDialogBox(String content, int x, int y) {
         return dialogBox(content, 15, 200, 100, x, y);
     }
 
-    /**
-     * Local class to make arrow objects.
-     */
+    /** Local class to make arrow objects. */
     public static class Arrow extends Path {
         /**
          * Constructor of the Arrow class.
-         *
          * @param sx Starting x coordinate
          * @param sy Starting y coordinate
          * @param ex Ending x coordinate
