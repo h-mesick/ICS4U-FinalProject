@@ -32,6 +32,7 @@ import javafx.stage.*;
  *  - Jun 4, 2019: Updated ~Evan Zhang
  *  - Jun 6, 2019: Updated ~Evan Zhang
  *  - Jun 6, 2019: Commented ~Evan Zhang
+ *  - Jun 7, 2019: Updated ~Evan Zhang
  * </pre>
  * @author Evan Zhang
  * @version 1
@@ -65,9 +66,7 @@ public class Game {
                 users.put(u.username, u);
             }
         }
-        // TODO: change to loading screen
-        // updateState(State.LOADING_SCREEN);
-        updateState(State.ENTER_USERNAME);
+        updateState(State.LOADING_SCREEN);
     }
 
     /**

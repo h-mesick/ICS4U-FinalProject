@@ -24,6 +24,7 @@ import javafx.util.*;
  *  - Jun 3, 2019: Updated ~Evan Zhang
  *  - Jun 3, 2019: Commented ~Evan Zhang
  *  - Jun 6, 2019: Commented ~Evan Zhang
+ *  - Jun 7, 2019: Updated ~Evan Zhang
  * </pre>
  * @author Max Li
  * @version 1
@@ -63,7 +64,7 @@ public class LoadingScreen extends BaseScene {
 
         for (int i = 1; i <= 6; i++) {
             timeline.getKeyFrames().add(
-                    new KeyFrame(Duration.seconds(2 + i),
+                    new KeyFrame(Duration.seconds(2.5 + i * 0.5),
                     new KeyValue(imageView.imageProperty(),
                                  ResourceLoader.loadImage("loadingscreen/house" + i + ".jpg")),
                     new KeyValue(imageView.opacityProperty(), 1.0))
@@ -73,7 +74,7 @@ public class LoadingScreen extends BaseScene {
         timeline.setCycleCount(1);
         timeline.setAutoReverse(false);
 
-        KeyFrame end = new KeyFrame(Duration.seconds(9), event -> game.updateState(State.ENTER_USERNAME));
+        KeyFrame end = new KeyFrame(Duration.seconds(6), event -> game.updateState(State.ENTER_USERNAME));
 
         timeline.getKeyFrames().add(end);
         timeline.play();
