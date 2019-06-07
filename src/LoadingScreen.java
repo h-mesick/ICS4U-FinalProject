@@ -70,8 +70,8 @@ public class LoadingScreen extends BaseScene {
             );
         }
 
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.setAutoReverse(true);
+        timeline.setCycleCount(1);
+        timeline.setAutoReverse(false);
 
         KeyFrame end = new KeyFrame(Duration.seconds(9), event -> game.updateState(State.ENTER_USERNAME));
 
