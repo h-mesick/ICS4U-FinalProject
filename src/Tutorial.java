@@ -26,6 +26,7 @@ import javafx.util.*;
  *  - Jun 5, 2019: Updated ~Max Li
  *  - Jun 6, 2019: Finished ~Max Li
  *  - Jun 6, 2019: Finishing touches ~Evan Zhang
+ *  - Jun 7, 2019: Finished ~Evan Zhang
  * </pre>
  * @author Max Li
  * @version 1
