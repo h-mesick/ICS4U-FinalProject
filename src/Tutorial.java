@@ -5,8 +5,9 @@
  * The tutorial class that offers a tutorial for every level.
  */
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 import javafx.geometry.*;
 import javafx.scene.*;
@@ -15,6 +16,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.*;
 import javafx.scene.shape.*;
 import javafx.scene.text.*;
+import javafx.util.*;
 
 /**
  * The tutorial class that offers a tutorial for every level.
@@ -31,20 +33,12 @@ import javafx.scene.text.*;
 public class Tutorial {
     /** The current level */
     protected BaseLevel baseLevel;
-    /** A list of the tutorial boxes */
-    private List<StackPane> boxes;
-    /** A list of the tutorial arrows */
-    private List<Arrow> arrows;
-    /** The current box and arrow index */
-    private int curBoxIdx, curArrowIdx;
+    /** A list of the tutorial boxes and arrows */
+    private Queue<Pair<StackPane, Arrow>> boxes;
     /** The current box */
     private StackPane curBox;
     /** The current arrow */
     private Arrow curArrow;
-    /** Whether this tutorial box has an arrow */
-    private boolean[] hasArrow;
-    /** Whether there is an arrow drawn on the screen */
-    private boolean arrowPresent;
 
     /**
      * Constructor for the tutorial class.
@@ -53,33 +47,30 @@ public class Tutorial {
      */
     public Tutorial(BaseLevel baseLevel) {
         this.baseLevel = baseLevel;
-        curBoxIdx = 0;
         curBox = dialogBox("Welcome to Level " + baseLevel.getLevel() + " !\n\nClick to begin...", 20, 300, 200,
                            (Constants.SCREEN_WIDTH - 300) / 2, (Constants.SCREEN_HEIGHT - 200) / 2);
-        curArrowIdx = 0;
         curArrow = null;
 
         baseLevel.root.setOnMouseClicked(event -> nextDialog());
         baseLevel.root.getChildren().add(curBox);
-        boxes = new ArrayList<>();
-        arrows = new ArrayList<>();
+        boxes = new LinkedList<Pair<StackPane, Arrow>>();
         List<String> lines = Util.readLines(ResourceLoader.loadTutorial(baseLevel.getLevelFile()));
-        hasArrow = new boolean[lines.size()];
         for (int j = 0; j < lines.size(); j++) {
             String[] tokens = lines.get(j).split(" ");
             int i = 0;
+            Arrow arrow = null;
             if (tokens[0].equals("?")) {
-                arrows.add(new Arrow(Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]),
-                                     Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4])));
-                hasArrow[j] = true;
+                arrow = new Arrow(Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]),
+                                  Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4]));
                 i = 5;
             }
             String temp = tokens[i];
             for (i++; i < tokens.length - 2; i++) {
                 temp += " " + tokens[i];
             }
-            boxes.add(contentDialogBox(temp, Integer.parseInt(tokens[tokens.length - 2]),
-                                       Integer.parseInt(tokens[tokens.length - 1])));
+            StackPane box = contentDialogBox(temp, Integer.parseInt(tokens[tokens.length - 2]),
+                                             Integer.parseInt(tokens[tokens.length - 1]));
+            boxes.add(new Pair<StackPane, Arrow>(box, arrow));
         }
     }
 
@@ -87,23 +78,20 @@ public class Tutorial {
      * Sets the dialog to the next dialog after the user clicks on the current one.
      */
     public void nextDialog() {
-        if (curBoxIdx < boxes.size()) {
-            if (hasArrow[curBoxIdx]) {
-                if (arrowPresent) {
+        Pair<StackPane, Arrow> cur = boxes.poll();
+        if (cur != null) {
+            if (cur.getValue() != null) {
+                if (curArrow != null) {
                     baseLevel.root.getChildren().remove(curArrow);
                 }
-                arrowPresent = true;
-                curArrow = arrows.get(curArrowIdx);
+                curArrow = cur.getValue();
                 baseLevel.root.getChildren().add(curArrow);
-                curArrowIdx++;
-            } else if (!hasArrow[curBoxIdx] && arrowPresent) {
-                arrowPresent = false;
+            } else if (curArrow != null) {
                 baseLevel.root.getChildren().remove(curArrow);
             }
             baseLevel.root.getChildren().remove(curBox);
-            curBox = boxes.get(curBoxIdx);
+            curBox = cur.getKey();
             baseLevel.root.getChildren().add(curBox);
-            curBoxIdx++;
         } else {
             baseLevel.root.getChildren().remove(curBox);
             baseLevel.root.setOnMouseClicked(null);
