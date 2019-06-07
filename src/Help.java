@@ -24,7 +24,7 @@ import javafx.scene.text.*;
  * - June 2, 2019: Finished ~Max Li
  * - June 3, 2019: Finishing touches ~Max Li
  * </pre>
- * @author Evan Zhang
+ * @author Max Li, Evan Zhang
  * @version 1
  */
 public class Help extends BaseScene {

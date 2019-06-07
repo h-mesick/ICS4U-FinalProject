@@ -24,7 +24,7 @@ import javafx.scene.text.*;
  *  - May 29, 2019: Updated ~Evan Zhang
  *  - May 31, 2019: Updated ~Evan Zhang
  * </pre>
- * @author Evan Zhang
+ * @author Max Li, Evan Zhang
  * @version 1
  */
 public class MainMenu extends BaseScene {
