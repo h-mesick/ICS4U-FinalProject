@@ -3,8 +3,8 @@ Level 1 is a choose your own adventure. 350 250
 This means that you will be making choices related to your current situation. 350 250
 By making good decisions, you will be able to play through the level and gain coins for later levels. 350 250
 However, if you make poor decisions, you will be stuck in the same situation or not gain as much as the good decisions. 350 250
-This is where the dialogue of the level will appear. 350 350
-Instructions on how to play through the dialogue are shown here. 500 400
+? 250 425 150 450 This is where the dialogue of the level will appear. 350 350
+? 450 460 490 530 Instructions on how to play through the dialogue are shown here. 500 400
 As well, after each choice, the amount of coins you have gained is shown at the end of the dialogue. 350 350
 Remember that your decisions will also affect how successful you are later on. 350 250
 If you want to revisit any of these, you can visit the help window in the pause menu. 350 250
