@@ -168,8 +168,6 @@ public class LevelOne extends BaseLevel {
         ));
         textOverlay.setPadding(new Insets(TEXT_PADDING));
 
-        root.setOnMouseClicked(e -> nextDialog());
-
         root.getChildren().add(textOverlay);
 
         root.getChildren().add(transitionOverlay);
@@ -402,7 +400,7 @@ public class LevelOne extends BaseLevel {
     /**
      * Runs the next dialog group
      */
-    private void nextDialog() {
+    public void nextDialog() {
         nextDialog(false);
     }
 

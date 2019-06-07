@@ -4,6 +4,7 @@
  * Due: June 10, 2019
  * Base class for levels.
  */
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -39,11 +40,14 @@ import javafx.scene.text.*;
  *  - Jun 2, 2019: Commented ~Evan Zhang
  *  - Jun 2, 2019: Updated ~Evan Zhang
  * </pre>
+ *
  * @author Evan Zhang
  * @version 1
  */
 public abstract class BaseLevel extends BaseScene {
-    /** Instance variables */
+    /**
+     * Instance variables
+     */
     private Group baseRoot = new Group();
     protected AnimationTimer mainTimer;
     protected Node currentOverlay;
@@ -57,6 +61,7 @@ public abstract class BaseLevel extends BaseScene {
 
     /**
      * Constructor for the BaseLevel class.
+     *
      * @param game The current game that is running.
      */
     public BaseLevel(Game game) {
@@ -96,6 +101,7 @@ public abstract class BaseLevel extends BaseScene {
 
     /**
      * Increments the score for the user given the index
+     *
      * @param index The index to increment
      * @param delta The amount to increment (can be negative)
      */
@@ -106,6 +112,7 @@ public abstract class BaseLevel extends BaseScene {
 
     /**
      * Reload the user's scores
+     *
      * @param newScores The new scores
      */
     protected void loadScores(int[] newScores) {
@@ -142,7 +149,6 @@ public abstract class BaseLevel extends BaseScene {
     protected void onFirstEnter() {
         Tutorial tutorial = new Tutorial(this, getLevel());
         root.setOnMouseClicked(event -> tutorial.nextDialog());
-
         if (getLevel() > 1) {
             BaseGameSave prevSave = this.game.currentUser.levelSaves[getLevel() - 2];
             if (prevSave != null) {
@@ -169,6 +175,7 @@ public abstract class BaseLevel extends BaseScene {
 
     /**
      * Creates the pause menu.
+     *
      * @return The pause menu to be overlaid.
      */
     protected VBox initEscapeOverlay() {
@@ -180,20 +187,20 @@ public abstract class BaseLevel extends BaseScene {
         overlay.setMinHeight(Constants.SCREEN_HEIGHT / 3);
 
         String[] buttonNames = {
-            "Resume",
-            "Help",
-            "Level Select",
-            "Main Menu",
+                "Resume",
+                "Help",
+                "Level Select",
+                "Main Menu",
         };
 
         EventHandler[] buttonHandlers = {
-            event -> removeOverlay(),
-            event -> {
-                game.setNextState(game.getCurrentState());
-                game.updateState(State.HELP);
-            },
-            event -> game.updateState(State.LEVEL_SELECT),
-            event -> game.updateState(State.MAIN_MENU),
+                event -> removeOverlay(),
+                event -> {
+                    game.setNextState(game.getCurrentState());
+                    game.updateState(State.HELP);
+                },
+                event -> game.updateState(State.LEVEL_SELECT),
+                event -> game.updateState(State.MAIN_MENU),
         };
 
         for (int x = 0; x < buttonNames.length; x++) {
@@ -205,8 +212,9 @@ public abstract class BaseLevel extends BaseScene {
 
     /**
      * Initializes a barebone overlay
-     * @param  nodes The nodes to place on the overlay
-     * @return       The overlay as a StackPane
+     *
+     * @param nodes The nodes to place on the overlay
+     * @return The overlay as a StackPane
      */
     protected StackPane initBasicOverlay(Node... nodes) {
         StackPane overlayBase = new StackPane();
@@ -226,6 +234,7 @@ public abstract class BaseLevel extends BaseScene {
 
     /**
      * Sets the overlay to the current overlay
+     *
      * @param overlay The overlay to set as the current overlay
      */
     protected void setOverlay(Node overlay) {
@@ -254,6 +263,7 @@ public abstract class BaseLevel extends BaseScene {
 
     /**
      * Sets the scene for the current level
+     *
      * @param root The root to use for the current scene
      */
     protected void setScene(Parent root) {
@@ -272,6 +282,7 @@ public abstract class BaseLevel extends BaseScene {
 
     /**
      * Gets the level file for the current level
+     *
      * @return The level filename
      */
     protected String getLevelFile() {
@@ -280,6 +291,7 @@ public abstract class BaseLevel extends BaseScene {
 
     /**
      * Gets the level data file for the current level
+     *
      * @return The level data filename
      */
     protected String getLevelDataFile() {
@@ -297,6 +309,7 @@ public abstract class BaseLevel extends BaseScene {
 
     /**
      * Returns whether there is an overlay set or not
+     *
      * @return Whether there is an overlay set or not
      */
     protected boolean overlayVisible() {
@@ -305,6 +318,7 @@ public abstract class BaseLevel extends BaseScene {
 
     /**
      * Called whenever a key is pressed
+     *
      * @param key The key that is pressed
      */
     protected void handleKeyPressed(KeyCode key) {
@@ -318,12 +332,14 @@ public abstract class BaseLevel extends BaseScene {
                     setOverlay(escapeOverlay);
                 }
                 break;
-            default: break;
+            default:
+                break;
         }
     }
 
     /**
      * Called whenever a key is released
+     *
      * @param key The key that was released
      */
     protected void handleKeyReleased(KeyCode key) {
@@ -337,12 +353,14 @@ public abstract class BaseLevel extends BaseScene {
 
     /**
      * Gets the level number for the current level
+     *
      * @return The level number of the current level
      */
     protected abstract int getLevel();
 
     /**
      * Gets the number of scores to keep track of
+     *
      * @return The number of scores to keep track of
      */
     protected abstract int getScoreCount();
@@ -354,12 +372,14 @@ public abstract class BaseLevel extends BaseScene {
 
     /**
      * Saves the current game to a BaseGameSave object
+     *
      * @return The BaseGameSave object representing this level
      */
     protected abstract BaseGameSave save();
 
     /**
      * Loads the game from a BaseGameSave object
+     *
      * @param baseSave The BaseGameSave object
      */
     protected void load(BaseGameSave baseSave) {

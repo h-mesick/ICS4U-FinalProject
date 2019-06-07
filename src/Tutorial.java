@@ -26,7 +26,7 @@ import java.util.List;
  * @version 1
  */
 public class Tutorial {
-    // TODO: change the design of the boxes, add arrows, implement level 3 (basically same as level 2), implement level 1, javadoc
+    // add arrows, javadoc
     protected BaseLevel baseLevel;
     protected int level;
     private List<StackPane> boxes;
@@ -37,8 +37,7 @@ public class Tutorial {
         this.baseLevel = baseLevel;
         this.level = level;
         curIdx = 0;
-        if (level == 2 || level == 3)
-            curBox = dialogBox("Welcome to Level " + level + " !\n\nClick to begin...", 20, 300, 200, (Constants.SCREEN_WIDTH - 300) / 2, (Constants.SCREEN_HEIGHT - 200) / 2);
+        curBox = dialogBox("Welcome to Level " + level + " !\n\nClick to begin...", 20, 300, 200, (Constants.SCREEN_WIDTH - 300) / 2, (Constants.SCREEN_HEIGHT - 200) / 2);
         baseLevel.root.getChildren().add(curBox);
         boxes = new ArrayList<>();
         List<String> lines = Util.readLines(ResourceLoader.loadTutorial("level-" + level + ".txt"));
@@ -61,6 +60,10 @@ public class Tutorial {
         } else {
             baseLevel.root.getChildren().remove(curBox);
             baseLevel.root.setOnMouseClicked(null);
+            if (level == 1) {
+                LevelOne temp = (LevelOne) baseLevel;
+                baseLevel.root.setOnMouseClicked(e -> temp.nextDialog());
+            }
         }
     }
 

@@ -1,0 +1,13 @@
+Level 3 has all the same features as Level 2. 350 250
+The only difference is the collectible coins have been replaced with stars. 350 300
+As well, the choices now differ from the ones you got in level 2. 350 300
+Now, instead of trying to collect as many coins, you are using the coins you made in level to make decisions which gain points. 350 300
+There are two different kinds of prompts, buying and lifestyle choices. 350 300
+Buying choices will require a certain cost in coins to buy, and are yes/no questions. 350 300
+Be careful as you do not always need to buy to gain points! 350 300
+Lifestyle choices are choices relating to the way you decide to live. 350 300
+Some choices will gain you lots of points, whereas some may give you none. 350 300
+Be careful of all the choices you make this level as it will count towards your final score. 350 300
+You final score is calculated as: Coins left + Stars 350 300
+If you want to revisit any of these, you can visit the help window in the pause menu. 350 300
+Good luck! 350 300
