@@ -22,10 +22,10 @@ import javafx.util.*;
  * The tutorial class that offers a tutorial for every level.
  * <pre>
  * Revision history:
- *  - June 4, 2019: Created ~Max Li
- *  - June 5, 2019: Updated ~Max Li
- *  - June 6, 2019: Finished ~Max Li
- *  - June 6, 2019: Finishing touches ~Evan Zhang
+ *  - Jun 4, 2019: Created ~Max Li
+ *  - Jun 5, 2019: Updated ~Max Li
+ *  - Jun 6, 2019: Finished ~Max Li
+ *  - Jun 6, 2019: Finishing touches ~Evan Zhang
  * </pre>
  * @author Max Li
  * @version 1

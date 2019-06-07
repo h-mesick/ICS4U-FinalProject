@@ -16,13 +16,16 @@ import javafx.scene.text.*;
  * The Help scene.
  * <pre>
  * Revision history:
- * - May 16, 2019: Created ~Evan Zhang
- * - May 18, 2019: Updated ~Evan Zhang
- * - May 27, 2019: Commented ~Max Li
- * - May 31, 2019: Updated ~Evan Zhang
- * - June 2, 2019: Updated ~Max Li
- * - June 2, 2019: Finished ~Max Li
- * - June 3, 2019: Finishing touches ~Max Li
+ *  - May 16, 2019: Created ~Evan Zhang
+ *  - May 18, 2019: Updated ~Evan Zhang
+ *  - May 27, 2019: Commented ~Max Li
+ *  - May 31, 2019: Updated ~Evan Zhang
+ *  - Jun 2, 2019: Updated ~Max Li
+ *  - Jun 2, 2019: Finished ~Max Li
+ *  - Jun 3, 2019: Finishing touches ~Max Li
+ *  - Jun 4, 2019: Updated ~Evan Zhang
+ *  - Jun 6, 2019: Commented ~Evan Zhang
+ *  - Jun 6, 2019: Updated ~Evan Zhang
  * </pre>
  * @author Max Li, Evan Zhang
  * @version 1

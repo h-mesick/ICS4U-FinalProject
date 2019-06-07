@@ -12,8 +12,12 @@ import javafx.scene.image.*;
  * The ImageButton class for buttons with images instead of text.
  * <pre>
  * Revision history:
- * - May 16, 2019: Created ~Evan Zhang
- * - May 27, 2019: Commented ~Max Li
+ *  - May 16, 2019: Created ~Evan Zhang
+ *  - May 27, 2019: Commented ~Max Li
+ *  - Jun 3, 2019: Updated ~Evan Zhang
+ *  - Jun 3, 2019: Commented ~Evan Zhang
+ *  - Jun 5, 2019: Updated ~Evan Zhang
+ *  - Jun 6, 2019: Commented ~Evan Zhang
  * </pre>
  * @author Evan Zhang
  * @version 1

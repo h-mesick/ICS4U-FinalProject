@@ -39,6 +39,10 @@ import javafx.scene.text.*;
  *  - Jun 1, 2019: Commented ~Evan Zhang
  *  - Jun 2, 2019: Commented ~Evan Zhang
  *  - Jun 2, 2019: Updated ~Evan Zhang
+ *  - Jun 3, 2019: Commented ~Evan Zhang
+ *  - Jun 3, 2019: Updated ~Evan Zhang
+ *  - Jun 4, 2019: Updated ~Evan Zhang
+ *  - Jun 6, 2019: Updated ~Evan Zhang
  * </pre>
  * @author Evan Zhang
  * @version 1
