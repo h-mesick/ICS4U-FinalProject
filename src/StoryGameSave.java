@@ -17,7 +17,7 @@ import javax.json.*;
  * @version 1
  */
 public class StoryGameSave extends BaseGameSave {
-    /** Instance variables */
+    /** The current position of the dialog */
     public int dialogPosition;
 
     /**

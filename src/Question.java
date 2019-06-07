@@ -25,9 +25,11 @@ import javafx.scene.text.*;
  * @version 1
  */
 public class Question {
-    /** Instance variables */
+    /** The question */
     private String question;
+    /** The choices that the user can choose */
     private String[] answers;
+    /** The handlers for each choice */
     private EventHandler[] handlers;
 
     /**

@@ -23,9 +23,11 @@ import javax.json.*;
  * @version 1
  */
 public class User implements Comparable {
-    /** Instance variables */
+    /** The user's username */
     public String username;
+    /** The user's current score */
     public int score;
+    /** The array of the user's level game saves */
     public BaseGameSave[] levelSaves = new BaseGameSave[Constants.NUM_LEVELS];
 
     /**

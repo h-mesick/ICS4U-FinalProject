@@ -28,9 +28,11 @@ import javax.json.*;
  * @version 1
  */
 public class PlatformerGameSave extends BaseGameSave {
-    /** Instance variables */
+    /** The reference point of the screen */
     public double referencePoint;
+    /** The position of the player */
     public Point2D player;
+    /** The list of the positions of the removed nodes */
     public List<Point2D> removedNodes;
 
     /**

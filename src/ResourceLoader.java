@@ -29,7 +29,7 @@ import javafx.scene.image.*;
  * @version 1
  */
 public abstract class ResourceLoader {
-    /** Static variables */
+    /** An image cache for all loaded image resources */
     private static Map<String, Image> imageCache = new TreeMap<String, Image>();
 
     /**

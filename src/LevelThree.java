@@ -38,7 +38,7 @@ import javax.json.*;
  * @version 1
  */
 public class LevelThree extends BasePlatformer {
-    /** Instance variables */
+    /** The JSONArray of all the questions */
     private JsonArray questions;
 
     /**

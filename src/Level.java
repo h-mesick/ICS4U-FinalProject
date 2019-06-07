@@ -27,15 +27,19 @@ import javafx.geometry.*;
  * @version 1
  */
 public class Level {
-    /** Static constants */
+    /** The offset to compare two Sprites */
     private static final double OFFSET = 0.1;
+    /** The default image for special nodes */
     private static final String DEFAULT_SPECIAL_IMAGE = "coin.png";
 
-    /** Instance variables */
+    /** The array of blocks stored as integers */
     private int[][] arr;
+    /** The array of blocks stored as sprites */
     private Sprite[][] blocks;
 
+    /** The list of all the sprites */
     private List<Sprite> allSprites = new ArrayList<Sprite>();
+    /** The list of all the special sprites */
     private List<Sprite> specialSprites = new ArrayList<Sprite>();
 
     /**

@@ -19,7 +19,7 @@ import javafx.scene.image.*;
  * @version 1
  */
 public class ImageButton extends Button {
-    /** Instance variables */
+    /** The ImageView overlayed on the button */
     private ImageView image;
 
     /**
@@ -34,7 +34,6 @@ public class ImageButton extends Button {
 
     /**
      * Sets button component with normal, hover, and selected images.
-     *
      * @param normal   The image on the button when it is not being hovered over, or selected.
      * @param hover    The image on the button when it is being hovered over by the mouse.
      * @param selected The image on the button when it is clicked.
@@ -54,7 +53,6 @@ public class ImageButton extends Button {
 
     /**
      * Sets button component with normal and hover images.
-     *
      * @param normal The image on the button when it is not being hovered over, or selected.
      * @param hover  The image on the button when it is being hovered over by the mouse.
      */
@@ -64,7 +62,6 @@ public class ImageButton extends Button {
 
     /**
      * Sets button component with a normal images.
-     *
      * @param normal The image on the button when it is not being hovered over, or selected.
      */
     public void setImages(Image normal) {
@@ -73,7 +70,6 @@ public class ImageButton extends Button {
 
     /**
      * Sets the width of the button.
-     *
      * @param width The width of the button.
      */
     public void setFitWidth(double width) {
@@ -83,7 +79,6 @@ public class ImageButton extends Button {
 
     /**
      * Sets the height of the button.
-     *
      * @param height The height of the button.
      */
     public void setFitHeight(double height) {

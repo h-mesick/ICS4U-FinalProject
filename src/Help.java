@@ -24,14 +24,12 @@ import javafx.scene.text.*;
  * - June 2, 2019: Finished ~Max Li
  * - June 3, 2019: Finishing touches ~Max Li
  * </pre>
- *
  * @author Evan Zhang
  * @version 1
  */
 public class Help extends BaseScene {
     /**
      * Constructor for the Help class.
-     *
      * @param game The current game that is running.
      */
     public Help(Game game) {

@@ -24,7 +24,6 @@ import javafx.stage.*;
 public class Main extends Application {
     /**
      * Calls to launch() method, which launches the application.
-     *
      * @param args Command line arguments
      */
     public static void main(String[] args) {
@@ -35,7 +34,6 @@ public class Main extends Application {
     /**
      * Entry point in the JavaFX application.
      * A new game is initialized, and primaryStage is preset to constraints.
-     *
      * @param primaryStage The primary stage for this application.
      */
     @Override

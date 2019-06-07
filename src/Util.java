@@ -33,7 +33,7 @@ import javafx.util.*;
  * @version 1
  */
 public abstract class Util {
-    /** Static variables */
+    /** A font cache of the main font used in the game */
     private static Map<Double, Font> fontCache = new TreeMap<Double, Font>();
 
     /**

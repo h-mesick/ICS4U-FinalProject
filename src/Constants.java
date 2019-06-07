@@ -41,6 +41,6 @@ public abstract class Constants {
     /** The extension for the save files */
     static final String DATA_EXTENSION = ".ctgd";
 
-    /** Comparing doubles is bad, so the EPS exists */
+    /** Comparing doubles is inprecise, so the EPS exists */
     static final double EPS = 1e-7;
 }

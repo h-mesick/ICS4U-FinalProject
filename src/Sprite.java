@@ -22,8 +22,10 @@ import javafx.scene.image.*;
  * @version 1
  */
 public class Sprite extends ImageView {
-    /** Instance variables */
-    public final double gravity = 0.2;
+    /** The gravity of the sprite */
+    public static final double gravity = 0.2;
+
+    /** The current y velocity of the sprite */
     private double yVel = 0;
 
     /**

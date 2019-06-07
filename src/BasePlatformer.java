@@ -42,14 +42,19 @@ import javafx.scene.input.*;
  * @version 1
 */
 public abstract class BasePlatformer extends BaseLevel {
-    /** Instance variables */
+    /** The player sprite */
     protected Sprite player;
+    /** The progress bar */
     protected ProgressBar progress;
+    /** The level data manager */
     protected Level level;
+    /** The reference point of the screen */
     protected double referencePoint;
+    /** The background image */
     protected ImageView background;
+    /** The list of removed nodes from the screen */
     protected List<Sprite> removedNodes = new ArrayList<Sprite>();
-
+    /** The amount of times the update function has been called */
     protected int updateCount = 0;
 
     /**

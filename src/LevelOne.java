@@ -41,9 +41,11 @@ import javafx.scene.text.*;
 public class LevelOne extends BaseLevel {
     /** A local class to simulate a command */
     private class Command {
-        /** Instance variables */
+        /** The command */
         private String command;
+        /** The arguments of the command */
         private String[] arguments;
+        /** The current position of the argument pointer for nextArgument() */
         private int argumentPointer = 0;
 
         /**
@@ -60,7 +62,7 @@ public class LevelOne extends BaseLevel {
         }
 
         /**
-         * Constructor
+         * Copy Constructor
          * @param  other The other Command to clone
          */
         public Command(Command other) {
@@ -104,17 +106,24 @@ public class LevelOne extends BaseLevel {
         }
     }
 
-    /** Static constants */
+    /** The width of the text overlay */
     public static final int TEXT_OVERLAY_WIDTH = Constants.SCREEN_WIDTH - 150;
+    /** The height of the text overlay */
     public static final int TEXT_OVERLAY_HEIGHT = 200;
+    /** The padding of the text overlay */
     public static final int TEXT_PADDING = 50;
 
-    /** Instance variables */
+    /** The transition overlay object */
     private Rectangle transitionOverlay = new Rectangle(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, Color.BLACK);
+    /** The background object */
     private ImageView background;
+    /** The text overlay object */
     private BorderPane textOverlay;
+    /** The position of the dialog command */
     private int dialogPosition = 0;
+    /** The array of all the dialog commands */
     private Command[] dialogCommands;
+    /** The map of dialog command labels to dialog positions */
     private Map<String, Integer> dialogCommandsLabelMap = new TreeMap<String, Integer>();
 
     /**

@@ -22,7 +22,7 @@
  * @version 1
  */
 public abstract class BaseScene {
-    /** Instance variables */
+    /** The game object that stores game data and state */
     protected Game game;
 
     /**

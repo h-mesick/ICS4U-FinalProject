@@ -17,7 +17,6 @@
 public class Launcher {
     /**
      * Calls the actual main method to begin the game.
-     *
      * @param args Command line arguments
      */
     public static void main(String[] args) {

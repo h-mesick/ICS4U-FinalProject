@@ -32,13 +32,18 @@ import javafx.stage.*;
  * @version 1
  */
 public class Game {
-    /** Instance variables */
+    /** The current state of the game */
     private State currentState = null;
+    /** The proposed next state of the game by the current state */
     private State nextState = null;
+    /** The current scene of the game */
     private BaseScene currentScene;
+    /** The list of users */
     private Map<String, User> users = new HashMap<String, User>();
 
+    /** The stage to draw everything */
     public Stage stage;
+    /** The current user playing the game */
     public User currentUser;
 
     /**

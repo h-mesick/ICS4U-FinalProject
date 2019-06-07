@@ -20,8 +20,9 @@ import javax.json.*;
  * @version 1
  */
 public abstract class BaseGameSave {
-    /** Instance variables */
+    /** The scores that are saved */
     public int[] scores;
+    /** Whether the level is completed */
     public boolean levelComplete;
 
     /**
@@ -43,7 +44,6 @@ public abstract class BaseGameSave {
         for (int s : scores) {
             jsonScores.add(s);
         }
-
         return Json.createObjectBuilder()
                    .add("levelComplete", levelComplete)
                    .add("scores", jsonScores.build());
