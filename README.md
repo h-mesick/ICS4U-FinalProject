@@ -27,11 +27,12 @@ For Java 8, simply running this command will compile and run the program from so
 ```sh
 $ ./run
 ```
+You may also use Dr. Java to run the program in Java 8.
+
 For Java 11, Apache Maven is used:
 ```sh
 $ mvn clean javafx:run
 ```
-
 ## Authors
 - [Evan Zhang](https://github.com/Ninjaclasher)
 - [Max Li](https://github.com/h-mesick)
