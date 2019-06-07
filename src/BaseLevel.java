@@ -63,6 +63,8 @@ public abstract class BaseLevel extends BaseScene {
     protected Text[] scoresText;
     /** Whether the level is completed */
     protected boolean levelComplete;
+    /** Whether the tutorial is completed */
+    protected boolean tutorialComplete = false;
 
     /**
      * Constructor for the BaseLevel class.
@@ -129,7 +131,9 @@ public abstract class BaseLevel extends BaseScene {
      * Saves the game on exit.
      */
     public void onExit() {
-        this.game.currentUser.levelSaves[getLevel() - 1] = save();
+        if (tutorialComplete) {
+            this.game.currentUser.levelSaves[getLevel() - 1] = save();
+        }
     }
 
     /**
@@ -139,9 +143,17 @@ public abstract class BaseLevel extends BaseScene {
         BaseGameSave save = this.game.currentUser.levelSaves[getLevel() - 1];
         if (save != null) {
             load(save);
+            onTutorialComplete();
         } else {
             onFirstEnter();
         }
+    }
+
+    /**
+     * Called when the tutorial is completed.
+     */
+    protected void onTutorialComplete() {
+        tutorialComplete = true;
     }
 
     /**
@@ -149,8 +161,7 @@ public abstract class BaseLevel extends BaseScene {
      * as well as initialize the tutorial.
      */
     protected void onFirstEnter() {
-        Tutorial tutorial = new Tutorial(this);
-        root.setOnMouseClicked(event -> tutorial.nextDialog());
+        new Tutorial(this);
         if (getLevel() > 1) {
             BaseGameSave prevSave = this.game.currentUser.levelSaves[getLevel() - 2];
             if (prevSave != null) {
@@ -308,7 +319,7 @@ public abstract class BaseLevel extends BaseScene {
      * @return Whether there is an overlay set or not
      */
     protected boolean overlayVisible() {
-        return currentOverlay != null;
+        return currentOverlay != null || !tutorialComplete;
     }
 
     /**

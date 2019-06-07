@@ -85,7 +85,7 @@ public abstract class BasePlatformer extends BaseLevel {
         }
 
         /** Add the player */
-        player = new Sprite(30, Constants.SCREEN_HEIGHT - Constants.PLATFORM_BLOCK_HEIGHT - 30,
+        player = new Sprite(30, Constants.SCREEN_HEIGHT - Constants.PLATFORM_BLOCK_HEIGHT - 26,
                             25, 25, ResourceLoader.loadImage("player/still.png"));
         root.getChildren().add(player);
 
@@ -97,6 +97,7 @@ public abstract class BasePlatformer extends BaseLevel {
         progress.setMinHeight(20);
         progress.getStylesheets().add(ResourceLoader.loadCSS("game-progress-bar.css"));
         root.getChildren().add(progress);
+        updateProgress();
 
         /** Add the pause button */
         ImageButton pause = Util.getMainImageButton("pause", event -> handleKeyPressed(KeyCode.ESCAPE));
@@ -245,7 +246,7 @@ public abstract class BasePlatformer extends BaseLevel {
      * {@inheritDoc}
      */
     protected void update() {
-        if (currentOverlay != null) {
+        if (overlayVisible()) {
             return;
         }
         updateScreen();

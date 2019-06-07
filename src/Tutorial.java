@@ -58,6 +58,8 @@ public class Tutorial {
                            (Constants.SCREEN_WIDTH - 300) / 2, (Constants.SCREEN_HEIGHT - 200) / 2);
         curArrowIdx = 0;
         curArrow = null;
+
+        baseLevel.root.setOnMouseClicked(event -> nextDialog());
         baseLevel.root.getChildren().add(curBox);
         boxes = new ArrayList<>();
         arrows = new ArrayList<>();
@@ -105,10 +107,7 @@ public class Tutorial {
         } else {
             baseLevel.root.getChildren().remove(curBox);
             baseLevel.root.setOnMouseClicked(null);
-            if (baseLevel.getLevel() == 1) {
-                LevelOne temp = (LevelOne) baseLevel;
-                baseLevel.root.setOnMouseClicked(e -> temp.nextDialog());
-            }
+            baseLevel.onTutorialComplete();
         }
     }
 

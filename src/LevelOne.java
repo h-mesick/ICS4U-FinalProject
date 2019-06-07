@@ -211,7 +211,7 @@ public class LevelOne extends BaseLevel {
      */
     protected void onFirstEnter() {
         super.onFirstEnter();
-        nextDialog();
+        nextDialog(true);
     }
 
     /**
@@ -232,6 +232,14 @@ public class LevelOne extends BaseLevel {
                 break;
             default: break;
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected void onTutorialComplete() {
+        super.onTutorialComplete();
+        root.setOnMouseClicked(e -> nextDialog());
     }
 
     /**
