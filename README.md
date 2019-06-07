@@ -6,11 +6,7 @@ A vertical platformer game built on top of a choose your own adventure. This gam
 You must have either Java 8 or Java 11 installed. The game works as a standalone program.
 
 ## Usage
-First, run:
-```sh
-$ cd bin
-```
-
+Download the latest version from "Releases".
 If you have Java 8, run:
 ```sh
 $ java -jar ClimbToGrace-8.jar
