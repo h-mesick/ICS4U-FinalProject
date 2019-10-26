@@ -35,7 +35,7 @@ $ mvn clean javafx:run
 ```
 ## Authors
 - [Evan Zhang](https://github.com/Ninjaclasher)
-- [Max Li](https://github.com/h-mesick)
+- [Max Li](https://github.com/pinkleshake)
 
 ## License
 Copyright (c) 2019 Evan Zhang
